@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>login page</title>
+        <script src="https://www.gstatic.com/firebasejs/4.5.2/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyASyS2PmeJsALxQOPvH13BgrA0YuM315fM",
+                authDomain: "recycling-system.firebaseapp.com",
+                databaseURL: "https://recycling-system.firebaseio.com",
+                projectId: "recycling-system",
+                storageBucket: "recycling-system.appspot.com",
+                messagingSenderId: "277884932249"
+            };
+            firebase.initializeApp(config);
+            function createUserWithEmailAndPassword() {
+                firebase.auth().createUserWithEmailAndPassword(document.getElementById('signup_Email').value,document.getElementById('signup_Password').value).then(function() {
+                    console.log("Successful")
+                }).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    if(errorMessage) console.log(errorMessage)
+                    // ...
+                });
+            }
+            function signInWithEmailAndPassword() {
+                firebase.auth().signInWithEmailAndPassword(document.getElementById('login_Email').value,document.getElementById('login_Password').value).then(function() {
+                    console.log("Successful")
+                }).catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    if(errorMessage) console.log(errorMessage)
+                    // ...
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <div>
+                <label><b>Email</b></label>
+                <input type="text" id="signup_Email" required>
+                <label><b>Password</b></label>
+                <input type="password" id="signup_Password" required>
+                <button type="button" onclick="createUserWithEmailAndPassword()">Signup</button>
+            </div>
+        </form>
+        <br>
+        <form>
+            <div>
+                <label><b>Email</b></label>
+                <input type="text" id="login_Email" required>
+                <label><b>Password</b></label>
+                <input type="password" id="login_Password" required>
+                <button type="button" onclick="signInWithEmailAndPassword()">Login</button>
+            </div>
+        </form>
+    </body>
+</html>
