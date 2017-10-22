@@ -17,7 +17,7 @@
     const street1 = document.getElementById('Street_Address1')
     const street2 = document.getElementById('Street_Address2')
     const city = document.getElementById('City')
-    const state = document.getElementById("State").options[document.getElementById("State").selectedIndex]
+    const state = document.getElementById("State")
     const zip = document.getElementById('Zip_Code')
 
     // signout
@@ -53,7 +53,7 @@
                     street1: street1.value,
                     street2: street2.value,
                     city: city.value,
-                    state: state,
+                    state: state.options[state.selectedIndex].value,
                     zip: zip.value   
                 }); 
             }
