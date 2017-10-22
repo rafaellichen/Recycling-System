@@ -5,27 +5,20 @@
     </head>
     <body>
         <div>
-            <label><b>First Name</b></label>
             <input type="text" placeholder="First Name" id="First_Name">
             <br>
-            <label><b>Last Name</b></label>
             <input type="text" placeholder="Last Name" id="Last_Name">
             <br>
-            <label><b>Phone Number</b></label>
             <input type="text" placeholder="Phone Number" id="Phone_Number">
-        </div>
-        <div>
-            <label><b>Street Address</b></label>
+            <br>
             <input type="text" placeholder="Street Address" id="Street_Address1">
             <br>
-            <label><b>Street Address Line 2</b></label>
             <input type="text" placeholder="Street Address Line 2" id="Street_Address2">
             <br>
-            <label><b>City</b></label>
             <input type="text" placeholder="City" id="City">
             <br>
-            <label><b>State / Province</b></label>
             <select id="State">
+                <option value="">State / Province</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
                 <option value="Arizona">Arizona</option>
@@ -76,11 +69,11 @@
                 <option value="Wyoming">Wyoming</option>
             </select>
             <br>
-            <label><b>Postal / Zip Code</b></label>
             <input type="text" placeholder="Postal / Zip Code" id="Zip_Code">
+            <br>
+            <button id="update_Button">Update</button>
+            <button id="signout_Button">Signout</button>
         </div>
-        <button id="update_Button">Update</button>
-        <button id="signout_Button">Signout</button>
         <script src="profile.js"></script>
     </body>
 </html>
