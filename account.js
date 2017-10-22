@@ -42,19 +42,14 @@
         })
     })
 
-    // signout
-    signout_Button.addEventListener("click",e=> {
-        firebase.auth().signOut()
-    })
-
     // listener
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-        if(firebaseUser) {
-            document.getElementById('signout_Button').style.visibility = 'visible'
-            var newUser = firebase.database().ref("/users/"+firebaseUser.uid)
+    firebase.auth().onAuthStateChanged(user => {
+        if(user) {
+            var newUser = firebase.database().ref("/users/"+user.uid)
+            console.log(user.uid)
             newUser.on("value",function(existence) {
                 if(!existence.exists()) {
-                    firebase.database().ref("/users/"+firebaseUser.uid).set({
+                    firebase.database().ref("/users/"+user.uid).set({
                         first_name: "",
                         last_name: "",
                         phone: "",
@@ -64,10 +59,9 @@
                         state: "",
                         zip: ""    
                     }); 
+                    window.location = "profile.html"
                 }
             })
-        } else {
-            document.getElementById('signout_Button').style.visibility = 'hidden'
         }
     })
 }())
