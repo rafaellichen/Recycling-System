@@ -46,7 +46,6 @@
     firebase.auth().onAuthStateChanged(user => {
         if(user) {
             var newUser = firebase.database().ref("/users/"+user.uid)
-            console.log(user.uid)
             newUser.on("value",function(existence) {
                 if(!existence.exists()) {
                     firebase.database().ref("/users/"+user.uid).set({
@@ -59,8 +58,8 @@
                         state: "",
                         zip: ""    
                     }); 
-                    window.location = "profile.html"
                 }
+                window.location = "profile.html"
             })
         }
     })
