@@ -1,5 +1,29 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block body %}
-	<p> Test Paragraph </p>
+	<div class="jumbotron jumbotron-fluid">
+	  	<div class="container">
+	    <h1 class="display-3">Recycling Starts Here.</h1>
+	    <p class="lead">Try our recycling center finder.</p>
+	  	</div>
+	</div>
+	<div class = "container">
+		<div data-toggle="buttons">
+		  <label class="btn btn-primary">
+		    <input type="checkbox" autocomplete="off"> Paper
+		  </label>
+		  <label class="btn btn-primary">
+		    <input type="checkbox" autocomplete="off"> Plastic
+		  </label>
+		  <label class="btn btn-primary">
+		    <input type="checkbox" autocomplete="off"> Metal
+		  </label>
+		  <label class="btn btn-primary">
+		    <input type="checkbox" autocomplete="off"> Electronics
+		  </label>
+		  <label class="btn btn-primary">
+		    <input type="checkbox" autocomplete="off"> Glasses
+		  </label>
+		</div>
+	</div>
 {% endblock %}
