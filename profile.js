@@ -38,6 +38,8 @@ firebase.auth().onIdTokenChanged(function(user) {
             state.value = snapshot.val().state
             zip.value = snapshot.val().zip
         })
+    } else {
+        window.location = "account.html"
     }
 });
 
