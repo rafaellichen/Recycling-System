@@ -1,11 +1,20 @@
 <html>
     <head>
-        <title>Account</title>
+        <title>Recycling System - Account</title>
         <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
         <link rel="stylesheet" href="account.css" type="text/css">
     </head>
-    <body>
-        <div class="center">
+    <body class="center">
+        <div class="nav">
+            <ul>
+                <li><a>Recycling System</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="guides.html">Guides</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a id="more">More</a></li>
+            </ul>
+        </div>
+        <div id="account">
             <input type="email" placeholder="Email" pattern=".+@.+\..+" id="userEmail" required>
             <br>
             <input type="password" placeholder="Password" minlength="6" id="userPassword" required>
