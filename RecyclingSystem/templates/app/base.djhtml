@@ -45,10 +45,11 @@
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" href="/explore/services">Services</a>
-                <a class="dropdown-item" href="/explore/option2">Option2</a>
-                <a class="dropdown-item" href="/explore/option3">Option3</a>
+                <a class="dropdown-item" href="/explore/option2">Join Us</a>
+                <a class="dropdown-item" href="/explore/option3">Case/Information</a>
 
               </div>
+            </li>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
