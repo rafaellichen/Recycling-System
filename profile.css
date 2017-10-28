@@ -20,15 +20,20 @@ input, button {
     font-size: 12pt;
     margin-top: 10px;
     vertical-align: middle;
+    border: 1px solid lightgrey;
 }
 div[id="info"] {
     border-bottom: 1px dotted white;
+}
+div[id="bottom"] div {
+    display: inline-block;
 }
 div:nth-last-of-type(2) {
     padding-bottom: 50px;
     margin-bottom: 50px;
 }
 div:nth-last-of-type(1) {
+    margin-top: -10px;
     margin-bottom: 50px;
 }
 button:hover {

@@ -10,14 +10,15 @@ const config = {
 firebase.initializeApp(config);
 
 // elements
-const first_name = document.getElementById('First_Name')
-const last_name = document.getElementById('Last_Name')
-const phone = document.getElementById('Phone_Number')
-const street1 = document.getElementById('Street_Address1')
-const street2 = document.getElementById('Street_Address2')
-const city = document.getElementById('City')
+const first_name = document.getElementById("First_Name")
+const last_name = document.getElementById("Last_Name")
+const phone = document.getElementById("Phone_Number")
+const street1 = document.getElementById("Street_Address1")
+const street2 = document.getElementById("Street_Address2")
+const city = document.getElementById("City")
 const state = document.getElementById("State")
-const zip = document.getElementById('Zip_Code')
+const zip = document.getElementById("Zip_Code")
+const inventory = document.getElementById("inventory")
 
 // signout
 signout_Button.addEventListener("click",e=> {
@@ -40,7 +41,15 @@ firebase.auth().onIdTokenChanged(function(user) {
             zip.value = snapshot.val().zip
         })
         firebase.database().ref("/inventory/"+user.uid).on("value",function(snapshot) {
-            
+            var op="<option value=''>description</option>"
+            var ans=""
+            var count=0;
+            for (key in snapshot.val()) {
+                count++
+                ans+=op.replace("description",snapshot.val()[key].description).replace("=''", "='"+snapshot.val()[key].description+"'")
+            }
+            inventory.innerHTML = ans;
+            inventory.size = count;
         })
     } else {
         window.location = "account.html"
