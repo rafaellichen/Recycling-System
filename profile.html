@@ -4,17 +4,17 @@
         <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
         <link rel="stylesheet" href="profile.css" type="text/css">
     </head>
-    <body>
+    <body class="center">
         <div class="nav">
             <ul>
-                <li><a>Recycling System</a></li>
+                <li><a>Easy Recycle</a></li>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="guides.html">Guides</a></li>
                 <li><a href="account.html">Account</a></li>
                 <li><a id="more">More</a></li>
             </ul>
         </div>
-        <div id="info" class="center">
+        <div id="info">
             <input type="text" placeholder="First Name" id="First_Name">
             <br>
             <input type="text" placeholder="Last Name" id="Last_Name">
@@ -83,6 +83,9 @@
             <br>
             <button id="update_Button">Update</button>
             <button id="signout_Button">Signout</button>
+        </div>
+        <div>
+            <select id="inventory"></select>
         </div>
         <script src="profile.js"></script>
     </body>

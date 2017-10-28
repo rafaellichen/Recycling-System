@@ -25,6 +25,7 @@ signout_Button.addEventListener("click",e=> {
     window.location = "account.html"
 })
 
+
 // sync
 firebase.auth().onIdTokenChanged(function(user) {
     if (user) {
@@ -37,6 +38,9 @@ firebase.auth().onIdTokenChanged(function(user) {
             city.value = snapshot.val().city
             state.value = snapshot.val().state
             zip.value = snapshot.val().zip
+        })
+        firebase.database().ref("/inventory/"+user.uid).on("value",function(snapshot) {
+            
         })
     } else {
         window.location = "account.html"

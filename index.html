@@ -1,17 +1,45 @@
 <html>
     <head>
         <title>Recycling System - Home</title>
+        <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
         <link rel="stylesheet" href="index.css" type="text/css">
     </head>
     <body class="center">
         <div class="nav">
             <ul>
-                <li><a>Recycling System</a></li>
+                <li><a>Easy Recycle</a></li>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="guides.html">Guides</a></li>
                 <li><a href="account.html">Account</a></li>
                 <li><a id="more">More</a></li>
             </ul>
+        </div>
+        <div class="trash-type">
+            <button>Paper</button>
+            <button>Plastic</button>
+            <button>Metal</button>
+            <button>Electronic</button>
+            <button>Glasses</button>
+            <button>Cans</button>
+        </div>
+        <div id="bottom" class="trash-type">
+            <input id="zip-search" type="text" placeholder="Postal / Zip Code" minlength="5" required>
+            <button>Search</button>
+        </div>
+        <div>
+            <input id="description" type="text" placeholder="Description" minlength="1" required>
+            <br>
+            <select id="trash-type-select">
+                <option value="">Type of trash</option>
+                <option value="Paper">Paper</option>
+                <option value="Plastic">Plastic</option>
+                <option value="Metal">Metal</option>
+                <option value="Electronic">Electronic</option>
+                <option value="Glasses">Glasses</option>
+                <option value="Cans">Cans</option>
+            </select>
+            <br>
+            <button id="add">Add</button>
         </div>
         <script src="index.js"></script>
     </body>
