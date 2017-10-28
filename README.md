@@ -3,6 +3,14 @@
 JSON Tree
 ```js
 {
+    "inventory" : {
+        "BdgUvz0xgqQS8d0VYLR6vyBCC7j2" : {
+            "-KxZSZr9k0f2UyXYYej8" : {
+                "description" : "newpaper",
+                "type" : "Paper"
+            }
+        }
+    },
     "users" : {
         "BdgUvz0xgqQS8d0VYLR6vyBCC7j2" : {
             "city" : "Universe",
