@@ -22,6 +22,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         add.style.display="none";
         description.style.display="none";
         bottom.style.border="none";
+        trash_for_select.style.display="none";
         bottom.style.marginBottom = "-130px";
     }
 });
