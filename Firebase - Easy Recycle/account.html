@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Recycling System - Account</title>
+        <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+        <link rel="stylesheet" href="account.css" type="text/css">
+    </head>
+    <body class="center">
+        <div class="nav">
+            <ul>
+                <li><a>Easy Recycle</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="guides.html">Guides</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a id="more">More</a></li>
+            </ul>
+        </div>
+        <div id="account">
+            <input type="email" placeholder="Email" pattern=".+@.+\..+" id="userEmail" required>
+            <input type="password" placeholder="Password" minlength="6" id="userPassword" required>
+            <div></div>
+            <button class="button-color" id="signup_Button">Sign up</button>
+            <button class="button-color" id="login_Button">Log in</button>
+        </div>
+        <script src="account.js"></script>
+    </body>
+</html>
