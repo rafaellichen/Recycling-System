@@ -31,4 +31,3 @@ JSON Tree
 ***
 **cd into the recycling-system**:
 > $ python manage.py runserver
->>>>>>> master
