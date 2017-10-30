@@ -27,11 +27,4 @@ JSON Tree
 ```
 
 ## Deployed using Firebase Hosting service
-[Index.html](https://recycling-system.firebaseapp.com/ )
-
-* account.html
-* account.js
-* index.html
-* index.js
-* profile.html
-* profile.js
+[Easy Recycle](https://recycling-system.firebaseapp.com/ )
