@@ -18,7 +18,8 @@ const street2 = document.getElementById("Street_Address2")
 const city = document.getElementById("City")
 const state = document.getElementById("State")
 const zip = document.getElementById("Zip_Code")
-const inventory = document.getElementById("inventory")
+const donate = document.getElementById("donate")
+const recycle = document.getElementById("recycle")
 
 // signout
 signout_Button.addEventListener("click",e=> {
@@ -40,16 +41,27 @@ firebase.auth().onIdTokenChanged(function(user) {
             state.value = snapshot.val().state
             zip.value = snapshot.val().zip
         })
-        firebase.database().ref("/inventory/"+user.uid).on("value",function(snapshot) {
-            var op="<option value=''>description</option>"
+        firebase.database().ref("/inventory/"+user.uid+"/donate").on("value",function(snapshot) {
+            var op="<option id='' value=''>description</option>"
             var ans=""
             var count=0;
             for (key in snapshot.val()) {
                 count++
-                ans+=op.replace("description",snapshot.val()[key].description).replace("=''", "='"+snapshot.val()[key].type+"'")
+                ans+=op.replace("description",snapshot.val()[key].description).replace("value=''", "value='"+snapshot.val()[key].type+"'").replace("id=''","id="+key)
             }
-            inventory.innerHTML = ans;
-            inventory.size = count;
+            donate.innerHTML = ans;
+            donate.size = count>3?count:3;
+        })
+        firebase.database().ref("/inventory/"+user.uid+"/recycle").on("value",function(snapshot) {
+            var op="<option id='' value=''>description</option>"
+            var ans=""
+            var count=0;
+            for (key in snapshot.val()) {
+                count++
+                ans+=op.replace("description",snapshot.val()[key].description).replace("value=''", "value='"+snapshot.val()[key].type+"'").replace("id=''","id="+key)
+            }
+            recycle.innerHTML = ans;
+            recycle.size = count>3?count:3;
         })
     } else {
         window.location = "account.html"
@@ -72,4 +84,26 @@ update_Button.addEventListener("click",e => {
             }); 
         }
     }); 
+})
+
+// delete
+delete_Button.addEventListener("click",e=> {
+    var keys_donate=[]
+    for(var i=0; i<donate.selectedOptions.length; i++) {
+        keys_donate.push(donate.selectedOptions[i].id)
+    }
+    var keys_recycle=[]
+    for(var i=0; i<recycle.selectedOptions.length; i++) {
+        keys_recycle.push(recycle.selectedOptions[i].id)
+    }
+    firebase.auth().onIdTokenChanged(function(user) {
+        if(user) {
+            for(var i=0; i<keys_donate.length; i++) {
+                firebase.database().ref("/inventory/"+user.uid+"/donate/"+keys_donate[i]).remove()
+            }
+            for(var i=0; i<keys_recycle.length; i++) {
+                firebase.database().ref("/inventory/"+user.uid+"/recycle/"+keys_recycle[i]).remove()
+            }
+        }
+    })
 })

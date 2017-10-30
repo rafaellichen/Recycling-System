@@ -41,6 +41,12 @@ select {
     text-align: center;
     width: 300px;
 }
+label {
+    color: white;
+    font-size: 12pt;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
 div:nth-last-of-type(1) {
     margin-bottom: 100px;
 }
