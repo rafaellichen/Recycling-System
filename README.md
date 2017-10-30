@@ -1,5 +1,5 @@
 # Recycling-System
-<<<<<<< HEAD
+
 ## Using Realtime Database to store information
 JSON Tree
 ```js
@@ -26,12 +26,9 @@ JSON Tree
     }
 }
 ```
-
 ## Deployed using Firebase Hosting service
 [Easy Recycle](https://recycling-system.firebaseapp.com/ )
-=======
-==============================
-
+***
 **cd into the recycling-system**:
 > $ python manage.py runserver
 >>>>>>> master
