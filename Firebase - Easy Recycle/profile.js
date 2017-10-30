@@ -46,7 +46,7 @@ firebase.auth().onIdTokenChanged(function(user) {
             var count=0;
             for (key in snapshot.val()) {
                 count++
-                ans+=op.replace("description",snapshot.val()[key].description).replace("=''", "='"+snapshot.val()[key].description+"'")
+                ans+=op.replace("description",snapshot.val()[key].description).replace("=''", "='"+snapshot.val()[key].type+"'")
             }
             inventory.innerHTML = ans;
             inventory.size = count;

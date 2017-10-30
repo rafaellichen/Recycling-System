@@ -22,19 +22,27 @@ input, button {
     vertical-align: middle;
     border: 1px solid lightgrey;
 }
-div[id="info"] {
-    border-bottom: 1px dotted white;
+#bottom {
+    padding-top: 45px;
 }
-div[id="bottom"] div {
-    display: inline-block;
+#b4del {
+    margin-top: -100px;
 }
-div:nth-last-of-type(2) {
-    padding-bottom: 50px;
-    margin-bottom: 50px;
+#div-border {
+    margin-left: auto;
+    margin-right: auto;
+    position: center;
+    width: 50%;
+    border-top: 1px dotted white;
+}
+select {
+    margin-top: 10px;
+    font-size: 12pt;
+    text-align: center;
+    width: 300px;
 }
 div:nth-last-of-type(1) {
-    margin-top: -10px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 button:hover {
     background-color: grey;
@@ -89,6 +97,19 @@ li:nth-child(n+2) a:hover {
 @media only screen and (max-width:410px) {
     li:nth-child(n+3):nth-child(-n+4) a {
         display: none;
+    }
+}
+@media only screen and (max-width:610px) {
+    div:nth-last-of-type(1) {
+        margin-bottom: 60px;
+    }
+    #b4del {
+        margin-top: -60px;
+    }
+}
+@media only screen and (min-width:610px) {
+    div[id="last"] {
+        margin-bottom: 60px;
     }
 }
 @media only screen and (min-width:410px) {
