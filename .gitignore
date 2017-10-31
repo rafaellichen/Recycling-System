@@ -1,6 +1,3 @@
 *.pyc
 *.firebaserc
-database.rules.json
-firebase.json
-public
 *.DS_Store
