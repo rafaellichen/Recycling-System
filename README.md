@@ -1,15 +1,29 @@
 # Recycling-System
 
-## Using Realtime Database to store information
+## Firebase - EasyRecycle
+### Using Realtime Database to store information
 JSON Tree
 ```js
 {
     "inventory" : {
         "BdgUvz0xgqQS8d0VYLR6vyBCC7j2" : {
-            "-KxZSZr9k0f2UyXYYej8" : {
-                "description" : "newpaper",
-                "type" : "Paper"
+            "donate" : {
+                "-KxjLBh1jdU6wXH0QLnE" : {
+                    "description" : "iPhone X",
+                    "type" : "Electronic"
+                }
+            },
+            "recycle" : {
+                "-KxjLL8SZ9eunklEAQc_" : {
+                    "description" : "newspaper",
+                    "type" : "Paper"
+                }
             }
+        }
+    },
+    "search" : {
+        "BdgUvz0xgqQS8d0VYLR6vyBCC7j2" : {
+            "check" : ""
         }
     },
     "users" : {
@@ -26,8 +40,9 @@ JSON Tree
     }
 }
 ```
-## Deployed using Firebase Hosting service
+### Deployed using Firebase Hosting service
 [Easy Recycle](https://recycling-system.firebaseapp.com/ )
 ***
+## recycleApp
 **cd into the recycling-system**:
 > $ python manage.py runserver
