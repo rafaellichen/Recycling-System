@@ -15,16 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-<<<<<<< HEAD
 from mainRecycleApp.views import about
-=======
->>>>>>> 5864c299cd6050e292038c3ece7ca99e0b0fae77
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', include('mainRecycleApp.urls')),
-<<<<<<< HEAD
     url(r'^about$', about),
-=======
->>>>>>> 5864c299cd6050e292038c3ece7ca99e0b0fae77
 ]
