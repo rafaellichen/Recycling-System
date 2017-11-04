@@ -11,5 +11,5 @@ class RecyclingCenters(models.Model):
 	timetable = models.TextField()
 
 	def __str__(self):
-		return self.name, self.address, self.phone, self.website, self.timetable	
+		return self.name	
 
