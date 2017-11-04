@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView
 from searchResult.models import RecyclingCenters
 
 urlpatterns = [
-    url(r'^$', ListView.as_view(queryset=RecyclingCenters.objects.all().order_by("name"),
-    							template_name="searchResult/result.html")),
+    url(r'^$', ListView.as_view(
+    					queryset=RecyclingCenters.objects.all().order_by("name"),
+    					template_name="searchResult/result.html")),
 ]
