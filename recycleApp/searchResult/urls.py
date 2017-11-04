@@ -7,6 +7,6 @@ from searchResult.models import RecyclingCenters
 
 urlpatterns = [
     url(r'^$', ListView.as_view(
-    					queryset=RecyclingCenters.objects.all().order_by("name"),
+    					queryset=RecyclingCenters.objects.all(),
     					template_name="searchResult/result.html")),
 ]
