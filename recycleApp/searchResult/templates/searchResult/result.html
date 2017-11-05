@@ -1,0 +1,11 @@
+{% extends "mainRecycleApp/header.html" %}
+
+{% block content %}
+	{% for RecyclingCenters in object_list %}
+		{{ RecyclingCenters.name }}
+		{{ RecyclingCenters.address }}
+		{{ RecyclingCenters.phone }}
+		{{ RecyclingCenters.website }}
+		{{ RecyclingCenters.timetable }}
+	{% endfor %}
+{% endblock %}
