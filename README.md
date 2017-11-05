@@ -1,4 +1,4 @@
 # Recycling-System
 ## recycleApp
-**cd into the recycling-system**:
+**cd into the recycleApp**:
 > $ python manage.py runserver
