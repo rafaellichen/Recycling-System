@@ -21,5 +21,6 @@ from mainRecycleApp.views import about
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', include('mainRecycleApp.urls')),
+    url(r'^result/$', include('searchResult.urls')),    
     url(r'^about$', about),
 ]
