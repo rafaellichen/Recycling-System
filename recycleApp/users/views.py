@@ -47,3 +47,7 @@ def signup(request):
 
 def profile(request):
     return render(request, 'users/profile.djhtml')
+
+
+def index(request):
+    return render(request, 'app/index.djhtml')
