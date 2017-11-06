@@ -22,7 +22,8 @@ def signin(request):
 
 @csrf_exempt
 def signout(request):
-    pass
+    logout(request)
+    return redirect('/')
 
 def signup(request):
     if request.method == 'POST':
@@ -45,4 +46,4 @@ def signup(request):
 
 
 def profile(request):
-    pass
+    return render(request, 'users/profile.djhtml')
