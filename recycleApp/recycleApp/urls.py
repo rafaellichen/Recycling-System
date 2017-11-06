@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^$', include('mainRecycleApp.urls')),
     url(r'^result/$', include('searchResult.urls')),
     url(r'^about$', about),
+    url(r'^', include('users.urls', namespace='users')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
