@@ -6,7 +6,19 @@ from . import forms
 
 
 def signin(request):
-    pass
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        print (username, password)
+        user = authenticate(username = username, password=password)
+        print (user)
+        if user is None: return HttpResponse("Invalid Login")
+        if request.user.is_authenticated(): return redirect ('/')
+        login(request, user)
+        return redirect ('/')
+
+    return render(request, 'users/login.djhtml')
+
 
 @csrf_exempt
 def signout(request):
