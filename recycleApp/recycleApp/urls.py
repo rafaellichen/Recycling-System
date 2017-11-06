@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from mainRecycleApp.views import about
+from mainRecycleApp.views import contact
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,5 +26,6 @@ urlpatterns = [
     url(r'^$', include('mainRecycleApp.urls')),
     url(r'^result/$', include('searchResult.urls')),
     url(r'^about$', about),
+    url(r'^contact$', contact),
     url(r'^accounts/', include('users.urls', namespace='users')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
