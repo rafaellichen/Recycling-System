@@ -26,5 +26,11 @@ def signup(request):
         else:
             return HttpResponse('something wrong!')
 
+    context = {
+        'signupForm' : forms.SignupForm
+    }
+    return render(request, 'users/signup.djhtml', context=context)
+
+
 def profile(request):
     pass
