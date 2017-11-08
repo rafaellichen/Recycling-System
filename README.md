@@ -1,2 +1,4 @@
 # Recycling-System
-CSC 47300 Web Site Design, Fall 2017
+## recycleApp
+**cd into the recycleApp**:
+> $ python manage.py runserver
