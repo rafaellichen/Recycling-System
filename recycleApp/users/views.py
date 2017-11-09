@@ -3,14 +3,14 @@ from django.contrib.auth import logout, authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from . import forms
 
-
 def signin(request):
+    '''Signin method with param request'''
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        print (username, password)
+        # print (username, password)
         user = authenticate(username=username, password=password)
-        print (user)
+        # print (user)
         if user is None: return HttpResponse("Invalid Login")
         if request.user.is_authenticated(): return redirect('/')
         login(request, user)
@@ -21,10 +21,12 @@ def signin(request):
 
 @csrf_exempt
 def signout(request):
+    '''Signout Method with param request'''
     logout(request)
     return redirect('/')
 
 def signup(request):
+    '''Signup Method with param request'''
     if request.method == 'POST':
         userForm = forms.SignupForm(request.POST or None)
         if userForm.is_valid() and userForm.cleaned_data['password'] == userForm.cleaned_data['confirm_password']:
@@ -43,8 +45,10 @@ def signup(request):
 
 
 def profile(request):
+    '''Profile render method that renders the Users/Profile'''
     return render(request, 'users/profile.djhtml')
 
 
 def index(request):
+    '''Index render method that renders app/index'''
     return render(request, 'app/index.djhtml')

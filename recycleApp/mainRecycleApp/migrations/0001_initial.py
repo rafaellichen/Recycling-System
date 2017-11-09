@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RecyclingCenter',
             fields=[
-                ('id', models.AutoField(auto_created=True, 
+                ('id', models.AutoField(auto_created=True,
                         primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.TextField()),
                 ('address', models.TextField()),
