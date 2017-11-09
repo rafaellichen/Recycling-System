@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
-from django.contrib.auth import logout,authenticate, login
-from django.template import RequestContext
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.contrib.auth import logout, authenticate, login
+from django.views.decorators.csrf import csrf_exempt
 from . import forms
 
 
@@ -10,12 +9,12 @@ def signin(request):
         username = request.POST['username']
         password = request.POST['password']
         print (username, password)
-        user = authenticate(username = username, password=password)
+        user = authenticate(username=username, password=password)
         print (user)
         if user is None: return HttpResponse("Invalid Login")
-        if request.user.is_authenticated(): return redirect ('/')
+        if request.user.is_authenticated(): return redirect('/')
         login(request, user)
-        return redirect ('/')
+        return redirect('/')
 
     return render(request, 'users/login.djhtml')
 
@@ -28,7 +27,7 @@ def signout(request):
 def signup(request):
     if request.method == 'POST':
         userForm = forms.SignupForm(request.POST or None)
-        if (userForm.is_valid() and userForm.cleaned_data['password'] == userForm.cleaned_data['confirm_password']):
+        if userForm.is_valid() and userForm.cleaned_data['password'] == userForm.cleaned_data['confirm_password']:
             user = userForm.save()
             user.set_password(user.password)
             user.save()

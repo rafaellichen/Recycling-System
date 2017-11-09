@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import SESSION_KEY
 from django.test import TestCase
 
 class LoginTest(TestCase):

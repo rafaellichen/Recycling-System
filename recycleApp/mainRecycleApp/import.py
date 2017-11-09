@@ -2,7 +2,6 @@
 import csv
 
 from mainRecycleApp.models import RecyclingCenter
-from recycleApp import settings
 
 data = csv.reader(open("DonateNYCCSV.csv"), delimiter=",")
 
