@@ -28,14 +28,12 @@ def signout(request):
 def signup(request):
     if request.method == 'POST':
         userForm = forms.SignupForm(request.POST or None)
-        if ( userForm.is_valid()
-             and userForm.cleaned_data['password'] ==
-              userForm.cleaned_data['confirm_password']):
-                user = userForm.save()
-                user.set_password(user.password)
-                user.save()
-                return HttpResponse('signup succcessful\
-                    <a href="/login"> login</a>')
+        if (userForm.is_valid() and userForm.cleaned_data['password'] == userForm.cleaned_data['confirm_password']):
+            user = userForm.save()
+            user.set_password(user.password)
+            user.save()
+            return HttpResponse('signup succcessful\
+            <a href="/accounts/login"> login</a>')
         else:
             return HttpResponse('something wrong!')
 
