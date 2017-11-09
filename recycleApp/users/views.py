@@ -35,7 +35,7 @@ def signup(request):
                 user.set_password(user.password)
                 user.save()
                 return HttpResponse('signup succcessful\
-                    <a href="/login"> login</a>')
+                    <a href="/accounts/login"> login</a>')
         else:
             return HttpResponse('something wrong!')
 
