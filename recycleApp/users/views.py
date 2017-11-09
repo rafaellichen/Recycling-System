@@ -1,3 +1,4 @@
+'''Views for Users App'''
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import logout, authenticate, login
 from django.views.decorators.csrf import csrf_exempt
@@ -28,15 +29,14 @@ def signout(request):
 def signup(request):
     '''Signup Method with param request'''
     if request.method == 'POST':
-        userForm = forms.SignupForm(request.POST or None)
-        if userForm.is_valid() and userForm.cleaned_data['password'] == userForm.cleaned_data['confirm_password']:
-            user = userForm.save()
+        USERFORM = forms.SignupForm(request.POST or None)
+        if USERFORM.is_valid() and USERFORM.cleaned_data['password'] == USERFORM.cleaned_data['confirm_password']:
+            user = USERFORM.save()
             user.set_password(user.password)
             user.save()
             return HttpResponse('signup succcessful\
             <a href="/accounts/login"> login</a>')
-        else:
-            return HttpResponse('something wrong!')
+        return HttpResponse('something wrong!')
 
     context = {
         'signupForm' : forms.SignupForm
