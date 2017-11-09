@@ -1,20 +1,11 @@
+'''Helper Import script to import the CSV data into the Django Models'''
 import csv
-import sys
-import os
-import django
+
 from mainRecycleApp.models import RecyclingCenter
 
-django.setup()
+data = csv.reader(open("DonateNYCCSV.csv"), delimiter=",")
 
-directory = "/recycleApp/"
-
-sys.path.append(directory)
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-
-csvData = csv.reader(open("DonateNYCCSV.csv"), delimiter=",")
-
-for row in csvData:
+for row in data:
     if row[0] != 'name':
         recycle = RecyclingCenter()
         recycle.name = row[0]

@@ -1,11 +1,24 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
+<div class="container-fluid">
+
 	{% for RecyclingCenters in object_list %}
-		{{ RecyclingCenters.name }}
-		{{ RecyclingCenters.address }}
-		{{ RecyclingCenters.phone }}
-		{{ RecyclingCenters.website }}
-		{{ RecyclingCenters.timetable }}
+	<div class = "row text-center">
+		<div class = "col">
+			{{ RecyclingCenters.name }}
+			<br>
+			{{ RecyclingCenters.address }}
+			<br>
+			{{ RecyclingCenters.phone }}
+			<br>			
+			{{ RecyclingCenters.website }}
+			<br>
+		</div>
+		<div class = "col">
+			{{ RecyclingCenters.timetable }}
+		</div>
+	</div>
 	{% endfor %}
+</div>
 {% endblock %}
