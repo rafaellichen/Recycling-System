@@ -2,3 +2,4 @@
 *.firebaserc
 *.DS_Store
 .idea
+/.vscode
