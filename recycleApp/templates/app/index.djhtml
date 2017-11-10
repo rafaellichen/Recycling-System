@@ -31,262 +31,145 @@
   <section class="container text-center">
       <div class="row divItemCategory">
           {% load static  %}
-
-<!-- First Row -->
-<h1>Daily Use</h1>
-  <div class="row">
-  <div class="col-md-5">
-        <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+            <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-sq-lg btn-primary">
+                <input type="checkbox" name="1" id="1" class="tooltipstered">
+                <img src="/static/img/art.png" style="width:30px; height:30px">
+                Art Supplies
+              </label>
+            </div>
+          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
             <label class="btn btn-sq-lg btn-primary">
                 <input type="checkbox" name="9" id="9" class="tooltipstered">
                 <img src="/static/img/food.png" style="width:30px; height:30px">
                 Food &amp; Beverages
             </label>
-          </div>      
-            
-</div>
+          </div>
 
-<div class="col-md-3">
           <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                  <label class="btn btn-primary">
-                      <input type="checkbox" name="10" id="10" class="tooltipstered">
-                      <img src="/static/img/glass.png" style="width:30px; height:30px">
-                      Glass
-                  </label>
-                </div>
-</div>
-
-<div class="col-md-4">
-         <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                <label class="btn btn-primary">
-                    <input type="checkbox" name="11" id="11" class="tooltipstered">
-                    <img src="/static/img/homeappliances.png" style="width:30px; height:30px">
-                    Home Appliances
-                </label>
-              </div> 
-
-</div>
-</div>
-
-<!-- Second Row -->
-<div class="row">
-  <div class="col-md-4">
-           <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                      <label class="btn btn-primary">
-                          <input type="checkbox" name="12" id="12" class="tooltipstered">
-                          <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
-                          Household Furniture
-                      </label>
-                    </div>
-           
-
-</div>
-<div class="col-md-4">
-          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                  <label class="btn btn-primary">
-                      <input type="checkbox" name="19" id="19" class="tooltipstered">
-                      <img src="/static/img/cardboard.png" style="width:30px; height:30px">
-                      Paper &amp; Cardboard
-                  </label>
-                </div>  
-</div>      
-<div class="col-md-4"> 
-          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                        <label class="btn btn-primary">
-                            <input type="checkbox" name="22" id="22" class="tooltipstered">
-                            <img src="/static/img/textiles.png" style="width:30px; height:30px">
-                            Textiles (non-clothing)
-                        </label>
-                      </div>        
-</div>
-</div>
-
-<!-- Third Row -->
-<div class="row">
-  <div class="col-md-3">
-         <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                            <label class="btn btn-primary">
-                                <input type="checkbox" name="13" id="13" class="tooltipstered">
-                                <img src="/static/img/houseware.png" style="width:30px; height:30px">
-                                Housewares
-                            </label>
-                          </div>
-  </div>
-
-  <div class="col-md-2">
-      <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                        <label class="btn btn-primary">
-                            <input type="checkbox" name="20" id="20" class="tooltipstered">
-                            <img src="/static/img/shoes.png" style="width:30px; height:30px">
-                            Shoes
-                        </label>
-                      </div>
-  </div>
-
-  <div class="col-md-2">
-      <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                          <label class="btn btn-primary">
-                              <input type="checkbox" name="5" id="5" class="tooltipstered">
-                              <img src="/static/img/clothing.png" style="width:30px; height:30px">
-                              Clothing
-                          </label>
-                        </div>
-  </div>
-  
-  <div class="col-md-5">
-         <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-              <label class="btn btn-primary">
-                  <input type="checkbox" name="7" id="7" class="tooltipstered">
-                  <img src="/static/img/packaging.png" style="width:30px; height:30px">
-                  Containers &amp; Packaging
-              </label>
-   </div>
-</div>
-
-<div class ="container">
-<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
-</div>
-
-<!-- Fourth Row -->
-<h1>Office</h1>
-<div class="row">
-  <div class="col-md-4">
-
-               <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                    <label class="btn btn-primary">
-                        <input type="checkbox" name="18" id="18" class="tooltipstered">
-                        <img src="/static/img/officesupp.png" style="width:30px; height:30px">
-                        Office Supplies
-                    </label>
-                  </div>
-  </div>
-  <div class="col-md-4">
-               
-               <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
               <label class="btn btn-primary">
                   <input type="checkbox" name="17" id="17" class="tooltipstered">
                   <img src="/static/img/officefurniture.png" style="width:30px; height:30px">
                   Office Furniture
               </label>
             </div>
-  </div>
-  <div class="col-md-4">
-          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-                      <label class="btn btn-primary">
-                          <input type="checkbox" name="3" id="3" class="tooltipstered">
-                          <img src="/static/img/books.png" style="width:30px; height:30px">
-                          Books &amp; Media (CDs, LPs, DVDs)
-                      </label>
-                    </div>
 
-  </div>
-
-  </div>
-  <div class ="container">
-<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
-</div>
-
-<!-- Fifth Row -->
-<h1>Machine</h1>
-<div class="row">
-  <div class="col-md-4">
-        <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+            <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
                 <label class="btn btn-primary">
                     <input type="checkbox" name="2" id="2" class="tooltipstered">
                     <img src="/static/img/car.png" style="width:30px; height:30px">
                     Automotive
                 </label>
               </div>
-  </div>
 
-  <div class="col-md-4">
-       <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-              <label class="btn btn-primary">
-                  <input type="checkbox" name="8" id="8" class="tooltipstered">
-                  <img src="/static/img/electronics.png" style="width:30px; height:30px">
-                  Electronics
-              </label>
-        </div>
-  </div>
+              <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                  <label class="btn btn-primary">
+                      <input type="checkbox" name="10" id="10" class="tooltipstered">
+                      <img src="/static/img/glass.png" style="width:30px; height:30px">
+                      Glass
+                  </label>
+                </div>
+          
+                <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="18" id="18" class="tooltipstered">
+                        <img src="/static/img/officesupp.png" style="width:30px; height:30px">
+                        Office Supplies
+                    </label>
+                  </div>
+                  <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                      <label class="btn btn-primary">
+                          <input type="checkbox" name="3" id="3" class="tooltipstered">
+                          <img src="/static/img/books.png" style="width:30px; height:30px">
+                          Books &amp; Media (CDs, LPs, DVDs)
+                      </label>
+                    </div>
+                    <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="22" id="22" class="tooltipstered">
+                            <img src="/static/img/textiles.png" style="width:30px; height:30px">
+                            Textiles (non-clothing)
+                        </label>
+                      </div>
 
-    <div class="col-md-4">
-           <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-              <label class="btn btn-primary">
-                  <input type="checkbox" name="15" id="15" class="tooltipstered">
-                  <img src="/static/img/medical.png" style="width:30px; height:30px">
-                  Medical Equipment &amp; Furniture
-              </label>
-           
-          </div>
-  </div>
 
-</div>
-<div class ="container">
-<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
-</div>
-
-<!-- Sixth Row -->
-<h1>Others</h1>
-<div class="row">
-  <div class="col-md-4">
-         <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+            <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                <label class="btn btn-primary">
+                    <input type="checkbox" name="11" id="11" class="tooltipstered">
+                    <img src="/static/img/homeappliances.png" style="width:30px; height:30px">
+                    Home Appliances
+                </label>
+              </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                  <label class="btn btn-primary">
+                      <input type="checkbox" name="19" id="19" class="tooltipstered">
+                      <img src="/static/img/cardboard.png" style="width:30px; height:30px">
+                      Paper &amp; Cardboard
+                  </label>
+                </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
                     <label class="btn btn-primary">
                         <input type="checkbox" name="4" id="4" class="tooltipstered">
                         <img src="/static/img/buildingproducts.png" style="width:30px; height:30px">
                         Building Products
                     </label>
-                  </div>
-   </div>
-
-   <div class="col-md-4">
-          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                  </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                      <label class="btn btn-primary">
+                          <input type="checkbox" name="12" id="12" class="tooltipstered">
+                          <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
+                          Household Furniture
+                      </label>
+                    </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="20" id="20" class="tooltipstered">
+                            <img src="/static/img/shoes.png" style="width:30px; height:30px">
+                            Shoes
+                        </label>
+                      </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                          <label class="btn btn-primary">
+                              <input type="checkbox" name="5" id="5" class="tooltipstered">
+                              <img src="/static/img/clothing.png" style="width:30px; height:30px">
+                              Clothing
+                          </label>
+                        </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                            <label class="btn btn-primary">
+                                <input type="checkbox" name="13" id="13" class="tooltipstered">
+                                <img src="/static/img/houseware.png" style="width:30px; height:30px">
+                                Housewares
+                            </label>
+                          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
                               <label class="btn btn-primary">
                                   <input type="checkbox" name="21" id="21" class="tooltipstered">
                                   <img src="/static/img/sport.png" style="width:30px; height:30px">
                                   Sporting Equipment
                               </label>
                             </div>
-   </div>
-
-   <div class="col-md-4">
-          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+    <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
               <label class="btn btn-primary">
                   <input type="checkbox" name="6" id="6" class="tooltipstered">
                   <img src="/static/img/jewelry.png" style="width:30px; height:30px">
                   Collectibles (antiques, jewelry, art)
               </label>
-          </div>
-   </div>
-
-</div>
-
-<!-- Seventh Row -->
-<div class="row">
-  <div class="col-md-3">
-
-        <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-              <label class="btn btn-sq-lg btn-primary">
-                <input type="checkbox" name="1" id="1" class="tooltipstered">
-                <img src="/static/img/art.png" style="width:30px; height:30px">
-                Art Supplies
-              </label>
-              </div>
-  </div>            
-   
-  <div class="col-md-3">                          
-                        
-    <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
               <label class="btn btn-primary">
                   <input type="checkbox" name="14" id="14" class="tooltipstered">
                   <img src="/static/img/lubricants.png" style="width:30px; height:30px">
                   Lubricants
               </label>
            
-          </div>
-  </div>
-
-  <div class="col-md-3">    
-         <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="7" id="7" class="tooltipstered">
+                  <img src="/static/img/packaging.png" style="width:30px; height:30px">
+                  Containers &amp; Packaging
+              </label>
+           
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="15" id="15" class="tooltipstered">
+                  <img src="/static/img/medical.png" style="width:30px; height:30px">
+                  Medical Equipment &amp; Furniture
+              </label>
+           
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
               <label class="btn btn-primary">
                   <input type="checkbox" name="23" id="23" class="tooltipstered">
                   <img src="/static/img/toy.png" style="width:30px; height:30px">
@@ -294,10 +177,14 @@
               </label>
            
           </div>
- </div>
-
- <div class="col-md-3">     
+          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="8" id="8" class="tooltipstered">
+                  <img src="/static/img/electronics.png" style="width:30px; height:30px">
+                  Electronics
+              </label>
            
+          </div>
           <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
               <label class="btn btn-primary">
                   <input type="checkbox" name="16" id="16" class="tooltipstered">
@@ -306,8 +193,9 @@
               </label>
             </div>
 
+
       </div>
-</div>
+
 
 
 <br><br><br>
