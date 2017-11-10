@@ -1,7 +1,6 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: linux-64
-beautifulsoup4=4.6.0=py36h49b8c8c_1
 ca-certificates=2017.08.26=h1d4fec5_0
 certifi=2017.7.27.1=py36h8b7b77e_0
 django=1.11.3=py36_0
