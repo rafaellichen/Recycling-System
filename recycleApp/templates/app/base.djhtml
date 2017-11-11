@@ -20,6 +20,9 @@
   <!-- Theme CSS -->
   <link href="{% static "css/grayscale.css" %}" rel="stylesheet">
 
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
   <!-- /*<style type="text/css">
       .limtiCharClass {
 
@@ -94,7 +97,8 @@
   <script src="{% static "js/popper.js" %}" type='text/javascript'></script>
   <script src="{% static "js/bootstrap.min.js" %}" type='text/javascript'></script>
   <script src="{% static "js/jquery-ui.min.js" %}" type="text/javascript"></script>
-
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
   <script type="text/javascript">
@@ -218,7 +222,11 @@
           });
         });
       });
-
+     
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  
       {% endif %}
   </script>
 
