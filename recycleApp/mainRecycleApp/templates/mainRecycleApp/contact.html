@@ -1,6 +1,65 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
+<style>
+body {
+  background: #f5f5f5;
+}
+
+.chat-box {
+  width: 900px;
+  height: 400px;
+  overflow: auto;
+  margin: 30px auto 20px;
+  padding: 25px;
+  background: #fff;
+}
+.chat-box p {
+  line-height: 1;
+  margin: 8px auto;
+}
+.chat-box p span {
+  font-weight: 600;
+}
+.chat-box p span#you {
+  color: #5cb85c;
+}
+.chat-box p span#ai {
+  color: #337ab7;
+}
+.you-hr,
+.ai-hr {
+  margin: 5px 0;
+  width: 5%;
+  opacity: 0.1;
+}
+.you-hr {
+  border-color: #5cb85c;
+}
+.ai-hr {
+  border-color: #337ab7;
+}
+
+.chat-form {
+  width: 600px;
+  margin: 0 auto 20px;
+}
+.chat-message {
+  width: 420px !important;
+}
+.chat-send,
+.chat-reset,
+.chat-clear {
+  width: 56px;
+}
+
+body > hr
+{
+    width: 60%;
+    margin: 20px auto;
+}
+</style>
+
 <div class="container">
   <div class="row-fluid">
         <div class="span8">
@@ -21,5 +80,27 @@
       </div>
     </div>
 </div>
+
+<div class="container">
+  <div class="chat-box">
+</div>
+<form class="form-inline chat-form">
+  <input type="text" class="form-control chat-message" placeholder="Say Something">
+  <button type="button" class="btn btn-primary chat-send" title="Send Message">
+    <i class="fa fa-paper-plane" aria-hidden="true">
+    </i>
+  </button>
+  <button type="reset" class="btn btn-success chat-reset" title="Reset Message">
+    <i class="fa fa-refresh" aria-hidden="true">
+    </i>
+  </button>
+  <button type="button" class="btn btn-danger chat-clear" title="Clear the Chat Box">
+    <i class="fa fa-times" aria-hidden="true">
+    </i>
+  </button>
+</form>
+<hr>
+</div>
+
 
 {% endblock %}
