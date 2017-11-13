@@ -73,7 +73,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     
     <script>
-  $(document).ready(function() {
+ $(document).ready(function() {
 
     //send the message by click
     $(".chat-send").click(sendMsg);
@@ -92,7 +92,7 @@
 
 //send message to chat box
 function sendMsg() {
-  var msg = $(".chat-message");
+    var msg = $(".chat-message");
     var msgVal = msg.val();
     var chatBox = $(".chat-box");
     if (msgVal) {
@@ -112,7 +112,7 @@ function sendMsg() {
 
 //set up the AI dialog
 function dialog(msg){
-    var replyArr = ["Hi, how's it going :)","I'm good, thx, U? :)"];
+    var replyArr = ["Just click account button","I'm good, thx, U? :)"];
     msg = msg.toLowerCase();
     var time = new Date();
     var hour = time.getHours();
@@ -121,7 +121,7 @@ function dialog(msg){
 
     var chatBox = $(".chat-box");
 
-    if(msg.indexOf("hello") != -1){
+    if(msg.indexOf("how to find") != -1){
         chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[0] + "</p><hr class='ai-hr'>");
     }
     else if(msg.indexOf("how are you") != -1 || msg.indexOf("how are u") != -1){
@@ -149,111 +149,7 @@ function timeGreeting(h){
     var greeting = ["U need to sleep","Good morning","Lunch time now","Feel asleep? Have some coffee","Free time~Yeah","Good night"];
 
     if(h>=0&&h<=6){
-      return greeting[0];
-    }
-    else if(h>=7&&h<=10){
-        return greeting[1];
-    }
-    else if(h>=11&&h<=13){
-        return greeting[2];
-    }
-    else if(h>=14&&h<=18){
-        return greeting[3];
-    }
-    else if(h>=19&&h<=21){
-        return greeting[4];
-    }
-    else if(h>=22&&h<=23){
-        return greeting[5];
-    }
-    else {
-        return "";
-    }
-}
-
-//clear the chat box
-function clearChatBox() {
-    $(".chat-box").html("");
-}
-</script>
-<script>
-  $(document).ready(function() {
-
-    //send the message by click
-    $(".chat-send").click(sendMsg);
-
-    //press enter to send
-    $("form").keypress(function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            sendMsg();
-        }
-    });
-
-    //clear the chat box
-    $(".chat-clear").click(clearChatBox);
-});
-
-//send message to chat box
-function sendMsg() {
-  var msg = $(".chat-message");
-    var msgVal = msg.val();
-    var chatBox = $(".chat-box");
-    if (msgVal) {
-        var msgAppend = "<p><span id='you'>You: </span>" + msgVal + "</p><hr class='you-hr'>";
-        chatBox.append(msgAppend);
-    } else {}
-
-    //dialog reply
-    dialog(msgVal);
-
-    //empty input
-    msg.val("");
-
-    //keep the scroll in bottom
-    chatBox.scrollTop(chatBox[0].scrollHeight);
-}
-
-//set up the AI dialog
-function dialog(msg){
-    var replyArr = ["Hi, how's it going :)","I'm good, thx, U? :)"];
-    msg = msg.toLowerCase();
-    var time = new Date();
-    var hour = time.getHours();
-    var minute = time.getMinutes();
-    var currentTime = plusZero(hour) + ":" + plusZero(minute);
-
-    var chatBox = $(".chat-box");
-
-    if(msg.indexOf("hello") != -1){
-        chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[0] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("how are you") != -1 || msg.indexOf("how are u") != -1){
-        chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[1] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("time") != -1){
-        chatBox.append("<p><span id='ai'>AI: </span>Current Time: " + currentTime + ". " + timeGreeting(hour) + "~ :)</p><hr class='ai-hr'>");
-    }
-    else {}
-}
-
-//add 0 if time number is <10
-function plusZero(x){
-    if(x < 10){
-        x = "0" + x;
-    }
-    else {
-        x = x;
-    }
-    return x;
-}
-
-//greeting by hour
-function timeGreeting(h){
-    var greeting = ["U need to sleep","Good morning","Lunch time now","Feel asleep? Have some coffee","Free time~Yeah","Good night"];
-
-    if(h>=0&&h<=6){
-      return greeting[0];
+        return greeting[0];
     }
     else if(h>=7&&h<=10){
         return greeting[1];
