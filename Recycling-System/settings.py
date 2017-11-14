@@ -25,7 +25,7 @@ SECRET_KEY = '!^2@^bfaj0l5r#jy=ki065g91!3b-s$#^(qrkt18z)hfivairv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'recycleApp.urls'
+ROOT_URLCONF = 'Recycling-System.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'recycleApp.wsgi.application'
+WSGI_APPLICATION = 'Recycling-System.wsgi.application'
 
 
 # Database
@@ -120,8 +120,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    'https://www1.nyc.gov/',
 ]
