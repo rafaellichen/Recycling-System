@@ -1,1 +1,5 @@
-.DS_Store
+*.pyc
+*.firebaserc
+*.DS_Store
+.idea
+/.vscode

@@ -1,0 +1,259 @@
+{% extends 'app/base.djhtml' %}
+{% block body %}
+<style>
+  .art {
+    background: url("/static/img/art.png");
+  }
+</style>
+
+<div class="container" style="margin-top:55px;">
+  <!-- Intro Header -->
+  <header class="intro">
+    <div class="intro-body">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-md-offset-2">
+            <br><br><br><br>
+            <h1 class="brand-heading">Easy Recycle</h1> {% if not request.user.is_anonymous %}
+            <h6>Hi, {{request.user.first_name}} </h6> {%endif%}
+            <a href="#" id="trigger" class="btn btn-circle page-scroll">
+                                <i class="fa fa-angle-double-down animated"></i>
+                            </a>
+            <br><br><br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <br><br>
+
+  <section class="container text-center">
+      <div class="row divItemCategory">
+          {% load static  %}
+            <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-sq-lg btn-primary">
+                <input type="checkbox" name="1" id="1" class="tooltipstered">
+                <img src="/static/img/art.png" style="width:30px; height:30px">
+                Art Supplies
+              </label>
+            </div>
+          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+            <label class="btn btn-sq-lg btn-primary">
+                <input type="checkbox" name="9" id="9" class="tooltipstered">
+                <img src="/static/img/food.png" style="width:30px; height:30px">
+                Food &amp; Beverages
+            </label>
+          </div>
+
+          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="17" id="17" class="tooltipstered">
+                  <img src="/static/img/officefurniture.png" style="width:30px; height:30px">
+                  Office Furniture
+              </label>
+            </div>
+
+            <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                <label class="btn btn-primary">
+                    <input type="checkbox" name="2" id="2" class="tooltipstered">
+                    <img src="/static/img/car.png" style="width:30px; height:30px">
+                    Automotive
+                </label>
+              </div>
+
+              <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                  <label class="btn btn-primary">
+                      <input type="checkbox" name="10" id="10" class="tooltipstered">
+                      <img src="/static/img/glass.png" style="width:30px; height:30px">
+                      Glass
+                  </label>
+                </div>
+          
+                <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="18" id="18" class="tooltipstered">
+                        <img src="/static/img/officesupp.png" style="width:30px; height:30px">
+                        Office Supplies
+                    </label>
+                  </div>
+                  <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                      <label class="btn btn-primary">
+                          <input type="checkbox" name="3" id="3" class="tooltipstered">
+                          <img src="/static/img/books.png" style="width:30px; height:30px">
+                          Books &amp; Media (CDs, LPs, DVDs)
+                      </label>
+                    </div>
+                    <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="22" id="22" class="tooltipstered">
+                            <img src="/static/img/textiles.png" style="width:30px; height:30px">
+                            Textiles (non-clothing)
+                        </label>
+                      </div>
+
+
+            <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                <label class="btn btn-primary">
+                    <input type="checkbox" name="11" id="11" class="tooltipstered">
+                    <img src="/static/img/homeappliances.png" style="width:30px; height:30px">
+                    Home Appliances
+                </label>
+              </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                  <label class="btn btn-primary">
+                      <input type="checkbox" name="19" id="19" class="tooltipstered">
+                      <img src="/static/img/cardboard.png" style="width:30px; height:30px">
+                      Paper &amp; Cardboard
+                  </label>
+                </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                    <label class="btn btn-primary">
+                        <input type="checkbox" name="4" id="4" class="tooltipstered">
+                        <img src="/static/img/buildingproducts.png" style="width:30px; height:30px">
+                        Building Products
+                    </label>
+                  </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                      <label class="btn btn-primary">
+                          <input type="checkbox" name="12" id="12" class="tooltipstered">
+                          <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
+                          Household Furniture
+                      </label>
+                    </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                        <label class="btn btn-primary">
+                            <input type="checkbox" name="20" id="20" class="tooltipstered">
+                            <img src="/static/img/shoes.png" style="width:30px; height:30px">
+                            Shoes
+                        </label>
+                      </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                          <label class="btn btn-primary">
+                              <input type="checkbox" name="5" id="5" class="tooltipstered">
+                              <img src="/static/img/clothing.png" style="width:30px; height:30px">
+                              Clothing
+                          </label>
+                        </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                            <label class="btn btn-primary">
+                                <input type="checkbox" name="13" id="13" class="tooltipstered">
+                                <img src="/static/img/houseware.png" style="width:30px; height:30px">
+                                Housewares
+                            </label>
+                          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+                              <label class="btn btn-primary">
+                                  <input type="checkbox" name="21" id="21" class="tooltipstered">
+                                  <img src="/static/img/sport.png" style="width:30px; height:30px">
+                                  Sporting Equipment
+                              </label>
+                            </div>
+    <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="6" id="6" class="tooltipstered">
+                  <img src="/static/img/jewelry.png" style="width:30px; height:30px">
+                  Collectibles (antiques, jewelry, art)
+              </label>
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="14" id="14" class="tooltipstered">
+                  <img src="/static/img/lubricants.png" style="width:30px; height:30px">
+                  Lubricants
+              </label>
+           
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="7" id="7" class="tooltipstered">
+                  <img src="/static/img/packaging.png" style="width:30px; height:30px">
+                  Containers &amp; Packaging
+              </label>
+           
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="15" id="15" class="tooltipstered">
+                  <img src="/static/img/medical.png" style="width:30px; height:30px">
+                  Medical Equipment &amp; Furniture
+              </label>
+           
+          </div><div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="23" id="23" class="tooltipstered">
+                  <img src="/static/img/toy.png" style="width:30px; height:30px">
+                  Toys/Games
+              </label>
+           
+          </div>
+          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="8" id="8" class="tooltipstered">
+                  <img src="/static/img/electronics.png" style="width:30px; height:30px">
+                  Electronics
+              </label>
+           
+          </div>
+          <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+              <label class="btn btn-primary">
+                  <input type="checkbox" name="16" id="16" class="tooltipstered">
+                  <img src="/static/img/musicalinstruments.png" style="width:30px; height:30px">
+                  Musical Instruments
+              </label>
+            </div>
+
+
+      </div>
+
+
+
+<br><br><br>
+          <div class="span12">
+            <div class="row">
+              <div class="col-lg-6 col-md-6" >
+                <div style="margin-bottom:2px"><label for="txtAddress" style="margin-left :0px !important">ZIP CODE<span class="red">*</span></label></div>
+                <div>
+                  <input id="txtAddress" name="txtAddress" tabindex="5" type="text"  required="required" class="tooltipstered form-control">
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-6">
+                <div style="margin-bottom:2px"><label for="ddlDistance" style="margin-left :0px !important">Search Radius</label></div>
+                <div>
+                  <select class="custom-select" id="ddlDistance" name="ddlDistance" tabindex="3" type="select-one" style="width:100%">
+                                                    <option selected="selected" value="0">Select</option>
+                                                    <option value=".5">.5 miles</option>
+                                                    <option value="1">1 miles</option>
+                                                    <option value="2">2 miles</option>
+                                                    <option value="3">3 miles</option>
+                                                    <option value="4">4 miles</option>
+                                                    <option value="5">5 miles</option>
+                                                </select>
+                </div>
+              </div>
+             
+            <div class="row justify-content-md-center">
+              <div class="col-lg-12 col-md-12">
+                <div style="margin-top:14px"><button type="submit" class="btn btn-primary" tabindex="6" id="btnSearch" style="float:none;">Search</button></div>
+
+              </div>
+            </div>
+          </div>
+
+  </section>
+
+<br> <br>
+  <section class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <table class="table">
+          <thead>
+              <tr>
+                <th>#</th>
+                <th>Facility</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+              </tr>
+          </thead>
+          <tbody id="divsearchresult">
+
+          </tbody>
+        </table>
+
+    </div>
+  </section>
+
+</div>
+
+{% endblock body %}
