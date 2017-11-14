@@ -11,6 +11,12 @@
   border-color: rgb(112, 112, 112);
 }
 </style>
+<script>
+  function togglemore() {
+    if(document.getElementById("more").innerText=="More") document.getElementById("more").innerText="Less"
+    else document.getElementById("more").innerText="More"
+  }
+</script>
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
 	    <h1 class="display-3">Recycling Starts Here.</h1>
@@ -57,7 +63,7 @@
     </div>
   </div>
   <div class="container">
-    <a class="btn btn-danger" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
+    <a id="more" onclick="togglemore()" class="btn btn-danger" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
       More
     </a>
   </div>
