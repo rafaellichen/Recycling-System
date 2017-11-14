@@ -3,9 +3,11 @@ backports.functools-lru-cache==1.4
 beautifulsoup4==4.6.0
 click==6.7
 configparser==3.5.0
+coverage==4.4.2
 Django==1.11.6
 enum34==1.1.6
 Flask==0.12.2
+gunicorn==19.7.1
 isort==4.2.15
 itsdangerous==0.24
 Jinja2==2.9.6
@@ -21,4 +23,3 @@ six==1.11.0
 virtualenv==15.1.0
 Werkzeug==0.12.2
 wrapt==1.10.11
-gunicorn==19.7.1

@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 class MainRecycleAppViewTest(TestCase):
 
     def test_home_from_url(self):
+        '''Test returns true when home is redered properly with URL'''
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
@@ -39,7 +40,6 @@ class MainRecycleAppViewTest(TestCase):
         response = self.client.get('/contact/')
         self.assertTemplateUsed(response, 'mainRecycleApp/contact.html')   
 
-        
 class RecyclingCenterModelTest(TestCase):
 
     @classmethod
