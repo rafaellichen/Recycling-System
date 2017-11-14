@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'mainRecycleApp',
-    'searchResult',
     'users',
     'django.contrib.admin',
     'django.contrib.auth',
