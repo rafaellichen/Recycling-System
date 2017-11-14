@@ -2,21 +2,44 @@
 from __future__ import unicode_literals
 from django.test import TestCase
 from mainRecycleApp.models import RecyclingCenter
+from django.core.urlresolvers import reverse
 
 # Create your tests here.
-class SimpleTest(TestCase):
-    def test_home(self):
+class MainRecycleAppViewTest(TestCase):
+
+    def test_home_from_url(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
-    def test_about(self):
+    def test_about_from_url(self):
         response = self.client.get('/about/')
         self.assertEqual(response.status_code, 200)
 
-    def test_contact(self):
+    def test_contact_from_url(self):
         response = self.client.get('/contact/')
         self.assertEqual(response.status_code, 200)
 
+    def test_about_from_name(self):
+        response = self.client.get(reverse('about'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_contact_from_name(self):
+        response = self.client.get(reverse('contact'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_home_template_use(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'mainRecycleApp/home.html')
+
+    def test_about_template_use(self):
+        response = self.client.get('/about/')
+        self.assertTemplateUsed(response, 'mainRecycleApp/about.html')
+    
+    def test_about_template_use(self):
+        response = self.client.get('/contact/')
+        self.assertTemplateUsed(response, 'mainRecycleApp/contact.html')   
+
+        
 class RecyclingCenterModelTest(TestCase):
 
     @classmethod

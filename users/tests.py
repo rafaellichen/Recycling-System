@@ -10,6 +10,7 @@ class LoginTest(TestCase):
             'username': 'test',
             'password': 'password'}
         User.objects.create_user(**self.credentials)
+        
     def test_login(self):
         '''Method test_Login that logs in'''
         response = self.client.post('/login/', self.credentials, follow=True)
