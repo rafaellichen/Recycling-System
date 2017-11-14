@@ -112,7 +112,7 @@ function sendMsg() {
 
 //set up the AI dialog
 function dialog(msg){
-    var replyArr = ["Just click account button","I'm good, thx, U? :)"];
+    var replyArr = ["Hi, this is Easy Recycle! How can I help you?","Just click Accounts button!","Our service is totally free!"];
     msg = msg.toLowerCase();
     var time = new Date();
     var hour = time.getHours();
@@ -121,11 +121,14 @@ function dialog(msg){
 
     var chatBox = $(".chat-box");
 
-    if(msg.indexOf("how to find") != -1){
+    if(msg.indexOf("hi") != -1 || msg.indexOf("hello") != -1){
         chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[0] + "</p><hr class='ai-hr'>");
     }
-    else if(msg.indexOf("how are you") != -1 || msg.indexOf("how are u") != -1){
+    else if(msg.indexOf("how it works") != -1 || msg.indexOf("where can i find recycling center") != -1){
         chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[1] + "</p><hr class='ai-hr'>");
+    }
+    else if(msg.indexOf("how it charges") != -1 || msg.indexOf("how much should i pay") != -1){
+        chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[2] + "</p><hr class='ai-hr'>");
     }
     else if(msg.indexOf("time") != -1){
         chatBox.append("<p><span id='ai'>AI: </span>Current Time: " + currentTime + ". " + timeGreeting(hour) + "~ :)</p><hr class='ai-hr'>");
