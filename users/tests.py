@@ -7,10 +7,10 @@ class LoginTest(TestCase):
     def setUp(self):
         '''Method setup that sets the user credentials'''
         self.credentials = {
-            'username': 'testuser',
-            'password': 'secret'}
+            'username': 'test',
+            'password': 'password'}
         User.objects.create_user(**self.credentials)
     def test_login(self):
         '''Method test_Login that logs in'''
-        response = self.client.post('/login/', **self.credentials)
+        response = self.client.post('/login/', self.credentials, follow=True)
         self.assertTrue(response.context['user'].is_active)
