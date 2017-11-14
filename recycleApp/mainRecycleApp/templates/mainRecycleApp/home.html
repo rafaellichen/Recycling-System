@@ -1,6 +1,16 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
+<style>
+.jumbotron{
+  background:url(static/img/green.jpg);
+  background-size: cover;
+}
+.unselected {
+  background-color: rgb(112, 112, 112);
+  border-color: rgb(112, 112, 112);
+}
+</style>
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
 	    <h1 class="display-3">Recycling Starts Here.</h1>
@@ -9,30 +19,30 @@
 	</div>
 	<div class = "container">
 		<div data-toggle="buttons">
-		  <label class="btn btn-sq-lg btn-primary">
+		  <label class="btn btn-sq-lg btn-primary unselected">
 		    <input type="checkbox" autocomplete="off">
 		    <br>
 		    <i class="fa fa-book fa-5x"></i>
 		    <br>
-		    Paper
+		    Books
 		  </label>
-		  <label class="btn btn-sq-lg btn-primary">
+		  <label class="btn btn-sq-lg btn-primary unselected">
 		    <input type="checkbox" autocomplete="off">
 		    <br>
-		    <i class="fa fa-shopping-bag fa-5x"></i>
+		    <i class="fa fa-cube fa-5x"></i>
 		    <br>
 
-		    Plastic
+		    Cardboard
 		  </label>
-		  <label class="btn btn-sq-lg btn-primary">
+		  <!-- <label class="btn btn-sq-lg btn-primary">
 		    <input type="checkbox" autocomplete="off">
 		    <br>
 		    <i class="fa fa-trash fa-5x"></i>
 
 		    <br>
 		    Metal
-		  </label>
-		  <label class="btn btn-sq-lg btn-primary">
+		  </label> -->
+		  <label class="btn btn-sq-lg btn-primary unselected">
 		    <input type="checkbox" autocomplete="off">
 			<br>
 			<i class="fa fa-television fa-5x"></i>
@@ -40,7 +50,7 @@
 		    <br>
 		    Electronics
 		  </label>
-		  <label class="btn btn-sq-lg btn-primary">
+		  <label class="btn btn-sq-lg btn-primary unselected">
 		    <input type="checkbox" autocomplete="off">
 		    <br>
 		    <i class="fa fa-glass fa-5x"></i>
@@ -48,18 +58,83 @@
 		    <br>
 		    Glasses
 		  </label>
-		  <label class="btn btn-sq-lg btn-primary">
+		  <!-- <label class="btn btn-sq-lg btn-primary">
 		    <input type="checkbox" autocomplete="off">
 		    <br>
 		    <i class="fa fa-beer fa-5x"></i>
 
 		    <br>
 		    Cans
-		  </label>
-		</div>
-		<br>
-
-	<div class="container">
+		  </label> -->
+    </div>
+    <div data-toggle="buttons">
+      <label class="btn btn-primary unselected">
+        <input type="checkbox" autocomplete="off">
+        Sunday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input type="checkbox" autocomplete="off">
+        Monday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input type="checkbox" autocomplete="off">
+        Tuesday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input type="checkbox" autocomplete="off">
+        Wednesday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input type="checkbox" autocomplete="off">
+        Thursday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input type="checkbox" autocomplete="off">
+        Friday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input type="checkbox" autocomplete="off">
+        Saturday
+      </label>
+    </div>
+    <select name="" id="">
+      <option value="">8:00 - 8:30 AM</option>
+      <option value="">8:30 - 9:00 AM</option>
+      <option value="">9:00 - 9:30 AM</option>
+      <option value="">9:30 - 10:00 AM</option>
+      <option value="">10:00 - 10:30 AM</option>
+      <option value="">10:30 - 11:00 AM</option>
+      <option value="">11:00 - 11:30 AM</option>
+      <option value="">11:30 AM - 12:00 PM</option>
+      <option value="">12:00 - 12:30 PM</option>
+      <option value="">12:30 - 1:00 PM</option>
+      <option value="">1:00 - 1:30 PM</option>
+      <option value="">1:30 - 2:00 PM</option>
+      <option value="">2:00 - 2:30 PM</option>
+      <option value="">2:30 - 3:00 PM</option>
+      <option value="">3:00 - 3:30 PM</option>
+      <option value="">3:30 - 4:00 PM</option>
+      <option value="">4:00 - 4:30 PM</option>
+      <option value="">4:30 - 5:00 PM</option>
+      <option value="">5:00 - 5:30 PM</option>
+      <option value="">5:30 - 6:00 PM</option>
+      <option value="">6:00 - 6:30 PM</option>
+      <option value="">6:30 - 7:00 PM</option>
+      <option value="">7:00 - 7:30 PM</option>
+      <option value="">7:30 - 8:00 PM</option>
+      <option value="">8:00 - 8:30 PM</option>
+      <option value="">8:30 - 9:00 PM</option>
+      <option value="">9:00 - 9:30 PM</option>
+      <option value="">9:30 - 10:00 PM</option>
+      <option value="">10:00 - 10:30 PM</option>
+      <option value="">10:30 - 11:00 PM</option>
+      <option value="">11:00 - 11:30 PM</option>
+      <option value="">11:30 PM - 12:00 AM</option>
+    </select>
+   <hr>
+    
+    
+	<!-- <div class="container">
   <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
     Monday
@@ -73,13 +148,13 @@
   <a class="btn btn-primary" data-toggle="collapse" href="#List4" aria-expanded="false" aria-controls="List4">
     Thursday
   </a>
-  <a class="btn btn-primary" data-toggle="collapse" href="#List5" aria-expanded="false" aria-controls="List5">
+  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List5" aria-expanded="false" aria-controls="List5">
     Friday
   </a>
-  <a class="btn btn-primary" data-toggle="collapse" href="#List6" aria-expanded="false" aria-controls="List6">
+  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List6" aria-expanded="false" aria-controls="List6">
     Saturday
   </a>
-  <a class="btn btn-primary" data-toggle="collapse" href="#List7" aria-expanded="false" aria-controls="List7">
+  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List7" aria-expanded="false" aria-controls="List7">
     Sunday
   </a>
 </p>
@@ -125,7 +200,8 @@
     (212)239-0022
   </div>
 </div>
-</div><br>
+</div> -->
+<br>
 
 		<input class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode">
 		<br>
@@ -154,5 +230,9 @@
       </div>
     </div>
   </div>
+</div><br>
+
+<div class="embed-responsive embed-responsive-16by9">
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
 </div><br>
 {% endblock %}

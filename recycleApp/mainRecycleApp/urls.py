@@ -1,4 +1,5 @@
-from django.conf.urls import url, include
+'''URLS for mainRecycleApp'''
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -6,7 +7,3 @@ urlpatterns = [
     url(r'^/about/', views.about, name='about'),
     url(r'^/contact/', views.contact, name='contact'),
 ]
-
-
-
-
