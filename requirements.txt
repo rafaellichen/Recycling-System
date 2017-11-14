@@ -21,4 +21,4 @@ six==1.11.0
 virtualenv==15.1.0
 Werkzeug==0.12.2
 wrapt==1.10.11
-gunicorn==0.14.2
+gunicorn==19.7.1
