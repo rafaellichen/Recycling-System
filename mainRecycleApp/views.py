@@ -2,6 +2,7 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 
+from mainRecycleApp.models import RecyclingCenter
 from django.shortcuts import render
 import sqlite3
 import pandas as pd
@@ -19,7 +20,20 @@ def contact(request):
     '''Contact render method for mainRecycleApp/contact.html'''
     return render(request, 'mainRecycleApp/contact.html')
 
+def search_withQuery(request):
+    '''Method to search with query from the database'''
+    if request.method == 'GET':
+        # category = request.GET.getlist("gtype")
+        # day=request.GET.getlist("day")
+        # time = request.GET.getlist("dropdown")[0]
+        # zipcode = request.GET.getlist("zipcode")[0]
+        result = RecyclingCenter.objects.all().order_by("name")
+        return render(request,'mainRecycleApp/home.html', {"date":result})
+
+"""
 def search(request):
+    '''Method to search from the database'''
+    
     if request.method == 'GET':
         category = request.GET.getlist("gtype")
         day=request.GET.getlist("day")
@@ -61,5 +75,6 @@ def search(request):
                     index.append(i)
         index = list(set(index))
         result = result.iloc[index]
-
-        return render(request,'mainRecycleApp/search.html', {"date":result})
+        """
+        # return render(request,'mainRecycleApp/home.html', {"date":result})
+    
