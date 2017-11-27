@@ -21,7 +21,28 @@ class LoginTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_logout(self):
-        '''Method test_logout that verifies the logout'''       
+        '''Method test_logout that verifies the logout''' 
+        login = self.client.login(username='test', password='password')
+        response = self.client.get('/')
+        
+        # Verify first that the user has logged in with the accurate response code
+        self.assertEqual(str(response.context['user']), 'test')
+        self.assertEqual(response.status_code, 200)
+
+        self.client.logout();
+        response = self.client.get('/')
+
+        self.assertFalse(str(response.context['user'] == "test"))
+        self.assertEqual(response.status_code, 200)
+
+    def invalid_user_login_test(self):
+        '''Method for testing the rendered message for invalid users'''
+        login = self.client.login(username='garbage', password='password')
+        response = self.client.get('/')
+
+        self.assertEqual(str(response), "Invalid Login")
+        self.assertEqual(response.status_code, 200)
+
 
 
 class SignupFormTest(TestCase):
