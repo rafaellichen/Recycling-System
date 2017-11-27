@@ -16,7 +16,6 @@ def signin(request):
         if request.user.is_authenticated(): return redirect('/')
         login(request, user)
         return redirect('/')
-
     return render(request, 'users/login.djhtml')
 
 
@@ -45,8 +44,12 @@ def signup(request):
 
 
 def profile(request):
-    '''Profile render method that renders the Users/Profile'''
-    return render(request, 'users/profile.djhtml')
+    '''Profile render method that renders the Users/Profile and redirects if the user is not authenticated'''
+    user = request.user
+    if user.is_authenticated():
+        return render(request, 'users/profile.djhtml')
+    else:
+        return redirect('/')
 
 
 def index(request):
