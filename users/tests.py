@@ -63,6 +63,10 @@ class UserProfileViewTest(TestCase):
         response = self.client.get('/profile')
         self.assertTemplateUsed(response, 'users/profile.djhtml') 
 
+    def test_redirect_if_user_not_logged_in(self):
+        '''Method to test the redirect to homepage if user not logged in'''
+        response = self.client.get('/profile', follow=True)
+        self.assertRedirects(response, '/')
 
 class SignupFormTest(TestCase):
     '''Signup Form Test Class for users app'''
