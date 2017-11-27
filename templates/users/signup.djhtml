@@ -8,6 +8,13 @@
             <ul>
               {{ signupForm.as_ul }}
               <input class="btn btn-secondary" type="submit" name="submit" value="submit">
+              {% if signupForm.errors %}
+                {% for field in signupForm %}
+                  <div class = "errors">
+                    {{ field.errors }}
+                  </div>
+                {% endfor %}
+              {% endif %}
             </ul>
             </form>
         </div>

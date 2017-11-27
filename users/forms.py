@@ -6,6 +6,13 @@ class SignupForm(forms.ModelForm):
     '''Class SignupForm that takes forms.ModelForm as input param'''
     password = forms.CharField(widget=forms.PasswordInput())
     confirm_password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username', 'password']
+
+    def clean(self):
+    	if self.cleaned_data['password'] != self.cleaned_data['confirm_password']:
+    		raise forms.ValidationError('Your passwords does not match.')
+    	else:
+    		return self.cleaned_data['confirm_password']
