@@ -9,19 +9,13 @@ class RecyclingCenter(models.Model):
     name = models.TextField()
     address = models.TextField()
     recycleType = models.TextField()
-    monday = models.TextField()
-    tuesday = models.TextField()
-    wednesday = models.TextField()
-    thrusday = models.TextField()
-    friday = models.TextField()
-    saturday = models.TextField()
-    sunday = models.TextField()
     borough = models.TextField()
     state = models.TextField()
     zipcode = models.TextField()
     phone = models.TextField()
     picks_up = models.TextField()
     website = models.TextField()
+    logo_url = models.TextField()
 
     def __str__(self):
         '''Method to return the string name'''
