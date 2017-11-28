@@ -31,6 +31,7 @@ def search_withQuery(request):
         print(zipcode)
 
         zip_code_result = list(RecyclingCenter.objects.filter(zipcode=zipcode).values())
+        
 
         return render(request,'mainRecycleApp/home.html', {"data": zip_code_result})
 
