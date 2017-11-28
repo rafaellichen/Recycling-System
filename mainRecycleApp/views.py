@@ -23,12 +23,16 @@ def contact(request):
 def search_withQuery(request):
     '''Method to search with query from the database'''
     if request.method == 'GET':
-        # category = request.GET.getlist("gtype")
+        category = request.GET.getlist("gtype")
         # day=request.GET.getlist("day")
         # time = request.GET.getlist("dropdown")[0]
-        # zipcode = request.GET.getlist("zipcode")[0]
-        # result = RecyclingCenter.objects.all().order_by("name")
-        return render(request,'mainRecycleApp/home.html')
+        zipcode = request.GET.getlist("zipcode")[0]    
+        print(category)
+        print(zipcode)
+
+        zip_code_result = list(RecyclingCenter.objects.filter(zipcode=zipcode).values())
+
+        return render(request,'mainRecycleApp/home.html', {"data": zip_code_result})
 
 def populate_seed_data(request):
     '''Method to populate seed data for recycling centers in the recycling centers model'''
