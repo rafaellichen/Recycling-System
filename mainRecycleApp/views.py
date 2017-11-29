@@ -2,6 +2,7 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 
+from mainRecycleApp.models import RecyclingCenter
 from django.shortcuts import render
 import sqlite3
 import pandas as pd
@@ -19,7 +20,36 @@ def contact(request):
     '''Contact render method for mainRecycleApp/contact.html'''
     return render(request, 'mainRecycleApp/contact.html')
 
+def search_withQuery(request):
+    '''Method to search with query from the database'''
+    if request.method == 'GET':
+        category = request.GET.getlist("gtype")
+        # day=request.GET.getlist("day")
+        # time = request.GET.getlist("dropdown")[0]
+        zipcode = request.GET.getlist("zipcode")[0]    
+        print(category)
+        print(zipcode)
+
+        zip_code_result = list(RecyclingCenter.objects.filter(zipcode=zipcode).values())
+        
+
+        return render(request,'mainRecycleApp/home.html', {"data": zip_code_result})
+
+def populate_seed_data(request):
+    '''Method to populate seed data for recycling centers in the recycling centers model'''
+    if RecyclingCenter.objects.count() == 0:    
+        RecyclingCenter(name = 'Vintage Thrift Gramercy', address = '286 3rd Avenue', recycleType = 'Household Furniture', borough = 'Manhattan', state = 'New York', zipcode='10010', phone='(212) 871-0777', picks_up='0', website='www.vintagethriftshop.org').save()
+        RecyclingCenter(name = 'City Opera Thrift Shop', address = '222 East 23rd Street', recycleType = 'Household Furniture', borough = 'Manhattan', state = 'New York', zipcode='10010', phone='(212) 684-5344', picks_up='1', website='www.cityoperathriftshop.org', logo_url='https://i.imgur.com/1qh5hSQ.jpg').save()
+        RecyclingCenter(name = 'The Salvation Army Of Greater New York', address = '208 E 23rd Street', recycleType = 'Household Furniture', borough = 'Manhattan', state = 'New York', zipcode='10010', phone='(800) 728-7825', picks_up='1', website='ny.salvationarmy.org/GreaterNewYork', logo_url='https://s3.amazonaws.com/cache.salvationarmy.org/resources/img/ihq-logo.jpg').save()
+        RecyclingCenter(name = 'Housing Works', address = '157 East 23rd Street', recycleType = 'Household Furniture', borough = 'Manhattan', state = 'New York', zipcode='10010', phone='(347) 473-7400', picks_up='1', website='http://housingworks.org', logo_url='http://t2conline.com/wp-content/uploads/2016/03/Housing-Worls-2.jpg').save()
+        RecyclingCenter(name = 'WPA', address = '347 East 10th Street', recycleType = '', borough = 'Manhattan', state = 'New York', zipcode='10009', phone='(646) 292-7740', picks_up='0').save()
+        RecyclingCenter(name = 'Materials for the Arts', address = '33-00 Northern Blvd', recycleType = 'Electronics', borough = 'Queens', state = 'New York', zipcode='11101', phone='(718) 729-3001', picks_up='0', website='http://www.nyc.gov/html/dcla/mfta/html/home/home.shtml', logo_url='http://www.nyc.gov/html/dcla/mfta/includes/site_images/branding/logo.png').save()
+        RecyclingCenter(name = 'Goodwill Industries of Greater New York & Northern New Jersey', address = '220 East 23rd Street', recycleType = 'Electronics', borough = 'Manhattan', state = 'New York', zipcode='10010', phone='(718) 728-5400', picks_up='1', website='http://goodwillnynj.org', logo_url='http://nycharityguide.org/img/logos/goodwillny.jpg').save()
+
+"""
 def search(request):
+    '''Method to search from the database'''
+    
     if request.method == 'GET':
         category = request.GET.getlist("gtype")
         day=request.GET.getlist("day")
@@ -61,5 +91,6 @@ def search(request):
                     index.append(i)
         index = list(set(index))
         result = result.iloc[index]
-
-        return render(request,'mainRecycleApp/search.html', {"date":result})
+        """
+        # return render(request,'mainRecycleApp/home.html', {"date":result})
+    

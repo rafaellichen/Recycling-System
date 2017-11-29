@@ -8,13 +8,14 @@ class RecyclingCenter(models.Model):
     '''Model for RecyclingCenters in searchResult App'''
     name = models.TextField()
     address = models.TextField()
+    recycleType = models.TextField()
     borough = models.TextField()
     state = models.TextField()
     zipcode = models.TextField()
     phone = models.TextField()
     picks_up = models.TextField()
-    recycleType = models.TextField()
     website = models.TextField()
+    logo_url = models.TextField()
 
     def __str__(self):
         '''Method to return the string name'''

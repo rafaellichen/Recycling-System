@@ -29,18 +29,14 @@ def signup(request):
     '''Signup Method with param request'''
     if request.method == 'POST':
         USERFORM = forms.SignupForm(request.POST or None)
-        if USERFORM.is_valid() and USERFORM.cleaned_data['password'] == USERFORM.cleaned_data['confirm_password']:
-            user = USERFORM.save()
-            user.set_password(user.password)
+        if USERFORM.is_valid():
+            user = USERFORM.save(commit=False)
+            user.set_password(USERFORM.cleaned_data['password'])
             user.save()
-            return HttpResponse('signup succcessful\
-            <a href="/accounts/login"> login</a>')
-        return HttpResponse('something wrong!')
-
-    context = {
-        'signupForm' : forms.SignupForm
-    }
-    return render(request, 'users/signup.djhtml', context=context)
+            return render(request, 'users/completed_signup.djhtml', {'user': USERFORM})
+    else:
+        USERFORM = forms.SignupForm()
+    return render(request, 'users/signup.djhtml', {'signupForm' : USERFORM})
 
 
 def profile(request):
