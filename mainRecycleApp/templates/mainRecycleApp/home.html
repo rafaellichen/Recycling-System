@@ -13,8 +13,13 @@
 </style>
 <script>
   function togglemore() {
-    if(document.getElementById("more").innerText=="More") document.getElementById("more").innerText="Less"
-    else document.getElementById("more").innerText="More"
+    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
+    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
+    if(document.getElementById("more").innerHTML==more) {
+      document.getElementById("more").innerHTML=less
+    } else {
+      document.getElementById("more").innerHTML=more
+    }
   }
 </script>
 	<div class="jumbotron jumbotron-fluid">
@@ -68,11 +73,7 @@
         <br>
         Building Products
       </label>
-      <label>
-        <a id="more" onclick="togglemore()" class="btn btn-sq-lg btn-danger" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
-          More
-        </a>
-      </label>
+      <label id="more" onclick="togglemore()" class="btn btn-sq-lg" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1"><br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More</label>
     </div>
   </div>
   
@@ -297,8 +298,8 @@
     <div class="card-deck">
     {% for item in data %}
       <br>
-      <div class="card" style="width: 20rem;">
-        <img class="card-img-top" src="{{ item.logo_url }}" alt="Card image cap">
+      <div class="card-block" style="width: 20rem; border: 1px grey solid">
+        <img class="card-img-top" src="{{ item.logo_url }}" alt="">
         <div class="card-body">
           <h6 class="card-title">{{item.name}}</h6>
         </div>
