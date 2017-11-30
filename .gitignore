@@ -3,3 +3,7 @@
 *.DS_Store
 .idea
 /.vscode
+/data
+/Documentation/_build/
+.coverage.*
+*sqlite3
