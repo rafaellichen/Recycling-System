@@ -6,3 +6,4 @@
 /data
 /Documentation/_build/
 .coverage.*
+*sqlite3

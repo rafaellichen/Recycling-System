@@ -33,6 +33,7 @@ def signup(request):
             user = USERFORM.save(commit=False)
             user.set_password(USERFORM.cleaned_data['password'])
             user.save()
+            print('registration successful')
             return render(request, 'users/completed_signup.djhtml', {'user': USERFORM})
     else:
         USERFORM = forms.SignupForm()
