@@ -1,0 +1,354 @@
+{% extends "mainRecycleApp/header.html" %}
+
+{% block content %}
+<style>
+.jumbotron{
+  background:url(static/img/green.jpg);
+  background-size: cover;
+}
+.unselected {
+  background-color: rgb(112, 112, 112);
+  border-color: rgb(112, 112, 112);
+}
+</style>
+<script>
+  function togglemore() {
+    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
+    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
+    if(document.getElementById("more").innerHTML==more) {
+      document.getElementById("more").innerHTML=less
+    } else {
+      document.getElementById("more").innerHTML=more
+    }
+  }
+
+  function time() {
+        t_div = document.getElementById('showtime');
+        var now = new Date()
+        t_div.innerHTML = "Time Now: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
+        setTimeout(time, 1000);
+    }
+
+</script>
+	<div class="jumbotron jumbotron-fluid">
+	  	<div class="container">
+	    <h1 class="display-3">Recycling Starts Here.</h1>
+	    <p class="lead">Try our recycling center finder.</p>
+	  	</div>
+  </div>
+  <form action="search" method="GET"> {% csrf_token %}
+
+  <div class ="container">
+      <body onload="time()">
+    <div id="showtime"></div>
+</body>
+  </div>
+  <br>
+
+	<div class = "container">
+		<div data-toggle="buttons">
+		  <label class="btn btn-sq-lg btn-primary unselected">
+		    <input value="Electronics" name="gtype" type="checkbox" autocomplete="off">
+		    <br>
+		    <img src="/static/img/electronics.png" style="width:80px; height:80px">
+		    <br>
+		    Electronics
+		  </label>
+		  <label class="btn btn-sq-lg btn-primary unselected">
+		    <input value="Home Appliances" name="gtype" type="checkbox" autocomplete="off">
+		    <br>
+		    <img src="/static/img/homeappliances.png" style="width:80px; height:80px">
+		    <br>
+		    Home Appliances
+		  </label>
+		  <label class="btn btn-sq-lg btn-primary unselected">
+		    <input value="Automotive" name="gtype" type="checkbox" autocomplete="off">
+			<br>
+			<img src="/static/img/car.png" style="width:80px; height:80px">
+		    <br>
+		    Automotive
+		  </label>
+		  <label class="btn btn-sq-lg btn-primary unselected">
+		    <input value="Office Furniture" name="gtype" type="checkbox" autocomplete="off">
+		    <br>
+		    <img src="/static/img/officefurniture.png" style="width:80px; height:80px">
+		    <br>
+		    Office Furniture
+      </label>
+      <label class="btn btn-sq-lg btn-primary unselected">
+		    <input value = "Clothing" name="gtype" type="checkbox" autocomplete="off">
+		    <br>
+        <img src="/static/img/clothing.png" style="width:80px; height:80px">
+		    <br>
+		    Clothing
+      </label>
+      <label class="btn btn-sq-lg btn-primary unselected">
+        <input value = "Building Products" name="gtype" type="checkbox" autocomplete="off">
+        <br>
+        <img src="/static/img/buildingproducts.png" style="width:80px; height:80px">
+        <br>
+        Building Products
+      </label>
+      <label id="more" onclick="togglemore()" class="btn btn-sq-lg" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1"><br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More</label>
+    </div>
+  </div>
+  
+  <div class="container collapse" id="List1">
+    <div class="card card-block">
+      <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
+        <label class="btn btn-primary unselected">
+            <input name="gtype" type="checkbox" autocomplete="off">
+            <img src="/static/img/art.png" style="width:30px; height:30px">
+            Art Supplies
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/food.png" style="width:30px; height:30px">
+          Food &amp; Beverages
+          </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/officesupp.png" style="width:30px; height:30px">
+        Office Supplies
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/textiles.png" style="width:30px; height:30px">
+          Textiles (non-clothing)
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
+          Household Furniture
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/shoes.png" style="width:30px; height:30px">
+          Shoes
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/houseware.png" style="width:30px; height:30px">
+          Housewares
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/sport.png" style="width:30px; height:30px">
+          Sporting Equipment
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/jewelry.png" style="width:30px; height:30px">
+          Collectibles (antiques, jewelry, art)
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/lubricants.png" style="width:30px; height:30px">
+          Lubricants
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/food.png" style="width:30px; height:30px">
+          Containers &amp; Packaging
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/medical.png" style="width:30px; height:30px">
+          Medical Equipment &amp; Furniture
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/toy.png" style="width:30px; height:30px">
+          Toys/Games
+        </label>
+        <label class="btn btn-primary unselected">
+          <input name="gtype" type="checkbox" autocomplete="off">
+          <img src="/static/img/musicalinstruments.png" style="width:30px; height:30px">
+          Musical Instruments
+        </label>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div data-toggle="buttons">
+      <label class="btn btn-primary unselected">
+        <input value="Sunday" name="day" type="checkbox" autocomplete="off">
+        Sunday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input value="Monday" name="day" type="checkbox" autocomplete="off">
+        Monday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input value="Tuesday" name="day" type="checkbox" autocomplete="off">
+        Tuesday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input value="Wednesday" name="day" type="checkbox" autocomplete="off">
+        Wednesday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input value="Thursday" name="day" type="checkbox" autocomplete="off">
+        Thursday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input value="Friday" name="day" type="checkbox" autocomplete="off">
+        Friday
+      </label>
+      <label class="btn btn-primary unselected">
+        <input value="Saturday" name="day" type="checkbox" autocomplete="off">
+        Saturday
+      </label>
+    </div>
+    <select name="dropdown">
+      <option value="" disabled selected>Select a time frame</option>
+      <option value="0800,0830">8:00 - 8:30 AM</option>
+      <option value="0830,0900">8:30 - 9:00 AM</option>
+      <option value="0900,0930">9:00 - 9:30 AM</option>
+      <option value="0930,1000">9:30 - 10:00 AM</option>
+      <option value="1000,1030">10:00 - 10:30 AM</option>
+      <option value="1030,1100">10:30 - 11:00 AM</option>
+      <option value="1100,1130">11:00 - 11:30 AM</option>
+      <option value="1130,1200">11:30 AM - 12:00 PM</option>
+      <option value="1200,1230">12:00 - 12:30 PM</option>
+      <option value="1230,1300">12:30 - 1:00 PM</option>
+      <option value="1300,1330">1:00 - 1:30 PM</option>
+      <option value="1330,1400">1:30 - 2:00 PM</option>
+      <option value="1400,1430">2:00 - 2:30 PM</option>
+      <option value="1430,1500">2:30 - 3:00 PM</option>
+      <option value="1500,1530">3:00 - 3:30 PM</option>
+      <option value="1530,1600">3:30 - 4:00 PM</option>
+      <option value="1600,1630">4:00 - 4:30 PM</option>
+      <option value="1630,1700">4:30 - 5:00 PM</option>
+      <option value="1700,1730">5:00 - 5:30 PM</option>
+      <option value="1730,1800">5:30 - 6:00 PM</option>
+      <option value="1800,1830">6:00 - 6:30 PM</option>
+      <option value="1830,1900">6:30 - 7:00 PM</option>
+      <option value="1900,1930">7:00 - 7:30 PM</option>
+      <option value="1930,2000">7:30 - 8:00 PM</option>
+      <option value="2000,2030">8:00 - 8:30 PM</option>
+      <option value="2030,2100">8:30 - 9:00 PM</option>
+      <option value="2100,2130">9:00 - 9:30 PM</option>
+      <option value="2130,2200">9:30 - 10:00 PM</option>
+      <option value="2200,2230">10:00 - 10:30 PM</option>
+      <option value="2230,2300">10:30 - 11:00 PM</option>
+      <option value="2300,2330">11:00 - 11:30 PM</option>
+      <option value="2330,2400">11:30 PM - 12:00 AM</option>
+    </select>
+<br><br>
+<input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode">
+<br>
+<button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+	<!-- <div class="container">
+  <p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
+    Monday
+  </a>
+  <a class="btn btn-primary" data-toggle="collapse" href="#List2" aria-expanded="false" aria-controls="List2">
+    Tuesday
+  </a>
+  <a class="btn btn-primary" data-toggle="collapse" href="#List3" aria-expanded="false" aria-controls="List3">
+    Wednesday
+  </a>
+  <a class="btn btn-primary" data-toggle="collapse" href="#List4" aria-expanded="false" aria-controls="List4">
+    Thursday
+  </a>
+  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List5" aria-expanded="false" aria-controls="List5">
+    Friday
+  </a>
+  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List6" aria-expanded="false" aria-controls="List6">
+    Saturday
+  </a>
+  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List7" aria-expanded="false" aria-controls="List7">
+    Sunday
+  </a>
+</p>
+<div class="collapse" id="List1">
+  <div class="card card-block">
+    PowerMyLearning: 520 8th Avenue 10th Floor, New York, NY, 10018
+    (917)677-5506
+  </div>
+</div>
+<div class="collapse" id="List2">
+  <div class="card card-block">
+    Ya-ya Network: 224 W 29th St, New York, NY, 10001
+    (212)239-0022
+  </div>
+</div>
+<div class="collapse" id="List3">
+  <div class="card card-block">
+    Ya-ya Network: 224 W 29th St, New York, NY, 10001
+    (212)239-0022
+  </div>
+</div>
+<div class="collapse" id="List4">
+  <div class="card card-block">
+    Ya-ya Network: 224 W 29th St, New York, NY, 10001
+    (212)239-0022
+  </div>
+</div>
+<div class="collapse" id="List5">
+  <div class="card card-block">
+    Ya-ya Network: 224 W 29th St, New York, NY, 10001
+    (212)239-0022
+  </div>
+</div>
+<div class="collapse" id="List6">
+  <div class="card card-block">
+    Ya-ya Network: 224 W 29th St, New York, NY, 10001
+    (212)239-0022
+  </div>
+</div>
+<div class="collapse" id="List7">
+  <div class="card card-block">
+    Ya-ya Network: 224 W 29th St, New York, NY, 10001
+    (212)239-0022
+  </div>
+</div>
+</div> -->
+<br>
+  <div class="container">
+    <div class="card-deck">
+    {% for item in data %}
+      <br>
+      <div class="card-block" style="width: 20rem; border: 1px grey solid">
+        <img class="card-img-top" src="{{ item.logo_url }}" alt="">
+        <div class="card-body">
+          <h6 class="card-title">{{item.name}}</h6>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+  <br>
+	<div class="container text-center">
+  <h3>What We Do</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
+      <p>For Residents</p>
+    </div>
+    <div class="col-sm-4">
+      <img src="static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
+      <p>For Recycle Companies</p>
+    </div>
+    <div class="col-sm-4">
+      <div class="well">
+       <p>Local Residents</p><br>
+          Do you want recycle garbege in smart way?
+      </div>
+      <div class="well">
+       <p>Recycle Companies</p>
+          Getting recycle sources directly from residents?
+      </div>
+    </div>
+  </div>
+</div><br>
+
+<div class="embed-responsive embed-responsive-16by9">
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
+</div><br>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "mainRecycleApp/header.html" %}
+
+{% block content %}
+<style>
+.poster-main{position:relative;width:800px;height:234px;margin:0px auto;visibility:hidden;}
+.poster-main.done{visibility:visible;}
+.poster-main a,.poster-main img{display: block;border:0px}
+.poster-main .poster-list{width:800px;height: 234px;list-style:none;}
+.poster-main .poster-btn{
+    position:absolute;
+    height: 234px;
+    width:100px;
+    top:0;
+    z-index:10;
+    opacity:.5;
+    color:black;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: opacity .3s; 
+}
+.poster-main .poster-btn:hover{
+    opacity:.8;
+    transition: opacity .3s; 
+}
+.poster-main .poster-item{position:absolute;left:0;top:0;}
+.poster-main .poster-left-btn{
+    left:0;
+    background-image: url('../images/arrow-left.png');
+}
+.poster-main .poster-right-btn{
+    right:0;
+    background-image: url('../images/arrow-right.png');
+}
+
+</style>
+<div class="container-fluid">
+	<div class="row">
+	<main>
+    <div class=" text-center">
+        <p><span>About Us</span></p>
+    </div>
+
+
+
+        <div><img src="static/img/about2.jpg" class="rounded float-right height="500" width="500" "></div>
+    
+    <div class="main-about-footer">
+        <p class="english">The company is committed to help the traditional recycle companies to achieve the transformation and
+            upgrading in the Internet age. At present, local residents could schedule garbage(recycle source) then choose one of these recycle companies via our website.</p>
+    </div>
+</main>
+</div>
+</div>
+<br>
+<HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
+<div class="container-fluid">
+    <div class="row">
+    
+   <div class='poster-main'>
+        <img src="static/img/pic1.jpg" width="100%">
+        <img src="static/img/pic2.jpg" width="100%">
+        <img src="static/img/pic3.jpg" width="100%">
+        <img src="static/img/pic4.jpg" width="100%">
+        <img src="static/img/pic5.jpg" width="100%">
+        
+    </div>
+
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="static/js/poster.js"></script>
+    <script>
+    jQuery(document).ready(function($) {
+        var setting = {
+            "width":900,
+            "height":234,
+        };
+        Poster.init($(".poster-main"),setting);
+
+    });
+    </script>
+
+</div>
+</div>
+<br>
+{% endblock %}
