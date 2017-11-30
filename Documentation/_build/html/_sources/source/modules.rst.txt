@@ -1,7 +1,0 @@
-Recycling-System
-================
-
-.. toctree::
-   :maxdepth: 4
-
-   Recycling-System

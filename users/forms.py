@@ -28,7 +28,7 @@ class SignupForm(forms.ModelForm):
     	else:
     		raise forms.ValidationError('Your email already exists')
 
-    def clean(self):
+    def clean_confirm_password(self):
     	'''Check if the password and the password confirmation matches or not'''
     	if self.cleaned_data['password'] != self.cleaned_data['confirm_password']:
     		raise forms.ValidationError('Your passwords does not match.')

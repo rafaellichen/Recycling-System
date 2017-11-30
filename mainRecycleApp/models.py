@@ -1,11 +1,14 @@
-# -*- coding: utf-8 -*-
-'''Models for MainRecycleApp contains RecyclingCenter model'''
+""" 
+Models for MainRecycleApp contains RecyclingCenter model 
+"""
 from __future__ import unicode_literals
 
 from django.db import models
 
 class RecyclingCenter(models.Model):
-    '''Model for RecyclingCenters in searchResult App'''
+    """
+    Model for RecyclingCenters in searchResult App
+    """
     idc = models.TextField()
     name = models.TextField()
     address = models.TextField()
@@ -27,5 +30,7 @@ class RecyclingCenter(models.Model):
     #logo_url = models.TextField()
 
     def __str__(self):
-        '''Method to return the string name'''
+        """ 
+        Method to return the string name
+        """
         return self.name

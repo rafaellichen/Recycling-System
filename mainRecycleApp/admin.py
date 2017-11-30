@@ -6,5 +6,4 @@ from django.contrib import admin
 
 # Register your models here.
 from mainRecycleApp.models import RecyclingCenter
-
 admin.site.register(RecyclingCenter)

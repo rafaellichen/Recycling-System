@@ -11,7 +11,6 @@ Welcome to Recycling-System's documentation!
    :caption: Contents:
 
 
-
 Indices and tables
 ==================
 

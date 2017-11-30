@@ -19,8 +19,12 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
-
+sys.path.insert(0, os.path.abspath('..'))
+from django.conf import settings
+# settings.configure()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Recycling-System.settings")
+import django
+django.setup()
 
 # -- General configuration ------------------------------------------------
 
