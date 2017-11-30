@@ -26,8 +26,7 @@ SECRET_KEY = '!^2@^bfaj0l5r#jy=ki065g91!3b-s$#^(qrkt18z)hfivairv'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-print "base dir path", BASE_DIR
-print os.path.join(BASE_DIR, "static")
+
 # Application definition
 
 INSTALLED_APPS = [
