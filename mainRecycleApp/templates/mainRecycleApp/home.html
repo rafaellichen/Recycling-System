@@ -318,7 +318,9 @@
         <img class="card-img-top" src="{{ item.logo_url }}" alt="">
         <div class="card-body">
           <h6 class="card-title">{{item.name}}</h6>
-          <p>{{item.type}}<p>
+          <p>{{item.type}}</p>
+          <p>{{item.address}}</p>
+          <a target="_blank" href = "{{item.url}}">Website</a>
         </div>
       </div>
     {% endfor %}
