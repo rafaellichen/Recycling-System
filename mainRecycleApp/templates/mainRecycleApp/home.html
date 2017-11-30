@@ -21,6 +21,30 @@
       document.getElementById("more").innerHTML=more
     }
   }
+  function validForm() {
+    var x = document.getElementsByName("gtype")
+    typeSelect=false
+    for(var i=0; i<x.length; i++) {
+      if(x[i].checked) {
+       typeSelect=true
+      }
+    }
+    var y = document.getElementsByName("day")
+    daySelect=false
+    for(var j=0; j<y.length; j++) {
+      if(y[j].checked) {
+        daySelect=true
+      }
+    }
+    if(typeSelect==false && daySelect==false) {
+      alert("Please select at least 1 type of recyclable waste and at least 1 available day")
+    } else if(typeSelect==true && daySelect==false) {
+      alert("Please select at least 1 available day")
+    } else if(typeSelect==false && daySelect==true){
+      alert("Please select at least 1 type of recyclable waste")
+    }
+    return (typeSelect && daySelect) 
+  }
 </script>
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
@@ -28,7 +52,7 @@
 	    <p class="lead">Try our recycling center finder.</p>
 	  	</div>
   </div>
-  <form action="search" method="GET"> {% csrf_token %}
+  <form name="searchForm" onsubmit="return validForm()" action="search" method="GET"> {% csrf_token %}
 	<div class = "container">
 		<div data-toggle="buttons">
 		  <label class="btn btn-sq-lg btn-primary unselected">
@@ -185,7 +209,7 @@
         Saturday
       </label>
     </div>
-    <select name="dropdown">
+    <select name="dropdown" required>
       <option value="" disabled selected>Select a time frame</option>
       <option value="0800,0830">8:00 - 8:30 AM</option>
       <option value="0830,0900">8:30 - 9:00 AM</option>
@@ -221,7 +245,7 @@
       <option value="2330,2400">11:30 PM - 12:00 AM</option>
     </select>
 <br><br>
-<input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode">
+<input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
 <br>
 <button type="submit" class="btn btn-primary">Submit</button>
   </div>
