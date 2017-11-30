@@ -1,5 +1,5 @@
-""" 
-Models for MainRecycleApp contains RecyclingCenter model 
+"""
+Models for MainRecycleApp contains RecyclingCenter model
 """
 from __future__ import unicode_literals
 
@@ -30,7 +30,7 @@ class RecyclingCenter(models.Model):
     #logo_url = models.TextField()
 
     def __str__(self):
-        """ 
+        """
         Method to return the string name
         """
         return self.name

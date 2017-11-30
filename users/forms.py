@@ -13,24 +13,24 @@ class SignupForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'username', 'password']
 
     def clean_username(self):
-    	'''Check if username already exists in the database or not'''
-    	user = User.objects.filter(username__iexact = self.cleaned_data['username'])
-    	if not user:
-    		return self.cleaned_data['username']
-    	else:
-    		raise forms.ValidationError('Your username already exists')
+        '''Check if username already exists in the database or not'''
+        user = User.objects.filter(username__iexact=self.cleaned_data['username'])
+        if not user:
+            return self.cleaned_data['username']
+        else:
+            raise forms.ValidationError('Your username already exists')
 
     def clean_email(self):
-    	'''Check if email already exists in the database or not'''
-    	user = User.objects.filter(username__iexact = self.cleaned_data['email'])
-    	if not user:
-    		return self.cleaned_data['email']
-    	else:
-    		raise forms.ValidationError('Your email already exists')
+        '''Check if email already exists in the database or not'''
+        user = User.objects.filter(username__iexact=self.cleaned_data['email'])
+        if not user:
+            return self.cleaned_data['email']
+        else:
+            raise forms.ValidationError('Your email already exists')
 
-    def clean(self):
-    	'''Check if the password and the password confirmation matches or not'''
-    	if self.cleaned_data['password'] != self.cleaned_data['confirm_password']:
-    		raise forms.ValidationError('Your passwords does not match.')
-    	else:
-    		return self.cleaned_data['confirm_password']
+    def clean_confirm_password(self):
+        '''Check if the password and the password confirmation matches or not'''
+        if self.cleaned_data['password'] != self.cleaned_data['confirm_password']:
+            raise forms.ValidationError('Your passwords does not match.')
+        else:
+            return self.cleaned_data['confirm_password']
