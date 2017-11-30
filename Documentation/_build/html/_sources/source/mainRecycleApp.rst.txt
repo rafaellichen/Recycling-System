@@ -1,0 +1,37 @@
+mainRecycleApp package
+=======================================
+
+Submodules
+----------
+
+mainRecycleApp.admin module
+--------------------------------------------
+
+.. automodule:: mainRecycleApp.admin
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+mainRecycleApp.tests module
+--------------------------------------------
+
+.. automodule:: mainRecycleApp.tests
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+mainRecycleApp.views module
+--------------------------------------------
+
+.. automodule:: mainRecycleApp.views
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Module contents
+-----------------------------------------------
+
+.. automodule:: mainRecycleApp
+    :members:
+    :undoc-members:
+    :show-inheritance:

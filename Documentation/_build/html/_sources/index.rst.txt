@@ -10,7 +10,8 @@ Welcome to Recycling-System's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+.. automodule:: mainRecycleApp.models
+   :members:
 
 Indices and tables
 ==================

@@ -1,6 +1,13 @@
 Recycling\-System package
 =========================
 
+Subpackages
+-----------
+
+.. toctree::
+    
+    Recycling-System.mainRecycleApp
+
 Submodules
 ----------
 
