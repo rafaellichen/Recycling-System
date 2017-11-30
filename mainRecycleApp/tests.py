@@ -1,14 +1,21 @@
-# -*- coding: utf-8 -*-
+"""
+Created on 15 November 2017
+@author: Rupesh Basnet
+"""
 from __future__ import unicode_literals
 from django.test import TestCase
 from mainRecycleApp.models import RecyclingCenter
 from django.core.urlresolvers import reverse
 
-# Create your tests here.
-class MainRecycleAppViewTest(TestCase):
 
+class MainRecycleAppViewTest(TestCase):
+    """
+    Create Tests for the MainRecycleApp Views
+    """
     def test_home_from_url(self):
-        '''Test returns true when home is redered properly with URL'''
+        """
+        Test returns true when home is redered properly with URL
+        """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
