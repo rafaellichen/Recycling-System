@@ -1,0 +1,198 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mainRecycleApp.tests &#8212; Recycling-System 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for mainRecycleApp.tests</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on 15 November 2017</span>
+<span class="sd">@author: Rupesh Basnet</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="k">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">mainRecycleApp.models</span> <span class="k">import</span> <span class="n">RecyclingCenter</span>
+<span class="kn">from</span> <span class="nn">django.core.urlresolvers</span> <span class="k">import</span> <span class="n">reverse</span>
+
+
+<div class="viewcode-block" id="MainRecycleAppViewTest"><a class="viewcode-back" href="../../index.html#mainRecycleApp.tests.MainRecycleAppViewTest">[docs]</a><span class="k">class</span> <span class="nc">MainRecycleAppViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create Tests for the MainRecycleApp Views</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MainRecycleAppViewTest.test_home_from_url"><a class="viewcode-back" href="../../index.html#mainRecycleApp.tests.MainRecycleAppViewTest.test_home_from_url">[docs]</a>    <span class="k">def</span> <span class="nf">test_home_from_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test returns true when home is redered properly with URL</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">test_about_from_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/about/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_contact_from_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/contact/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_about_from_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;about&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_contact_from_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;contact&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_home_template_use</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;mainRecycleApp/home.html&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_about_template_use</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/about/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;mainRecycleApp/about.html&#39;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">test_about_template_use</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/contact/&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;mainRecycleApp/contact.html&#39;</span><span class="p">)</span>   </div>
+
+<span class="k">class</span> <span class="nc">RecyclingCenterModelTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">setUpTestData</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;This method will set up non-modified objects for RecyclingCenterModel</span>
+<span class="sd">           and will be used by all test methods&#39;&#39;&#39;</span>
+        <span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;TestRecycle&#39;</span><span class="p">,</span>
+            <span class="n">address</span><span class="o">=</span><span class="s1">&#39;123 Test Street&#39;</span><span class="p">,</span>
+            <span class="n">borough</span><span class="o">=</span><span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+            <span class="n">state</span><span class="o">=</span><span class="s1">&#39;NY&#39;</span><span class="p">,</span>
+            <span class="n">zipcode</span><span class="o">=</span><span class="s1">&#39;11104&#39;</span><span class="p">,</span>
+            <span class="n">phone</span><span class="o">=</span><span class="s1">&#39;123-123-1234&#39;</span><span class="p">,</span>
+            <span class="n">picks_up</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">,</span>
+            <span class="n">recycleType</span><span class="o">=</span><span class="s1">&#39;Plastic&#39;</span><span class="p">,</span>
+            <span class="n">website</span><span class="o">=</span><span class="s1">&#39;www.website.com&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_name_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_address_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_borough_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;borough&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;borough&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_state_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;state&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_zipcode_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;zipcode&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;zipcode&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_phone_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;phone&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_picks_up_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;picks_up&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;picks up&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_recycleType_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;recycleType&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;recycleType&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_website_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">field_label</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="s1">&#39;website&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">verbose_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">field_label</span><span class="p">,</span> <span class="s1">&#39;website&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_object_name_is_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">recyclingCenter</span><span class="o">=</span><span class="n">RecyclingCenter</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">output_name</span><span class="o">=</span><span class="n">recyclingCenter</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">output_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">recyclingCenter</span><span class="p">))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Rupesh Basnet.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

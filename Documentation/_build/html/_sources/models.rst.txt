@@ -2,9 +2,9 @@ Models Package
 ==============
 
 :mod:`Models` Package
---------------------
+---------------------
 
-.. automodule:: mainRecycleApp.RecyclingCenter
+.. automodule:: mainRecycleApp.models
     :members:
     :undoc-members:
     :show-inheritance:
