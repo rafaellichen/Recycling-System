@@ -1,0 +1,10 @@
+Recycling-System
+================
+
+.. toctree::
+   :maxdepth: 4
+
+   Recycling-System
+   mainRecycleApp
+   manage
+   users
