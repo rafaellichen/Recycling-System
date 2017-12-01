@@ -10,6 +10,7 @@
   background-color: rgb(112, 112, 112);
   border-color: rgb(112, 112, 112);
 }
+
 </style>
 <script>
   function togglemore() {
@@ -45,6 +46,13 @@
     }
     return (typeSelect && daySelect) 
   }
+
+   function time() {
+         t_div = document.getElementById('showtime');
+        var now = new Date()
+         t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
+         setTimeout(time, 1000);
+     }
 </script>
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
@@ -52,6 +60,14 @@
 	    <p class="lead">Try our recycling center finder.</p>
 	  	</div>
   </div>
+
+
+  <div class ="container">
+       <body onload="time()">
+     <div id="showtime"></div>
+ </body>
+   </div><br>
+
   <form name="searchForm" onsubmit="return validForm()" action="search" method="GET"> {% csrf_token %}
 	<div class = "container">
 		<div data-toggle="buttons">
