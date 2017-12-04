@@ -33,7 +33,8 @@ def signup(request):
             user = USERFORM.save(commit=False)
             user.set_password(USERFORM.cleaned_data['password'])
             user.save()
-            return render(request, 'users/completed_signup.djhtml', {'user': USERFORM})
+            user_first_name = USERFORM.cleaned_data['first_name']
+            return render(request, 'users/completed_signup.djhtml', {'user': user_first_name})
     else:
         USERFORM = forms.SignupForm()
     return render(request, 'users/signup.djhtml', {'signupForm' : USERFORM})
