@@ -34,3 +34,37 @@ class RecyclingCenter(models.Model):
         Method to return the string name
         """
         return self.name
+
+class PublicRecyclingBin(models.Model):
+    """
+    Model for the public recycling bins
+    """
+    borough = models.TextField()
+    siteType = models.TextField()
+    siteName = models.TextField()
+    address = models.TextField()
+    latitude = models.TextField()
+    longitude = models.TextField()
+
+    def __str__(self):
+        """
+        Method to return the string sitename
+        """
+        return self.siteName
+
+class SpecialWasteSite(models.Model):
+    """
+    Model for the special waste site 
+    """
+    name = models.TextField()
+    latitude = models.TextField()
+    longitude = models.TextField()
+    location = models.TextField()
+    hours = models.TextField()
+    url = models.TextField()
+
+    def __str__(self):
+        """
+        Method to return the name
+        """
+        return self.name
