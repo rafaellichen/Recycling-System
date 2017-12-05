@@ -26,55 +26,62 @@
 .poster-main .poster-item{position:absolute;left:0;top:0;}
 .poster-main .poster-left-btn{
     left:0;
-    background-image: url('../images/arrow-left.png');
+    background-image: url('../img/arrow-left.png');
 }
 .poster-main .poster-right-btn{
     right:0;
-    background-image: url('../images/arrow-right.png');
+    background-image: url('../img/arrow-right.png');
 }
 
 </style>
+
 <div class="container-fluid">
 	<div class="row">
-	<main>
+  <main> 
     <div class=" text-center">
         <p><span>About Us</span></p>
     </div>
 
+    <div class="container-fluid">
 
-
-        <div><img src="static/img/about2.jpg" class="rounded float-right height="500" width="500" "></div>
-
+        <img src="/static/img/about2.jpg" class="rounded float-right" height="500" width="500">
+  
     <div class="main-about-footer">
         <p class="english">The company is committed to help the traditional recycle companies to achieve the transformation and
             upgrading in the Internet age. At present, local residents could schedule garbage(recycle source) then choose one of these recycle companies via our website.</p>
     </div>
+
+  </div>
 </main>
 </div>
 </div>
 <br>
+
 <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
+
 <div class="container-fluid">
     <div class="row">
 
    <div class='poster-main'>
-        <img src="static/img/pic1.jpg" width="100%">
-        <img src="static/img/pic2.jpg" width="100%">
-        <img src="static/img/pic3.jpg" width="100%">
-        <img src="static/img/pic4.jpg" width="100%">
-        <img src="static/img/pic5.jpg" width="100%">
+        <img src="/static/img/pic1.jpg" width="100%">
+        <img src="/static/img/pic2.jpg" width="100%">
+        <img src="/static/img/pic3.jpg" width="100%">
+        <img src="/static/img/pic4.jpg" width="100%">
+        <img src="/static/img/pic5.jpg" width="100%">
 
     </div>
+  </div>
+</div><br>
 
     <div class="container text-center">
     <h3>What We Do</h3><br>
     <div class="row">
       <div class="col-sm-4">
-        <img src="static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
+        <img src="/static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
         <p>For Residents</p>
       </div>
       <div class="col-sm-4">
-        <img src="static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
+        <img src="/static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
         <p>For Recycle Companies</p>
       </div>
       <div class="col-sm-4">
@@ -90,12 +97,25 @@
     </div>
   </div><br>
 
+ <div class="container">
   <div class="embed-responsive embed-responsive-16by9">
    <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
-  </div><br>
+  </div>
+</div><br>
+
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="/static/js/poster.js"></script>
+    <script>
+    jQuery(document).ready(function($) {
+        var setting = {
+            "width":900,
+            "height":234,
+        };
+        Poster.init($(".poster-main"),setting);
+
+    });
+    </script>
 
 
-</div>
-</div>
-<br>
 {% endblock %}
+
