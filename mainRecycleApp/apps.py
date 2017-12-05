@@ -6,5 +6,6 @@ from django.apps import AppConfig
 
 
 class MainrecycleappConfig(AppConfig):
-	'''Class for MainRecycleAppConfig'''
+    '''Class for MainRecycleAppConfig'''
+    
     name = 'mainRecycleApp'
