@@ -73,28 +73,33 @@ class SignupFormTest(TestCase):
 
     def test_singupForm_password_field_label(self):
         form = SignupForm()
-        self.assertTrue(form.fields['password'].label== 'Password')
+        self.assertTrue(form.fields['password'].label == 'Password')
 
 # Create your tests here.
 class UsersViewTest(TestCase):
+    '''Class to test the Users views'''
 
     def test_index_from_url(self):
-        '''Test returns true when user account index is redered properly with URL'''
+        '''Test returns true when index is redered properly with URL'''
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
     def test_login_from_url(self):
+        '''Test returns true when login is redered properly with URL'''
         response = self.client.get('login/')
         self.assertEqual(response.status_code, 200)
 
     def test_logout_from_url(self):
+        '''Test returns true when logout is redered properly with URL'''
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
     def test_signup_from_name(self):
+        '''Test returns true when signup index is redered properly with name'''
         response = self.client.get(reverse('signup'))
         self.assertEqual(response.status_code, 200)
 
     def test_profile_from_name(self):
+        '''Test returns true when profile index is redered properly with name'''
         response = self.client.get(reverse('profile'))
         self.assertEqual(response.status_code, 200)
