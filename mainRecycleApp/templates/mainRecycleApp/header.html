@@ -111,7 +111,7 @@ function sendMsg() {
 
 //set up the AI dialog
 function dialog(msg){
-    var replyArr = ["Hi, this is Easy Recycle! How can I help you?","Just click Accounts button!","Our service is totally free!"];
+    var replyArr = ["Hi, this is Easy Recycle! How can I help you?(hints:how it works, how it charges)","Just login or find something in home page!","Our service is totally free!","Call us right now!", "We open Monday-Friday from 10:00AM-06:00PM","Sorry, I don't understand!"];
     msg = msg.toLowerCase();
     var time = new Date();
     var hour = time.getHours();
@@ -121,18 +121,26 @@ function dialog(msg){
     var chatBox = $(".chat-box");
 
     if(msg.indexOf("hi") != -1 || msg.indexOf("hello") != -1){
-        chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[0] + "</p><hr class='ai-hr'>");
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[0] + "</p><hr class='ai-hr'>");
     }
-    else if(msg.indexOf("how it works") != -1 || msg.indexOf("where can i find recycling center") != -1){
-        chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[1] + "</p><hr class='ai-hr'>");
+    else if(msg.indexOf("work") != -1 || msg.indexOf("how it works") != -1 || msg.indexOf("where can i find recycling center") != -1){
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[1] + "</p><hr class='ai-hr'>");
     }
-    else if(msg.indexOf("how it charges") != -1 || msg.indexOf("how much should i pay") != -1){
-        chatBox.append("<p><span id='ai'>AI: </span>" + replyArr[2] + "</p><hr class='ai-hr'>");
+    else if(msg.indexOf("charge") != -1 || msg.indexOf("how it charges") != -1 || msg.indexOf("how much should i pay") != -1){
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[2] + "</p><hr class='ai-hr'>");
+    }
+    else if(msg.indexOf("help") != -1 || msg.indexOf("I need help") != -1 || msg.indexOf("I have other problems") != -1){
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[3] + "</p><hr class='ai-hr'>");
+    }
+    else if(msg.indexOf("what is your office time") != -1 || msg.indexOf("office time") != -1 || msg.indexOf("visit time") != -1){
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[4] + "</p><hr class='ai-hr'>");
     }
     else if(msg.indexOf("time") != -1){
-        chatBox.append("<p><span id='ai'>AI: </span>Current Time: " + currentTime + ". " + timeGreeting(hour) + "~ :)</p><hr class='ai-hr'>");
+        chatBox.append("<p><span id='ai'>Customer Service: </span>Current Time: " + currentTime + ". " + timeGreeting(hour) + "~ :)</p><hr class='ai-hr'>");
     }
-    else {}
+    else {
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[5] + "</p><hr class='ai-hr'>");
+    }
 }
 
 //add 0 if time number is <10
@@ -273,3 +281,4 @@ function clearChatBox() {
     </div>
 </footer>
 </html>
+
