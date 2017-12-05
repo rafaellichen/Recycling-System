@@ -471,9 +471,6 @@
     var map;
     function initMap() {
       var locations = {{ specialWasteSite|safe }};
-      //var locations = JSON.parse(locationsJson);
-      console.log(locations);
-      var location = {lng: -74.19440961754422 , lat: 40.5693567232716 };
       map = new google.maps.Map(document.getElementById("map"), {
         zoom: 10,
         center: new google.maps.LatLng(locations[0].longitude, locations[0].latitude)

@@ -68,3 +68,19 @@ class SpecialWasteSite(models.Model):
         Method to return the name
         """
         return self.name
+
+class Event(models.Model):
+    """
+    Model for the Safe Disposal Events
+    """
+    borough = models.TextField()
+    time = models.TextField()
+    address = models.TextField()
+    date = models.TextField()
+    description = models.TextField()
+
+    def __str__(self):
+        """
+        Method to return the name
+        """
+        return self.borough
