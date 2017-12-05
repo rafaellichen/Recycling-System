@@ -35,20 +35,22 @@ def getBoroughFromZip(zipcode):
         borough = "Staten Island"
     else:
         # Not a new york city zip code
-        borough = "Unknown"
+        borough = ""
     return borough
 
 def search_withQuery(request):
     '''Method to search with query from the database'''
-    if request.method == 'GET':
-        category = request.GET.getlist("gtype")
-        day=request.GET.getlist("day")
+    if request.method == 'POST':
+        category = request.POST.getlist("gtype")
+        day=request.POST.getlist("day")
         try:
-            time = request.GET.getlist("dropdown")[0]
+            time = request.POST.getlist("dropdown")[0]
         except:
             time = '0,0'
-        zipcode = request.GET.getlist("zipcode")[0]
+        zipcode = request.POST.getlist("zipcode")[0]
         borough = getBoroughFromZip(zipcode)
+        if borough == "":
+            return render(request,'mainRecycleApp/home.html', {"data": [], "invalid": True})
         '''Filter list by user selected categories determined borough'''
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
         '''Filter out closed facilties'''
