@@ -1,17 +1,18 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
+{%load static%}
 <style>
 .jumbotron{
-  background:url(static/img/green.jpg);
+  background:url({% static "img/green.jpg" %});
   background-size: cover;
 }
+
 .unselected {
   background-color: rgb(112, 112, 112);
   border-color: rgb(112, 112, 112);
 }
 </style>
-
 
 
 	<div class="jumbotron jumbotron-fluid">
@@ -36,7 +37,7 @@
 		    <br>
 		    <img src="/static/img/homeappliances.png" style="width:80px; height:80px">
 		    <br>
-		    Home Appliances
+		    Appliances
 		  </label>
 		  <label class="btn btn-sq-lg btn-primary unselected">
 		    <input value="Automotive" name="gtype" type="checkbox" autocomplete="off">
@@ -50,7 +51,7 @@
 		    <br>
 		    <img src="/static/img/officefurniture.png" style="width:80px; height:80px">
 		    <br>
-		    Office Furniture
+		    Furniture
       </label>
       <label class="btn btn-sq-lg btn-primary unselected">
 		    <input value = "Clothing" name="gtype" type="checkbox" autocomplete="off">
@@ -214,11 +215,12 @@
       <option value="2330,2400">11:30 PM - 12:00 AM</option>
     </select>
 <br><br>
-{%if data == "invalid" %}
+{%if invalid %}
 <h6 style="color:red;">Please enter a valid NYC zipcode</h6>
 {% endif %}
 <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
 <br>
+
 <div class="row">
   <div class="col-lg-2 offset-lg-5">
 
@@ -229,9 +231,37 @@
 </form>
 <br>
 
-{%if data != "invalid" %}
+{%if data|length > 1   %}
+<section class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <table class="table">
+        <thead>
+            <tr>
+              <th>Facility</th>
+              <th>Type</th>
+              <th>Address</th>
+              <th>Website</th>
+            </tr>
+        </thead>
+        <tbody id="divsearchresult">
+          {% for item in data %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.address}}</td>
+            <td><a target="_blank" href = "{{item.url}}">Website</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-  <div class="container">
+  </div>
+</section>
+
+
+
+  <!-- <div class="container">
     <div class="card-deck">
     {% for item in data %}
       <br>
@@ -247,8 +277,10 @@
     {% endfor %}
     </div>
   </div>
-  <br>
+  <br> -->
 {%endif%}
+
+
   <script>
     function togglemore() {
       more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
@@ -283,6 +315,8 @@
       }
       return (typeSelect && daySelect)
     }
+
+
   </script>
 
 
