@@ -447,10 +447,35 @@
       </div>
       <div class="col-sm-5">
         <p>Safe Disposal Events</p>
-        <img src="static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
       </div>
     </div>
   </div>
+{% if safeDisposalEvents %}
+  
+  <div class="card text-center">
+    <div class="card-header">
+      Current Safe Disposal Event
+    </div>
+      <div class="card-body">
+        <div class = "card-deck">
+          {% for event in safeDisposalEvents %}
+          
+            <div class="card border-success mb-3" style="max-width: 15rem;">
+              <div class="card-header">{{ event.date }}</div>
+              <div class="card-body">
+                <h4 class="card-title">{{ event.borough }}</h4>
+                <p class="card-text"> {{ event.description }}</p>
+              </div>
+              <div class="card-footer">{{ event.date }} <br> {{ event.time }} <br>  {{ event.address }}</div>
+            </div>
+        
+          {% endfor %}
+        </div>
+        <a href="#" class="btn btn-primary">Notify me</a>
+      </div>
+  </div>
+  
+{% endif %}
   {% if specialWasteSite %}
   
   <div class="container text-center">
@@ -459,7 +484,7 @@
         Safe Disposal Pickup Centers
         {% for site in specialWasteSite %}
          {{site.name}}  
-        {% endfor  %}
+        {% endfor %}
         <br><br><br>
         <div style="width: 100%; position: absolute;"> 
           <div id = "map" style = "clear:both; height:400px;"></div>

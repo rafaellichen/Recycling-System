@@ -2,7 +2,7 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 
-from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event
 from django.shortcuts import render
 import json
 from django.core.serializers.json import DjangoJSONEncoder
@@ -49,6 +49,12 @@ def get_special_waste_site(borough):
         result = json.dumps(result, cls=DjangoJSONEncoder)
         return result
 
+def get_safe_disposal_events(boro):
+    '''Method to get the safe disposal events'''
+    result = list(Event.objects.all().values())
+    if result is not None:
+        return result 
+
 def search_withQuery(request):
     '''Method to search with query from the database'''
     if request.method == 'GET':
@@ -61,6 +67,7 @@ def search_withQuery(request):
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
         '''Filter out closed facilties'''
         special_waste_site = get_special_waste_site(borough)
+        safe_disposal_events = get_safe_disposal_events(borough)
         filter_day = []
         for e in result:
             for i in day:
@@ -87,4 +94,5 @@ def search_withQuery(request):
         index = list(set(index))
         result = [result[i] for i in index]
         return render(request,'mainRecycleApp/home.html', {"data": result, 
-                                                           "specialWasteSite": special_waste_site})
+                                                           "specialWasteSite": special_waste_site,
+                                                           "safeDisposalEvents": safe_disposal_events})
