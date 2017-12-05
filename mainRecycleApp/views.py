@@ -2,8 +2,10 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 
-from mainRecycleApp.models import RecyclingCenter
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite
 from django.shortcuts import render
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 def index(request):
@@ -38,6 +40,15 @@ def getBoroughFromZip(zipcode):
         borough = "Unknown"
     return borough
 
+# retrive from the model and send the lat and long as an array
+def get_special_waste_site(borough):
+    '''Method to get the special waste site'''
+    # Since there are only 4 special waste sites as of now, Location is stored as the borough name
+    result = list(SpecialWasteSite.objects.filter(location=borough).values())
+    if result  is not None:
+        result = json.dumps(result, cls=DjangoJSONEncoder)
+        return result
+
 def search_withQuery(request):
     '''Method to search with query from the database'''
     if request.method == 'GET':
@@ -49,6 +60,7 @@ def search_withQuery(request):
         '''Filter list by user selected categories determined borough'''
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
         '''Filter out closed facilties'''
+        special_waste_site = get_special_waste_site(borough)
         filter_day = []
         for e in result:
             for i in day:
@@ -74,4 +86,5 @@ def search_withQuery(request):
         '''Remove duplicates in the result'''
         index = list(set(index))
         result = [result[i] for i in index]
-        return render(request,'mainRecycleApp/home.html', {"data": result})
+        return render(request,'mainRecycleApp/home.html', {"data": result, 
+                                                           "specialWasteSite": special_waste_site})
