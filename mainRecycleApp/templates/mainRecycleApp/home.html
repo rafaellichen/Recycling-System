@@ -55,12 +55,25 @@
     return (typeSelect && daySelect) 
   }
 
-   function time() {
+  function time() {
          t_div = document.getElementById('showtime');
         var now = new Date()
          t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
          setTimeout(time, 1000);
-     }
+  }
+
+  function initMap() {
+    var location = {lat: -74.19440961754422 , lng: 40.5693567232716 };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 8,
+      center: location
+    });
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+
 </script>
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
@@ -427,29 +440,29 @@
     </div>
   </div>
   <br>
-	<div class="container text-center">
-  <h3>What We Do</h3><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
-      <p>For Residents</p>
-    </div>
-    <div class="col-sm-4">
-      <img src="static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
-      <p>For Recycle Companies</p>
-    </div>
-    <div class="col-sm-4">
-      <div class="well">
-       <p>Local Residents</p><br>
-          Do you want recycle garbege in smart way?
+	{% if data %}
+  <div class="container text-center">
+    <h3>New Options</h3><br>
+    <div class="row">
+      <div class="col-sm-4">
+        <p>Take Back Programs</p>
+        <img src="static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
       </div>
-      <div class="well">
-       <p>Recycle Companies</p>
-          Getting recycle sources directly from residents?
+      <div class="col-sm-4">
+        <p>Safe Disposal Events</p>
+        <img src="static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-4">
+        <div class = "map">
+          <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+          </script>
+        </div>
       </div>
     </div>
   </div>
-</div><br>
+  {% endif %}
+<br>
 
 <div class="embed-responsive embed-responsive-16by9">
  <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
