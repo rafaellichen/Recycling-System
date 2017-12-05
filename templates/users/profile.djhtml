@@ -1,17 +1,37 @@
 {% extends "app/base.djhtml" %}
 {% block body %}
-<div class="container" style="margin-top:80px;">
+
+<style>
+.main{
+  background-image: url("/static/img/bg1.jpg");
+}
+</style>
+
+<body class="main">
+<div  class="container" style="margin-top:80px;">
 
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-heading">
-          <h1>Welcome {{request.user.username}}!</h1>
-          <hr class="small">
-          <span class="subheading">{{request.user.first_name}} {{request.user.last_name}}</span>
+        <div class="text-center">
+          <h1>Welcome To Easy Recycle!</h1>
+        </div>
+          <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
+          <div class="row">
+          <div class="col-6">
+          <label> Name: {{request.user.first_name}} {{request.user.last_name}}</label> <br>
+          <label>User Name: {{request.user.username}} </label><br>
+          <label>Email: {{request.user.email}} </label><br>
+         </div>
+
+         <div class="col-6">
+            <img src="/static/img/user.png">
+         </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+</body>
+<br>
 {% endblock body %}
