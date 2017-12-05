@@ -11,47 +11,16 @@
   border-color: rgb(112, 112, 112);
 }
 </style>
-<script>
-  function togglemore() {
-    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
-    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
-    if(document.getElementById("more").innerHTML==more) {
-      document.getElementById("more").innerHTML=less
-    } else {
-      document.getElementById("more").innerHTML=more
-    }
-  }
-  function validForm() {
-    var x = document.getElementsByName("gtype")
-    typeSelect=false
-    for(var i=0; i<x.length; i++) {
-      if(x[i].checked) {
-       typeSelect=true
-      }
-    }
-    var y = document.getElementsByName("day")
-    daySelect=false
-    for(var j=0; j<y.length; j++) {
-      if(y[j].checked) {
-        daySelect=true
-      }
-    }
-    if(typeSelect==false && daySelect==false) {
-      alert("Please select at least 1 type of recyclable waste and at least 1 available day")
-    } else if(typeSelect==true && daySelect==false) {
-      alert("Please select at least 1 available day")
-    } else if(typeSelect==false && daySelect==true){
-      alert("Please select at least 1 type of recyclable waste")
-    }
-    return (typeSelect && daySelect)
-  }
-</script>
+
+
+
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
 	    <h1 class="display-3">Recycling Starts Here.</h1>
 	    <p class="lead">Try our recycling center finder.</p>
 	  	</div>
   </div>
+
   <form name="searchForm" onsubmit="return validForm()" action="search" method="GET"> {% csrf_token %}
 	<div class = "container">
 		<div data-toggle="buttons">
@@ -247,7 +216,11 @@
 <br><br>
 <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
 <br>
-<button type="submit" class="btn btn-primary">Submit</button>
+<div class="row">
+  <div class="col-lg-2 offset-lg-5">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
   </div>
 </form>
 
@@ -269,5 +242,43 @@
     </div>
   </div>
   <br>
-	
+
+
+  <script>
+    function togglemore() {
+      more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
+      less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
+      if(document.getElementById("more").innerHTML==more) {
+        document.getElementById("more").innerHTML=less
+      } else {
+        document.getElementById("more").innerHTML=more
+      }
+    }
+    function validForm() {
+      var x = document.getElementsByName("gtype")
+      typeSelect=false
+      for(var i=0; i<x.length; i++) {
+        if(x[i].checked) {
+         typeSelect=true
+        }
+      }
+      var y = document.getElementsByName("day")
+      daySelect=false
+      for(var j=0; j<y.length; j++) {
+        if(y[j].checked) {
+          daySelect=true
+        }
+      }
+      if(typeSelect==false && daySelect==false) {
+        alert("Please select at least 1 type of recyclable waste and at least 1 available day")
+      } else if(typeSelect==true && daySelect==false) {
+        alert("Please select at least 1 available day")
+      } else if(typeSelect==false && daySelect==true){
+        alert("Please select at least 1 type of recyclable waste")
+      }
+      return (typeSelect && daySelect)
+    }
+  </script>
+
+
 {% endblock %}
