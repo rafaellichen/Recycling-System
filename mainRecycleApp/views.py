@@ -32,7 +32,7 @@ def getBoroughFromZip(zipcode):
     elif int(zipcode) in QN:
         borough = "Queens"
     elif int(zipcode) in SI:
-        borough = "Staten Island"    
+        borough = "Staten Island"
     else:
         # Not a new york city zip code
         borough = "Unknown"
@@ -42,16 +42,11 @@ def search_withQuery(request):
     '''Method to search with query from the database'''
     if request.method == 'GET':
         category = request.GET.getlist("gtype")
-<<<<<<< HEAD
         day=request.GET.getlist("day")
         try:
             time = request.GET.getlist("dropdown")[0]
         except:
             time = '0,0'
-=======
-        day = request.GET.getlist("day")
-        time = request.GET.getlist("dropdown")[0]
->>>>>>> 09c5c98a28060fae7b9d3de7f67f89f1a9a8cbb3
         zipcode = request.GET.getlist("zipcode")[0]
         borough = getBoroughFromZip(zipcode)
         '''Filter list by user selected categories determined borough'''
