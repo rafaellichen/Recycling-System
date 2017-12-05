@@ -79,4 +79,17 @@ def search_withQuery(request):
         '''Remove duplicates in the result'''
         index = list(set(index))
         result = [result[i] for i in index]
-        return render(request,'mainRecycleApp/home.html', {"data": result})
+        final = {}
+        for cur_element in result:
+            keys = (cur_element["idc"])
+            if keys in final:  # combine when have same "idc"
+                final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"],  "url": cur_element["url"], "type": cur_element["type"] + "," +final[keys]["type"]}
+            else:  # for unique "idc"
+                final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"],  "url": cur_element["url"], "type": cur_element["type"]}
+        returnval = []
+        for i in final:
+            returnval.append(final[i])
+        returnval = [{'name': 'Goodwill Industries of Greater New York & Northern New Jersey', 'address': '47-47 Van Dam Street ', 'Monday': '0800,2000', 'Tuesday': '0800,2000', 'Wednesday': '0800,2000', 'Thursday': '0800,2000', 'Friday': '0800,2000', 'Saturday': '0800,2000', 'Sunday': '1100,1900', 'borough': 'Queens', 'zip': '11101', 'cell': '(718) 728-5400', 'picksup': '1', 'url': 'http://goodwillnynj.org', 'type': 'Books,Electronics'},{'name': 'Materials for the Arts', 'address': '33-00 Northern Blvd ', 'Monday': '0900,1530', 'Tuesday': 'closed', 'Wednesday': '0900,1530', 'Thursday': 'closed', 'Friday': '0900,1530', 'Saturday': 'closed', 'Sunday': 'closed', 'borough': 'Queens', 'zip': '11101', 'cell': '(718) 729-3001', 'picksup': '0', 'url': 'http://www.nyc.gov/html/dcla/mfta/html/home/home.shtml', 'type': 'Home Appliances'}]
+        for i in returnval:
+            i["type"]=i['type'].split(",")
+        return render(request,'mainRecycleApp/home.html', {"data": returnval})

@@ -255,66 +255,68 @@
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
            <div class="card-body">
              {% with item.type as type %}
-               {% if type == "Electronics" %}
+             {% for each in type %}
+               {% if each == "Electronics" %}
                  <img id="card-img" src="/static/img/electronics.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Home Appliances" %}
+               {% if each == "Home Appliances" %}
                  <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Automotive" %}
+               {% if each == "Automotive" %}
                  <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Office Furniture" %}
+               {% if each == "Office Furniture" %}
                  <img id="card-img" src="/static/img/officefurniture.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Clothing" %}
+               {% if each == "Clothing" %}
                  <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Building Products" %}
+               {% if each == "Building Products" %}
                  <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Art Supplies" %}
+               {% if each == "Art Supplies" %}
                  <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Food" %}
+               {% if each == "Food" %}
                  <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Office Supplies" %}
+               {% if each == "Office Supplies" %}
                  <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Textiles" %}
+               {% if each == "Textiles" %}
                  <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Household Furniture" %}
+               {% if each == "Household Furniture" %}
                  <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Shoes" %}
+               {% if each == "Shoes" %}
                  <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Housewares" %}
+               {% if each == "Housewares" %}
                  <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Sporting Equipment" %}
+               {% if each == "Sporting Equipment" %}
                  <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Collectibles" %}
+               {% if each == "Collectibles" %}
                  <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Lubricants" %}
+               {% if each == "Lubricants" %}
                  <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Containers" %}
+               {% if each == "Containers" %}
                  <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Medical Equipment" %}
+               {% if each == "Medical Equipment" %}
                  <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Toys" %}
+               {% if each == "Toys" %}
                  <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Musical Instruments" %}
+               {% if each == "Musical Instruments" %}
                  <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42">
                {% endif %}
+               {% endfor %}
              {% endwith %}
              <h6 class="card-title">{{item.name}}</h6>
              <p>{{item.address}}</p>
