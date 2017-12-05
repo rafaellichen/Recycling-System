@@ -89,7 +89,6 @@ def search_withQuery(request):
         returnval = []
         for i in final:
             returnval.append(final[i])
-        returnval = [{'name': 'Goodwill Industries of Greater New York & Northern New Jersey', 'address': '47-47 Van Dam Street ', 'Monday': '0800,2000', 'Tuesday': '0800,2000', 'Wednesday': '0800,2000', 'Thursday': '0800,2000', 'Friday': '0800,2000', 'Saturday': '0800,2000', 'Sunday': '1100,1900', 'borough': 'Queens', 'zip': '11101', 'cell': '(718) 728-5400', 'picksup': '1', 'url': 'http://goodwillnynj.org', 'type': 'Books,Electronics'},{'name': 'Materials for the Arts', 'address': '33-00 Northern Blvd ', 'Monday': '0900,1530', 'Tuesday': 'closed', 'Wednesday': '0900,1530', 'Thursday': 'closed', 'Friday': '0900,1530', 'Saturday': 'closed', 'Sunday': 'closed', 'borough': 'Queens', 'zip': '11101', 'cell': '(718) 729-3001', 'picksup': '0', 'url': 'http://www.nyc.gov/html/dcla/mfta/html/home/home.shtml', 'type': 'Home Appliances'}]
         for i in returnval:
             i["type"]=i['type'].split(",")
         return render(request,'mainRecycleApp/home.html', {"data": returnval})
