@@ -21,7 +21,7 @@
 	  	</div>
   </div>
 
-  <form name="searchForm" onsubmit="return validForm()" action="search" method="GET"> {% csrf_token %}
+  <form name="searchForm" onsubmit="return validForm()" action="/search/" method="POST"> {% csrf_token %}
 	<div class = "container">
 		<div data-toggle="buttons">
 		  <label class="btn btn-sq-lg btn-primary unselected">
@@ -214,17 +214,23 @@
       <option value="2330,2400">11:30 PM - 12:00 AM</option>
     </select>
 <br><br>
+{%if data == "invalid" %}
+<h6 style="color:red;">Please enter a valid NYC zipcode</h6>
+{% endif %}
 <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
 <br>
 <div class="row">
   <div class="col-lg-2 offset-lg-5">
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </div>
   </div>
 </form>
-
 <br>
+
+{%if data != "invalid" %}
+
   <div class="container">
     <div class="card-deck">
     {% for item in data %}
@@ -242,8 +248,7 @@
     </div>
   </div>
   <br>
-
-
+{%endif%}
   <script>
     function togglemore() {
       more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
