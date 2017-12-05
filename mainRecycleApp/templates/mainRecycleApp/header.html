@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Recycle App Home Page</title>
-	{% load static %}
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  <link rel = "stylesheet" href = "static/css/style.css">
-  <link rel = "stylesheet" href = "static/css/bootstrap.css">
-	<link rel="stylesheet" href="static/css/font-awesome.min.css">
-   <link rel="stylesheet" href="static/css/bootstrap.css">
-  <link rel="stylesheet" href="static/css/font-awesome.css" >
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link rel="shortcut icon" href="static/img/favicon.ico">
+	<title> Home </title>
+
+		{% load static %}
+		<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/jquery-ui.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/jquery-ui.structure.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/jquery-ui.theme.min.css" %}">
+		<link rel = "stylesheet" href = "{% static "css/style.css" %}">
+		<link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+		<link href="{% static "img/favicon.ico" %}" rel="shortcut icon">
+		<link href="{% static "css/grayscale.css" %}" rel="stylesheet">
+
 </head>
 <body>
 	<div>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-  <a class="navbar-brand" href="#"><img src="static/img/logo.png" height="50" width="100"></a>
+  		<img id="logo-png" src="static/img/logo.png" style="max-height : 40px; width:auto;" class="">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -30,34 +33,14 @@
       </li>
 
       <li class="nav-item ">
-        <a class="nav-link" href="/about">About Us </a>
+        <a class="nav-link" href="/about">About</a>
       </li>
-			<!-- <li class="nav-item ">
-				<a class="nav-link" href="/accounts">Accounts </a>
-			</li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="/contact">Contact</a>
+      </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/contact">Contact Us</a>
-      </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        FAQs
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Recommend Us To a Friend</a>
-      </li> -->
     </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
+
 		<ul class="nav navbar-nav navbar-right">
 			{% if request.user.is_anonymous != True %}
 			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
@@ -82,6 +65,8 @@
 
     <script>
  $(document).ready(function() {
+	 // document.getElementById("logo-png").className+= " img-fluid";
+
 
     //send the message by click
     $(".chat-send").click(sendMsg);
@@ -194,7 +179,7 @@ function clearChatBox() {
 ;
 (function() {
 	$('#logout').click(function() {
-		$.post("/accounts/logout", function() {
+		$.post("/logout", function() {
 			window.location.href = '/';
 		});
 	});
