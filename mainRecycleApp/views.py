@@ -34,10 +34,10 @@ def getBoroughFromZip(zipcode):
     elif int(zipcode) in QN:
         borough = "Queens"
     elif int(zipcode) in SI:
-        borough = "Staten Island"    
+        borough = "Staten Island"
     else:
         # Not a new york city zip code
-        borough = "Unknown"
+        borough = ""
     return borough
 
 # retrive from the model and send the lat and long as an array
@@ -57,12 +57,17 @@ def get_safe_disposal_events(boro):
 
 def search_withQuery(request):
     '''Method to search with query from the database'''
-    if request.method == 'GET':
-        category = request.GET.getlist("gtype")
-        day = request.GET.getlist("day")
-        time = request.GET.getlist("dropdown")[0]
-        zipcode = request.GET.getlist("zipcode")[0]
+    if request.method == 'POST':
+        category = request.POST.getlist("gtype")
+        day=request.POST.getlist("day")
+        try:
+            time = request.POST.getlist("dropdown")[0]
+        except:
+            time = '0,0'
+        zipcode = request.POST.getlist("zipcode")[0]
         borough = getBoroughFromZip(zipcode)
+        if borough == "":
+            return render(request,'mainRecycleApp/home.html', {"data": [], "invalid": True})
         '''Filter list by user selected categories determined borough'''
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
         '''Filter out closed facilties'''
