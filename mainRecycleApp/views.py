@@ -91,4 +91,25 @@ def search_withQuery(request):
             returnval.append(final[i])
         for i in returnval:
             i["type"]=i['type'].split(",")
+            if(i["Monday"]!="closed"):
+                temp = i["Monday"].split(",")
+                i['Monday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(i["Tuesday"]!="closed"):    
+                temp = i["Tuesday"].split(",")
+                i['Tuesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(i["Wednesday"]!="closed"):    
+                temp = i["Wednesday"].split(",")
+                i['Wednesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(i["Thursday"]!="closed"):   
+                temp = i["Thursday"].split(",")
+                i['Thursday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(i["Friday"]!="closed"):    
+                temp = i["Friday"].split(",")
+                i['Friday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(i["Saturday"]!="closed"):    
+                temp = i["Saturday"].split(",")
+                i['Saturday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(i["Sunday"]!="closed"):    
+                temp = i["Sunday"].split(",")
+                i['Sunday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
         return render(request,'mainRecycleApp/home.html', {"data": returnval})

@@ -21,6 +21,7 @@
 #card-img {
   margin-bottom: 15px;
 }
+
 </style>
 
 
@@ -320,8 +321,9 @@
              {% endwith %}
              <h6 class="card-title">{{item.name}}</h6>
              <p>{{item.address}}</p>
+             <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Dismissible popover" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
              {% if item.url %}
-               <a target="_blank" href = "{{item.url}}">Website</a>
+               <a target="#blank" class="btn btn-info" href = "{{item.url}}">Website</a>
              {% else %}
                <br>
              {% endif %}
@@ -358,8 +360,11 @@
   </div>
   {% endif %}
 <br>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
 function togglemore() {
   more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
   less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
@@ -412,7 +417,6 @@ function initMap() {
     map: map
   });
 }
-
 </script>
 
 {% endblock %}
