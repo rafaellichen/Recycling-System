@@ -38,6 +38,36 @@ def getBoroughFromZip(zipcode):
         borough = ""
     return borough
 
+def filterDay(result, day):
+    '''filter out closed facilities'''
+    filter_day = []
+    for e in result:
+        for i in day:
+            if e[i] != "closed":
+                filter_day.append(e)
+    return [dict(t) for t in set([tuple(d.items()) for d in filter_day])]
+
+def filterTime(result, day, time):
+    '''Filter out facilities that don't match user's avaiable time'''
+    checktime = []
+    for d in day:
+        temp = []
+        for e in result:
+            temp.append(e[d])
+        checktime.append(temp)
+    index = []
+    for i in range(0,len(checktime[0])):
+        for j in range(0,len(checktime)):
+            if(checktime[j][i] == "closed"):
+                continue
+            db_time = checktime[j][i].split(",")
+            user_time = time.split(",")
+            if int(db_time[0]) <= int(user_time[0]) and int(db_time[1]) >= int(user_time[1]):
+                index.append(i)
+    '''Remove duplicates in the result'''
+    index = list(set(index))
+    return [result[i] for i in index]
+
 def search_withQuery(request):
     '''Method to search with query from the database'''
     if request.method == 'POST':
@@ -54,33 +84,9 @@ def search_withQuery(request):
             return render(request,'mainRecycleApp/home.html', {"data": [], "invalid": True})
         '''Filter list by user selected categories determined borough'''
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
-        '''Filter out closed facilties'''
-        filter_day = []
-        for e in result:
-            for i in day:
-                if e[i] != "closed":
-                    filter_day.append(e)
-        result = [dict(t) for t in set([tuple(d.items()) for d in filter_day])]
+        result = filterDay(result,day)
         if(time!=""):
-            '''Filter out facilities that don't match user's avaiable time'''
-            checktime = []
-            for d in day:
-                temp = []
-                for e in result:
-                    temp.append(e[d])
-                checktime.append(temp)
-            index = []
-            for i in range(0,len(checktime[0])):
-                for j in range(0,len(checktime)):
-                    if(checktime[j][i] == "closed"):
-                        continue
-                    db_time = checktime[j][i].split(",")
-                    user_time = time.split(",")
-                    if int(db_time[0]) <= int(user_time[0]) and int(db_time[1]) >= int(user_time[1]):
-                        index.append(i)
-            '''Remove duplicates in the result'''
-            index = list(set(index))
-            result = [result[i] for i in index]
+            result = filterTime(result, day, time)
         final = {}
         for cur_element in result:
             keys = (cur_element["idc"])
