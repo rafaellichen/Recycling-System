@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
-
+from collections import OrderedDict
 from mainRecycleApp.models import RecyclingCenter
 from django.shortcuts import render
 
@@ -38,47 +38,55 @@ def getBoroughFromZip(zipcode):
         borough = ""
     return borough
 
+def filterDay(result, day):
+    '''filter out closed facilities'''
+    filter_day = []
+    for e in result:
+        for i in day:
+            if e[i] != "closed":
+                filter_day.append(e)
+    return [dict(t) for t in set([tuple(d.items()) for d in filter_day])]
+
+def filterTime(result, day, time):
+    '''Filter out facilities that don't match user's avaiable time'''
+    checktime = []
+    for d in day:
+        temp = []
+        for e in result:
+            temp.append(e[d])
+        checktime.append(temp)
+    index = []
+    for i in range(0,len(checktime[0])):
+        for j in range(0,len(checktime)):
+            if(checktime[j][i] == "closed"):
+                continue
+            db_time = checktime[j][i].split(",")
+            user_time = time.split(",")
+            if int(db_time[0]) <= int(user_time[0]) and int(db_time[1]) >= int(user_time[1]):
+                index.append(i)
+    '''Remove duplicates in the result'''
+    index = list(set(index))
+    return [result[i] for i in index]
+
 def search_withQuery(request):
     '''Method to search with query from the database'''
     if request.method == 'POST':
         category = request.POST.getlist("gtype")
         day=request.POST.getlist("day")
+        time=""
         try:
             time = request.POST.getlist("dropdown")[0]
         except:
-            time = '0,0'
+            time=""
         zipcode = request.POST.getlist("zipcode")[0]
         borough = getBoroughFromZip(zipcode)
         if borough == "":
             return render(request,'mainRecycleApp/home.html', {"data": [], "invalid": True})
         '''Filter list by user selected categories determined borough'''
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
-        '''Filter out closed facilties'''
-        filter_day = []
-        for e in result:
-            for i in day:
-                if e[i] != "closed":
-                    filter_day.append(e)
-        result = [dict(t) for t in set([tuple(d.items()) for d in filter_day])]
-        '''Filter out facilities that don't match user's avaiable time'''
-        checktime = []
-        for d in day:
-            temp = []
-            for e in result:
-                temp.append(e[d])
-            checktime.append(temp)
-        index = []
-        for i in range(0,len(checktime[0])):
-            for j in range(0,len(checktime)):
-                if(checktime[j][i] == "closed"):
-                    continue
-                db_time = checktime[j][i].split(",")
-                user_time = time.split(",")
-                if int(db_time[0]) <= int(user_time[0]) and int(db_time[1]) >= int(user_time[1]):
-                    index.append(i)
-        '''Remove duplicates in the result'''
-        index = list(set(index))
-        result = [result[i] for i in index]
+        result = filterDay(result,day)
+        if(time!=""):
+            result = filterTime(result, day, time)
         final = {}
         for cur_element in result:
             keys = (cur_element["idc"])
@@ -86,9 +94,32 @@ def search_withQuery(request):
                 final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"],  "url": cur_element["url"], "type": cur_element["type"] + "," +final[keys]["type"]}
             else:  # for unique "idc"
                 final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"],  "url": cur_element["url"], "type": cur_element["type"]}
+        for i in final:
+            final[i]["type"]=final[i]['type'].split(",")
+            if(final[i]["Monday"]!="closed"):
+                temp = final[i]["Monday"].split(",")
+                final[i]['Monday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(final[i]["Tuesday"]!="closed"):    
+                temp = final[i]["Tuesday"].split(",")
+                final[i]['Tuesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(final[i]["Wednesday"]!="closed"):    
+                temp = final[i]["Wednesday"].split(",")
+                final[i]['Wednesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(final[i]["Thursday"]!="closed"):   
+                temp = final[i]["Thursday"].split(",")
+                final[i]['Thursday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(final[i]["Friday"]!="closed"):    
+                temp = final[i]["Friday"].split(",")
+                final[i]['Friday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(final[i]["Saturday"]!="closed"):    
+                temp = final[i]["Saturday"].split(",")
+                final[i]['Saturday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            if(final[i]["Sunday"]!="closed"):    
+                temp = final[i]["Sunday"].split(",")
+                final[i]['Sunday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
+            final[i]["len"]=len(final[i]["type"])
+        final = OrderedDict(sorted(final.items(), key=lambda kv: kv[1]['len'], reverse=True))
         returnval = []
         for i in final:
             returnval.append(final[i])
-        for i in returnval:
-            i["type"]=i['type'].split(",")
         return render(request,'mainRecycleApp/home.html', {"data": returnval})
