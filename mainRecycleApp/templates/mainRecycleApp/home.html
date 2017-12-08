@@ -1,11 +1,13 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
+{%load static%}
 <style>
 .jumbotron{
-  background:url(static/img/green.jpg);
+  background:url({% static "img/green.jpg" %});
   background-size: cover;
 }
+
 .unselected {
   background-color: rgb(112, 112, 112);
   border-color: rgb(112, 112, 112);
@@ -19,49 +21,10 @@
 #card-img {
   margin-bottom: 15px;
 }
-</style>
-<script>
-  function togglemore() {
-    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
-    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
-    if(document.getElementById("more").innerHTML==more) {
-      document.getElementById("more").innerHTML=less
-    } else {
-      document.getElementById("more").innerHTML=more
-    }
-  }
-  function validForm() {
-    var x = document.getElementsByName("gtype")
-    typeSelect=false
-    for(var i=0; i<x.length; i++) {
-      if(x[i].checked) {
-       typeSelect=true
-      }
-    }
-    var y = document.getElementsByName("day")
-    daySelect=false
-    for(var j=0; j<y.length; j++) {
-      if(y[j].checked) {
-        daySelect=true
-      }
-    }
-    if(typeSelect==false && daySelect==false) {
-      alert("Please select at least 1 type of recyclable waste and at least 1 available day")
-    } else if(typeSelect==true && daySelect==false) {
-      alert("Please select at least 1 available day")
-    } else if(typeSelect==false && daySelect==true){
-      alert("Please select at least 1 type of recyclable waste")
-    }
-    return (typeSelect && daySelect) 
-  }
 
-   function time() {
-         t_div = document.getElementById('showtime');
-        var now = new Date()
-         t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
-         setTimeout(time, 1000);
-     }
-</script>
+</style>
+
+
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
 	    <h1 class="display-3">Recycling Starts Here.</h1>
@@ -69,14 +32,14 @@
 	  	</div>
   </div>
 
-
   <div class ="container">
        <body onload="time()">
      <div id="showtime"></div>
  </body>
    </div><br>
 
-  <form name="searchForm" onsubmit="return validForm()" action="search" method="GET"> {% csrf_token %}
+
+  <form name="searchForm" onsubmit="return validForm()" action="/search/" method="POST"> {% csrf_token %}
 	<div class = "container">
 		<div data-toggle="buttons">
 		  <label class="btn btn-sq-lg btn-primary unselected">
@@ -91,7 +54,7 @@
 		    <br>
 		    <img src="/static/img/homeappliances.png" style="width:80px; height:80px">
 		    <br>
-		    Home Appliances
+		    Appliances
 		  </label>
 		  <label class="btn btn-sq-lg btn-primary unselected">
 		    <input value="Automotive" name="gtype" type="checkbox" autocomplete="off">
@@ -105,7 +68,7 @@
 		    <br>
 		    <img src="/static/img/officefurniture.png" style="width:80px; height:80px">
 		    <br>
-		    Office Furniture
+		    Furniture
       </label>
       <label class="btn btn-sq-lg btn-primary unselected">
 		    <input value = "Clothing" name="gtype" type="checkbox" autocomplete="off">
@@ -124,7 +87,7 @@
       <label id="more" onclick="togglemore()" class="btn btn-sq-lg" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1"><br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More</label>
     </div>
   </div>
-  
+
   <div class="container collapse" id="List1">
     <div class="card card-block">
       <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
@@ -233,7 +196,7 @@
         Saturday
       </label>
     </div>
-    <select name="dropdown" required>
+    <select name="dropdown">
       <option value="" disabled selected>Select a time frame</option>
       <option value="0800,0830">8:00 - 8:30 AM</option>
       <option value="0830,0900">8:30 - 9:00 AM</option>
@@ -269,189 +232,191 @@
       <option value="2330,2400">11:30 PM - 12:00 AM</option>
     </select>
 <br><br>
+{%if invalid %}
+<h6 style="color:red;">Please enter a valid NYC zipcode</h6>
+{% endif %}
 <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
 <br>
-<button type="submit" class="btn btn-primary">Submit</button>
+
+<div class="row">
+  <div class="col-lg-2 offset-lg-5">
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
   </div>
 </form>
-	<!-- <div class="container">
-  <p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
-    Monday
-  </a>
-  <a class="btn btn-primary" data-toggle="collapse" href="#List2" aria-expanded="false" aria-controls="List2">
-    Tuesday
-  </a>
-  <a class="btn btn-primary" data-toggle="collapse" href="#List3" aria-expanded="false" aria-controls="List3">
-    Wednesday
-  </a>
-  <a class="btn btn-primary" data-toggle="collapse" href="#List4" aria-expanded="false" aria-controls="List4">
-    Thursday
-  </a>
-  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List5" aria-expanded="false" aria-controls="List5">
-    Friday
-  </a>
-  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List6" aria-expanded="false" aria-controls="List6">
-    Saturday
-  </a>
-  <a class="btn btn-primary  unselected" data-toggle="collapse" href="#List7" aria-expanded="false" aria-controls="List7">
-    Sunday
-  </a>
-</p>
-<div class="collapse" id="List1">
-  <div class="card card-block">
-    PowerMyLearning: 520 8th Avenue 10th Floor, New York, NY, 10018
-    (917)677-5506
-  </div>
-</div>
-<div class="collapse" id="List2">
-  <div class="card card-block">
-    Ya-ya Network: 224 W 29th St, New York, NY, 10001
-    (212)239-0022
-  </div>
-</div>
-<div class="collapse" id="List3">
-  <div class="card card-block">
-    Ya-ya Network: 224 W 29th St, New York, NY, 10001
-    (212)239-0022
-  </div>
-</div>
-<div class="collapse" id="List4">
-  <div class="card card-block">
-    Ya-ya Network: 224 W 29th St, New York, NY, 10001
-    (212)239-0022
-  </div>
-</div>
-<div class="collapse" id="List5">
-  <div class="card card-block">
-    Ya-ya Network: 224 W 29th St, New York, NY, 10001
-    (212)239-0022
-  </div>
-</div>
-<div class="collapse" id="List6">
-  <div class="card card-block">
-    Ya-ya Network: 224 W 29th St, New York, NY, 10001
-    (212)239-0022
-  </div>
-</div>
-<div class="collapse" id="List7">
-  <div class="card card-block">
-    Ya-ya Network: 224 W 29th St, New York, NY, 10001
-    (212)239-0022
-  </div>
-</div>
-</div> -->
 <br>
-  <div class="container">
-    <div class="card-deck">
-        {% if data %}
-          {% for item in data %}
-          <div class="card-block" style="width: 20rem; border: 1px grey solid">
-            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
-            <div class="card-body">
-              {% with item.type as type %}
-                {% if type == "Electronics" %}
-                  <img id="card-img" src="/static/img/electronics.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Home Appliances" %}
-                  <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Automotive" %}
-                  <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Office Furniture" %}
-                  <img id="card-img" src="/static/img/officefurniture.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Clothing" %}
-                  <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Building Products" %}
-                  <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Art Supplies" %}
-                  <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Food" %}
-                  <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Office Supplies" %}
-                  <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Textiles" %}
-                  <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Household Furniture" %}
-                  <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Shoes" %}
-                  <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Housewares" %}
-                  <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Sporting Equipment" %}
-                  <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Collectibles" %}
-                  <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Lubricants" %}
-                  <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Containers" %}
-                  <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Medical Equipment" %}
-                  <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Toys" %}
-                  <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42">
-                {% endif %}
-                {% if type == "Musical Instruments" %}
-                  <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42">
-                {% endif %}
-              {% endwith %}
-              <h6 class="card-title">{{item.name}}</h6>
-              <p>{{item.address}}</p>
-              {% if item.url %}
-                <a target="_blank" href = "{{item.url}}">Website</a>
-              {% else %}
-                <br>
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-          <h2>No result</h2>
-      {% endif %}
-    </div>
-  </div>
-  <br>
-	<div class="container text-center">
-  <h3>What We Do</h3><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <img src="static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
-      <p>For Residents</p>
-    </div>
-    <div class="col-sm-4">
-      <img src="static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
-      <p>For Recycle Companies</p>
-    </div>
-    <div class="col-sm-4">
-      <div class="well">
-       <p>Local Residents</p><br>
-          Do you want recycle garbege in smart way?
-      </div>
-      <div class="well">
-       <p>Recycle Companies</p>
-          Getting recycle sources directly from residents?
-      </div>
-    </div>
-  </div>
-</div><br>
 
-<div class="embed-responsive embed-responsive-16by9">
- <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
-</div><br>
+<div class="container">
+   <div class="card-deck">
+       {% if data %}
+         {% for item in data %}
+         <div class="card-block" style="width: 20rem; border: 1px grey solid">
+           <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
+           <div class="card-body">
+             {% with item.type as type %}
+             {% for each in type %}
+               {% if each == "Electronics" %}
+                 <img id="card-img" src="/static/img/electronics.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Home Appliances" %}
+                 <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Automotive" %}
+                 <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Office Furniture" %}
+                 <img id="card-img" src="/static/img/officefurniture.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Clothing" %}
+                 <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Building Products" %}
+                 <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Art Supplies" %}
+                 <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Food" %}
+                 <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Office Supplies" %}
+                 <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Textiles" %}
+                 <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Household Furniture" %}
+                 <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Shoes" %}
+                 <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Housewares" %}
+                 <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Sporting Equipment" %}
+                 <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Collectibles" %}
+                 <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Lubricants" %}
+                 <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Containers" %}
+                 <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Medical Equipment" %}
+                 <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Toys" %}
+                 <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42">
+               {% endif %}
+               {% if each == "Musical Instruments" %}
+                 <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42">
+               {% endif %}
+               {% endfor %}
+             {% endwith %}
+             <h6 class="card-title">{{item.name}}</h6>
+             <p>{{item.address}}</p>
+             <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
+             {% if item.url %}
+               <a target="#blank" class="btn btn-info" href = "{{item.url}}">Website</a>
+             {% else %}
+               <br>
+             {% endif %}
+           </div>
+         </div>
+       {% endfor %}
+     {% endif %}
+   </div>
+    {% if not data and request.method == 'POST'%} <h6 style="color:red;">No results found!</h6> {% endif%}
+ </div>
+
+  <br>
+  <br>
+	{% if data %}
+  <div class="container text-center">
+    <h3>New Options</h3><br>
+    <div class="row">
+      <div class="col-sm-4">
+        <p>Take Back Programs</p>
+        <img src="/static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-4">
+        <p>Safe Disposal Events</p>
+        <img src="/static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-4">
+        <div class = "map">
+          <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+function togglemore() {
+  more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
+  less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
+  if(document.getElementById("more").innerHTML==more) {
+    document.getElementById("more").innerHTML=less
+  } else {
+    document.getElementById("more").innerHTML=more
+  }
+}
+function validForm() {
+  var x = document.getElementsByName("gtype")
+  typeSelect=false
+  for(var i=0; i<x.length; i++) {
+    if(x[i].checked) {
+     typeSelect=true
+    }
+  }
+  var y = document.getElementsByName("day")
+  daySelect=false
+  for(var j=0; j<y.length; j++) {
+    if(y[j].checked) {
+      daySelect=true
+    }
+  }
+  if(typeSelect==false && daySelect==false) {
+    alert("Please select at least 1 type of recyclable waste and at least 1 available day")
+  } else if(typeSelect==true && daySelect==false) {
+    alert("Please select at least 1 available day")
+  } else if(typeSelect==false && daySelect==true){
+    alert("Please select at least 1 type of recyclable waste")
+  }
+  return (typeSelect && daySelect)
+}
+
+function time() {
+       t_div = document.getElementById('showtime');
+      var now = new Date()
+       t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
+       setTimeout(time, 1000);
+}
+
+function initMap() {
+  var location = {lat: -74.19440961754422 , lng: 40.5693567232716 };
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: location
+  });
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+}
+</script>
+
 {% endblock %}

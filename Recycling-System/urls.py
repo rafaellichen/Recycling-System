@@ -15,9 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from mainRecycleApp.views import about
-from mainRecycleApp.views import contact
-from mainRecycleApp.views import search_withQuery
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,8 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('mainRecycleApp.urls')),
-    url(r'^about', about),
-    url(r'^contact', contact),
-    url(r'^search', search_withQuery),
-    url(r'^accounts/', include('users.urls', namespace='users')),   
+    url(r'^', include('users.urls', namespace='users')),
+    url(r'^', include('guestbook.urls',namespace='guestbook')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
