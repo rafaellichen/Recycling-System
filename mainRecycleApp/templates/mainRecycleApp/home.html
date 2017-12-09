@@ -3,6 +3,7 @@
 {% block content %}
 {%load static%}
 <style>
+
 .jumbotron{
   background:url({% static "img/green.jpg" %});
   background-size: cover;
@@ -21,9 +22,13 @@
 #card-img {
   margin-bottom: 15px;
 }
-
+#map {
+   height: 100%;
+}
+#footer {
+  position: relative;
+}
 </style>
-
 
 	<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
@@ -247,7 +252,6 @@
   </div>
 </form>
 <br>
-
 <div class="container">
    <div class="card-deck">
        {% if data %}
@@ -339,25 +343,103 @@
   <br>
 	{% if data %}
   <div class="container text-center">
-    <h3>New Options</h3><br>
+    <h3>Other Options</h3><br>
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <p>Take Back Programs</p>
         <img src="/static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <p>Safe Disposal Events</p>
         <img src="/static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
       </div>
-      <div class="col-sm-4">
-        <div class = "map">
-          <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
-          </script>
+    </div>
+  </div>
+{% if safeDisposalEvents %}
+  
+  <div class="card text-center">
+    <div class="card-header">
+      Current Safe Disposal Event
+    </div>
+      <div class="card-body">
+        <div class = "card-deck">
+          {% for event in safeDisposalEvents %}
+          
+            <div class="card border-success mb-3" style="max-width: 15rem;">
+              <div class="card-header">{{ event.date }}</div>
+              <div class="card-body">
+                <h4 class="card-title">{{ event.borough }}</h4>
+                <p class="card-text"> {{ event.description }}</p>
+              </div>
+              <div class="card-footer">{{ event.date }} <br> {{ event.time }} <br>  {{ event.address }}</div>
+            </div>
+        
+          {% endfor %}
+        </div>
+        <a href="#" class="btn btn-primary">Notify me</a>
+      </div>
+  </div>
+  
+{% endif %}
+  {% if specialWasteSite %}  
+  <div class="container text-center">
+    <div class = "row">
+      <div class="col">
+        Safe Disposal Pickup Centers
+        <div style="width: 100%; position: absolute;"> 
+          <div id = "map" style = "clear:both; height:400px;"></div>
         </div>
       </div>
     </div>
+     <br>
+        <br>
+        <br>
+        <br>
+        <br> 
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
   </div>
+  
+  <script>
+    var map;
+    function initMap() {
+      var locations = {{ specialWasteSite|safe }};
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: new google.maps.LatLng(locations[0].longitude, locations[0].latitude)
+      });
+
+      var infoWindow = new google.maps.InfoWindow();
+      var marker; 
+      for (var i = 0; i < locations.length; i++) {
+        var latlong = new google.maps.LatLng(locations[i].longitude, locations[i].latitude);
+        console.log(locations[i].latitude);
+        marker = new google.maps.Marker({
+          position: latlong,
+          map: map,
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infoWindow.setContent('<p>' + locations[i].name + '</p>' + '<p>' + locations[i].hours + '</p>');
+            infoWindow.open(map, marker);
+          }
+        })(marker, i));
+
+        map.fitBounds(bounds);
+      }
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9k7z9ezCMLWq9D14zpuZxndZV8rRkW2E&callback=initMap" async defer>
+  </script>
+  {% endif %}
   {% endif %}
 <br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -382,23 +464,30 @@ function validForm() {
      typeSelect=true
     }
   }
-  var y = document.getElementsByName("day")
-  daySelect=false
-  for(var j=0; j<y.length; j++) {
-    if(y[j].checked) {
-      daySelect=true
+  function validForm() {
+    var x = document.getElementsByName("gtype")
+    typeSelect=false
+    for(var i=0; i<x.length; i++) {
+      if(x[i].checked) {
+       typeSelect=true
+      }
     }
+    var y = document.getElementsByName("day")
+    daySelect=false
+    for(var j=0; j<y.length; j++) {
+      if(y[j].checked) {
+        daySelect=true
+      }
+    }
+    if(typeSelect==false && daySelect==false) {
+      alert("Please select at least 1 type of recyclable waste and at least 1 available day")
+    } else if(typeSelect==true && daySelect==false) {
+      alert("Please select at least 1 available day")
+    } else if(typeSelect==false && daySelect==true){
+      alert("Please select at least 1 type of recyclable waste")
+    }
+    return (typeSelect && daySelect) 
   }
-  if(typeSelect==false && daySelect==false) {
-    alert("Please select at least 1 type of recyclable waste and at least 1 available day")
-  } else if(typeSelect==true && daySelect==false) {
-    alert("Please select at least 1 available day")
-  } else if(typeSelect==false && daySelect==true){
-    alert("Please select at least 1 type of recyclable waste")
-  }
-  return (typeSelect && daySelect)
-}
-
 function time() {
        t_div = document.getElementById('showtime');
       var now = new Date()
@@ -417,6 +506,6 @@ function initMap() {
     map: map
   });
 }
-</script>
 
+</script>
 {% endblock %}

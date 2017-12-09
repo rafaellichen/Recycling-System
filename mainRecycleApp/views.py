@@ -2,8 +2,11 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 from collections import OrderedDict
-from mainRecycleApp.models import RecyclingCenter
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event
+
 from django.shortcuts import render
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 def index(request):
@@ -38,6 +41,7 @@ def getBoroughFromZip(zipcode):
         borough = ""
     return borough
 
+
 def filterDay(result, day):
     '''filter out closed facilities'''
     filter_day = []
@@ -68,6 +72,22 @@ def filterTime(result, day, time):
     index = list(set(index))
     return [result[i] for i in index]
 
+# retrive from the model and send the lat and long as an array
+def get_special_waste_site(borough):
+    '''Method to get the special waste site'''
+    # Since there are only 4 special waste sites as of now, Location is stored as the borough name
+    result = list(SpecialWasteSite.objects.filter(location=borough).values())
+    if result  is not None:
+        result = json.dumps(result, cls=DjangoJSONEncoder)
+        return result
+
+def get_safe_disposal_events(boro):
+    '''Method to get the safe disposal events'''
+    result = list(Event.objects.all().values())
+    if result is not None:
+        return result 
+
+
 def search_withQuery(request):
     '''Method to search with query from the database'''
     if request.method == 'POST':
@@ -84,6 +104,8 @@ def search_withQuery(request):
             return render(request,'mainRecycleApp/home.html', {"data": [], "invalid": True})
         '''Filter list by user selected categories determined borough'''
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
+        special_waste_site = get_special_waste_site(borough)
+        safe_disposal_events = get_safe_disposal_events(borough)
         result = filterDay(result,day)
         if(time!=""):
             result = filterTime(result, day, time)
@@ -123,3 +145,4 @@ def search_withQuery(request):
         for i in final:
             returnval.append(final[i])
         return render(request,'mainRecycleApp/home.html', {"data": returnval})
+      
