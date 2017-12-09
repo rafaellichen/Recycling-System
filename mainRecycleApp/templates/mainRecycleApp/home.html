@@ -201,7 +201,7 @@
         Saturday
       </label>
     </div>
-    <select name="dropdown" required>
+    <select name="dropdown">
       <option value="" disabled selected>Select a time frame</option>
       <option value="0800,0830">8:00 - 8:30 AM</option>
       <option value="0830,0900">8:30 - 9:00 AM</option>
@@ -260,71 +260,74 @@
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
            <div class="card-body">
              {% with item.type as type %}
-               {% if type == "Electronics" %}
+             {% for each in type %}
+               {% if each == "Electronics" %}
                  <img id="card-img" src="/static/img/electronics.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Home Appliances" %}
+               {% if each == "Home Appliances" %}
                  <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Automotive" %}
+               {% if each == "Automotive" %}
                  <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Office Furniture" %}
+               {% if each == "Office Furniture" %}
                  <img id="card-img" src="/static/img/officefurniture.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Clothing" %}
+               {% if each == "Clothing" %}
                  <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Building Products" %}
+               {% if each == "Building Products" %}
                  <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Art Supplies" %}
+               {% if each == "Art Supplies" %}
                  <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Food" %}
+               {% if each == "Food" %}
                  <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Office Supplies" %}
+               {% if each == "Office Supplies" %}
                  <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Textiles" %}
+               {% if each == "Textiles" %}
                  <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Household Furniture" %}
+               {% if each == "Household Furniture" %}
                  <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Shoes" %}
+               {% if each == "Shoes" %}
                  <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Housewares" %}
+               {% if each == "Housewares" %}
                  <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Sporting Equipment" %}
+               {% if each == "Sporting Equipment" %}
                  <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Collectibles" %}
+               {% if each == "Collectibles" %}
                  <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Lubricants" %}
+               {% if each == "Lubricants" %}
                  <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Containers" %}
+               {% if each == "Containers" %}
                  <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Medical Equipment" %}
+               {% if each == "Medical Equipment" %}
                  <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Toys" %}
+               {% if each == "Toys" %}
                  <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42">
                {% endif %}
-               {% if type == "Musical Instruments" %}
+               {% if each == "Musical Instruments" %}
                  <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42">
                {% endif %}
+               {% endfor %}
              {% endwith %}
              <h6 class="card-title">{{item.name}}</h6>
              <p>{{item.address}}</p>
+             <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
              {% if item.url %}
-               <a target="_blank" href = "{{item.url}}">Website</a>
+               <a target="#blank" class="btn btn-info" href = "{{item.url}}">Website</a>
              {% else %}
                <br>
              {% endif %}
@@ -438,15 +441,27 @@
   </script>
   {% endif %}
   {% endif %}
-
-<script>
-  function togglemore() {
-    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
-    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
-    if(document.getElementById("more").innerHTML==more) {
-      document.getElementById("more").innerHTML=less
-    } else {
-      document.getElementById("more").innerHTML=more
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+function togglemore() {
+  more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
+  less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
+  if(document.getElementById("more").innerHTML==more) {
+    document.getElementById("more").innerHTML=less
+  } else {
+    document.getElementById("more").innerHTML=more
+  }
+}
+function validForm() {
+  var x = document.getElementsByName("gtype")
+  typeSelect=false
+  for(var i=0; i<x.length; i++) {
+    if(x[i].checked) {
+     typeSelect=true
     }
   }
   function validForm() {
@@ -473,13 +488,24 @@
     }
     return (typeSelect && daySelect) 
   }
+function time() {
+       t_div = document.getElementById('showtime');
+      var now = new Date()
+       t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
+       setTimeout(time, 1000);
+}
 
-  function time() {
-         t_div = document.getElementById('showtime');
-        var now = new Date()
-         t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
-         setTimeout(time, 1000);
-  }
+function initMap() {
+  var location = {lat: -74.19440961754422 , lng: 40.5693567232716 };
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: location
+  });
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+}
 
 </script>
 {% endblock %}
