@@ -47,6 +47,11 @@
 #footer {
   position: relative;
 }
+
+.progress-bar1 {
+  border-right: 1px solid white;
+}
+
 #header1 {
   color: #FFFFFF;
 }
@@ -54,7 +59,6 @@
   background-color: #FFA727 !important;
   /*border-color: #65B34D; */
   border-color: #FFFFFF; 
-
 }
 .btn-sq {
   width: 120px !important;
@@ -111,7 +115,7 @@
 		  <label class="btn btn-sq btn-info unselected">
 		    <input value="Office Furniture" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
-		    <img src="/static/img/officefurniture.png" style="width:60px; height:60px">
+		    <img src="/static/img/householdfurniture.png" style="width:80px; height:80px">
 		    <br>
 		    Furniture
       </label>
@@ -127,7 +131,7 @@
         <br>
         <img src="/static/img/buildingproducts.png" style="width:60px; height:60px">
         <br>
-        Building P.
+        Paints
       </label>
       <label id="more" onclick="togglemore()" class="btn btn-sq btn-info unselected" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
         <br>
@@ -143,31 +147,32 @@
   <div class="container collapse" id="List1">
     <div class="card card-block">
       <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-        <label class="btn btn-primary unselected">
+        <!-- <label class="btn btn-primary unselected">
             <input value="Art Supplies" name="gtype" type="checkbox" autocomplete="off">
             <img src="/static/img/art.png" style="width:30px; height:30px">
             Art Supplies
-        </label>
-        <label class="btn btn-primary unselected">
+        </label> -->
+        <!-- <label class="btn btn-primary unselected">
           <input value="Food" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/food.png" style="width:30px; height:30px">
           Food &amp; Beverages
-          </label>
-        <label class="btn btn-primary unselected">
+          </label> -->
+        <!-- <label class="btn btn-primary unselected">
           <input value="Office Supplies" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/officesupp.png" style="width:30px; height:30px">
         Office Supplies
-        </label>
-        <label class="btn btn-primary unselected">
+        </label> -->
+        <!-- <label class="btn btn-primary unselected">
           <input value="Textiles" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/textiles.png" style="width:30px; height:30px">
           Textiles (non-clothing)
-        </label>
-        <label class="btn btn-primary unselected">
+        </label> -->
+        <!-- <label class="btn btn-primary unselected">
           <input value="Household Furniture" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
-          Household Furniture
-        </label>
+          Household 
+          Furniture
+        </label> -->
         <label class="btn btn-primary unselected">
           <input value="Shoes" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/shoes.png" style="width:30px; height:30px">
@@ -181,28 +186,30 @@
         <label class="btn btn-primary unselected">
           <input value="Sporting Equipment" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/sport.png" style="width:30px; height:30px">
-          Sporting Equipment
+          Sports Equipment
         </label>
         <label class="btn btn-primary unselected">
           <input value="Collectibles" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/jewelry.png" style="width:30px; height:30px">
-          Collectibles (antiques, jewelry, art)
+          Collectibles 
+          <!-- (antiques, jewelry, art) -->
         </label>
-        <label class="btn btn-primary unselected">
+        <!-- <label class="btn btn-primary unselected">
           <input value="Lubricants" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/lubricants.png" style="width:30px; height:30px">
           Lubricants
-        </label>
-        <label class="btn btn-primary unselected">
+        </label> -->
+        <!-- <label class="btn btn-primary unselected">
           <input value="Containers" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/cardboard.png" style="width:30px; height:30px">
-          Containers &amp; Packaging
-        </label>
-        <label class="btn btn-primary unselected">
+          Containers &amp; 
+          Packaging
+        </label> -->
+        <!-- <label class="btn btn-primary unselected">
           <input value="Medical Equipment" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/medical.png" style="width:30px; height:30px">
           Medical Equipment &amp; Furniture
-        </label>
+        </label> -->
         <label class="btn btn-primary unselected">
           <input value="Toys" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/toy.png" style="width:30px; height:30px">
@@ -211,7 +218,8 @@
         <label class="btn btn-primary unselected">
           <input value="Musical Instruments" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/musicalinstruments.png" style="width:30px; height:30px">
-          Musical Instruments
+          <!-- Musical  -->
+          Instruments
         </label>
       </div>
     </div>
@@ -323,7 +331,7 @@
                  <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
                {% endif %}
                {% if each == "Office Furniture" %}
-                 <img id="card-img" src="/static/img/officefurniture.png" alt="" height="42" width="42">
+                 <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
                {% endif %}
                {% if each == "Clothing" %}
                  <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42">
@@ -376,7 +384,80 @@
                {% endfor %}
              {% endwith %}
              <h6 class="card-title">{{item.name}}</h6>
-             <p>{{item.address}}</p>
+             <div class="progress">
+               {% if item.Monday != "closed" %}
+                <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+                  MON
+                </div>
+              {% else %}
+              <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+                  MON
+                </div>
+              {% endif %}
+              {% if item.Tuesday != "closed" %}
+              <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+                TUE
+              </div>
+            {% else %}
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+                TUE
+              </div>
+            {% endif %}
+            {% if item.Wednesday != "closed" %}
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+              WED
+            </div>
+          {% else %}
+          <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+              WED
+            </div>
+          {% endif %}
+          {% if item.Thursday != "closed" %}
+          <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:16%">
+            THUR
+          </div>
+        {% else %}
+        <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:16%">
+            THUR
+          </div>
+        {% endif %}
+        {% if item.Friday != "closed" %}
+        <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+          FRI
+        </div>
+      {% else %}
+      <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+          FRI
+        </div>
+      {% endif %}
+      {% if item.Saturday != "closed" %}
+      <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+        SAT
+      </div>
+    {% else %}
+    <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+        SAT
+      </div>
+    {% endif %}
+    {% if item.Sunday != "closed" %}
+    <div class="progress-bar bg-success" role="progressbar" style="width:14%">
+      SUN
+    </div>
+  {% else %}
+  <div class="progress-bar bg-danger" role="progressbar" style="width:14%">
+      SUN
+    </div>
+  {% endif %}
+              </div>
+              <br>
+             <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30"> {{item.address}}</img>
+             <br>
+             <img id="card-img" src="/static/img/cell.png" alt="" height="30" width="30"> {{item.cell}}</img>
+             <br>
+             {% if item.picksup == "1" %}
+              <img id="card-img" src="/static/img/pick.png" alt="" height="30" width="30"> Pick up</img>
+              <br>
+             {% endif %}
              <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
              {% if item.url %}
                <a target="#blank" class="btn btn-info" href = "{{item.url}}">Website</a>
@@ -486,6 +567,7 @@
 {% endif %}
 <br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function(){
       $('[data-toggle="popover"]').popover(); 
@@ -507,21 +589,10 @@
          typeSelect=true
         }
       }
-      var y = document.getElementsByName("day")
-      daySelect=false
-      for(var j=0; j<y.length; j++) {
-        if(y[j].checked) {
-          daySelect=true
-        }
-      }
-      if(typeSelect==false && daySelect==false) {
-        alert("Please select at least 1 type of recyclable waste and at least 1 available day")
-      } else if(typeSelect==true && daySelect==false) {
-        alert("Please select at least 1 available day")
-      } else if(typeSelect==false && daySelect==true){
+      if(typeSelect==false){
         alert("Please select at least 1 type of recyclable waste")
       }
-      return (typeSelect && daySelect) 
+      return (typeSelect) 
     }
 
   function time() {
