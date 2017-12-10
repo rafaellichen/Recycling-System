@@ -7,3 +7,4 @@
 /Documentation/_build/
 .coverage.*
 *sqlite3
+*__pycache__
