@@ -4,14 +4,33 @@
 {%load static%}
 <style>
 
+#background-img {
+  background:url({% static "img/grass.jpg" %});
+}
+
 .jumbotron{
-  background:url({% static "img/green.jpg" %});
+  /*background:url({% static "img/green.jpg" %});*/
+  /* darker green :#02bf08b5 
+    lighter green : #00ff08b5;
+    more darker : #017505b5;
+    avg : #019e07b5;
+  */
+
+  background: 
+    linear-gradient(
+      #019e07b5,
+      #019e07b5 ),
+    url({% static "img/grass.jpg" %});
   background-size: cover;
 }
 
 .unselected {
-  background-color: rgb(112, 112, 112);
-  border-color: rgb(112, 112, 112);
+  /*background-color: rgb(112, 112, 112);*/
+  background-color: #50787878;
+  /*border-color: rgb(112, 112, 112);*/
+  border-color: #0065b300; 
+  /*border-color: #FFFFFF; */
+
 }
 .card-block {
   margin: 10px 10px 10px 10px;
@@ -28,68 +47,95 @@
 #footer {
   position: relative;
 }
+#header1 {
+  color: #FFFFFF;
+}
+.btn-info:hover, .btn-info:focus, .btn-info.active {
+  background-color: #FFA727 !important;
+  /*border-color: #65B34D; */
+  border-color: #FFFFFF; 
+
+}
+.btn-sq {
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 12px;
+}
 </style>
 
-	<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid">
 	  	<div class="container">
-	    <h1 class="display-3">Recycling Starts Here.</h1>
-	    <p class="lead">Try our recycling center finder.</p>
+      <div class = "row justify-content-center">
+        <div class = "col-8 align-self-center">
+         <div class = "float-right">
+	         <h1 id = "header1">Recycling Starts Here</h1>
+         </div>
+        </div>
+        <div class = "col-4 align-self-center">
+         <div class = "float-left">
+          <img src = "/static/img/logo5.png" style="width: 150px; height: 150px">
+         </div>
+        </div>
+      </div>
 	  	</div>
-  </div>
+</div> <!-- jumbotron div -->
 
-  <div class ="container">
-       <body onload="time()">
-     <div id="showtime"></div>
- </body>
-   </div><br>
-
-
+  <br>
   <form name="searchForm" onsubmit="return validForm()" action="/search/" method="POST"> {% csrf_token %}
 	<div class = "container">
+    <div class = "row">
+    <div class = "mx-auto">
 		<div data-toggle="buttons">
-		  <label class="btn btn-sq-lg btn-primary unselected">
+		  <label class="btn btn-sq unselected btn-info">
 		    <input value="Electronics" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
-		    <img src="/static/img/electronics.png" style="width:80px; height:80px">
+		    <img src="/static/img/electronics.png" style="width:60px; height:60px">
 		    <br>
 		    Electronics
 		  </label>
-		  <label class="btn btn-sq-lg btn-primary unselected">
+		  <label class="btn btn-sq btn-info unselected">
 		    <input value="Home Appliances" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
-		    <img src="/static/img/homeappliances.png" style="width:80px; height:80px">
+		    <img src="/static/img/homeappliances.png" style="width:60px; height:60px">
 		    <br>
 		    Appliances
 		  </label>
-		  <label class="btn btn-sq-lg btn-primary unselected">
+		  <label class="btn btn-sq btn-info unselected">
 		    <input value="Automotive" name="gtype" type="checkbox" autocomplete="off">
 			<br>
-			<img src="/static/img/car.png" style="width:80px; height:80px">
+			<img src="/static/img/car.png" style="width:60px; height:60px">
 		    <br>
 		    Automotive
 		  </label>
-		  <label class="btn btn-sq-lg btn-primary unselected">
+		  <label class="btn btn-sq btn-info unselected">
 		    <input value="Office Furniture" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
-		    <img src="/static/img/officefurniture.png" style="width:80px; height:80px">
+		    <img src="/static/img/officefurniture.png" style="width:60px; height:60px">
 		    <br>
 		    Furniture
       </label>
-      <label class="btn btn-sq-lg btn-primary unselected">
+      <label class="btn btn-sq btn-info unselected">
 		    <input value = "Clothing" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
-        <img src="/static/img/clothing.png" style="width:80px; height:80px">
+        <img src="/static/img/clothing.png" style="width:60px; height:60px">
 		    <br>
 		    Clothing
       </label>
-      <label class="btn btn-sq-lg btn-primary unselected">
+      <label class="btn btn-sq btn-info unselected">
         <input value = "Building Products" name="gtype" type="checkbox" autocomplete="off">
         <br>
-        <img src="/static/img/buildingproducts.png" style="width:80px; height:80px">
+        <img src="/static/img/buildingproducts.png" style="width:60px; height:60px">
         <br>
-        Building Products
+        Building P.
       </label>
-      <label id="more" onclick="togglemore()" class="btn btn-sq-lg" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1"><br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More</label>
+      <label id="more" onclick="togglemore()" class="btn btn-sq btn-info unselected" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
+        <br>
+        <img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:60px; height:60px">
+        <br>
+        More
+      </label>
+    </div>
+    </div>
     </div>
   </div>
 
@@ -169,39 +215,42 @@
       </div>
     </div>
   </div>
-  <br>
   <div class="container">
-    <div data-toggle="buttons">
-      <label class="btn btn-primary unselected">
-        <input value="Sunday" name="day" type="checkbox" autocomplete="off">
-        Sunday
-      </label>
-      <label class="btn btn-primary unselected">
-        <input value="Monday" name="day" type="checkbox" autocomplete="off">
-        Monday
-      </label>
-      <label class="btn btn-primary unselected">
-        <input value="Tuesday" name="day" type="checkbox" autocomplete="off">
-        Tuesday
-      </label>
-      <label class="btn btn-primary unselected">
-        <input value="Wednesday" name="day" type="checkbox" autocomplete="off">
-        Wednesday
-      </label>
-      <label class="btn btn-primary unselected">
-        <input value="Thursday" name="day" type="checkbox" autocomplete="off">
-        Thursday
-      </label>
-      <label class="btn btn-primary unselected">
-        <input value="Friday" name="day" type="checkbox" autocomplete="off">
-        Friday
-      </label>
-      <label class="btn btn-primary unselected">
-        <input value="Saturday" name="day" type="checkbox" autocomplete="off">
-        Saturday
-      </label>
+    <div class = "row">
+      <div class="col-lg-9 mx-auto">
+        <div data-toggle="buttons">
+          <label class="btn btn-primary unselected">
+            <input value="Sunday" name="day" type="checkbox" autocomplete="off">
+            Sunday
+          </label>
+          <label class="btn btn-primary unselected">
+            <input value="Monday" name="day" type="checkbox" autocomplete="off">
+            Monday
+          </label>
+          <label class="btn btn-primary unselected">
+            <input value="Tuesday" name="day" type="checkbox" autocomplete="off">
+            Tuesday
+          </label>
+          <label class="btn btn-primary unselected">
+            <input value="Wednesday" name="day" type="checkbox" autocomplete="off">
+            Wednesday
+          </label>
+          <label class="btn btn-primary unselected">
+            <input value="Thursday" name="day" type="checkbox" autocomplete="off">
+            Thursday
+          </label>
+          <label class="btn btn-primary unselected">
+            <input value="Friday" name="day" type="checkbox" autocomplete="off">
+            Friday
+          </label>
+          <label class="btn btn-primary unselected">
+            <input value="Saturday" name="day" type="checkbox" autocomplete="off">
+            Saturday
+          </label>
+        </div>
+      </div>
     </div>
-    <select name="dropdown">
+    <!--<select name="dropdown">
       <option value="" disabled selected>Select a time frame</option>
       <option value="0800,0830">8:00 - 8:30 AM</option>
       <option value="0830,0900">8:30 - 9:00 AM</option>
@@ -235,23 +284,25 @@
       <option value="2230,2300">10:30 - 11:00 PM</option>
       <option value="2300,2330">11:00 - 11:30 PM</option>
       <option value="2330,2400">11:30 PM - 12:00 AM</option>
-    </select>
-<br><br>
+    </select> --> 
+
 {%if invalid %}
 <h6 style="color:red;">Please enter a valid NYC zipcode</h6>
 {% endif %}
-<input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
 <br>
-
-<div class="row">
-  <div class="col-lg-2 offset-lg-5">
-
-    <button type="submit" class="btn btn-primary">Submit</button>
+<div class = "row">
+  <div class = "col-lg-6 mx-auto">
+    <div class = "input-group">
+      <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
+      <span class = "input-group-btn">
+          <button type="submit" class="btn btn-info">Submit</button>
+      </span>
+    </div>
   </div>
 </div>
-  </div>
+</div>
 </form>
-<br>
+
 <div class="container">
    <div class="card-deck">
        {% if data %}
@@ -338,7 +389,6 @@
    </div>
     {% if not data and request.method == 'POST'%} <h6 style="color:red;">No results found!</h6> {% endif%}
  </div>
-
   <br>
   <br>
 	{% if data %}
@@ -447,8 +497,8 @@
       $('[data-toggle="popover"]').popover(); 
   });
   function togglemore() {
-    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:80px; height:80px"><br>More'
-    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:80px; height:80px"><br>Less'
+    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:60px; height:60px"><br>More'
+    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:60px; height:60px"><br>Less'
     if(document.getElementById("more").innerHTML==more) {
       document.getElementById("more").innerHTML=less
     } else {
@@ -486,7 +536,5 @@
          t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
          setTimeout(time, 1000);
     }
-
-
 </script>
 {% endblock %}
