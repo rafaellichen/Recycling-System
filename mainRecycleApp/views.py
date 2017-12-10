@@ -105,7 +105,10 @@ def search_withQuery(request):
         '''Filter list by user selected categories determined borough'''
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
         special_waste_site = get_special_waste_site(borough)
+        print (special_waste_site)
+
         safe_disposal_events = get_safe_disposal_events(borough)
+        print (safe_disposal_events)
         result = filterDay(result,day)
         if(time!=""):
             result = filterTime(result, day, time)
