@@ -9,4 +9,5 @@
 .coverage.*
 *.coverage
 *sqlite3
-*__pycache__
+/guestbook/__pycache__/
+/guestbook/migrations/*.pyc
