@@ -71,10 +71,10 @@ class MainRecycleAppViewTest(TestCase):
 class RecyclingCenterModelTest(TestCase):
 
     @classmethod
-    def setUpTestData(cls):
+    def setUp(self):
         '''This method will set up non-modified objects for RecyclingCenterModel
            and will be used by all test methods'''
-        RecyclingCenter.objects.create(name='TestRecycle',
+        self.recyclingCenter = RecyclingCenter.objects.create(name='TestRecycle',
                                        address='123 Test Street',
                                        borough='Queens',
                                        state='NY',
@@ -83,6 +83,20 @@ class RecyclingCenterModelTest(TestCase):
                                        picks_up='1',
                                        recycleType='Plastic',
                                        website='www.website.com')
+    def test_recycle_center_values(self):
+        """
+        Testing the recycle center values
+        """
+        self.assertEqual(self.recyclingCenter.name, "TestRecycle")
+        self.assertEqual(self.recyclingCenter.address, "123 Test Street")
+        self.assertEqual(self.recyclingCenter.borough, "Queens")
+        self.assertEqual(self.recyclingCenter.state, "NY")
+        self.assertEqual(self.recyclingCenter.zipcode, "11104")
+        self.assertEqual(self.recyclingCenter.phone, "123-123-1234")
+        self.assertEqual(self.recyclingCenter.picks_up, "1")
+        self.assertEqual(self.recyclingCenter.recycleType, "Plastic")
+        self.assertEqual(self.recyclingCenter.website, "www.website.com")
+
 
     def test_name_label(self):
         """
@@ -164,17 +178,32 @@ class RecyclingCenterModelTest(TestCase):
         output_name = RECYCLINGCENTER.name
         self.assertEqual(output_name, str(RECYCLINGCENTER))
 
+    def tearDown(self):
+        del self
+
 class PublicRecyclingBinsModelsTest(TestCase):
+
     @classmethod
-    def setUpTestData(cls):
+    def setUp(self):
         '''This method will set up non-modified objects for RecyclingCenterModel
            and will be used by all test methods'''
-        PublicRecyclingBin.objects.create(borough='Queens',
+        self.publicRecyclingBin = PublicRecyclingBin.objects.create(borough='Queens',
                                        siteType='TestSiteType',
                                        siteName='TestSiteName',
                                        address='E 227 St/Bronx River Pkway',
                                        latitude='40.890848989',
                                        longitude='-73.864223918')
+
+    def test_public_recycle_bin_name(self):
+        """
+        Testing the public recycle bins values
+        """
+        self.assertEqual(self.publicRecyclingBin.borough, "Queens")
+        self.assertEqual(self.publicRecyclingBin.siteType, "TestSiteType")
+        self.assertEqual(self.publicRecyclingBin.siteName, "TestSiteName")
+        self.assertEqual(self.publicRecyclingBin.address, "E 227 St/Bronx River Pkway")
+        self.assertEqual(self.publicRecyclingBin.latitude, "40.890848989")
+        self.assertEqual(self.publicRecyclingBin.longitude, "-73.864223918")
 
     def test_borough_label(self):
         """
@@ -232,18 +261,33 @@ class PublicRecyclingBinsModelsTest(TestCase):
         output_name = PUBLICRECYCLEBIN.siteName
         self.assertEqual(output_name, str(PUBLICRECYCLEBIN))
 
+    def tearDown(self):
+        del self
+
 class SpecialWasteSiteModelTest(TestCase):
+
     @classmethod
-    def setUpTestData(cls):
+    def setUp(self):
         '''This method will set up non-modified objects for SpecialWasteSiteModel
            and will be used by all test methods'''
-        SpecialWasteSite.objects.create(name='TestName',
+        self.specialWasteSite = SpecialWasteSite.objects.create(name='TestName',
                                        latitude='40.890848989',
                                        longitude='-73.864223918',
                                        location='E 227 St/Bronx River Pkway',
                                        hours='Saturdays and the last Friday of every month from 10 AM to 5 PM.',
                                        url='http://www.nyc.gov/html/dsny/html/collection/special_schedule.shtml')
         
+    def test_special_waste_site_name(self):
+        """
+        Testing the special waste site values
+        """
+        self.assertEqual(self.specialWasteSite.name, "TestName")
+        self.assertEqual(self.specialWasteSite.latitude, "40.890848989")
+        self.assertEqual(self.specialWasteSite.longitude, "-73.864223918")
+        self.assertEqual(self.specialWasteSite.location, "E 227 St/Bronx River Pkway")
+        self.assertEqual(self.specialWasteSite.hours, "Saturdays and the last Friday of every month from 10 AM to 5 PM.")
+        self.assertEqual(self.specialWasteSite.url, "http://www.nyc.gov/html/dsny/html/collection/special_schedule.shtml")        
+
     def test_name_label(self):
         """
         Test name label
@@ -291,3 +335,6 @@ class SpecialWasteSiteModelTest(TestCase):
         SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
         output_name = SpecialWasteSite.name
         self.assertEqual(output_name, str(SpecialWasteSite))
+
+    def tearDown(self):
+        del self
