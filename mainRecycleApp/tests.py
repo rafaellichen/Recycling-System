@@ -207,3 +207,28 @@ class PublicRecyclingBinsModelsTest(TestCase):
         PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
         field_label = PUBLICRECYCLEBIN._meta.get_field('address').verbose_name
         self.assertEqual(field_label, 'address')
+
+    def test_latitude_label(self):
+        """
+        Test Latitude label
+        """
+        PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
+        field_label = PUBLICRECYCLEBIN._meta.get_field('latitude').verbose_name
+        self.assertEqual(field_label, 'latitude')
+
+    def test_longitude_label(self):
+        """
+        Test Longitude label
+        """
+        PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
+        field_label = PUBLICRECYCLEBIN._meta.get_field('longitude').verbose_name
+        self.assertEqual(field_label, 'longitude')
+
+    def test_object_name_is_siteName(self):
+        """
+        Test returns true when __str__ method returns the siteName of the public recycling bins 
+        """
+        PUBLICRECYCLEBIN = PUBLICRECYCLEBIN.objects.get(id=1)
+        output_name = PUBLICRECYCLEBIN.siteName
+        self.assertEqual(output_name, str(PUBLICRECYCLEBIN))
+
