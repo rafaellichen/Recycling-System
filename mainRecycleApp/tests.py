@@ -86,7 +86,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_name_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for name is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('name').verbose_name
@@ -94,7 +94,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_address_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for address is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('address').verbose_name
@@ -102,7 +102,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_borough_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for borough is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('borough').verbose_name
@@ -110,7 +110,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_state_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for state is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('state').verbose_name
@@ -118,7 +118,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_zipcode_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for zipcode is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('zipcode').verbose_name
@@ -126,7 +126,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_phone_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for phone is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('phone').verbose_name
@@ -134,7 +134,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_picks_up_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for picks up is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('picks_up').verbose_name
@@ -142,7 +142,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_recycleType_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for recycleType is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('recycleType').verbose_name
@@ -150,7 +150,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_website_label(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when the label for the website is correct
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         field_label = RECYCLINGCENTER._meta.get_field('website').verbose_name
@@ -158,7 +158,7 @@ class RecyclingCenterModelTest(TestCase):
 
     def test_object_name_is_name(self):
         """
-        Test returns true when about is redered properly with right template
+        Test returns true when __str__ method returns the name of the Recycling center 
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         output_name = RECYCLINGCENTER.name
@@ -183,3 +183,27 @@ class PublicRecyclingBinsModelsTest(TestCase):
         PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
         field_label = PUBLICRECYCLEBIN._meta.get_field('borough').verbose_name
         self.assertEqual(field_label, 'borough')
+
+    def test_siteType_label(self):
+        """
+        Test Site Type label
+        """
+        PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
+        field_label = PUBLICRECYCLEBIN._meta.get_field('siteType').verbose_name
+        self.assertEqual(field_label, 'siteType')
+
+    def test_siteName_label(self):
+        """
+        Test SiteName Type label
+        """
+        PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
+        field_label = PUBLICRECYCLEBIN._meta.get_field('siteName').verbose_name
+        self.assertEqual(field_label, 'siteName')
+
+    def test_address_label(self):
+        """
+        Test Address label
+        """
+        PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
+        field_label = PUBLICRECYCLEBIN._meta.get_field('address').verbose_name
+        self.assertEqual(field_label, 'address')
