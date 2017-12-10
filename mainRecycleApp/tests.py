@@ -4,7 +4,7 @@ Created on 15 November 2017
 """
 from __future__ import unicode_literals
 from django.test import TestCase
-from mainRecycleApp.models import RecyclingCenter, PublicRecyclingBin
+from mainRecycleApp.models import RecyclingCenter, PublicRecyclingBin, SpecialWasteSite
 from django.core.urlresolvers import reverse
 
 
@@ -232,3 +232,30 @@ class PublicRecyclingBinsModelsTest(TestCase):
         output_name = PUBLICRECYCLEBIN.siteName
         self.assertEqual(output_name, str(PUBLICRECYCLEBIN))
 
+class SpecialWasteSiteModelTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        '''This method will set up non-modified objects for SpecialWasteSiteModel
+           and will be used by all test methods'''
+        SpecialWasteSite.objects.create(name='TestName',
+                                       latitude='40.890848989',
+                                       longitude='-73.864223918',
+                                       location='E 227 St/Bronx River Pkway',
+                                       hours='Saturdays and the last Friday of every month from 10 AM to 5 PM.',
+                                       url='http://www.nyc.gov/html/dsny/html/collection/special_schedule.shtml')
+        
+    def test_name_label(self):
+        """
+        Test name label
+        """
+        SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
+        field_label = SPECIALWASTESITE._meta.get_field('name').verbose_name
+        self.assertEqual(field_label, 'name')
+
+    def test_latitude_label(self):
+        """
+        Test latitude label
+        """
+        SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
+        field_label = SPECIALWASTESITE._meta.get_field('latitude').verbose_name
+        self.assertEqual(field_label, 'latitude') 
