@@ -259,3 +259,35 @@ class SpecialWasteSiteModelTest(TestCase):
         SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
         field_label = SPECIALWASTESITE._meta.get_field('latitude').verbose_name
         self.assertEqual(field_label, 'latitude') 
+
+    def test_location_label(self):
+        """
+        Test location label
+        """
+        SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
+        field_label = SPECIALWASTESITE._meta.get_field('location').verbose_name
+        self.assertEqual(field_label, 'location') 
+
+    def test_hours_label(self):
+        """
+        Test hours label
+        """
+        SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
+        field_label = SPECIALWASTESITE._meta.get_field('hours').verbose_name
+        self.assertEqual(field_label, 'hours') 
+
+    def test_url_label(self):
+        """
+        Test url label
+        """
+        SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
+        field_label = SPECIALWASTESITE._meta.get_field('url').verbose_name
+        self.assertEqual(field_label, 'url')
+
+    def test_object_name_is_siteName(self):
+        """
+        Test returns true when __str__ method returns the name of the special waste location
+        """
+        SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
+        output_name = SpecialWasteSite.name
+        self.assertEqual(output_name, str(SpecialWasteSite))
