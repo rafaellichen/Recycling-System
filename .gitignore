@@ -8,3 +8,4 @@
 .coverage.*
 *.coverage
 *sqlite3
+*__pycache__
