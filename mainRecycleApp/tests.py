@@ -4,7 +4,7 @@ Created on 15 November 2017
 """
 from __future__ import unicode_literals
 from django.test import TestCase
-from mainRecycleApp.models import RecyclingCenter
+from mainRecycleApp.models import RecyclingCenter, PublicRecyclingBin
 from django.core.urlresolvers import reverse
 
 
@@ -163,3 +163,23 @@ class RecyclingCenterModelTest(TestCase):
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         output_name = RECYCLINGCENTER.name
         self.assertEqual(output_name, str(RECYCLINGCENTER))
+
+class PublicRecyclingBinsModelsTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        '''This method will set up non-modified objects for RecyclingCenterModel
+           and will be used by all test methods'''
+        PublicRecyclingBin.objects.create(borough='Queens',
+                                       siteType='TestSiteType',
+                                       siteName='TestSiteName',
+                                       address='E 227 St/Bronx River Pkway',
+                                       latitude='40.890848989',
+                                       longitude='-73.864223918')
+
+    def test_borough_label(self):
+        """
+        Test Borough label
+        """
+        PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
+        field_label = PUBLICRECYCLEBIN._meta.get_field('borough').verbose_name
+        self.assertEqual(field_label, 'borough')
