@@ -20,4 +20,4 @@ def save(request):
     message.save()
     
     '''return HttpResponseRedirect('/guestbook/feedback/')'''
-    return render(request, 'guestbook/feedback.html')
+    return render(request, 'users/profile.djhtml')

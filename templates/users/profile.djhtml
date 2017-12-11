@@ -49,16 +49,15 @@ button.css3button {
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="text-center">
           <h1>Welcome To Easy Recycle!</h1>
+          
         </div>
           <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
           <div class="row">
           <div class="col-6">
-          <label> Name: {{request.user.first_name}} {{request.user.last_name}}</label> <br>
-          <label>User Name: {{request.user.username}} </label><br>
-          <label>Email: {{request.user.email}} </label><br>
-      <br>
-         
-
+          <label> Name: {{request.user.first_name}} {{request.user.last_name}} </label><br>
+          <label> Username: {{request.user.username}} </label><br>
+          <label> Email: {{request.user.email}} </label><br>
+      <br>  
        <a href="/feedback"><button type="button" class="css3button">Leave Feedback</button></a>
 
          </div>
