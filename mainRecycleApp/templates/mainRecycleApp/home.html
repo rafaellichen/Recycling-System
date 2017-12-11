@@ -106,7 +106,7 @@
 		    Appliances
 		  </label>
 		  <label class="btn btn-sq btn-info unselected">
-		    <input value="Automotive" name="gtype" type="checkbox" autocomplete="off">
+		    <input id = "Automotive" value="Automotive" name="gtype" type="checkbox" autocomplete="off">
 			<br>
 			<img src="/static/img/car.png" style="width:60px; height:60px">
 		    <br>
@@ -304,7 +304,7 @@
     <div class = "input-group">
       <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
       <span class = "input-group-btn">
-          <button type="submit" class="btn btn-info">Submit</button>
+          <button type="submit" class="btn btn-info" id = "submit-zip">Submit</button>
       </span>
     </div>
   </div>
@@ -312,11 +312,17 @@
 </div>
 </form>
 <br><br>
+{% if data %}
+<div class = "container justify-content-center">
+  <p id = "result-ok">Your search results:</p>
+</div>
+{% endif %}
 <div class="container">
    <div class="card-deck justify-content-center">
        {% if data %}
+         <br>
          {% for item in data %}
-         <div class="card-block" style="width: 20rem; border: 1px grey solid">
+         <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
            <div class="card-body">
              {% with item.type as type %}
@@ -328,7 +334,7 @@
                  <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
                {% endif %}
                {% if each == "Automotive" %}
-                 <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
+                 <img id="card-img Automotive" src="/static/img/car.png" alt="" height="42" width="42">
                {% endif %}
                {% if each == "Office Furniture" %}
                  <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">

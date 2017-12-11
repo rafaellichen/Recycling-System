@@ -11,3 +11,4 @@
 *sqlite3
 /guestbook/__pycache__/
 /guestbook/migrations/*.pyc
+*.log
