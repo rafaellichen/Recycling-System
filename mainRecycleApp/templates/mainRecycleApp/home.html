@@ -294,10 +294,15 @@
       <option value="2300,2330">11:00 - 11:30 PM</option>
       <option value="2330,2400">11:30 PM - 12:00 AM</option>
     </select> --> 
-
+<br>
 {%if invalid %}
-<h6 style="color:red;">Please enter a valid NYC zipcode</h6>
+<h6 style="color:red;" class="text-center">Please Enter A Valid NYC Zipcode</h6>
 {% endif %}
+
+ </div>
+    {% if not data and request.method == 'POST'%} <h6 style="color:red;" class="text-center">No results found!</h6> {% endif%}
+   </div>
+
 <br>
 <div class = "row">
   <div class = "col-lg-6 mx-auto">
@@ -314,7 +319,7 @@
 <br><br>
 {% if data %}
 <div class = "container justify-content-center">
-  <p id = "result-ok">Your search results:</p>
+  <p id = "result-ok" class="text-center" style="color:#1e90ff;">Your Search Results:</p>
 </div>
 {% endif %}
 <div class="container">
@@ -480,12 +485,10 @@
      
       
      {% endif %}
+   
+  <br>
+  <br>
 
-   </div>
-    {% if not data and request.method == 'POST'%} <h6 style="color:red;">No results found!</h6> {% endif%}
-   </div>
-  <br>
-  <br>
 {% if data %}
   <div class="container text-center">
     <h3>Other Options</h3><br>
