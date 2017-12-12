@@ -29,28 +29,4 @@
   <br><br>
 
 
-
-<br> <br>
-  <section class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <table class="table">
-          <thead>
-              <tr>
-                <th>#</th>
-                <th>Facility</th>
-                <th>Address</th>
-                <th>Phone Number</th>
-              </tr>
-          </thead>
-          <tbody id="divsearchresult">
-
-          </tbody>
-        </table>
-
-    </div>
-  </section>
-
-</div>
-
 {% endblock body %}
