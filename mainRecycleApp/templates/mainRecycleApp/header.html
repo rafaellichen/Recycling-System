@@ -26,8 +26,8 @@
         .bg-custom-navbar {
             background-color: #FFFFFF;
         }
-        
-       
+
+
     </style>
 </head>
 <body>
@@ -76,6 +76,56 @@
 
 	</div>
     <script>
+
+
+
+const initRequest = function(url) {
+
+	var objSearchType, objAddress, objItemCategory, objVendorwithin;
+
+
+
+	jQuery.support.cors = true;
+	$("#divsearchresult").html("");
+
+	function getResults() {
+		$("#divsearchresult").html("");
+
+		var APIurl = 'https://a827-donatenyc.nyc.gov/DonateNYCAPI'
+
+		$.ajax({
+				url: APIurl + '/api/users/SearchVendors?address=' + objAddress + '&buySellDonate=' + objSearchType + '&categoryID=' + objItemCategory + '&pickup=' + 'false' + '&radius=' + objVendorwithin + '&clLatitude=&clLongitude',
+				type: 'GET',
+				dataType: 'json',
+				async: true,
+				success: function(data) {
+					console.log(data);
+					var total;
+					if (data) {
+						total = data.length;
+					}
+					if (total > 0) {
+						$.each(data, function(i, item) {
+								var row = '<tr>'+
+									'<th scope="row">'+ (i+1) +'</th>'+
+									'<td>'+item.VendorName+'</td>'+
+									'<td>'+ item.HouseNo+ ' '+item.Street +' ' + item.AptNo+ ' ' + item.Borough+ ' ' +item.Zip +'</td>'+
+									'<td>'+item.PublicPhone+'</td>'+
+								'</tr>'
+
+								$('#divsearchresult').append(row);
+							})
+						}
+						else {
+							$('#divsearchresult').append("<div class='span12' style='margin: 3px 0px; width: 260px;'><b>No searches found</b></div>");
+						}
+					}
+				});
+		}
+
+
+}
+
  $(document).ready(function() {
 	 // document.getElementById("logo-png").className+= " img-fluid";
 
@@ -239,7 +289,7 @@ function clearChatBox() {
 </body>
 
 <footer class="footer">
-	
+
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -295,4 +345,3 @@ function clearChatBox() {
 </footer>
 
 </html>
-
