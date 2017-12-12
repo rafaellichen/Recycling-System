@@ -8,6 +8,8 @@ from django.shortcuts import render
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
+from math import sin, cos, sqrt, atan2, radians, acos
+
 # Create your views here.
 def index(request):
     '''Index render method for mainrecycleApp/home'''
@@ -87,6 +89,32 @@ def get_safe_disposal_events(boro):
     if result is not None:
         return result 
 
+def return_lat_long_from_Zip(zip):
+    """
+    This method will return the latitude and longitude form Zipcode
+    """
+    result = list(Zip.objects.filter(zipcode=zip).values())
+    lat = result[0]['latitude'].replace('"', '').strip()
+    lon = result[0]['longitude'].replace('"', '').strip()
+    lat = float(lat)
+    lon = float(lon)
+    return lat, lon
+
+
+def check_Distance_Of_Zips(zip1, zip2):
+    """
+    We need to check if the current zip is close to the recommended list of centers has 
+    Using the Haversine formula
+    """
+    lat1, long1 = return_lat_long_from_Zip(zip1)
+    lat2, long2 = return_lat_long_from_Zip(zip2)
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+    d_long = radians(long1 - long2)
+    cosx = (sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(d_long))
+    return acos(cosx) * 3958.761
+
+
 def get_recommended_list_test(returnval, category, zipcode):
     '''
     Method to get the recommended list
@@ -96,6 +124,7 @@ def get_recommended_list_test(returnval, category, zipcode):
     # Maintain a new list of found categories in the returnval
     foundTypes = []
     recommended = []
+    minDifference = 0;
     # loop through each item in the returnval
     for item in returnval:
         # Loop through each sub category
@@ -179,7 +208,7 @@ def search_withQuery(request):
         returnval = []
         for i in final:
             returnval.append(final[i])
-        
+        # print (check_Distance_Of_Zips('11104', '10016'))
         get_recommended_list_test (returnval, category, zipcode)
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
                                                            "specialWasteSite" : special_waste_site,

@@ -34,8 +34,6 @@
 }
 .card-block {
   margin: 10px 10px 10px 10px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
-
 }
 
 .card-block-recommended {
@@ -333,7 +331,9 @@
        {% if data %}
          <br>
          {% for item in data %}
+
          {% if item.recommendedStatus %}
+
           <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
          {% else %}
           <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
@@ -405,7 +405,6 @@
                {% endfor %}
              {% endwith %}
              <h6 class="card-title">{{item.name}}</h6>
-             {{item.zip}}
              <div class="progress">
                {% if item.Monday != "closed" %}
                 <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
@@ -470,8 +469,8 @@
       SUN
     </div>
   {% endif %}
-              </div>
-              <br>
+            </div>
+            <br>
              <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30"> {{item.address}}</img>
              <br>
              <img id="card-img" src="/static/img/cell.png" alt="" height="30" width="30"> {{item.cell}}</img>
@@ -486,6 +485,7 @@
              {% else %}
                <br>
              {% endif %}
+
            </div>
          </div>
        {% endfor %}
@@ -493,7 +493,6 @@
       {% else %}
       
         {% include "mainRecycleApp/description.html" %}
-     
       
      {% endif %}
    
