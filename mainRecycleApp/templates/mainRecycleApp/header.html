@@ -123,6 +123,24 @@ const initRequest = function(url) {
 				});
 		}
 
+		function validateItems() {
+		  var i = 0;
+		  $(':checkbox:checked').each(function() {
+		    i++;
+		  });
+
+		  if (i === 0) {
+		    $(".divItemCategory input:checkbox:first").attr("class", "tooltipstered error");
+		    $(".divItemCategory input:checkbox:first").attr("aria-invalid", true);
+		    $(".divItemCategory input:checkbox:first").tooltipster('update', "Please select atleast one checkbox");
+		    $(".divItemCategory input:checkbox:first").tooltipster('show');
+		    return false;
+		  } else {
+		    $(".divItemCategory input:checkbox:first").attr("class", "tooltipstered");
+		    $(".divItemCategory input:checkbox:first").removeAttr("aria-invalid");
+		    return true;
+		  }
+		}
 
 }
 
