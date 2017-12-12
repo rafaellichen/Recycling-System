@@ -211,5 +211,6 @@ def search_withQuery(request):
         # print (check_Distance_Of_Zips('11104', '10016'))
         get_recommended_list_test (returnval, category, zipcode)
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
+                                                           "userCategories": category,
                                                            "specialWasteSite" : special_waste_site,
                                                            "safeDisposalEvents" : safe_disposal_events })

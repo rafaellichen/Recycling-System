@@ -177,22 +177,22 @@
           Household 
           Furniture
         </label> -->
-        <label class="btn btn-primary unselected">
+        <label class="btn btn-info unselected">
           <input value="Shoes" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/shoes.png" style="width:30px; height:30px">
           Shoes
         </label>
-        <label class="btn btn-primary unselected">
+        <label class="btn btn-info unselected">
           <input value="Housewares" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/houseware.png" style="width:30px; height:30px">
           Housewares
         </label>
-        <label class="btn btn-primary unselected">
+        <label class="btn btn-info unselected">
           <input value="Sporting Equipment" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/sport.png" style="width:30px; height:30px">
           Sports Equipment
         </label>
-        <label class="btn btn-primary unselected">
+        <label class="btn btn-info unselected">
           <input value="Collectibles" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/jewelry.png" style="width:30px; height:30px">
           Collectibles 
@@ -214,12 +214,12 @@
           <img src="/static/img/medical.png" style="width:30px; height:30px">
           Medical Equipment &amp; Furniture
         </label> -->
-        <label class="btn btn-primary unselected">
+        <label class="btn btn-info unselected">
           <input value="Toys" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/toy.png" style="width:30px; height:30px">
           Toys/Games
         </label>
-        <label class="btn btn-primary unselected">
+        <label class="btn btn-info unselected">
           <input value="Musical Instruments" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/musicalinstruments.png" style="width:30px; height:30px">
           <!-- Musical  -->
@@ -232,31 +232,31 @@
     <div class = "row">
       <div class="col-lg-9 mx-auto">
         <div data-toggle="buttons">
-          <label class="btn btn-primary unselected">
+          <label class="btn btn-info unselected">
             <input value="Sunday" name="day" type="checkbox" autocomplete="off">
             Sunday
           </label>
-          <label class="btn btn-primary unselected">
+          <label class="btn btn-info unselected">
             <input value="Monday" name="day" type="checkbox" autocomplete="off">
             Monday
           </label>
-          <label class="btn btn-primary unselected">
+          <label class="btn btn-info unselected">
             <input value="Tuesday" name="day" type="checkbox" autocomplete="off">
             Tuesday
           </label>
-          <label class="btn btn-primary unselected">
+          <label class="btn btn-info unselected">
             <input value="Wednesday" name="day" type="checkbox" autocomplete="off">
             Wednesday
           </label>
-          <label class="btn btn-primary unselected">
+          <label class="btn btn-info unselected">
             <input value="Thursday" name="day" type="checkbox" autocomplete="off">
             Thursday
           </label>
-          <label class="btn btn-primary unselected">
+          <label class="btn btn-info unselected">
             <input value="Friday" name="day" type="checkbox" autocomplete="off">
             Friday
           </label>
-          <label class="btn btn-primary unselected">
+          <label class="btn btn-info unselected">
             <input value="Saturday" name="day" type="checkbox" autocomplete="off">
             Saturday
           </label>
@@ -323,7 +323,12 @@
 <br><br>
 {% if data %}
 <div class = "container justify-content-center">
-  <p id = "result-ok" class="text-center" style="color:#1e90ff;">Your Search Results:</p>
+  <p id = "result-ok" class="text-center">Places that accepts donation of these types in your location.</p>
+  <div class = "text-center">
+  {% for each in userCategories %}
+    {{ each }},
+  {% endfor %}
+  </div>
 </div>
 {% endif %}
 <div class="container">
@@ -496,13 +501,30 @@
       
      {% endif %}
    
-  <br>
-  <br>
+
 {% if data %}
   {% include "mainRecycleApp/otherfeatures.html" %}
 {% endif %}
 <br>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script type="text/javascript">
   $(document).ready(function(){
       $('[data-toggle="popover"]').popover(); 
