@@ -2,7 +2,7 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 from collections import OrderedDict
-from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip
 
 from django.shortcuts import render
 import json
@@ -87,7 +87,7 @@ def get_safe_disposal_events(boro):
     if result is not None:
         return result 
 
-def get_recommended_list_test(returnval, category):
+def get_recommended_list_test(returnval, category, zipcode):
     '''
     Method to get the recommended list
     We are taking the returnval from our search with query and the categories that
@@ -108,10 +108,18 @@ def get_recommended_list_test(returnval, category):
                         foundTypes.append(categoryType)
                         # if the item is not already in recommened add it
                         if item not in recommended: 
+                            # Also need to check for zipcode variance before adding to recommended
                             recommended.append(item)
-                            # Remove the items from the returnval
+                            # Remove the items from the returnval   
                             returnval.remove(item)
-    return recommended
+    # loop through the list in reverse since we know that the returnval is arranged by
+    # len, ideally a different recommended list should be passed, however I added this
+    # for testing our proof of concept
+
+    for item in reversed(recommended):
+        item["recommendedStatus"] = "true"
+        returnval.insert(0, item)
+    return returnval
 
 
 def search_withQuery(request):
@@ -171,8 +179,8 @@ def search_withQuery(request):
         returnval = []
         for i in final:
             returnval.append(final[i])
-        recommendedVal = get_recommended_list_test (returnval, category)
+        
+        get_recommended_list_test (returnval, category, zipcode)
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
-                                                           "recommended": recommendedVal,
                                                            "specialWasteSite" : special_waste_site,
                                                            "safeDisposalEvents" : safe_disposal_events })

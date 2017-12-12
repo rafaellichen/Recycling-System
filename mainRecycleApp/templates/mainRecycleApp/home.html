@@ -34,7 +34,15 @@
 }
 .card-block {
   margin: 10px 10px 10px 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
+
 }
+
+.card-block-recommended {
+  margin: 10px 10px 10px 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
+}
+
 #card {
   margin-bottom: 15px;
 }
@@ -325,7 +333,11 @@
        {% if data %}
          <br>
          {% for item in data %}
-         <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
+         {% if item.recommendedStatus %}
+          <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
+         {% else %}
+          <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
+         {% endif %}
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
            <div class="card-body">
              {% with item.type as type %}
@@ -393,6 +405,7 @@
                {% endfor %}
              {% endwith %}
              <h6 class="card-title">{{item.name}}</h6>
+             {{item.zip}}
              <div class="progress">
                {% if item.Monday != "closed" %}
                 <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
