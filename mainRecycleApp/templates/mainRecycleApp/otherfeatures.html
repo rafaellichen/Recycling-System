@@ -1,10 +1,10 @@
 {%load static %}
-<div class = "description">
+<div class = "container">
 	<div class="card text-center">
 	  <div class="card-header">
 	    <ul class="nav nav-tabs card-header-tabs" rol="tablist">
 	      <li class="nav-item">
-	        <a class="nav-link active" href="#specialWasteSites" role="tab" data-toggle="tab">Special Waste Sites</a>
+	        <a class="nav-link active" href="#specialWasteSites" role="tab" data-toggle="tab">Special Waste Drop Off Sites</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link" href="#publicRecycleBins" role="tab" data-toggle="tab">Public Recycle Bins</a>
@@ -15,15 +15,14 @@
 	    </ul>
 	  </div>
 	  <div class = "tab-content">
-	  	<div role = "tabpanel" class = "tab-pane active" id = "specialWasteSites">
-			  
-			    <h4>Special Waste Sites</h4>
-			  
+	  	<div style = "padding:10px; height:460px;" role = "tabpanel" class = "tab-pane active" id = "specialWasteSites">
+			<div class = "container">		
+	          <div id = "map" style = "top: -220px; clear:both;"></div>
+	        </div>
 	 	</div>
 	 	<div role = "tabpanel" class = "tab-pane fade" id = "publicRecycleBins">
 		  
 		    <h4>Public Recycle Bins</h4>
-		  
 		</div>
 		<div role = "tabpanel" class = "tab-pane fade" id = "safeDisposalEvents">
 		  
@@ -33,3 +32,9 @@
 	  </div>
 	</div>	
 </div>
+  
+  <meta id = "specialWasteSite_meta" data-locations = '{{ specialWasteSite|safe }}'> 
+  <script type="text/javascript" src="{% static "js/ApplicationJS/specialWasteMaps.js" %}">
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9k7z9ezCMLWq9D14zpuZxndZV8rRkW2E&callback=initMap" async defer>
+  </script>
