@@ -1,6 +1,7 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
+
 {%load static%}
 <style>
 
@@ -77,6 +78,7 @@
         <div class = "col-8 align-self-center">
          <div class = "float-right">
 	         <h1 id = "header1">Recycling Starts Here</h1>
+           
          </div>
         </div>
         <div class = "col-4 align-self-center">
@@ -90,6 +92,7 @@
 </div> <!-- jumbotron div -->
 
   <br>
+
   <form name="searchForm" onsubmit="return validForm()" action="/search/" method="POST"> {% csrf_token %}
 	<div class = "container">
     <div class = "row">
@@ -559,4 +562,5 @@
          setTimeout(time, 1000);
     }
 </script>
+
 {% endblock %}

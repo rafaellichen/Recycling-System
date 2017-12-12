@@ -26,6 +26,8 @@
         .bg-custom-navbar {
             background-color: #FFFFFF;
         }
+        
+       
     </style>
 </head>
 <body>
@@ -56,7 +58,7 @@
     </ul>
 		<ul class="nav navbar-nav navbar-right">
 			{% if request.user.is_anonymous != True %}
-			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user"></span>{{request.user.last_name}}'s Profile</a></li>
 			<li class="nav-item"><a class="nav-link" id="logout" href="#"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
 			{% else %}
 			<li class="nav-item"><a class="nav-link" href="/signup"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
@@ -73,7 +75,6 @@
 		{%endblock%}
 
 	</div>
-	
     <script>
  $(document).ready(function() {
 	 // document.getElementById("logo-png").className+= " img-fluid";
@@ -116,7 +117,7 @@ function sendMsg() {
 
 //set up the AI dialog
 function dialog(msg){
-    var replyArr = ["Hi, this is Easy Recycle! How can I help you?(hints:how it works, how it charges)","Just login or find something in home page!","Our service is totally free!","Call us right now!", "We open Monday-Friday from 10:00AM-06:00PM","Sorry, I don't understand!"];
+    var replyArr = ["Hi, this is Easy Recycle! How can I help you?(hints:how it works, how it charges)","Just login or find something in home page!","Our service is totally free!","Call us right now!", "We open Monday-Friday from 10:00AM-06:00PM","My name is Easy Recycle","You could see and leave a feedback on your profile","Sorry, I don't understand!"];
     msg = msg.toLowerCase();
     var time = new Date();
     var hour = time.getHours();
@@ -140,11 +141,17 @@ function dialog(msg){
     else if(msg.indexOf("what is your office time") != -1 || msg.indexOf("office time") != -1 || msg.indexOf("visit time") != -1){
         chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[4] + "</p><hr class='ai-hr'>");
     }
+    else if(msg.indexOf("name") != -1 || msg.indexOf("your name") != -1 || msg.indexOf("what is your name") != -1){
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[5] + "</p><hr class='ai-hr'>");
+    }
+     else if(msg.indexOf("feedback") != -1 || msg.indexOf("where can I see feedback") != -1 || msg.indexOf("how good is your website") != -1){
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[6] + "</p><hr class='ai-hr'>");
+    }
     else if(msg.indexOf("time") != -1){
         chatBox.append("<p><span id='ai'>Customer Service: </span>Current Time: " + currentTime + ". " + timeGreeting(hour) + "~ :)</p><hr class='ai-hr'>");
     }
     else {
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[5] + "</p><hr class='ai-hr'>");
+        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[7] + "</p><hr class='ai-hr'>");
     }
 }
 
@@ -232,7 +239,7 @@ function clearChatBox() {
 </body>
 
 <footer class="footer">
-	<br><br><br>
+	
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -240,26 +247,26 @@ function clearChatBox() {
                 <div class="row">
                     <div class="col-6">
                         <ul class="list-unstyled">
-                            <li><a href="">Product</a></li>
-                            <li><a href="">Benefits</a></li>
-                            <li><a href="">Partners</a></li>
-                            <li><a href="">Team</a></li>
+                            <li><a href="/">Product</a></li>
+                            <li><a href="/login">Benefits</a></li>
+                            <li><a href="/">Partners</a></li>
+                            <li><a href="/about">Team</a></li>
                         </ul>
                     </div>
                     <div class="col-6">
                         <ul class="list-unstyled">
-                            <li><a href="">Documentation</a></li>
-                            <li><a href="">Support</a></li>
-                            <li><a href="">Legal Terms</a></li>
-                            <li><a href="">About</a></li>
+                            <li><a href="/about">Documentation</a></li>
+                            <li><a href="/contact">Support</a></li>
+                            <li><a href="/about">Legal Terms</a></li>
+                            <li><a href="/about">About</a></li>
                         </ul>
                     </div>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item"><a href="" class="nav-link pl-0"><i class="fa fa-facebook fa-lg"></i></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-twitter fa-lg"></i></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-github fa-lg"></i></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-instagram fa-lg"></i></a></li>
+                    <li class="nav-item"><a href="/" class="nav-link pl-0"><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li class="nav-item"><a href="/" class="nav-link"><i class="fa fa-twitter fa-lg"></i></a></li>
+                    <li class="nav-item"><a href="/" class="nav-link"><i class="fa fa-github fa-lg"></i></a></li>
+                    <li class="nav-item"><a href="/" class="nav-link"><i class="fa fa-instagram fa-lg"></i></a></li>
                 </ul>
                 <br>
             </div>
