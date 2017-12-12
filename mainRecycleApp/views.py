@@ -2,11 +2,13 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 from collections import OrderedDict
-from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip
 
 from django.shortcuts import render
 import json
 from django.core.serializers.json import DjangoJSONEncoder
+
+from math import sin, cos, sqrt, atan2, radians, acos
 
 # Create your views here.
 def index(request):
@@ -87,6 +89,67 @@ def get_safe_disposal_events(boro):
     if result is not None:
         return result 
 
+def return_lat_long_from_Zip(zip):
+    """
+    This method will return the latitude and longitude form Zipcode
+    """
+    result = list(Zip.objects.filter(zipcode=zip).values())
+    lat = result[0]['latitude'].replace('"', '').strip()
+    lon = result[0]['longitude'].replace('"', '').strip()
+    lat = float(lat)
+    lon = float(lon)
+    return lat, lon
+
+
+def check_Distance_Of_Zips(zip1, zip2):
+    """
+    We need to check if the current zip is close to the recommended list of centers has 
+    Using the Haversine formula
+    """
+    lat1, long1 = return_lat_long_from_Zip(zip1)
+    lat2, long2 = return_lat_long_from_Zip(zip2)
+    lat1 = radians(lat1)
+    lat2 = radians(lat2)
+    d_long = radians(long1 - long2)
+    cosx = (sin(lat1) * sin(lat2) + cos(lat1) * cos(lat2) * cos(d_long))
+    return acos(cosx) * 3958.761
+
+
+def get_recommended_list_test(returnval, category, zipcode):
+    '''
+    Method to get the recommended list
+    We are taking the returnval from our search with query and the categories that
+    the user entered. 
+    '''
+    # Maintain a new list of found categories in the returnval
+    foundTypes = []
+    recommended = []
+    minDifference = 0;
+    # loop through each item in the returnval
+    for item in returnval:
+        # Loop through each sub category
+        for categoryType in item["type"]:
+            for catType in category:
+                if categoryType == catType:
+                    # there is a match
+                    if catType not in foundTypes:
+                        # if it is not already in foundtypes append it
+                        foundTypes.append(categoryType)
+                        # if the item is not already in recommened add it
+                        if item not in recommended: 
+                            # Also need to check for zipcode variance before adding to recommended
+                            recommended.append(item)
+                            # Remove the items from the returnval   
+                            returnval.remove(item)
+    # loop through the list in reverse since we know that the returnval is arranged by
+    # len, ideally a different recommended list should be passed, however I added this
+    # for testing our proof of concept
+
+    for item in reversed(recommended):
+        item["recommendedStatus"] = "true"
+        returnval.insert(0, item)
+    return returnval
+
 
 def search_withQuery(request):
     '''Method to search with query from the database'''
@@ -145,5 +208,9 @@ def search_withQuery(request):
         returnval = []
         for i in final:
             returnval.append(final[i])
-        return render(request,'mainRecycleApp/home.html', {"data": returnval})
-      
+        # print (check_Distance_Of_Zips('11104', '10016'))
+        get_recommended_list_test (returnval, category, zipcode)
+        return render(request,'mainRecycleApp/home.html', {"data": returnval,
+                                                           "userCategories": category,
+                                                           "specialWasteSite" : special_waste_site,
+                                                           "safeDisposalEvents" : safe_disposal_events })

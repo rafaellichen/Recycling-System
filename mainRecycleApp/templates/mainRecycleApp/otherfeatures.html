@@ -1,0 +1,84 @@
+{%load static %}
+<div class = "container">
+	<br><br>
+	<div class="card text-center">
+	  <div class="card-header">
+	    <ul class="nav nav-tabs card-header-tabs" rol="tablist">
+	      <li class="nav-item">
+	        <a class="nav-link active" href="#specialWasteSites" role="tab" data-toggle="tab">Special Waste Drop Off Sites</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#publicRecycleBins" role="tab" data-toggle="tab">Public Recycle Bins</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="#safeDisposalEvents" role="tab" data-toggle="tab">Safe Disposal Events</a>
+	      </li>
+	    </ul>
+	  </div>
+	  <div class = "tab-content">
+	  	<div style = "padding:10px; height:460px;" role = "tabpanel" class = "tab-pane active" id = "specialWasteSites">
+			<div class = "container">		
+	          <div id = "map" style = "top: -220px; clear:both;"></div>
+	        </div>
+	 	</div>
+	 	<div role = "tabpanel" class = "tab-pane fade" id = "publicRecycleBins">
+		  
+		    <h4>Public Recycle Bins</h4>
+		</div>
+		<div role = "tabpanel" class = "tab-pane fade" id = "safeDisposalEvents">
+		      <div class="card-body">
+		        <div class = "card-deck">
+		          {% for event in safeDisposalEvents %}
+		            <div class="card border-success mb-3" style="max-width: 15rem;">
+		              <div class="card-header">{{ event.date }}</div>
+		              <div class="card-body">
+		                <h6 class="card-title">{{ event.borough }}</h6>
+		                {{ event.description }}
+		              </div>
+		              <div class="card-footer">{{ event.date }} <br> {{ event.time }} <br>  {{ event.address }}</div>
+		            </div>
+		        
+		          {% endfor %}
+		        </div>
+		        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificationModal">
+				  Notification For New Events
+				</button>
+		      </div>
+			</div>
+	  </div>
+	</div>	
+</div>
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="notificationModalLabel">Set Notification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<p>Enter your email address to receive notification for new events</p>
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Address:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <meta id = "specialWasteSite_meta" data-locations = '{{ specialWasteSite|safe }}'> 
+  <script type="text/javascript" src="{% static "js/ApplicationJS/specialWasteMaps.js" %}">
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9k7z9ezCMLWq9D14zpuZxndZV8rRkW2E&callback=initMap" async defer>
+  </script>
