@@ -146,5 +146,5 @@ def search_withQuery(request):
         for i in final:
             returnval.append(final[i])
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
-                                                           "specialWasteSite" : special_waste_site})
-      
+                                                           "specialWasteSite" : special_waste_site,
+                                                           "safeDisposalEvents" : safe_disposal_events })

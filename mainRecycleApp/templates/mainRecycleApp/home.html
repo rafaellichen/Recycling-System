@@ -331,13 +331,13 @@
              {% with item.type as type %}
              {% for each in type %}
                {% if each == "Electronics" %}
-                 <img id="card-img" src="/static/img/electronics.png" alt="" height="42" width="42">
+                 <img id="card-img" src="/static/img/electronics.png" alt="Electronics" height="42" width="42">
                {% endif %}
                {% if each == "Home Appliances" %}
                  <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
                {% endif %}
                {% if each == "Automotive" %}
-                 <img id="card-img Automotive" src="/static/img/car.png" alt="" height="42" width="42">
+                 <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
                {% endif %}
                {% if each == "Office Furniture" %}
                  <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
@@ -487,34 +487,6 @@
   <br>
   <br>
 {% include "mainRecycleApp/otherfeatures.html" %}
-{% if data %}
- {% if safeDisposalEvents %}
-  <div class="card text-center">
-    <div class="card-header">
-      Current Safe Disposal Event
-    </div>
-      <div class="card-body">
-        <div class = "card-deck">
-          {% for event in safeDisposalEvents %}
-          
-            <div class="card border-success mb-3" style="max-width: 15rem;">
-              <div class="card-header">{{ event.date }}</div>
-              <div class="card-body">
-                <h4 class="card-title">{{ event.borough }}</h4>
-                <p class="card-text"> {{ event.description }}</p>
-              </div>
-              <div class="card-footer">{{ event.date }} <br> {{ event.time }} <br>  {{ event.address }}</div>
-            </div>
-        
-          {% endfor %}
-        </div>
-        <a href="#" class="btn btn-primary">Notify me</a>
-      </div>
-  </div>
-  
-  {% endif %}
-
-{% endif %}
 <br>
 
 <script type="text/javascript">
