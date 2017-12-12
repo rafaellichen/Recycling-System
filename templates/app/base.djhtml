@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="{% static "img/favicon.ico" %}" rel="shortcut icon">
-  
+
   <!-- Theme CSS -->
   <link href="{% static "css/grayscale.css" %}" rel="stylesheet">
 
@@ -59,14 +59,7 @@
             </div>
           </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-          {% if request.user.is_anonymous != True %}
-          <li class="nav-item"><a class="nav-link" href="/accounts/profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-          <li class="nav-item"><a class="nav-link" id="logout" href="#"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
-          {% else %}
-          <li class="nav-item"><a class="nav-link" href="/accounts/signup"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
-          <li class='nav-item'><a class="nav-link" href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-          {% endif %}
+      
         </ul>
       </div>
     </nav>
