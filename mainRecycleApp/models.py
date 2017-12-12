@@ -84,3 +84,19 @@ class Event(models.Model):
         Method to return the name
         """
         return self.borough
+
+class Zip(models.Model):
+    """
+    Model for the list of zip codes in NY
+    """
+    zipcode = models.CharField(max_length=10)
+    state = models.CharField(max_length=2)
+    latitude = models.CharField(max_length=30)
+    longitude = models.CharField(max_length=30)
+    city = models.CharField(max_length=50)
+
+    def __str__(self):
+        """
+        Method to return the zipcdoe
+        """
+        return self.zipcode

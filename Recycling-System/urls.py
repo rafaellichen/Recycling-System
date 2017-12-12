@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('mainRecycleApp.urls')),
     url(r'^', include('users.urls', namespace='users')),
+    url(r'^', include('guestbook.urls',namespace='guestbook')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
