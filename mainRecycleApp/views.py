@@ -87,6 +87,32 @@ def get_safe_disposal_events(boro):
     if result is not None:
         return result 
 
+def get_recommended_list_test(returnval, category):
+    '''
+    Method to get the recommended list
+    We are taking the returnval from our search with query and the categories that
+    the user entered. 
+    '''
+    # Maintain a new list of found categories in the returnval
+    foundTypes = []
+    recommended = []
+    # loop through each item in the returnval
+    for item in returnval:
+        # Loop through each sub category
+        for categoryType in item["type"]:
+            for catType in category:
+                if categoryType == catType:
+                    # there is a match
+                    if catType not in foundTypes:
+                        # if it is not already in foundtypes append it
+                        foundTypes.append(categoryType)
+                        # if the item is not already in recommened add it
+                        if item not in recommended: 
+                            recommended.append(item)
+                            # Remove the items from the returnval
+                            returnval.remove(item)
+    return recommended
+
 
 def search_withQuery(request):
     '''Method to search with query from the database'''
@@ -145,6 +171,8 @@ def search_withQuery(request):
         returnval = []
         for i in final:
             returnval.append(final[i])
+        recommendedVal = get_recommended_list_test (returnval, category)
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
+                                                           "recommended": recommendedVal,
                                                            "specialWasteSite" : special_waste_site,
                                                            "safeDisposalEvents" : safe_disposal_events })

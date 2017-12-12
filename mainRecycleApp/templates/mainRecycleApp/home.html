@@ -486,7 +486,9 @@
    
   <br>
   <br>
-{% include "mainRecycleApp/otherfeatures.html" %}
+{% if data %}
+  {% include "mainRecycleApp/otherfeatures.html" %}
+{% endif %}
 <br>
 
 <script type="text/javascript">
