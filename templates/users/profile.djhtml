@@ -4,7 +4,41 @@
 <style>
 .main{
   background-image: url("/static/img/bg1.jpg");
+  }
+
+button.css3button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: #030303;
+  padding: 0px 20px;
+  background: -moz-linear-gradient(
+    top,
+    #00ffd5 0%,
+    #fafafa);
+  background: -webkit-gradient(
+    linear, left top, left bottom,
+    from(#00ffd5),
+    to(#fafafa));
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  border: 1px solid #000000;
+  -moz-box-shadow:
+    0px 1px 3px rgba(000,000,000,0.8),
+    inset 0px 0px 1px rgba(255,255,255,1);
+  -webkit-box-shadow:
+    0px 1px 3px rgba(000,000,000,0.8),
+    inset 0px 0px 1px rgba(255,255,255,1);
+  box-shadow:
+    0px 1px 3px rgba(000,000,000,0.8),
+    inset 0px 0px 1px rgba(255,255,255,1);
+  text-shadow:
+    0px -1px 0px rgba(000,000,000,0.2),
+    0px 1px 0px rgba(255,255,255,0.9);
 }
+
+
+
 </style>
 
 <body class="main">
@@ -15,13 +49,17 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="text-center">
           <h1>Welcome To Easy Recycle!</h1>
+          
         </div>
           <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
           <div class="row">
           <div class="col-6">
-          <label> Name: {{request.user.first_name}} {{request.user.last_name}}</label> <br>
-          <label>User Name: {{request.user.username}} </label><br>
-          <label>Email: {{request.user.email}} </label><br>
+          <label> Name: {{request.user.first_name}} {{request.user.last_name}} </label><br>
+          <label> Username: {{request.user.username}} </label><br>
+          <label> Email: {{request.user.email}} </label><br>
+      <br>  
+       <a href="/feedback"><button type="button" class="css3button">Leave Feedback</button></a>
+
          </div>
 
          <div class="col-6">

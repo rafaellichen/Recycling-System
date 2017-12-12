@@ -1,0 +1,16 @@
+{% extends "mainRecycleApp/header.html" %}
+{% block body %}
+
+        <h3>Leave Message</h3> 
+        <!--method: POST /GET -->
+        <form action="/guestbook/save/" method="POST" novalidate="novalidate">
+        {% csrf_token %}
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <label>Username:</label> <input type="text" name="username" placeholder="User" /> <br /><br />
+                <label>Title:</label> <input type="text" name="title" placeholder="Title" /><br /><br />
+                <label>Content:</label> <textarea name="content" placeholder="Content"> </textarea><br /><br />
+            </table>
+            <input class="btn btn-success" type="submit" value="Leave Message"/>
+        </form>
+
+{% endblock body %}

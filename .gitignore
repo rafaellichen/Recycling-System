@@ -1,3 +1,4 @@
+*.cpython-36.pyc
 *.pyc
 *.firebaserc
 *.DS_Store
@@ -6,4 +7,8 @@
 /data
 /Documentation/_build/
 .coverage.*
+*.coverage
 *sqlite3
+/guestbook/__pycache__/
+/guestbook/migrations/*.pyc
+*.log
