@@ -142,6 +142,37 @@ const initRequest = function(url) {
 		  }
 		}
 
+		$("#btnSearch").click(function() {
+		  if ($('#txtAddress').val() == "") {
+		    $('#txtAddress').tooltipster('show');
+		  } else if (validateItems()) {
+
+		    objAddress = $('#txtAddress').val();
+		    objVendorwithin = $("#ddlDistance option:selected").val();
+		    objSearchType = $("#ddlSearchType option:selected").val();
+		    var ItemCategory = [];
+		    $('.divItemCategory input:checked').each(function() {
+		      ItemCategory.push(this.name);
+		    });
+
+		    objItemCategory = ItemCategory.toString();
+
+		    localStorage.setItem('OnlyShowPickup', false);
+		    localStorage.setItem('SearchAddress', $('#txtAddress').val());
+		    localStorage.setItem('SearchRadius', $("#ddlDistance option:selected").val());
+		    localStorage.setItem('SearchType', $("#ddlSearchType option:selected").val());
+		    var divItemCategory = [];
+		    $('.divItemCategory input:checked').each(function() {
+		      divItemCategory.push(this.name);
+		    });
+		    localStorage.setItem('SearchFlag', '1');
+		    localStorage.setItem("ItemCategory", divItemCategory.toString());
+
+		    getResults();
+		  }
+		});
+
+
 }
 
  $(document).ready(function() {
