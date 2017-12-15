@@ -103,5 +103,5 @@ class Zip(models.Model):
 
 
 class Bookmark (models.Model):
-    facility = models.ForeignKey(RecyclingCenter, realted_name='users', to_field='idc')
+    facility = models.ForeignKey(RecyclingCenter, related_name='users', to_field='idc')
     user = models.ForeignKey(User, related_name='bookmarks')
