@@ -49,12 +49,16 @@ const json = (response) => {
 const bookmarkHandler = e =>{
       param = e.target.getAttribute('id');
       idc = e.target.parentElement.getAttribute('id');
-      console.log(idc, param);
+      let csrftoken = $("[name=csrfmiddlewaretoken]").val();
+      console.log(csrftoken);
       fetch('/bookmarks', {
-        method: 'POST',
-        body: JSON.stringify({idc: idc, param: param}),
-        headers: {
-          "Content-Type": "application/json"
+        "method": 'POST',
+        "body": JSON.stringify({idc: idc, param: param}),
+        "credentials": 'include',
+        "headers": {
+          "X-CSRFToken": csrftoken,
+          "Accept": "application/json",
+          "Content-Type": "application/json",
         }
       }).then(res => {
         return res.json();

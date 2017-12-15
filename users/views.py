@@ -105,10 +105,14 @@ def getFacilities(idc_list):
         returnval.append(final[i])
     return returnval
 
-@csrf_exempt
 def bookmarkHandler(request):
     body = json.loads(request.body.decode("utf-8"))
     idc = body['idc']
     param = body['param']
     data = {'idc':idc, 'param':param} #TODO: add/remove bookmark to db
+    if param == 'add':
+        newBookmark = Bookmark(facility=idc, user=request.user)
+        newBookmark.save()
+    elif param =='remove':
+        Bookmarks.objects.delete(facility=idc, user=request.user)
     return JsonResponse(data)
