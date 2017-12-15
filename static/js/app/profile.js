@@ -15,8 +15,8 @@ const json = (response) => {
 };
 
 const deleteBookmark = e =>{
-      param = e.target.getAttribute('id');
-      idc = e.target.parentElement.getAttribute('id');
+      let param = e.target.getAttribute('id');
+      let idc = e.target.parentElement.getAttribute('id');
       let csrftoken = $("[name=csrfmiddlewaretoken]").val();
       fetch('/bookmarks', {
         "method": 'POST',
