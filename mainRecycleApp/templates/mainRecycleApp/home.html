@@ -3,6 +3,86 @@
 {% block content %}
 
 {%load static%}
+<style>
+
+#background-img {
+  background:url({% static "img/grass.jpg" %});
+}
+
+.jumbotron{
+  /*background:url({% static "img/green.jpg" %});*/
+  /* darker green :#02bf08b5 
+    lighter green : #00ff08b5;
+    more darker : #017505b5;
+    avg : #019e07b5;
+  */
+
+  background: 
+    linear-gradient(
+      #019e07b5,
+      #019e07b5 ),
+    url({% static "img/grass.jpg" %});
+  background-size: cover;
+}
+a[id="address"] {
+  text-decoration: underline;
+  color: rgb(22, 152, 175)
+}
+.unselected {
+  /*background-color: rgb(112, 112, 112);*/
+  background-color: #707070;
+  /*border-color: rgb(112, 112, 112);*/
+  border-color: #0065b300; 
+  /*border-color: #FFFFFF; */
+
+}
+.card-block {
+  margin: 10px 10px 10px 10px;
+}
+.card-block-recommended {
+  margin: 10px 10px 10px 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
+}
+#main {
+  position: relative;
+}
+#fav {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+#cate {
+  width: 70%;
+}
+#card {
+  margin-bottom: 15px;
+}
+#card-img {
+  margin-bottom: 15px;
+}
+
+#footer {
+  position: relative;
+}
+
+.progress-bar1 {
+  border-right: 1px solid white;
+}
+
+#header1 {
+  color: #FFFFFF;
+}
+.btn-info:hover, .btn-info:focus, .btn-info.active {
+  background-color: #FFA727 !important;
+  /*border-color: #65B34D; */
+  border-color: #FFFFFF; 
+}
+.btn-sq {
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 14px;
+}
+</style>
 
 <div class="jumbotron jumbotron-fluid">
 	<div class="container">
@@ -247,7 +327,13 @@
               <i class="bookmark fa fa-3x fa-bookmark-o" id="add" title="add to favorites" aria-hidden="true"></i>
          {% endif %}
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
-           <div class="card-body">
+           <div id="main" class="card-body">
+             <!-- use onclick to call js -->
+             <div id="fav">
+                <img src="/static/img/unlike.png" height="50" width="50">
+                <!-- or like.png -->
+             </div>
+             <div id="cate">
              {% with item.type as type %}
              {% for each in type %}
                {% if each == "Electronics" %}
@@ -312,6 +398,7 @@
                {% endif %}
                {% endfor %}
              {% endwith %}
+            </div>
              <h6 class="card-title">{{item.name}}</h6>
              <div class="progress">
                {% if item.Monday != "closed" %}
@@ -379,7 +466,9 @@
   {% endif %}
             </div>
             <br>
-             <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30"> {{item.address}}</img>
+             <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30">
+             <a id="address" target="#blank" href="https://www.google.com/maps/place/{{item.address}}">{{item.address}}</a>
+            </img>
              <br>
              <img id="card-img" src="/static/img/cell.png" alt="" height="30" width="30"> {{item.cell}}</img>
              <br>
