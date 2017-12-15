@@ -1,197 +1,88 @@
-{% extends "mainRecycleApp/header.html" %}
-
-{% block content %}
-
-{%load static%}
-<style>
-
-#background-img {
-  background:url({% static "img/grass.jpg" %});
-}
-
-.jumbotron{
-  /*background:url({% static "img/green.jpg" %});*/
-  /* darker green :#02bf08b5 
-    lighter green : #00ff08b5;
-    more darker : #017505b5;
-    avg : #019e07b5;
-  */
-
-  background: 
-    linear-gradient(
-      #019e07b5,
-      #019e07b5 ),
-    url({% static "img/grass.jpg" %});
-  background-size: cover;
-}
-a[id="address"] {
-  text-decoration: underline;
-  color: rgb(22, 152, 175)
-}
-.unselected {
-  /*background-color: rgb(112, 112, 112);*/
-  background-color: #707070;
-  /*border-color: rgb(112, 112, 112);*/
-  border-color: #0065b300; 
-  /*border-color: #FFFFFF; */
-
-}
-.card-block {
-  margin: 10px 10px 10px 10px;
-}
-.card-block-recommended {
-  margin: 10px 10px 10px 10px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
-}
-#main {
-  position: relative;
-}
-#fav {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-}
-#cate {
-  width: 70%;
-}
-#card {
-  margin-bottom: 15px;
-}
-#card-img {
-  margin-bottom: 15px;
-}
-
-#footer {
-  position: relative;
-}
-
-.progress-bar1 {
-  border-right: 1px solid white;
-}
-
-#header1 {
-  color: #FFFFFF;
-}
-.btn-info:hover, .btn-info:focus, .btn-info.active {
-  background-color: #FFA727 !important;
-  /*border-color: #65B34D; */
-  border-color: #FFFFFF; 
-}
-.btn-sq {
-  width: 120px !important;
-  height: 120px !important;
-  font-size: 14px;
-}
-</style>
+{% extends "mainRecycleApp/header.html" %} {% block content %} {%load static%}
 
 <div class="jumbotron jumbotron-fluid">
-	<div class="container">
-      <div class = "row justify-content-center">
-        <div class = "col-8 align-self-center">
-         <div class = "float-right">
-	         <h1 id = "header1">Recycling Starts Here</h1>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8 align-self-center">
+        <div class="float-right">
+          <h1 id="header1">Recycling Starts Here</h1>
 
-         </div>
-        </div>
-        <div class = "col-4 align-self-center">
-         <div class = "float-left">
-          <img src = "/static/img/logo5.png" style="width: 150px; height: 150px">
-         </div>
         </div>
       </div>
+      <div class="col-4 align-self-center">
+        <div class="float-left">
+          <img src="/static/img/logo5.png" style="width: 150px; height: 150px">
+        </div>
+      </div>
+    </div>
 
-	</div>
-</div> <!-- jumbotron div -->
+  </div>
+</div>
+<!-- jumbotron div -->
 
-  <br>
+<br>
 
-  <form name="searchForm" onsubmit="return validForm()" action="/search/" method="POST"> {% csrf_token %}
-	<div class = "container">
-    <div class = "row">
-    <div class = "mx-auto">
-		<div data-toggle="buttons">
-		  <label class="btn btn-sq unselected btn-info">
+<form name="searchForm" onsubmit="return validForm()" action="/search/" method="POST"> {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto">
+        <div data-toggle="buttons">
+          <label class="btn btn-sq unselected btn-info">
 		    <input value="Electronics" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
 		    <img src="/static/img/electronics.png" style="width:60px; height:60px">
 		    <br>
 		    Electronics
 		  </label>
-		  <label class="btn btn-sq btn-info unselected">
+          <label class="btn btn-sq btn-info unselected">
 		    <input value="Home Appliances" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
 		    <img src="/static/img/homeappliances.png" style="width:60px; height:60px">
 		    <br>
 		    Appliances
 		  </label>
-		  <label class="btn btn-sq btn-info unselected">
+          <label class="btn btn-sq btn-info unselected">
 		    <input id = "Automotive" value="Automotive" name="gtype" type="checkbox" autocomplete="off">
 			<br>
 			<img src="/static/img/car.png" style="width:60px; height:60px">
 		    <br>
 		    Automotive
 		  </label>
-		  <label class="btn btn-sq btn-info unselected">
+          <label class="btn btn-sq btn-info unselected">
 		    <input value="Office Furniture" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
 		    <img src="/static/img/householdfurniture.png" style="width:60px; height:60px">
 		    <br>
 		    Furniture
       </label>
-      <label class="btn btn-sq btn-info unselected">
+          <label class="btn btn-sq btn-info unselected">
 		    <input value = "Clothing" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
         <img src="/static/img/clothing.png" style="width:60px; height:60px">
 		    <br>
 		    Clothing
       </label>
-      <label class="btn btn-sq btn-info unselected">
+          <label class="btn btn-sq btn-info unselected">
         <input value = "Building Products" name="gtype" type="checkbox" autocomplete="off">
         <br>
         <img src="/static/img/buildingproducts.png" style="width:60px; height:60px">
         <br>
         Paints
       </label>
-      <label id="more" onclick="togglemore()" class="btn btn-sq btn-info unselected" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
+          <label id="more" onclick="togglemore()" class="btn btn-sq btn-info unselected" data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1">
         <br>
         <img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:60px; height:60px">
         <br>
         More
       </label>
-    </div>
-    </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="container collapse" id="List1">
     <div class="card card-block">
       <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-        <!-- <label class="btn btn-primary unselected">
-            <input value="Art Supplies" name="gtype" type="checkbox" autocomplete="off">
-            <img src="/static/img/art.png" style="width:30px; height:30px">
-            Art Supplies
-        </label> -->
-        <!-- <label class="btn btn-primary unselected">
-          <input value="Food" name="gtype" type="checkbox" autocomplete="off">
-          <img src="/static/img/food.png" style="width:30px; height:30px">
-          Food &amp; Beverages
-          </label> -->
-        <!-- <label class="btn btn-primary unselected">
-          <input value="Office Supplies" name="gtype" type="checkbox" autocomplete="off">
-          <img src="/static/img/officesupp.png" style="width:30px; height:30px">
-        Office Supplies
-        </label> -->
-        <!-- <label class="btn btn-primary unselected">
-          <input value="Textiles" name="gtype" type="checkbox" autocomplete="off">
-          <img src="/static/img/textiles.png" style="width:30px; height:30px">
-          Textiles (non-clothing)
-        </label> -->
-        <!-- <label class="btn btn-primary unselected">
-          <input value="Household Furniture" name="gtype" type="checkbox" autocomplete="off">
-          <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
-          Household
-          Furniture
-        </label> -->
         <label class="btn btn-info unselected">
           <input value="Shoes" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/shoes.png" style="width:30px; height:30px">
@@ -213,22 +104,7 @@ a[id="address"] {
           Collectibles
           <!-- (antiques, jewelry, art) -->
         </label>
-        <!-- <label class="btn btn-primary unselected">
-          <input value="Lubricants" name="gtype" type="checkbox" autocomplete="off">
-          <img src="/static/img/lubricants.png" style="width:30px; height:30px">
-          Lubricants
-        </label> -->
-        <!-- <label class="btn btn-primary unselected">
-          <input value="Containers" name="gtype" type="checkbox" autocomplete="off">
-          <img src="/static/img/cardboard.png" style="width:30px; height:30px">
-          Containers &amp;
-          Packaging
-        </label> -->
-        <!-- <label class="btn btn-primary unselected">
-          <input value="Medical Equipment" name="gtype" type="checkbox" autocomplete="off">
-          <img src="/static/img/medical.png" style="width:30px; height:30px">
-          Medical Equipment &amp; Furniture
-        </label> -->
+
         <label class="btn btn-info unselected">
           <input value="Toys" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/toy.png" style="width:30px; height:30px">
@@ -244,7 +120,7 @@ a[id="address"] {
     </div>
   </div>
   <div class="container">
-    <div class = "row">
+    <div class="row">
       <div class="col-lg-9 mx-auto">
         <div data-toggle="buttons">
           <label class="btn btn-info unselected">
@@ -278,250 +154,173 @@ a[id="address"] {
         </div>
       </div>
     </div>
-<br>
-{%if invalid %}
-<h6 style="color:red;" class="text-center">Please Enter A Valid NYC Zipcode</h6>
-{% endif %}
+    <br> {%if invalid %}
+    <h6 style="color:red;" class="text-center">Please Enter A Valid NYC Zipcode</h6> {% endif %}
 
- </div>
-    {% if not data and request.method == 'POST'%} <h6 style="color:red;" class="text-center">No results found!</h6> {% endif%}
-   </div>
+  </div>
+  {% if not data and request.method == 'POST'%}
+  <h6 style="color:red;" class="text-center">No results found!</h6> {% endif%}
+  </div>
 
-<br>
-<div class = "row">
-  <div class = "col-lg-6 mx-auto">
-    <div class = "input-group">
-      <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
-      <span class = "input-group-btn">
+  <br>
+  <div class="row">
+    <div class="col-lg-6 mx-auto">
+      <div class="input-group">
+        <input name="zipcode" class="form-control form-control-lg" type="text" placeholder="Enter Your ZipCode" required>
+        <span class="input-group-btn">
           <button type="submit" class="btn btn-info" id = "submit-zip">Submit</button>
       </span>
+      </div>
     </div>
   </div>
-</div>
-</div>
+  </div>
 </form>
-<br><br>
-{% if data %}
-<div class = "container justify-content-center">
-  <p id = "result-ok" class="text-center">Places that accepts donation of these types in your location.</p>
-  <div class = "text-center">
-  {% for each in userCategories %}
-    {{ each }},
-  {% endfor %}
+<br><br> {% if data %}
+<div class="container justify-content-center">
+  <p id="result-ok" class="text-center">Places that accepts donation of these types in your location.</p>
+  <div class="text-center">
+    {% for each in userCategories %} {{ each }}, {% endfor %}
   </div>
 </div>
 {% endif %}
 <div class="container">
-   <div class="card-deck justify-content-center">
-       {% if data %}
-         <br>
-         {% for item in data %}
+  <div class="card-deck justify-content-center">
+    {% if data %}
+    <br> {% for item in data %} {% if item.recommendedStatus %}
 
-         {% if item.recommendedStatus %}
+    <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id="{{item.idc}}">
+      {% else %}
+      <div class="card-block" style="width: 20rem; border: 1px grey solid" id="{{item.idc}}">
+        {% endif %}
+        {% if request.user.is_anonymous != True %}
+        <i class="bookmark fa fa-3x fa-bookmark-o" id="add" title="add to favorites" aria-hidden="true"></i>
+        {% endif %}
 
-          <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id = "{{item.idc}}">
-         {% else %}
-          <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "{{item.idc}}">
-         {% endif %}
-         {% if request.user.is_anonymous != True %}
-              <i class="bookmark fa fa-3x fa-bookmark-o" id="add" title="add to favorites" aria-hidden="true"></i>
-         {% endif %}
-           <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
-           <div id="main" class="card-body">
-             <!-- use onclick to call js -->
-             <div id="fav">
-                <img src="/static/img/unlike.png" height="50" width="50">
-                <!-- or like.png -->
-             </div>
-             <div id="cate">
-             {% with item.type as type %}
-             {% for each in type %}
-               {% if each == "Electronics" %}
-                 <img id="card-img" src="/static/img/electronics.png" alt="Electronics" height="42" width="42">
-               {% endif %}
-               {% if each == "Home Appliances" %}
-                 <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Automotive" %}
-                 <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Office Furniture" %}
-                 <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Clothing" %}
-                 <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Building Products" %}
-                 <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Art Supplies" %}
-                 <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Food" %}
-                 <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Office Supplies" %}
-                 <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Textiles" %}
-                 <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Household Furniture" %}
-                 <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Shoes" %}
-                 <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Housewares" %}
-                 <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Sporting Equipment" %}
-                 <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Collectibles" %}
-                 <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Lubricants" %}
-                 <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Containers" %}
-                 <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Medical Equipment" %}
-                 <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Toys" %}
-                 <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42">
-               {% endif %}
-               {% if each == "Musical Instruments" %}
-                 <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42">
-               {% endif %}
-               {% endfor %}
-             {% endwith %}
+        <div id="main" class="card-body">
+          <div id="cate">
+            {% with item.type as type %} {% for each in type %} {% if each == "Electronics" %}
+            <img id="card-img" src="/static/img/electronics.png" alt="Electronics" height="42" width="42"> {% endif %} {% if each == "Home Appliances" %}
+            <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42"> {% endif %} {% if each == "Automotive" %}
+            <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42"> {% endif %} {% if each == "Office Furniture" %}
+            <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42"> {% endif %} {% if each == "Clothing" %}
+            <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42"> {% endif %} {% if each == "Building Products" %}
+            <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42"> {% endif %} {% if each == "Art Supplies" %}
+            <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42"> {% endif %} {% if each == "Food" %}
+            <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42"> {% endif %} {% if each == "Office Supplies" %}
+            <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42"> {% endif %} {% if each == "Textiles" %}
+            <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42"> {% endif %} {% if each == "Household Furniture" %}
+            <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42"> {% endif %} {% if each == "Shoes" %}
+            <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42"> {% endif %} {% if each == "Housewares" %}
+            <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42"> {% endif %} {% if each == "Sporting Equipment" %}
+            <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42"> {% endif %} {% if each == "Collectibles" %}
+            <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42"> {% endif %} {% if each == "Lubricants" %}
+            <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42"> {% endif %} {% if each == "Containers" %}
+            <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42"> {% endif %} {% if each == "Medical Equipment" %}
+            <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42"> {% endif %} {% if each == "Toys" %}
+            <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42"> {% endif %} {% if each == "Musical Instruments" %}
+            <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42"> {% endif %} {% endfor %} {% endwith %}
+          </div>
+          <h6 class="card-title">{{item.name}}</h6>
+          <div class="progress">
+            {% if item.Monday != "closed" %}
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+              MON
             </div>
-             <h6 class="card-title">{{item.name}}</h6>
-             <div class="progress">
-               {% if item.Monday != "closed" %}
-                <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
-                  MON
-                </div>
-              {% else %}
-              <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
-                  MON
-                </div>
-              {% endif %}
-              {% if item.Tuesday != "closed" %}
-              <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
-                TUE
-              </div>
             {% else %}
             <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
-                TUE
-              </div>
-            {% endif %}
-            {% if item.Wednesday != "closed" %}
+              MON
+            </div>
+            {% endif %} {% if item.Tuesday != "closed" %}
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+              TUE
+            </div>
+            {% else %}
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+              TUE
+            </div>
+            {% endif %} {% if item.Wednesday != "closed" %}
             <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
               WED
             </div>
-          {% else %}
-          <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+            {% else %}
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
               WED
             </div>
-          {% endif %}
-          {% if item.Thursday != "closed" %}
-          <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:16%">
-            THUR
-          </div>
-        {% else %}
-        <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:16%">
-            THUR
-          </div>
-        {% endif %}
-        {% if item.Friday != "closed" %}
-        <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
-          FRI
-        </div>
-      {% else %}
-      <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
-          FRI
-        </div>
-      {% endif %}
-      {% if item.Saturday != "closed" %}
-      <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
-        SAT
-      </div>
-    {% else %}
-    <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
-        SAT
-      </div>
-    {% endif %}
-    {% if item.Sunday != "closed" %}
-    <div class="progress-bar bg-success" role="progressbar" style="width:14%">
-      SUN
-    </div>
-  {% else %}
-  <div class="progress-bar bg-danger" role="progressbar" style="width:14%">
-      SUN
-    </div>
-  {% endif %}
+            {% endif %} {% if item.Thursday != "closed" %}
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:16%">
+              THUR
             </div>
-            <br>
-             <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30">
-             <a id="address" target="#blank" href="https://www.google.com/maps/place/{{item.address}}">{{item.address}}</a>
-            </img>
-             <br>
-             <img id="card-img" src="/static/img/cell.png" alt="" height="30" width="30"> {{item.cell}}</img>
-             <br>
-             {% if item.picksup == "1" %}
-              <img id="card-img" src="/static/img/pick.png" alt="" height="30" width="30"> Pick up</img>
-              <br>
-             {% endif %}
-             <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
-             {% if item.url %}
-               <a target="#blank" class="btn btn-info" href = "{{item.url}}">Website</a>
-             {% else %}
-               <br>
-             {% endif %}
+            {% else %}
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:16%">
+              THUR
+            </div>
+            {% endif %} {% if item.Friday != "closed" %}
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+              FRI
+            </div>
+            {% else %}
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+              FRI
+            </div>
+            {% endif %} {% if item.Saturday != "closed" %}
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+              SAT
+            </div>
+            {% else %}
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+              SAT
+            </div>
+            {% endif %} {% if item.Sunday != "closed" %}
+            <div class="progress-bar bg-success" role="progressbar" style="width:14%">
+              SUN
+            </div>
+            {% else %}
+            <div class="progress-bar bg-danger" role="progressbar" style="width:14%">
+              SUN
+            </div>
+            {% endif %}
+          </div>
+          <br>
+          <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30">
+          <a id="address" target="#blank" href="https://www.google.com/maps/place/{{item.address}}">{{item.address}}</a>
+          </img>
+          <br>
+          <img id="card-img" src="/static/img/cell.png" alt="" height="30" width="30"> {{item.cell}}</img>
+          <br> {% if item.picksup == "1" %}
+          <img id="card-img" src="/static/img/pick.png" alt="" height="30" width="30"> Pick up</img>
+          <br> {% endif %}
+          <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>          {% if item.url %}
+          <a target="#blank" class="btn btn-info" href="{{item.url}}">Website</a> {% else %}
+          <br> {% endif %}
 
 
 
 
-           </div>
-         </div>
-       {% endfor %}
-
-      {% else %}
-
-        {% include "mainRecycleApp/description.html" %}
-
-     {% endif %}
-
-
-{% if data %}
-  {% include "mainRecycleApp/otherfeatures.html" %}
-{% endif %}
-<br>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </div>
+      </div>
+      {% endfor %} {% else %} {% include "mainRecycleApp/description.html" %} {% endif %} {% if data %} {% include "mainRecycleApp/otherfeatures.html" %} {% endif %}
+      <br>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-{% csrf_token %}
-<script type="text/javascript" src="{% static "js/app/home.js" %}">
-</script>
+      {% csrf_token %}
+      <script type="text/javascript" src="{% static "js/app/home.js" %}">
+      </script>
 
-{% endblock %}
+      {% endblock %}

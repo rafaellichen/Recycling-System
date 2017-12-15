@@ -16,6 +16,10 @@
   background-size: cover;
 }
 
+a[id="address"] {
+  text-decoration: underline;
+  color: rgb(22, 152, 175)
+}
 .unselected {
   /*background-color: rgb(112, 112, 112);*/
   background-color: #707070;
