@@ -17,12 +17,12 @@
 	  </div>
 	  <div class = "tab-content">
 	  	<div style = "padding:10px; height:460px;" role = "tabpanel" class = "tab-pane active" id = "specialWasteSites">
-			<div class = "container">		
+			<div class = "container">
 	          <div id = "map" style = "top: -220px; clear:both;"></div>
 	        </div>
 	 	</div>
 	 	<div role = "tabpanel" class = "tab-pane fade" id = "publicRecycleBins">
-		  
+
 		    <h4>Public Recycle Bins</h4>
 		</div>
 		<div role = "tabpanel" class = "tab-pane fade" id = "safeDisposalEvents">
@@ -37,7 +37,7 @@
 		              </div>
 		              <div class="card-footer">{{ event.date }} <br> {{ event.time }} <br>  {{ event.address }}</div>
 		            </div>
-		        
+
 		          {% endfor %}
 		        </div>
 		        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#notificationModal">
@@ -46,7 +46,7 @@
 		      </div>
 			</div>
 	  </div>
-	</div>	
+	</div>
 </div>
 <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -77,8 +77,8 @@
     </div>
   </div>
 </div>
-  <meta id = "specialWasteSite_meta" data-locations = '{{ specialWasteSite|safe }}'> 
-  <script type="text/javascript" src="{% static "js/ApplicationJS/specialWasteMaps.js" %}">
+  <meta id = "specialWasteSite_meta" data-locations = '{{ specialWasteSite|safe }}'>
+  <script type="text/javascript" src="{% static "js/app/specialWasteMaps.js" %}">
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9k7z9ezCMLWq9D14zpuZxndZV8rRkW2E&callback=initMap" async defer>
   </script>
