@@ -239,12 +239,12 @@
 
          {% if item.recommendedStatus %}
 
-          <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
+          <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id = "{{item.idc}}">
          {% else %}
-          <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
+          <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "{{item.idc}}">
          {% endif %}
          {% if request.user.is_anonymous != True %}
-              <i class="bookmark fa fa-3x fa-bookmark-o" title="add to favorites" aria-hidden="true"></i>
+              <i class="bookmark fa fa-3x fa-bookmark-o" id="add" title="add to favorites" aria-hidden="true"></i>
          {% endif %}
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
            <div class="card-body">

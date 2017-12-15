@@ -7,7 +7,7 @@ from . import forms
 from collections import OrderedDict
 from mainRecycleApp.models import Bookmark, RecyclingCenter
 from django.http import JsonResponse
-
+import json
 
 def signin(request):
     '''Signin method with param request'''
@@ -72,9 +72,9 @@ def getFacilities(idc_list):
     for cur_element in result:
         keys = (cur_element["idc"])
         if keys in final:  # combine when have same "idc"
-            final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"] + "," +final[keys]["type"]}
+            final[keys] = {"idc": cur_element['idc'],"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"], "url": cur_element["url"], "type": cur_element["type"] + "," +final[keys]["type"]}
         else:  # for unique "idc"
-            final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"]}
+            final[keys] = {"idc": cur_element['idc'],"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"], "url": cur_element["url"], "type": cur_element["type"]}
     for i in final:
         final[i]["type"]=final[i]['type'].split(",")
         if(final[i]["Monday"]!="closed"):
@@ -105,7 +105,10 @@ def getFacilities(idc_list):
         returnval.append(final[i])
     return returnval
 
-
+@csrf_exempt
 def bookmarkHandler(request):
-    pass
-    #TODO: handle ajax -> add/remove bookmark -> confirm with json
+    body = json.loads(request.body.decode("utf-8"))
+    idc = body['idc']
+    param = body['param']
+    data = {'idc':idc, 'param':param} #TODO: add/remove bookmark to db
+    return JsonResponse(data)

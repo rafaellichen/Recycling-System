@@ -33,10 +33,39 @@ function time() {
   }
 
 
-const bookmarkHandler = e =>{
-  //TODO: 1- make AJAX to handleBookmark route -> (add or remove)
-  //      2- update element text+icon to reflect status
+const status = (response) => {
+    if (response.status >= 200 && response.status < 300) {
+      return Promise.resolve(response)
+    } else {
+      return Promise.reject(new Error(response.statusText))
+    }
+  }
+
+const json = (response) => {
+    return response.json();
 }
 
 
-document.querySelector('#bookmark').addEventListener('click', bookmarkHandler);
+const bookmarkHandler = e =>{
+      param = e.target.getAttribute('id');
+      idc = e.target.parentElement.getAttribute('id');
+      console.log(idc, param);
+      fetch('/bookmarks', {
+        method: 'POST',
+        body: JSON.stringify({idc: idc, param: param}),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => {
+        return res.json();
+      })
+      .then(data => {
+          console.log(data);// TODO: Update element icon/text
+      })
+      .catch(err=> console.log(err))
+
+
+}
+
+
+document.querySelectorAll('.bookmark').forEach ( el => el.addEventListener('click', bookmarkHandler));
