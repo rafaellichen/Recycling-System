@@ -90,7 +90,7 @@ a[id="address"] {
         <div class = "col-8 align-self-center">
          <div class = "float-right">
 	         <h1 id = "header1">Recycling Starts Here</h1>
-           
+
          </div>
         </div>
         <div class = "col-4 align-self-center">
@@ -189,7 +189,7 @@ a[id="address"] {
         <!-- <label class="btn btn-primary unselected">
           <input value="Household Furniture" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
-          Household 
+          Household
           Furniture
         </label> -->
         <label class="btn btn-info unselected">
@@ -210,7 +210,7 @@ a[id="address"] {
         <label class="btn btn-info unselected">
           <input value="Collectibles" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/jewelry.png" style="width:30px; height:30px">
-          Collectibles 
+          Collectibles
           <!-- (antiques, jewelry, art) -->
         </label>
         <!-- <label class="btn btn-primary unselected">
@@ -221,7 +221,7 @@ a[id="address"] {
         <!-- <label class="btn btn-primary unselected">
           <input value="Containers" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/cardboard.png" style="width:30px; height:30px">
-          Containers &amp; 
+          Containers &amp;
           Packaging
         </label> -->
         <!-- <label class="btn btn-primary unselected">
@@ -278,41 +278,6 @@ a[id="address"] {
         </div>
       </div>
     </div>
-    <!--<select name="dropdown">
-      <option value="" disabled selected>Select a time frame</option>
-      <option value="0800,0830">8:00 - 8:30 AM</option>
-      <option value="0830,0900">8:30 - 9:00 AM</option>
-      <option value="0900,0930">9:00 - 9:30 AM</option>
-      <option value="0930,1000">9:30 - 10:00 AM</option>
-      <option value="1000,1030">10:00 - 10:30 AM</option>
-      <option value="1030,1100">10:30 - 11:00 AM</option>
-      <option value="1100,1130">11:00 - 11:30 AM</option>
-      <option value="1130,1200">11:30 AM - 12:00 PM</option>
-      <option value="1200,1230">12:00 - 12:30 PM</option>
-      <option value="1230,1300">12:30 - 1:00 PM</option>
-      <option value="1300,1330">1:00 - 1:30 PM</option>
-      <option value="1330,1400">1:30 - 2:00 PM</option>
-      <option value="1400,1430">2:00 - 2:30 PM</option>
-      <option value="1430,1500">2:30 - 3:00 PM</option>
-      <option value="1500,1530">3:00 - 3:30 PM</option>
-      <option value="1530,1600">3:30 - 4:00 PM</option>
-      <option value="1600,1630">4:00 - 4:30 PM</option>
-      <option value="1630,1700">4:30 - 5:00 PM</option>
-      <option value="1700,1730">5:00 - 5:30 PM</option>
-      <option value="1730,1800">5:30 - 6:00 PM</option>
-      <option value="1800,1830">6:00 - 6:30 PM</option>
-      <option value="1830,1900">6:30 - 7:00 PM</option>
-      <option value="1900,1930">7:00 - 7:30 PM</option>
-      <option value="1930,2000">7:30 - 8:00 PM</option>
-      <option value="2000,2030">8:00 - 8:30 PM</option>
-      <option value="2030,2100">8:30 - 9:00 PM</option>
-      <option value="2100,2130">9:00 - 9:30 PM</option>
-      <option value="2130,2200">9:30 - 10:00 PM</option>
-      <option value="2200,2230">10:00 - 10:30 PM</option>
-      <option value="2230,2300">10:30 - 11:00 PM</option>
-      <option value="2300,2330">11:00 - 11:30 PM</option>
-      <option value="2330,2400">11:30 PM - 12:00 AM</option>
-    </select> --> 
 <br>
 {%if invalid %}
 <h6 style="color:red;" class="text-center">Please Enter A Valid NYC Zipcode</h6>
@@ -354,9 +319,12 @@ a[id="address"] {
 
          {% if item.recommendedStatus %}
 
-          <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
+          <div class="card-block-recommended bg-light" style="width: 20rem; border: 1px grey solid" id = "{{item.idc}}">
          {% else %}
-          <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
+          <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "{{item.idc}}">
+         {% endif %}
+         {% if request.user.is_anonymous != True %}
+              <i class="bookmark fa fa-3x fa-bookmark-o" id="add" title="add to favorites" aria-hidden="true"></i>
          {% endif %}
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
            <div id="main" class="card-body">
@@ -515,16 +483,19 @@ a[id="address"] {
                <br>
              {% endif %}
 
+
+
+
            </div>
          </div>
        {% endfor %}
 
       {% else %}
-      
+
         {% include "mainRecycleApp/description.html" %}
-      
+
      {% endif %}
-   
+
 
 {% if data %}
   {% include "mainRecycleApp/otherfeatures.html" %}
@@ -549,39 +520,8 @@ a[id="address"] {
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function(){
-      $('[data-toggle="popover"]').popover(); 
-  });
-  function togglemore() {
-    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:60px; height:60px"><br>More'
-    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:60px; height:60px"><br>Less'
-    if(document.getElementById("more").innerHTML==more) {
-      document.getElementById("more").innerHTML=less
-    } else {
-      document.getElementById("more").innerHTML=more
-    }
-  }
-  function validForm() {
-      var x = document.getElementsByName("gtype")
-      typeSelect=false
-      for(var i=0; i<x.length; i++) {
-        if(x[i].checked) {
-         typeSelect=true
-        }
-      }
-      if(typeSelect==false){
-        alert("Please select at least 1 type of recyclable waste")
-      }
-      return (typeSelect) 
-    }
-
-  function time() {
-         t_div = document.getElementById('showtime');
-        var now = new Date();
-         t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
-         setTimeout(time, 1000);
-    }
+{% csrf_token %}
+<script type="text/javascript" src="{% static "js/app/home.js" %}">
 </script>
 
 {% endblock %}
