@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 from collections import OrderedDict
 from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip
-
+from django.contrib.auth.models import User
 from django.shortcuts import render
 import json
 from django.core.serializers.json import DjangoJSONEncoder
@@ -213,8 +213,12 @@ def search_withQuery(request):
             returnval.append(final[i])
         # print (check_Distance_Of_Zips('11104', '10016'))
         get_recommended_list_test (returnval, category, zipcode)
-        print (returnval)
+
+        if request.user.is_authenticated:
+            bookmarks = list(set(request.user.bookmarks.values_list('facility', flat=True)))
+
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
+                                                           "bookmarks":bookmarks,
                                                            "userCategories": category,
                                                            "specialWasteSite" : special_waste_site,
                                                            "safeDisposalEvents" : safe_disposal_events })

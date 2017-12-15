@@ -32,6 +32,25 @@ function time() {
        setTimeout(time, 1000);
   }
 
+const updateBookmarkItem = (idc, param) => {
+  let className = 'bookmark fa fa-3x fa-bookmark';
+  let title;
+  if (param == 'add')  {
+     param = 'remove';
+     title = 'remove from favorites';
+  }
+  else {
+    param='add'
+    className+='-o';
+    title = 'add to favorites';
+  }
+
+  $(`#${idc}> i`).attr({
+    'class': className,
+    'title':title,
+    'id':param,
+  });
+};
 
 const status = (response) => {
     if (response.status >= 200 && response.status < 300) {
@@ -39,18 +58,16 @@ const status = (response) => {
     } else {
       return Promise.reject(new Error(response.statusText))
     }
-  }
+};
 
 const json = (response) => {
     return response.json();
-}
-
+};
 
 const bookmarkHandler = e =>{
       param = e.target.getAttribute('id');
       idc = e.target.parentElement.getAttribute('id');
       let csrftoken = $("[name=csrfmiddlewaretoken]").val();
-      console.log(csrftoken);
       fetch('/bookmarks', {
         "method": 'POST',
         "body": JSON.stringify({idc: idc, param: param}),
@@ -63,13 +80,12 @@ const bookmarkHandler = e =>{
       }).then(res => {
         return res.json();
       })
-      .then(data => {
-          console.log(data);// TODO: Update element icon/text
+      .then(res => {
+          res['result'] == 'success'?
+            updateBookmarkItem(idc, param):
+            console.log(res);
       })
       .catch(err=> console.log(err))
-
-
-}
-
+};
 
 document.querySelectorAll('.bookmark').forEach ( el => el.addEventListener('click', bookmarkHandler));

@@ -106,13 +106,13 @@ def getFacilities(idc_list):
     return returnval
 
 def bookmarkHandler(request):
+    '''Adds/removes facility to user bookmarks'''
     body = json.loads(request.body.decode("utf-8"))
     idc = body['idc']
     param = body['param']
-    data = {'idc':idc, 'param':param} #TODO: add/remove bookmark to db
     if param == 'add':
         newBookmark = Bookmark(facility=idc, user=request.user)
         newBookmark.save()
     elif param =='remove':
-        Bookmarks.objects.delete(facility=idc, user=request.user)
-    return JsonResponse(data)
+        Bookmark.objects.filter(facility=idc, user=request.user).delete()
+    return JsonResponse({'result':'success'})
