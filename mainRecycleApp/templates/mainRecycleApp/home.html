@@ -24,7 +24,10 @@
     url({% static "img/grass.jpg" %});
   background-size: cover;
 }
-
+a[id="address"] {
+  text-decoration: underline;
+  color: rgb(22, 152, 175)
+}
 .unselected {
   /*background-color: rgb(112, 112, 112);*/
   background-color: #707070;
@@ -36,12 +39,21 @@
 .card-block {
   margin: 10px 10px 10px 10px;
 }
-
 .card-block-recommended {
   margin: 10px 10px 10px 10px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.298039);
 }
-
+#main {
+  position: relative;
+}
+#fav {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+#cate {
+  width: 70%;
+}
 #card {
   margin-bottom: 15px;
 }
@@ -347,7 +359,13 @@
           <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
          {% endif %}
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
-           <div class="card-body">
+           <div id="main" class="card-body">
+             <!-- use onclick to call js -->
+             <div id="fav">
+                <img src="/static/img/unlike.png" height="50" width="50">
+                <!-- or like.png -->
+             </div>
+             <div id="cate">
              {% with item.type as type %}
              {% for each in type %}
                {% if each == "Electronics" %}
@@ -412,6 +430,7 @@
                {% endif %}
                {% endfor %}
              {% endwith %}
+            </div>
              <h6 class="card-title">{{item.name}}</h6>
              <div class="progress">
                {% if item.Monday != "closed" %}
@@ -479,7 +498,9 @@
   {% endif %}
             </div>
             <br>
-             <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30"> {{item.address}}</img>
+             <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30">
+             <a id="address" target="#blank" href="https://www.google.com/maps/place/{{item.address}}">{{item.address}}</a>
+            </img>
              <br>
              <img id="card-img" src="/static/img/cell.png" alt="" height="30" width="30"> {{item.cell}}</img>
              <br>

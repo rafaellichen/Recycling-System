@@ -9,6 +9,7 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 
 from math import sin, cos, sqrt, atan2, radians, acos
+import geopy
 
 # Create your views here.
 def index(request):
@@ -124,7 +125,7 @@ def get_recommended_list_test(returnval, category, zipcode):
     # Maintain a new list of found categories in the returnval
     foundTypes = []
     recommended = []
-    minDifference = 0;
+    minDifference = 0
     # loop through each item in the returnval
     for item in returnval:
         # Loop through each sub category
@@ -207,6 +208,8 @@ def search_withQuery(request):
         final = OrderedDict(sorted(final.items(), key=lambda kv: kv[1]['len'], reverse=True))
         returnval = []
         for i in final:
+            final[i]['long']=1
+            final[i]['lat']=1
             returnval.append(final[i])
         # print (check_Distance_Of_Zips('11104', '10016'))
         get_recommended_list_test (returnval, category, zipcode)
