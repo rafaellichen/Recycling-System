@@ -42,3 +42,5 @@ urllib3==1.22
 virtualenv==15.1.0
 Werkzeug==0.12.2
 wrapt==1.10.11
+numpy==1.13.3
+pandas==0.21.0
