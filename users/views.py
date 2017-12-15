@@ -4,7 +4,10 @@ from django.contrib.auth import logout, authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from . import forms
-from mainRecycleApp.models import Bookmark, recyclinRecyclingCenter
+from collections import OrderedDict
+from mainRecycleApp.models import Bookmark, RecyclingCenter
+from django.http import JsonResponse
+
 
 def signin(request):
     '''Signin method with param request'''
@@ -46,7 +49,7 @@ def profile(request):
     '''Profile render method that renders the Users/Profile and redirects if the user is not authenticated'''
     user = request.user
     if request.method == 'GET':
-        bookmarks = getBookmrks(user)
+        bookmarks = getBookmarks(user)
         data = getFacilities(bookmarks)
         return render(request, 'users/profile.djhtml', {"data":data})
     else:
@@ -59,8 +62,7 @@ def index(request):
 
 def getBookmarks(user):
     ''' Returns user's bookmarked recycling centers'''
-    user_bookmarks = Bookmark.objects.filter(
-                        user=request.user).values_list('idc')
+    user_bookmarks = user.bookmarks.all().values_list('facility')
     return list(set(user_bookmarks))
 
 def getFacilities(idc_list):
@@ -102,3 +104,8 @@ def getFacilities(idc_list):
     for i in final:
         returnval.append(final[i])
     return returnval
+
+
+def bookmarkHandler(request):
+    pass
+    #TODO: handle ajax -> add/remove bookmark -> confirm with json

@@ -31,3 +31,12 @@ function time() {
        t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
        setTimeout(time, 1000);
   }
+
+
+const bookmarkHandler = e =>{
+  //TODO: 1- make AJAX to handleBookmark route -> (add or remove)
+  //      2- update element text+icon to reflect status
+}
+
+
+document.querySelector('#bookmark').addEventListener('click', bookmarkHandler);

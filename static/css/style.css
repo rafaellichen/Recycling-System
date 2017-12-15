@@ -1,3 +1,4 @@
+
 .btn-sq-lg {
   width: 100px !important;
   height: 100px !important;
@@ -9,18 +10,9 @@
 }
 
 .jumbotron{
-  /*background:url({% static "img/green.jpg" %});*/
-  /* darker green :#02bf08b5
-    lighter green : #00ff08b5;
-    more darker : #017505b5;
-    avg : #019e07b5;
-  */
-
   background:
-    linear-gradient(
-      #019e07b5,
-      #019e07b5 ),
-    url({% static "img/grass.jpg" %});
+    linear-gradient( #019e07b5, #019e07b5 ),
+    url("/static/img/grass.jpg");
   background-size: cover;
 }
 
