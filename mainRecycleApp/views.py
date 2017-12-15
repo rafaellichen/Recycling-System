@@ -213,7 +213,7 @@ def search_withQuery(request):
             returnval.append(final[i])
         # print (check_Distance_Of_Zips('11104', '10016'))
         get_recommended_list_test (returnval, category, zipcode)
-
+        bookmarks=[]
         if request.user.is_authenticated:
             bookmarks = list(set(request.user.bookmarks.values_list('facility', flat=True)))
 
