@@ -11,13 +11,13 @@
 
 .jumbotron{
   /*background:url({% static "img/green.jpg" %});*/
-  /* darker green :#02bf08b5 
+  /* darker green :#02bf08b5
     lighter green : #00ff08b5;
     more darker : #017505b5;
     avg : #019e07b5;
   */
 
-  background: 
+  background:
     linear-gradient(
       #019e07b5,
       #019e07b5 ),
@@ -29,7 +29,7 @@
   /*background-color: rgb(112, 112, 112);*/
   background-color: #707070;
   /*border-color: rgb(112, 112, 112);*/
-  border-color: #0065b300; 
+  border-color: #0065b300;
   /*border-color: #FFFFFF; */
 
 }
@@ -63,7 +63,7 @@
 .btn-info:hover, .btn-info:focus, .btn-info.active {
   background-color: #FFA727 !important;
   /*border-color: #65B34D; */
-  border-color: #FFFFFF; 
+  border-color: #FFFFFF;
 }
 .btn-sq {
   width: 120px !important;
@@ -78,7 +78,7 @@
         <div class = "col-8 align-self-center">
          <div class = "float-right">
 	         <h1 id = "header1">Recycling Starts Here</h1>
-           
+
          </div>
         </div>
         <div class = "col-4 align-self-center">
@@ -177,7 +177,7 @@
         <!-- <label class="btn btn-primary unselected">
           <input value="Household Furniture" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/householdfurniture.png" style="width:30px; height:30px">
-          Household 
+          Household
           Furniture
         </label> -->
         <label class="btn btn-info unselected">
@@ -198,7 +198,7 @@
         <label class="btn btn-info unselected">
           <input value="Collectibles" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/jewelry.png" style="width:30px; height:30px">
-          Collectibles 
+          Collectibles
           <!-- (antiques, jewelry, art) -->
         </label>
         <!-- <label class="btn btn-primary unselected">
@@ -209,7 +209,7 @@
         <!-- <label class="btn btn-primary unselected">
           <input value="Containers" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/cardboard.png" style="width:30px; height:30px">
-          Containers &amp; 
+          Containers &amp;
           Packaging
         </label> -->
         <!-- <label class="btn btn-primary unselected">
@@ -300,7 +300,7 @@
       <option value="2230,2300">10:30 - 11:00 PM</option>
       <option value="2300,2330">11:00 - 11:30 PM</option>
       <option value="2330,2400">11:30 PM - 12:00 AM</option>
-    </select> --> 
+    </select> -->
 <br>
 {%if invalid %}
 <h6 style="color:red;" class="text-center">Please Enter A Valid NYC Zipcode</h6>
@@ -499,11 +499,11 @@
        {% endfor %}
 
       {% else %}
-      
+
         {% include "mainRecycleApp/description.html" %}
-      
+
      {% endif %}
-   
+
 
 {% if data %}
   {% include "mainRecycleApp/otherfeatures.html" %}
@@ -528,39 +528,7 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function(){
-      $('[data-toggle="popover"]').popover(); 
-  });
-  function togglemore() {
-    more='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/plus.png" style="width:60px; height:60px"><br>More'
-    less='<br><img data-toggle="collapse" href="#List1" aria-expanded="false" aria-controls="List1" src="/static/img/minus.png" style="width:60px; height:60px"><br>Less'
-    if(document.getElementById("more").innerHTML==more) {
-      document.getElementById("more").innerHTML=less
-    } else {
-      document.getElementById("more").innerHTML=more
-    }
-  }
-  function validForm() {
-      var x = document.getElementsByName("gtype")
-      typeSelect=false
-      for(var i=0; i<x.length; i++) {
-        if(x[i].checked) {
-         typeSelect=true
-        }
-      }
-      if(typeSelect==false){
-        alert("Please select at least 1 type of recyclable waste")
-      }
-      return (typeSelect) 
-    }
-
-  function time() {
-         t_div = document.getElementById('showtime');
-        var now = new Date();
-         t_div.innerHTML = "Current Time: " + now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate() + " " + " " +now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " ";
-         setTimeout(time, 1000);
-    }
+<script type="text/javascript" src="{% static "js/app/home.js" %}">
 </script>
 
 {% endblock %}

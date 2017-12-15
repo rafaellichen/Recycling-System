@@ -58,7 +58,7 @@
     </ul>
 		<ul class="nav navbar-nav navbar-right">
 			{% if request.user.is_anonymous != True %}
-			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user"></span>{{request.user.last_name}}'s Profile</a></li>
+			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user"></span>{{request.user.first_name}}'s Profile</a></li>
 			<li class="nav-item"><a class="nav-link" id="logout" href="#"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
 			{% else %}
 			<li class="nav-item"><a class="nav-link" href="/signup"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
@@ -75,265 +75,9 @@
 		{%endblock%}
 
 	</div>
-    <script>
 
 
 
-const initRequest = function(url) {
-
-	var objSearchType, objAddress, objItemCategory, objVendorwithin;
-
-
-
-	jQuery.support.cors = true;
-	$("#divsearchresult").html("");
-
-	function getResults() {
-		$("#divsearchresult").html("");
-
-		var APIurl = 'https://a827-donatenyc.nyc.gov/DonateNYCAPI'
-
-		$.ajax({
-				url: APIurl + '/api/users/SearchVendors?address=' + objAddress + '&buySellDonate=' + objSearchType + '&categoryID=' + objItemCategory + '&pickup=' + 'false' + '&radius=' + objVendorwithin + '&clLatitude=&clLongitude',
-				type: 'GET',
-				dataType: 'json',
-				async: true,
-				success: function(data) {
-					console.log(data);
-					var total;
-					if (data) {
-						total = data.length;
-					}
-					if (total > 0) {
-						$.each(data, function(i, item) {
-								var row = '<tr>'+
-									'<th scope="row">'+ (i+1) +'</th>'+
-									'<td>'+item.VendorName+'</td>'+
-									'<td>'+ item.HouseNo+ ' '+item.Street +' ' + item.AptNo+ ' ' + item.Borough+ ' ' +item.Zip +'</td>'+
-									'<td>'+item.PublicPhone+'</td>'+
-								'</tr>'
-
-								$('#divsearchresult').append(row);
-							})
-						}
-						else {
-							$('#divsearchresult').append("<div class='span12' style='margin: 3px 0px; width: 260px;'><b>No searches found</b></div>");
-						}
-					}
-				});
-		}
-
-		function validateItems() {
-		  var i = 0;
-		  $(':checkbox:checked').each(function() {
-		    i++;
-		  });
-
-		  if (i === 0) {
-		    $(".divItemCategory input:checkbox:first").attr("class", "tooltipstered error");
-		    $(".divItemCategory input:checkbox:first").attr("aria-invalid", true);
-		    $(".divItemCategory input:checkbox:first").tooltipster('update', "Please select atleast one checkbox");
-		    $(".divItemCategory input:checkbox:first").tooltipster('show');
-		    return false;
-		  } else {
-		    $(".divItemCategory input:checkbox:first").attr("class", "tooltipstered");
-		    $(".divItemCategory input:checkbox:first").removeAttr("aria-invalid");
-		    return true;
-		  }
-		}
-
-		$("#btnSearch").click(function() {
-		  if ($('#txtAddress').val() == "") {
-		    $('#txtAddress').tooltipster('show');
-		  } else if (validateItems()) {
-
-		    objAddress = $('#txtAddress').val();
-		    objVendorwithin = $("#ddlDistance option:selected").val();
-		    objSearchType = $("#ddlSearchType option:selected").val();
-		    var ItemCategory = [];
-		    $('.divItemCategory input:checked').each(function() {
-		      ItemCategory.push(this.name);
-		    });
-
-		    objItemCategory = ItemCategory.toString();
-
-		    localStorage.setItem('OnlyShowPickup', false);
-		    localStorage.setItem('SearchAddress', $('#txtAddress').val());
-		    localStorage.setItem('SearchRadius', $("#ddlDistance option:selected").val());
-		    localStorage.setItem('SearchType', $("#ddlSearchType option:selected").val());
-		    var divItemCategory = [];
-		    $('.divItemCategory input:checked').each(function() {
-		      divItemCategory.push(this.name);
-		    });
-		    localStorage.setItem('SearchFlag', '1');
-		    localStorage.setItem("ItemCategory", divItemCategory.toString());
-
-		    getResults();
-		  }
-		});
-
-
-}
-
- $(document).ready(function() {
-	 // document.getElementById("logo-png").className+= " img-fluid";
-
-
-    //send the message by click
-    $(".chat-send").click(sendMsg);
-
-    //press enter to send
-    $("form").keypress(function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            sendMsg();
-        }
-    });
-
-    //clear the chat box
-    $(".chat-clear").click(clearChatBox);
-});
-
-//send message to chat box
-function sendMsg() {
-    var msg = $(".chat-message");
-    var msgVal = msg.val();
-    var chatBox = $(".chat-box");
-    if (msgVal) {
-        var msgAppend = "<p><span id='you'>You: </span>" + msgVal + "</p><hr class='you-hr'>";
-        chatBox.append(msgAppend);
-    } else {}
-
-    //dialog reply
-    dialog(msgVal);
-
-    //empty input
-    msg.val("");
-
-    //keep the scroll in bottom
-    chatBox.scrollTop(chatBox[0].scrollHeight);
-}
-
-//set up the AI dialog
-function dialog(msg){
-    var replyArr = ["Hi, this is Easy Recycle! How can I help you?(hints:how it works, how it charges)","Just login or find something in home page!","Our service is totally free!","Call us right now!", "We open Monday-Friday from 10:00AM-06:00PM","My name is Easy Recycle","You could see and leave a feedback on your profile","Sorry, I don't understand!"];
-    msg = msg.toLowerCase();
-    var time = new Date();
-    var hour = time.getHours();
-    var minute = time.getMinutes();
-    var currentTime = plusZero(hour) + ":" + plusZero(minute);
-
-    var chatBox = $(".chat-box");
-
-    if(msg.indexOf("hi") != -1 || msg.indexOf("hello") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[0] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("work") != -1 || msg.indexOf("how it works") != -1 || msg.indexOf("where can i find recycling center") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[1] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("charge") != -1 || msg.indexOf("how it charges") != -1 || msg.indexOf("how much should i pay") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[2] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("help") != -1 || msg.indexOf("I need help") != -1 || msg.indexOf("I have other problems") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[3] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("what is your office time") != -1 || msg.indexOf("office time") != -1 || msg.indexOf("visit time") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[4] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("name") != -1 || msg.indexOf("your name") != -1 || msg.indexOf("what is your name") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[5] + "</p><hr class='ai-hr'>");
-    }
-     else if(msg.indexOf("feedback") != -1 || msg.indexOf("where can I see feedback") != -1 || msg.indexOf("how good is your website") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[6] + "</p><hr class='ai-hr'>");
-    }
-    else if(msg.indexOf("time") != -1){
-        chatBox.append("<p><span id='ai'>Customer Service: </span>Current Time: " + currentTime + ". " + timeGreeting(hour) + "~ :)</p><hr class='ai-hr'>");
-    }
-    else {
-        chatBox.append("<p><span id='ai'>Customer Service: </span>" + replyArr[7] + "</p><hr class='ai-hr'>");
-    }
-}
-
-//add 0 if time number is <10
-function plusZero(x){
-    if(x < 10){
-        x = "0" + x;
-    }
-    else {
-        x = x;
-    }
-    return x;
-}
-
-//greeting by hour
-function timeGreeting(h){
-    var greeting = ["U need to sleep","Good morning","Lunch time now","Feel asleep? Have some coffee","Free time~Yeah","Good night"];
-
-    if(h>=0&&h<=6){
-        return greeting[0];
-    }
-    else if(h>=7&&h<=10){
-        return greeting[1];
-    }
-    else if(h>=11&&h<=13){
-        return greeting[2];
-    }
-    else if(h>=14&&h<=18){
-        return greeting[3];
-    }
-    else if(h>=19&&h<=21){
-        return greeting[4];
-    }
-    else if(h>=22&&h<=23){
-        return greeting[5];
-    }
-    else {
-        return "";
-    }
-}
-
-//clear the chat box
-function clearChatBox() {
-    $(".chat-box").html("");
-}
-
-
-
-{% if request.user.is_anonymous != True %}
-
-;
-(function() {
-	$('#logout').click(function() {
-		$.post("/logout", function() {
-			window.location.href = '/';
-		});
-	});
-})();
-
-{% else %}
-
-// $(function() {
-// 	$('#trigger').click(function(e) {
-// 		e.preventDefault();
-// 		var dialog = $('<p>Registration Required. Already a member?</p>').dialog({
-// 			buttons: {
-// 				"Login": function() {
-// 					window.location.replace("/login");
-// 				},
-// 				"Signup": function() {
-// 					window.location.replace("/signup");
-// 				},
-// 				"Close": function() {
-// 					dialog.dialog('close');
-// 				}
-// 			}
-// 		});
-// 	});
-// });
-
-{% endif %}
-
-</script>
 
 </body>
 
@@ -391,6 +135,24 @@ function clearChatBox() {
             </div>
         </div>
     </div>
+
+
+		<script type="text/javascript" src="{%static "js/app/header.js"%}">
+		</script>
+		<script type="text/javascript">
+		{% if request.user.is_anonymous != True %}
+
+		;(function() {
+			$('#logout').click(function() {
+				$.post("/logout", function() {
+					window.location.href = '/';
+				});
+			});
+		})();
+
+		{% endif %}
+		</script>
+
 </footer>
 
 </html>
