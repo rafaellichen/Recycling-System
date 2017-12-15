@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import logout, authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from . import forms
+from mainRecycleApp.models import Bookmark
 
 def signin(request):
     '''Signin method with param request'''
@@ -52,3 +53,9 @@ def profile(request):
 def index(request):
     '''Index render method that renders app/index'''
     return render(request, 'app/index.djhtml')
+
+
+def getBookmarks(request):
+    user_bookmarks = Bookmark.objects.filter(
+                        user=request.user).values_list('idc')
+    return list(set(user_bookmarks))

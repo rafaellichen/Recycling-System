@@ -54,7 +54,7 @@ class PublicRecyclingBin(models.Model):
 
 class SpecialWasteSite(models.Model):
     """
-    Model for the special waste site 
+    Model for the special waste site
     """
     name = models.TextField()
     latitude = models.TextField()
@@ -103,4 +103,5 @@ class Zip(models.Model):
 
 
 class Bookmark (models.Model):
-    pass
+    facility = models.ForeignKey(RecyclingCenter, realted_name='users', to_field='idc')
+    user = models.ForeignKey(User, related_name='bookmarks')
