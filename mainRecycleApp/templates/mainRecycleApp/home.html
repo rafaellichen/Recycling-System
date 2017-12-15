@@ -70,6 +70,13 @@
   height: 120px !important;
   font-size: 14px;
 }
+
+.bookmark{
+  position: relative;
+  left: 86%;
+  top: 2px;
+}
+
 </style>
 
 <div class="jumbotron jumbotron-fluid">
@@ -346,6 +353,9 @@
          {% else %}
           <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "result-card-block">
          {% endif %}
+         {% if request.user.is_anonymous != True %}
+              <i class="bookmark fa fa-3x fa-bookmark-o" aria-hidden="true"></i>
+         {% endif %}
            <!-- <img class="card-img-top" src="{{ item.logo_url }}" alt=""> -->
            <div class="card-body">
              {% with item.type as type %}
@@ -493,6 +503,9 @@
              {% else %}
                <br>
              {% endif %}
+
+
+
 
            </div>
          </div>

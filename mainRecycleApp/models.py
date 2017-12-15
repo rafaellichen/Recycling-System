@@ -2,7 +2,7 @@
 Models for MainRecycleApp contains RecyclingCenter model
 """
 from __future__ import unicode_literals
-
+from django.contrib.auth.models import User
 from django.db import models
 
 class RecyclingCenter(models.Model):
@@ -100,3 +100,7 @@ class Zip(models.Model):
         Method to return the zipcdoe
         """
         return self.zipcode
+
+
+class Bookmark (models.Model):
+    pass
