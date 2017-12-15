@@ -14,18 +14,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='PublicRecyclingBin',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('borough', models.TextField()),
-                ('siteType', models.TextField()),
-                ('siteName', models.TextField()),
-                ('address', models.TextField()),
-                ('latitude', models.TextField()),
-                ('longitude', models.TextField()),
-            ],
-        ),
-        migrations.CreateModel(
             name='RecyclingCenter',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
