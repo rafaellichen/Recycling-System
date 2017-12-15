@@ -2,7 +2,7 @@
 Models for MainRecycleApp contains RecyclingCenter model
 """
 from __future__ import unicode_literals
-
+from django.contrib.auth.models import User
 from django.db import models
 
 class RecyclingCenter(models.Model):
@@ -54,7 +54,7 @@ class PublicRecyclingBin(models.Model):
 
 class SpecialWasteSite(models.Model):
     """
-    Model for the special waste site 
+    Model for the special waste site
     """
     name = models.TextField()
     latitude = models.TextField()
@@ -68,3 +68,40 @@ class SpecialWasteSite(models.Model):
         Method to return the name
         """
         return self.name
+
+class Event(models.Model):
+    """
+    Model for the Safe Disposal Events
+    """
+    borough = models.TextField()
+    time = models.TextField()
+    address = models.TextField()
+    date = models.TextField()
+    description = models.TextField()
+
+    def __str__(self):
+        """
+        Method to return the name
+        """
+        return self.borough
+
+class Zip(models.Model):
+    """
+    Model for the list of zip codes in NY
+    """
+    zipcode = models.CharField(max_length=10)
+    state = models.CharField(max_length=2)
+    latitude = models.CharField(max_length=30)
+    longitude = models.CharField(max_length=30)
+    city = models.CharField(max_length=50)
+
+    def __str__(self):
+        """
+        Method to return the zipcdoe
+        """
+        return self.zipcode
+
+
+class Bookmark (models.Model):
+    facility = models.TextField()
+    user = models.ForeignKey(User, related_name='bookmarks')

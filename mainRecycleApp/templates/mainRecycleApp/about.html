@@ -1,50 +1,17 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
-<style>
-.poster-main{position:relative;width:800px;height:234px;margin:0px auto;visibility:hidden;}
-.poster-main.done{visibility:visible;}
-.poster-main a,.poster-main img{display: block;border:0px}
-.poster-main .poster-list{width:800px;height: 234px;list-style:none;}
-.poster-main .poster-btn{
-    position:absolute;
-    height: 234px;
-    width:100px;
-    top:0;
-    z-index:10;
-    opacity:.5;
-    color:black;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center center;
-    transition: opacity .3s;
-}
-.poster-main .poster-btn:hover{
-    opacity:.8;
-    transition: opacity .3s;
-}
-.poster-main .poster-item{position:absolute;left:0;top:0;}
-.poster-main .poster-left-btn{
-    left:0;
-    background-image: url('/static/img/arrow-left.png');
-}
-.poster-main .poster-right-btn{
-    right:0;
-    background-image: url('/static/img/arrow-right.png');
-}
-
-</style>
 
 <div class="container-fluid">
-	<div class="row">
+  <div class="row">
   <main> 
     <div class=" text-center">
-        <p><span>About Us</span></p>
+        <h2><span>About Us</span></h2>
     </div>
 
     <div class="container-fluid">
 
-        <img src="/static/img/about2.jpg" class="rounded float-right" height="500" width="500">
+        <img src="/static/img/about2.jpg" class="rounded float-right" height="300" width="300">
   
     <div class="main-about-footer">
         <p class="english">The company is committed to help the traditional recycle companies to achieve the transformation and
@@ -57,10 +24,42 @@
 </div>
 <br>
 
-<HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
+<main>
+    <div class="main-head text-center">
+        <h2><span>MRRS TEAM</span></h2>
+    </div>
+    <div class="main-team">
+      
+        <ul>
+            <li><span><img src="https://avatars1.githubusercontent.com/u/15823067?s=400&v=4" alt="" width="300" height="350"></span>
+                <h5>Rafael Li Chen</h5>
+                <h6>Scrum Master</h6>
+                <p> The facilitator for an agile development team. </p></li>
+            <li class="main-team-display"><span><img src="https://avatars3.githubusercontent.com/u/26423462?s=400&v=4" alt="" width="300" height="350"></span>
+                <h5>Rupesh Basnet</h5>
+                <h6>Product Owner</h6>
+                <p>Have a vision of what to build in website.</p></li>
+          
+            <li><span><img src="https://avatars2.githubusercontent.com/u/9379035?s=400&v=4" alt="" width="300" height="350"></span>
+                <h5>Moustafa Mahmoud</h5>
+                <h6>Other Developer</h6>
+                <p>Develope website </p></li>
+            <li><span><img src="https://avatars3.githubusercontent.com/u/15865510?s=400&v=4" alt="" width="300" height="350"></span>
+                <h5>Shirong Zheng</h5>
+                <h6>Other Developer</h6>
+                <p>Develope website</p></li>
+             
+        </ul>
+       
+        <span class="prevbtn"></span>
+        <span class="nextbtn"></span>
+    </div>
+</main>
+
+<!-- <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1> -->
 
 <div class="container-fluid">
-    <div class="row">
+    
 
    <div class='poster-main'>
         <img src="/static/img/pic1.jpg" width="100%">
@@ -70,7 +69,12 @@
         <img src="/static/img/pic5.jpg" width="100%">
 
     </div>
+
+    <br>
+    <div>
+    <p > Rethink, repurpose, recycle and remember. Rethink your daily purchases and ask yourself if there are alternatives. Repurpose unused items into art pieces to decorate your home. Recycle materials that can be broken down and turned into new products. Remember someone in the world may not have the resources your garbage bag is filled with. Set the bar high, be the change you wish to see and educate others.</p>
   </div>
+  
 </div><br>
 
     <div class="container text-center">
@@ -112,10 +116,8 @@
             "height":234,
         };
         Poster.init($(".poster-main"),setting);
-
     });
     </script>
 
 
 {% endblock %}
-
