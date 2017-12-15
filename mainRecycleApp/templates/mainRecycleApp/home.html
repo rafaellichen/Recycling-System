@@ -192,9 +192,13 @@
       {% else %}
       <div class="card-block" style="width: 20rem; border: 1px grey solid" id="{{item.idc}}">
         {% endif %}
-        {% if request.user.is_anonymous != True %}
+      {% if request.user.is_anonymous != True %}
+        {% if item.idc in bookmarks %}
+        <i class="bookmark fa fa-3x fa-bookmark" id="remove" title="remove from favorites" aria-hidden="true"></i>
+        {% else %}
         <i class="bookmark fa fa-3x fa-bookmark-o" id="add" title="add to favorites" aria-hidden="true"></i>
-        {% endif %}
+        {%endif%}
+      {% endif %}
 
         <div id="main" class="card-body">
           <div id="cate">
