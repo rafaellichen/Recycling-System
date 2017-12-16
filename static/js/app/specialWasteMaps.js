@@ -32,7 +32,7 @@ function initMap () {
   var marker2; 
 
   map2 = new google.maps.Map(document.getElementById("map2"), {
-    zoom: 15,
+    zoom: 10,
     center: new google.maps.LatLng(locations2[0].latitude, locations2[0].longitude)
   });
 
@@ -53,7 +53,7 @@ function initMap () {
   }
 
   // Added a datatoggle event handler to resize both maps to avoid grey map error
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {                 
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {                   
     google.maps.event.trigger(map, 'resize');
     google.maps.event.trigger(map2, 'resize');
 

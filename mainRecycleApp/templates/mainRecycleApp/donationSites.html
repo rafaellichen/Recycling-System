@@ -1,0 +1,10 @@
+{% extends "mainRecycleApp/header.html" %} {% block content %} {%load static%}
+
+{%load static %}
+<div id = "container">
+ {% for item in donationSite %}
+ 	{{ item }}
+ {% endfor%}
+</div>
+
+ {% endblock %}
