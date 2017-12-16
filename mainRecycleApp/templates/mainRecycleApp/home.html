@@ -27,42 +27,42 @@
     <div class="row">
       <div class="mx-auto">
         <div data-toggle="buttons">
-          <label class="btn btn-sq unselected btn-info">
+        <label id = "Electronics" class="btn btn-sq unselected btn-info">
 		    <input value="Electronics" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
 		    <img src="/static/img/electronics.png" style="width:60px; height:60px">
 		    <br>
 		    Electronics
 		  </label>
-          <label class="btn btn-sq btn-info unselected">
+        <label id ="Home_Appliances" class="btn btn-sq btn-info unselected">
 		    <input value="Home Appliances" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
 		    <img src="/static/img/homeappliances.png" style="width:60px; height:60px">
 		    <br>
 		    Appliances
 		  </label>
-          <label class="btn btn-sq btn-info unselected">
+          <label id ="Automotive" class="btn btn-sq btn-info unselected">
 		    <input id = "Automotive" value="Automotive" name="gtype" type="checkbox" autocomplete="off">
 			<br>
 			<img src="/static/img/car.png" style="width:60px; height:60px">
 		    <br>
 		    Automotive
 		  </label>
-          <label class="btn btn-sq btn-info unselected">
+          <label id ="Office_Furniture" class="btn btn-sq btn-info unselected">
 		    <input value="Office Furniture" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
 		    <img src="/static/img/householdfurniture.png" style="width:60px; height:60px">
 		    <br>
 		    Furniture
       </label>
-          <label class="btn btn-sq btn-info unselected">
+          <label id ="Clothing" class="btn btn-sq btn-info unselected">
 		    <input value = "Clothing" name="gtype" type="checkbox" autocomplete="off">
 		    <br>
         <img src="/static/img/clothing.png" style="width:60px; height:60px">
 		    <br>
 		    Clothing
       </label>
-          <label class="btn btn-sq btn-info unselected">
+          <label id ="Building_Products" class="btn btn-sq btn-info unselected">
         <input value = "Building Products" name="gtype" type="checkbox" autocomplete="off">
         <br>
         <img src="/static/img/buildingproducts.png" style="width:60px; height:60px">
@@ -83,34 +83,34 @@
   <div class="container collapse" id="List1">
     <div class="card card-block">
       <div data-toggle="buttons" class="span4" style="margin:4px 4px; float:left !important;">
-        <label class="btn btn-info unselected">
+        <label id ="Shoes" class="btn btn-info unselected">
           <input value="Shoes" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/shoes.png" style="width:30px; height:30px">
           Shoes
         </label>
-        <label class="btn btn-info unselected">
+        <label id ="Housewares" class="btn btn-info unselected">
           <input value="Housewares" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/houseware.png" style="width:30px; height:30px">
           Housewares
         </label>
-        <label class="btn btn-info unselected">
+        <label id ="Sporting_Equipment" class="btn btn-info unselected">
           <input value="Sporting Equipment" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/sport.png" style="width:30px; height:30px">
           Sports Equipment
         </label>
-        <label class="btn btn-info unselected">
+        <label id ="Collectibles" class="btn btn-info unselected">
           <input value="Collectibles" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/jewelry.png" style="width:30px; height:30px">
           Collectibles
           <!-- (antiques, jewelry, art) -->
         </label>
 
-        <label class="btn btn-info unselected">
+        <label id ="Toys" class="btn btn-info unselected">
           <input value="Toys" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/toy.png" style="width:30px; height:30px">
           Toys/Games
         </label>
-        <label class="btn btn-info unselected">
+        <label id ="Musical_Instruments" class="btn btn-info unselected">
           <input value="Musical Instruments" name="gtype" type="checkbox" autocomplete="off">
           <img src="/static/img/musicalinstruments.png" style="width:30px; height:30px">
           <!-- Musical  -->
@@ -123,31 +123,31 @@
     <div class="row">
       <div class="col-lg-9 mx-auto">
         <div data-toggle="buttons">
-          <label class="btn btn-info unselected">
+          <label id = "Sunday" class="btn btn-info unselected">
             <input value="Sunday" name="day" type="checkbox" autocomplete="off">
             Sunday
           </label>
-          <label class="btn btn-info unselected">
+          <label id = "Monday" class="btn btn-info unselected">
             <input value="Monday" name="day" type="checkbox" autocomplete="off">
             Monday
           </label>
-          <label class="btn btn-info unselected">
+          <label id = "Tuesday" class="btn btn-info unselected">
             <input value="Tuesday" name="day" type="checkbox" autocomplete="off">
             Tuesday
           </label>
-          <label class="btn btn-info unselected">
+          <label id = "Wednesday" class="btn btn-info unselected">
             <input value="Wednesday" name="day" type="checkbox" autocomplete="off">
             Wednesday
           </label>
-          <label class="btn btn-info unselected">
+          <label id = "Thursday" class="btn btn-info unselected">
             <input value="Thursday" name="day" type="checkbox" autocomplete="off">
             Thursday
           </label>
-          <label class="btn btn-info unselected">
+          <label id = "Friday" class="btn btn-info unselected">
             <input value="Friday" name="day" type="checkbox" autocomplete="off">
             Friday
           </label>
-          <label class="btn btn-info unselected">
+          <label id = "Saturday" class="btn btn-info unselected">
             <input value="Saturday" name="day" type="checkbox" autocomplete="off">
             Saturday
           </label>
@@ -180,6 +180,7 @@
   <p id="result-ok" class="text-center">Places that accepts donation of these types in your location.</p>
   <div class="text-center">
     {% for each in userCategories %} {{ each }}, {% endfor %}
+    
   </div>
 </div>
 {% endif %}
@@ -308,7 +309,7 @@
           <br> {% endif %}
           <!--<a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>-->
           <a class="btn btn-success" href="/donation/{{item.idc}}">More Info</a>
-          
+
           {% if item.url %}
           <a target="#blank" class="btn btn-info" href="{{item.url}}">Website</a> {% else %}
           <br> {% endif %}
@@ -340,5 +341,10 @@
       {% csrf_token %}
       <script type="text/javascript" src="{% static "js/app/home.js" %}">
       </script>
+      {% if data %}
+      <script type="text/javascript">
+        setToggleStatus({{ userCategories | safe }}, {{ days | safe }});
+      </script>
+      {% endif %}
 
       {% endblock %}
