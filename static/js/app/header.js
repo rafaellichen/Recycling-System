@@ -2,8 +2,6 @@ const initRequest = function(url) {
 
 	var objSearchType, objAddress, objItemCategory, objVendorwithin;
 
-
-
 	jQuery.support.cors = true;
 	$("#divsearchresult").html("");
 

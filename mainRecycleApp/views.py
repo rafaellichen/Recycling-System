@@ -2,7 +2,7 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 from collections import OrderedDict
-from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip, PublicRecyclingBin
 from django.contrib.auth.models import User
 from django.shortcuts import render
 import json
@@ -90,6 +90,15 @@ def get_safe_disposal_events(boro):
     if result is not None:
         return result
 
+def get_public_recycle_bins(boro):
+    """
+    Method to get the public recycle bins from the borough
+    """
+    result = []
+    allResult = list(PublicRecyclingBin.objects.filter(borough=boro).values()[:10])
+    allResult = json.dumps(allResult, cls=DjangoJSONEncoder)
+    return allResult
+
 def return_lat_long_from_Zip(zip):
     """
     This method will return the latitude and longitude form Zipcode
@@ -170,6 +179,8 @@ def search_withQuery(request):
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
         special_waste_site = get_special_waste_site(borough)
         safe_disposal_events = get_safe_disposal_events(borough)
+        public_recycle_bins = get_public_recycle_bins(borough)
+
         if(day!=[]):
             result = filterDay(result,day)
         if(time!=""):
@@ -213,7 +224,7 @@ def search_withQuery(request):
             returnval.append(final[i])
         # print (check_Distance_Of_Zips('11104', '10016'))
         get_recommended_list_test (returnval, category, zipcode)
-
+        bookmarks=[]
         if request.user.is_authenticated:
             bookmarks = list(set(request.user.bookmarks.values_list('facility', flat=True)))
 
@@ -221,4 +232,5 @@ def search_withQuery(request):
                                                            "bookmarks":bookmarks,
                                                            "userCategories": category,
                                                            "specialWasteSite" : special_waste_site,
-                                                           "safeDisposalEvents" : safe_disposal_events })
+                                                           "safeDisposalEvents" : safe_disposal_events,
+                                                           "publicRecycleBins" : public_recycle_bins})

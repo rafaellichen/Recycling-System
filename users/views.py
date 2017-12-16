@@ -51,6 +51,7 @@ def profile(request):
     if request.method == 'GET':
         bookmarks = getBookmarks(user)
         data = getFacilities(bookmarks)
+        print(data)
         return render(request, 'users/profile.djhtml', {"data":data})
     else:
         pass
@@ -62,7 +63,7 @@ def index(request):
 
 def getBookmarks(user):
     ''' Returns user's bookmarked recycling centers'''
-    user_bookmarks = user.bookmarks.all().values_list('facility')
+    user_bookmarks = user.bookmarks.all().values_list('facility', flat=True)
     return list(set(user_bookmarks))
 
 def getFacilities(idc_list):

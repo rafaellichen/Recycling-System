@@ -293,7 +293,8 @@
           <br> {% if item.picksup == "1" %}
           <img id="card-img" src="/static/img/pick.png" alt="" height="30" width="30"> Pick up</img>
           <br> {% endif %}
-          <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>          {% if item.url %}
+          <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
+                    {% if item.url %}
           <a target="#blank" class="btn btn-info" href="{{item.url}}">Website</a> {% else %}
           <br> {% endif %}
 
