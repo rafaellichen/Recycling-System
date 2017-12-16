@@ -4,13 +4,23 @@ from django import forms
 
 class SignupForm(forms.ModelForm):
     '''Class SignupForm that takes forms.ModelForm as input param'''
-    username = forms.CharField(label=(u'User Name'))
-    password = forms.CharField(widget=forms.PasswordInput())
-    confirm_password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput({
+        'placeholder': 'Password'
+        }))
+    confirm_password = forms.CharField(widget=forms.PasswordInput({
+        'placeholder': 'Confirm password'
+        }))
 
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username', 'password']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Email'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Username'}),
+            # 'password': forms.TextInput(attrs={'placeholder': 'Password'}),
+        }
 
     def clean_username(self):
         '''Check if username already exists in the database or not'''
