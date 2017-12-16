@@ -21,9 +21,10 @@
 	          <div id = "map" style = "top: -220px; clear:both;"></div>
 	        </div>
 	 	</div>
-	 	<div role = "tabpanel" class = "tab-pane fade" id = "publicRecycleBins">
-
-		    <h4>Public Recycle Bins</h4>
+	 	<div style = "padding:10px; height:460px;" role = "tabpanel" class = "tab-pane fade" id = "publicRecycleBins">
+	 		<div class = "container">
+	          <div id = "map2" style = "height: 400px; clear:both;"></div>
+	        </div>
 		</div>
 		<div role = "tabpanel" class = "tab-pane fade" id = "safeDisposalEvents">
 		      <div class="card-body">
@@ -78,6 +79,8 @@
   </div>
 </div>
   <meta id = "specialWasteSite_meta" data-locations = '{{ specialWasteSite|safe }}'>
+  <meta id = "publicRecycleBins_meta" data-locations = '{{ publicRecycleBins|safe }}'>
+
   <script type="text/javascript" src="{% static "js/app/specialWasteMaps.js" %}">
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9k7z9ezCMLWq9D14zpuZxndZV8rRkW2E&callback=initMap" async defer>
