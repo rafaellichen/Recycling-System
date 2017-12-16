@@ -10,26 +10,53 @@
 		
 </div>
 <div class = "row justify-content-center">
+
+	<div class = "col-lg-4">
 		Address: 
-		<p id = "address"> {{item.address}} ,{{item.borough}}, {{item.zip}}</p>
-		Time: 
+		<p id = "address"> {{item.address}}, {{item.borough}}, {{item.zip}}</p>
+		Time: <br>
 		Monday : {{item.Monday}} <br>
 		Tuesday : {{item.Tuesday}} <br>
-		Wednesday : {{item.Wednesday}}
-		Thrusday : {{item.Thrusday}}
-		Friday : {{item.Friday}}
-		Saturday : {{item.Saturday}}
-		Sunday : {{item.Sunday}}
-		
-		Phone: 
+		Wednesday : {{item.Wednesday}} <br>
+		Thrusday : {{item.Thursday}} <br>
+		Friday : {{item.Friday}} <br>
+		Saturday : {{item.Saturday}} <br>
+		Sunday : {{item.Sunday}} <br>
+		Phone: <br>
 		{{item.cell}}
+	</div>
 
+	<div class = "col-lg-4">
 		Accepted Types:
-		{% for value in item.type %}
-			{{value}}
-		{% endfor %}
+		<br>
+		{% with item.type as type %} {% for each in type %} {% if each == "Electronics" %}
+            <img id="card-img" src="/static/img/electronics.png" alt="Electronics" height="42" width="42"> {% endif %} {% if each == "Home Appliances" %}
+            <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42"> {% endif %} {% if each == "Automotive" %}
+            <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42"> {% endif %} {% if each == "Office Furniture" %}
+            <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42"> {% endif %} {% if each == "Clothing" %}
+            <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42"> {% endif %} {% if each == "Building Products" %}
+            <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42"> {% endif %} {% if each == "Art Supplies" %}
+            <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42"> {% endif %} {% if each == "Food" %}
+            <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42"> {% endif %} {% if each == "Office Supplies" %}
+            <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42"> {% endif %} {% if each == "Textiles" %}
+            <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42"> {% endif %} {% if each == "Household Furniture" %}
+            <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42"> {% endif %} {% if each == "Shoes" %}
+            <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42"> {% endif %} {% if each == "Housewares" %}
+            <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42"> {% endif %} {% if each == "Sporting Equipment" %}
+            <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42"> {% endif %} {% if each == "Collectibles" %}
+            <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42"> {% endif %} {% if each == "Lubricants" %}
+            <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42"> {% endif %} {% if each == "Containers" %}
+            <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42"> {% endif %} {% if each == "Medical Equipment" %}
+            <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42"> {% endif %} {% if each == "Toys" %}
+            <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42"> {% endif %} {% if each == "Musical Instruments" %}
+            <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42"> {% endif %} {% endfor %} {% endwith %}
+	</div>	
 </div>
-<iframe id = "map" width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>
+<div class = "row justify-content-center" style = "position:relative;">
+		
+		<iframe id = "map" width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>
+
+</div>
 {% endfor %}
 </div>
 <script> 

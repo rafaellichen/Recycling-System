@@ -227,59 +227,72 @@
           <h6 class="card-title">{{item.name}}</h6>
           <div class="progress">
             {% if item.Monday != "closed" %}
-            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%" data-placement="bottom" data-toggle="tooltip" title="{{item.Monday}}" data-container="body">
               MON
             </div>
             {% else %}
-            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%" 
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Monday}}" data-container="body">
               MON
             </div>
             {% endif %} {% if item.Tuesday != "closed" %}
-            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Tuesday}}" data-container="body">
               TUE
             </div>
             {% else %}
-            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Tuesday}}" data-container="body">
               TUE
             </div>
             {% endif %} {% if item.Wednesday != "closed" %}
-            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Wednesday}}" data-container="body">
               WED
             </div>
             {% else %}
-            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Wednesday}}" data-container="body">
               WED
             </div>
             {% endif %} {% if item.Thursday != "closed" %}
-            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:16%">
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:16%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Thursday}}" data-container="body">
               THUR
             </div>
             {% else %}
-            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:16%">
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:16%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Thursday}}" data-container="body">
               THUR
             </div>
             {% endif %} {% if item.Friday != "closed" %}
-            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Friday}}" data-container="body">
               FRI
             </div>
             {% else %}
-            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Friday}}" data-container="body">
               FRI
             </div>
             {% endif %} {% if item.Saturday != "closed" %}
-            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Saturday}}" data-container="body">
               SAT
             </div>
             {% else %}
-            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Saturday}}" data-container="body">
               SAT
             </div>
             {% endif %} {% if item.Sunday != "closed" %}
-            <div class="progress-bar bg-success" role="progressbar" style="width:14%">
+            <div class="progress-bar bg-success" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Sunday}}" data-container="body">
               SUN
             </div>
             {% else %}
-            <div class="progress-bar bg-danger" role="progressbar" style="width:14%">
+            <div class="progress-bar bg-danger" role="progressbar" style="width:14%"
+            data-placement="bottom" data-toggle="tooltip" title="{{item.Sunday}}" data-container="body">
               SUN
             </div>
             {% endif %}
@@ -293,13 +306,12 @@
           <br> {% if item.picksup == "1" %}
           <img id="card-img" src="/static/img/pick.png" alt="" height="30" width="30"> Pick up</img>
           <br> {% endif %}
-          <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
-                    {% if item.url %}
+          <!--<a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>-->
+          <a class="btn btn-success" href="/donation/{{item.idc}}">More Info</a>
+          
+          {% if item.url %}
           <a target="#blank" class="btn btn-info" href="{{item.url}}">Website</a> {% else %}
           <br> {% endif %}
-
-          <a class="btn btn-info" href="/donation/{{item.idc}}">More Info</a>
-
 
 
         </div>

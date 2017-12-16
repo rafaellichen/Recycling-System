@@ -164,6 +164,8 @@ def donationSiteDetails(request, id):
     '''Method to get the donation site details'''
     result = list(RecyclingCenter.objects.filter(idc=id).values())
     final = combine_idc(result)
+    for i in final:
+        final[i]["type"]=final[i]['type'].split(",")
     returnval = []
     for i in final:
         returnval.append(final[i])
@@ -178,6 +180,7 @@ def combine_idc(result):
             final[keys] = {"idc":cur_element["idc"], "name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"] + "," +final[keys]["type"]}
         else:  # for unique "idc"
             final[keys] = {"idc":cur_element["idc"], "name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"]}
+    print (final)
     return final
 
 def search_withQuery(request):
@@ -199,7 +202,7 @@ def search_withQuery(request):
         special_waste_site = get_special_waste_site(borough)
         safe_disposal_events = get_safe_disposal_events(borough)
         public_recycle_bins = get_public_recycle_bins(borough)
-        
+
         if(day!=[]):
             result = filterDay(result,day)
         if(time!=""):
