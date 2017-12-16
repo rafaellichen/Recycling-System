@@ -247,6 +247,7 @@ def search_withQuery(request):
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
                                                            "bookmarks":bookmarks,
                                                            "userCategories": category,
+                                                           "days": day,
                                                            "specialWasteSite" : special_waste_site,
                                                            "safeDisposalEvents" : safe_disposal_events,
                                                            "publicRecycleBins" : public_recycle_bins})

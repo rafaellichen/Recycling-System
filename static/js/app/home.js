@@ -2,9 +2,24 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+function setToggleStatus(selectedTypes, days) {
+  console.log(selectedTypes);
+  selectedTypes = $.map(selectedTypes, function(str) {
+    return str.replace(/ /g, '_');
+  })
+  console.log(selectedTypes);
+  for (var each in selectedTypes) {
+    $("#"+selectedTypes[each]).addClass('active');
+  }
+  if (days) {
+    for (var day in days) {
+     $("#"+days[day]).addClass('active');
+    }
+  }
+}
+
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
-
 });
 
 function togglemore() {
