@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	 // document.getElementById("logo-png").className+= " img-fluid";
 
-
     //send the message by click
     $(".chat-send").click(sendMsg);
 
@@ -15,6 +14,9 @@ $(document).ready(function() {
 
     //clear the chat box
     $(".chat-clear").click(clearChatBox);
+
+    //reset the chat box
+    $(".chat-reset").click(resetChatBox);
 });
 
 //send message to chat box
@@ -35,6 +37,17 @@ function sendMsg() {
 
     //keep the scroll in bottom
     chatBox.scrollTop(chatBox[0].scrollHeight);
+}
+
+//clear the chat box
+function clearChatBox() {
+    alert("Clean Now!!");
+    $(".chat-box").html("");
+}
+
+//reset the chat box
+function resetChatBox() {
+    $(".chat-box").html("");  
 }
 
 //set up the AI dialog
@@ -115,8 +128,5 @@ function timeGreeting(h){
     }
 }
 
-//clear the chat box
-function clearChatBox() {
-    $(".chat-box").html("");
-}
+
 
