@@ -10,9 +10,7 @@
           <h1>Welcome, {{request.user.first_name}}!
 
         </div>
-         <div id ="div1">
-       <h6>Leave Feedback</h6>
-</div>
+         
    <hr><br>
         <div class="container">
           <h4>Your Bookmarks</h4>
@@ -185,7 +183,7 @@
 <hr>
 <br>
 <h4>Leave feedback</h4>
-<a href="/feedback"><img src="/static/img/feedback.png" width="80" height="80" onmouseover="document.getElementById('div1').style.display='block'" onmouseout="document.getElementById('div1').style.display='none'"></a></h1>
+<a href="/feedback"><img src="/static/img/feedback.png" width="80"></a></h1>
 
 <br><br>
 <br>
