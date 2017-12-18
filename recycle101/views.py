@@ -11,6 +11,8 @@ def index(request):
 def searchHowTo(request):
     if request.method == 'POST':
         recycleType = request.POST['recycleType']
-        result = list(HowTo.objects.filter(recycleType__in=recycleType).values())
+        print (recycleType)
+        result = list(HowTo.objects.filter(recycleType=recycleType).values())
         print (result)
         return render(request, 'main.html', {"data": result})
+        

@@ -11,7 +11,9 @@
 </div>
 <div class = "container">
 	{% if data %}
-		{{ data }}
+		{% for item in data %}
+			{{item}}
+		{% endfor %}
 	{% else %}
 		No Result
 	{% endif %}
