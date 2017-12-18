@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'mainRecycleApp',
     'users',
     'guestbook',
+    'recycle101',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

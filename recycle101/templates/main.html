@@ -1,0 +1,22 @@
+{% extends "mainRecycleApp/header.html" %}
+
+{% block body %}
+<div class="container"  style="margin-top:70px;">
+	<form role="form" method="POST" action= "recycle101/search/"> 
+	   {% csrf_token %}
+	   <input name = "recycleType" class="form-control form-control-lg" type="text" placeholder="Enter the  item type">
+	   <br>
+	   <button type="submit" class="btn btn-primary">Search</button>
+	</form>
+</div>
+<div class = "container">
+	{% if data %}
+		{% for item in data %}
+			{{item}}
+		{% endfor %}
+	{% else %}
+		No Result
+	{% endif %}
+</div>
+
+{% endblock %}
