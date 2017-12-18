@@ -5,5 +5,12 @@ from recycle101.models import HowTo
 
 # Create your views here.
 def index(request):
-    '''Index render method for mainrecycleApp/home'''
+    '''Index render method for recycle101'''
     return render(request, 'main.html')
+
+def searchHowTo(request):
+    if request.method == 'POST':
+        recycleType = request.POST['recycleType']
+        result = list(HowTo.objects.filter(recycleType__in=recycleType).values())
+        print (result)
+        return render(request, 'main.html', {"data": result})
