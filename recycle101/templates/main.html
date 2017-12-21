@@ -2,11 +2,13 @@
 
 {% block body %}
 <div class="container"  style="margin-top:70px;">
-	<form role="form" method="POST" action= "recycle101/search/"> 
+	<form role="form" method="POST" action= "/search101"> 
 	   {% csrf_token %}
-	   <input name = "recycleType" class="form-control form-control-lg" type="text" placeholder="Enter the  item type">
-	   <br>
-	   <button type="submit" class="btn btn-primary">Search</button>
+	   <div class = "ui-widget">
+		   <input id = "recycleType" name = "recycleType" class="form-control form-control-lg" type="text" placeholder="Enter the  item type">
+		   <br>
+		   <button type="submit" class="btn btn-primary">Search</button>
+	   </div>
 	</form>
 </div>
 <div class = "container">
@@ -18,5 +20,12 @@
 		No Result
 	{% endif %}
 </div>
+<script type="text/javascript">
+	$(function() {
+		$('#recycleType').autocomplete({
+			source: "/api/types/"
+		})
+	});
+</script>
 
 {% endblock %}
