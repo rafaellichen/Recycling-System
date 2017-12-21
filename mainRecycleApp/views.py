@@ -2,7 +2,7 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 from collections import OrderedDict
-from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip, PublicRecyclingBin
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip, PublicRecyclingBin, Description
 from django.contrib.auth.models import User
 from django.shortcuts import render
 import json
@@ -43,7 +43,6 @@ def getBoroughFromZip(zipcode):
         # Not a new york city zip code
         borough = ""
     return borough
-
 
 def filterDay(result, day):
     '''filter out closed facilities'''
@@ -160,16 +159,24 @@ def get_recommended_list_test(returnval, category, zipcode):
         returnval.insert(0, item)
     return returnval
 
+def get_further_details(name):
+    further_desc = Description.objects.filter(name=name).values()
+    print (further_desc)
+    return further_desc
+
 def donationSiteDetails(request, id):
     '''Method to get the donation site details'''
-    result = list(RecyclingCenter.objects.filter(idc=id).values())
-    final = combine_idc(result)
+    result = RecyclingCenter.objects.filter(idc=id).values()
+    # print (further_desc)
+    final = combine_idc(result) 
     for i in final:
         final[i]["type"]=final[i]['type'].split(",")
     returnval = []
     for i in final:
         returnval.append(final[i])
-    return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval })
+    returnDesc = get_further_details(returnval[0]['name'])
+    return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval,
+                                                                  "furtherInfo" : returnDesc})
 
 def combine_idc(result):
     '''Method that combines the same idc values'''

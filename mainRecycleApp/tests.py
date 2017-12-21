@@ -4,7 +4,7 @@ Created on 15 November 2017
 """
 from __future__ import unicode_literals
 from django.test import TestCase
-from mainRecycleApp.models import RecyclingCenter, PublicRecyclingBin, SpecialWasteSite
+from mainRecycleApp.models import RecyclingCenter, PublicRecyclingBin, SpecialWasteSite, Description
 from django.core.urlresolvers import reverse
 
 
