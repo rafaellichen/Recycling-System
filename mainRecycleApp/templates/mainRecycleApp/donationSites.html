@@ -52,6 +52,23 @@
             <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42"> {% endif %} {% endfor %} {% endwith %}
 	</div>	
 </div>
+{% if furtherInfo %}
+<div class = "row justify-content-center">
+	<div class = "col-lg-4">
+		{% for desc in furtherInfo %}
+			{% if desc.description %}
+			<h3>Description :</h3>
+				<p>{{desc.description}}</p>
+			{% endif %}
+			{% if desc.pickup_info %}
+			<h3>Pickup/Drop Off Information :</h3>
+				<p>{{desc.pickup_info}}</p>
+			{% endif %}
+
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
 <div class = "row justify-content-center" style = "position:relative;">
 		
 		<iframe id = "map" width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowfullscreen></iframe>

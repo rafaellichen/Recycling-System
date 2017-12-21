@@ -5,6 +5,7 @@
 }
 
 
+
 #background-img {
   background:url({% static "img/grass.jpg" %});
 }
