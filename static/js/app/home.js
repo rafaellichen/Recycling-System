@@ -106,6 +106,8 @@ const bookmarkHandler = e =>{
             console.log(res);
       })
       .catch(err=> console.log(err))
+      
+        
 };
 
 document.querySelectorAll('.bookmark').forEach ( el => el.addEventListener('click', bookmarkHandler));
