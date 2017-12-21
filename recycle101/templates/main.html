@@ -1,7 +1,26 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block body %}
-<div class="container"  style="margin-top:70px;">
+{%load static%}
+<div class= "cotainer" style="margin-top:70px;">
+<div class = "row justify-content-center">
+		<h2>How recycling in New York works?</h2>
+		
+</div>
+<div class = "row justify-content-center"><p>Recycling in New York depends on three things: </p></div>
+<div class = "row justify-content-center">
+	Item type
+</div>
+<div class = "row justify-content-center">
+	Item condition
+</div>
+<div class = "row justify-content-center">
+	Item quantity
+</div>
+<br>
+</div>
+</div>
+<div class="container" style="margin-top:30px;">
 	<form role="form" method="POST" action= "/search101"> 
 	   {% csrf_token %}
 	   <div class = "ui-widget">
@@ -13,19 +32,17 @@
 </div>
 <div class = "container">
 	{% if data %}
+	<br>
 		{% for item in data %}
-			{{item}}
+			<h3>{{ item.recycleType }}</h3>
+			<p>{{ item.description }}</p>
 		{% endfor %}
 	{% else %}
 		No Result
 	{% endif %}
 </div>
-<script type="text/javascript">
-	$(function() {
-		$('#recycleType').autocomplete({
-			source: "/api/types/"
-		})
-	});
-</script>
+
+
+<script type="text/javascript" src="{% static "js/app/recycle101.js" %}">
 
 {% endblock %}
