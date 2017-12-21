@@ -229,7 +229,25 @@ class RecyclingCenterModelLabelTest(TestCase):
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         output_name = RECYCLINGCENTER.name
         self.assertEqual(output_name, str(RECYCLINGCENTER))
-    
+
+class DescriptionModelsTest(TestCase):
+
+    @classmethod
+    def setUp(self):
+        self.description = Description.objects.create(idc='1',
+                                       name='TestSiteName',
+                                       description='TestDescription',
+                                       pickup_info='Test pickup information')
+
+    def test_public_recycle_bin_name(self):
+        self.assertEqual(self.description.idc, "1")
+        self.assertEqual(self.description.name, "TestSiteType")
+        self.assertEqual(self.description.description, "TestDescription")
+        self.assertEqual(self.description.pickup_info, "Test pickup information")
+
+    def tearDown(self):
+        del self
+
 class PublicRecyclingBinsModelsTest(TestCase):
 
     @classmethod

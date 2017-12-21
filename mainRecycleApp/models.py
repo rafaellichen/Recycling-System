@@ -101,6 +101,20 @@ class Zip(models.Model):
         """
         return self.zipcode
 
+class Description(models.Model):
+    """
+    Model for the Further Description and pickup/drop off information if available
+    """
+    idc = models.CharField(max_length=5, blank=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    pickup_info = models.TextField(blank=True)
+
+    def __str__(self):
+        """
+        Method to return the name
+        """
+        return self.name
 
 class Bookmark (models.Model):
     facility = models.TextField()
