@@ -11,9 +11,12 @@
 </div>
 <div class = "row justify-content-center">
 
+ 
 	<div class = "col-lg-4">
+	<div class="card-panel center card green lighten-5" >
 		Address: 
 		<p id = "address"> {{item.address}}, {{item.borough}}, {{item.zip}}</p>
+   </div>
 		Time: <br>
 		Monday : {{item.Monday}} <br>
 		Tuesday : {{item.Tuesday}} <br>
@@ -22,12 +25,21 @@
 		Friday : {{item.Friday}} <br>
 		Saturday : {{item.Saturday}} <br>
 		Sunday : {{item.Sunday}} <br>
-		Phone: <br>
-		{{item.cell}}
+		Phone: {{item.cell}} <br>
 	</div>
 
+ 
+
+  
+      
 	<div class = "col-lg-4">
+		<div class="card">
+        <div class="card-image">
+
+          <img src="/static/img/RecyclingCartoon.png" height="200" width="200"><br>
+        <div class="center">
 		Accepted Types:
+	</div>
 		<br>
 		{% with item.type as type %} {% for each in type %} {% if each == "Electronics" %}
             <img id="card-img" src="/static/img/electronics.png" alt="Electronics" height="42" width="42"> {% endif %} {% if each == "Home Appliances" %}
@@ -52,6 +64,12 @@
             <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42"> {% endif %} {% endfor %} {% endwith %}
 	</div>	
 </div>
+
+</div>
+</div>
+
+<br>
+<br>
 {% if furtherInfo %}
 <div class = "row justify-content-center">
 	<div class = "col-lg-4">
