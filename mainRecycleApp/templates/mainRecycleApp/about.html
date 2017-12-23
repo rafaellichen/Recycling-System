@@ -1,20 +1,19 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
-
-<div class="container-fluid">
-  <div class="row">
-  <main> 
-    <div class=" text-center">
-        <h2><span>About Us</span></h2>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row justify-content-center">
+          <h1 id="header1">About Us</h1>
     </div>
-        <img src="/static/img/about2.jpg" class="rounded float-right" height="100" width="100">
+  </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
         <p class="english">The company is committed to help the traditional recycle companies to achieve the transformation and
             upgrading in the Internet age. At present, local residents could schedule garbage(recycle source) then choose one of these recycle companies via our website.</p>
- 
-
   </div>
-</main>
+
 </div>
 </div>
 
@@ -22,87 +21,50 @@
     <div class="main-head text-center">
         <h2><span>MRRS TEAM</span></h2>
     </div>
-    <div class="main-team">
-      
-        <ul>
-            <li><img src="https://avatars1.githubusercontent.com/u/15823067?s=400&v=4" alt="" width="100">
-                <h5>Rafael Li Chen <a href="https://github.com/rafaellichen"><i class="fa fa-github"></i></a></h5>
-                <h6>Scrum Master</h6>
-                <p> The facilitator for an agile development team. </p></li>
-            <li class="main-team-display"><img src="https://avatars3.githubusercontent.com/u/26423462?s=400&v=4" alt="" width="100">
-                <h5>Rupesh Basnet <a href="https://github.com/rupeshbasnet"><i class="fa fa-github"></i></a></h5>
-                <h6>Product Owner</h6>
-                <p>Having a vision of what to build in website.</p></li>
-          
-            <li><img src="https://avatars2.githubusercontent.com/u/9379035?s=400&v=4" alt="" width="100">
-                <h5>Moustafa Mahmoud <a href="https://github.com/drsh2k"><i class="fa fa-github"></i></a></h5>
-                <h6>Website Developer</h6>
-                <p>Develope website depend requirement.</p></li>
-            <li><img src="https://avatars3.githubusercontent.com/u/15865510?s=400&v=4" alt="" width="100">
-                <h5>Shirong Zheng <a href="https://github.com/shirongzheng"><i class="fa fa-github"></i></a></h5>
-                <h6>Website Developer</h6>
-                <p>Develope website depend requirement.</p></li>
-             
-        </ul>
+    <div class = "container">
+    <div class="card-deck">
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars1.githubusercontent.com/u/15823067?s=400&v=4" width = "50%" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Rafael Li Chen <br><a href="https://github.com/rafaellichen"><i class="fa fa-github"></i></a></h5>
+        <p>Scrum Master</p>
+        <p>The facilitator for an agile development team.</p></p>
+        </div>
+      </div>
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars3.githubusercontent.com/u/26423462?s=400&v=4" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Rupesh Basnet <br><a href="https://github.com/rupeshbasnet"><i class="fa fa-github"></i></a></h5>
+        <p>Product Owner</p>
+        <p>Having a vision of what to build in website.</p></p>
+        </div>
+      </div>
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars2.githubusercontent.com/u/9379035?s=400&v=4" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Moustafa Mahmoud <br><a href="https://github.com/drsh2k"><i class="fa fa-github"></i></a></h5>
+        <p>Developer</p>
+        <p>Develop website depend requirement.</p></p>
+        </div>
+      </div>
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars3.githubusercontent.com/u/15865510?s=400&v=4" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Shirong Zheng <br><a href="https://github.com/shirongzheng"><i class="fa fa-github"></i></a></h5>
+        <p>Developer</p>
+        <p>Develop website depend requirement.</p></p>
+        </div>
+      </div>
+
+      </div>
+    </div>
+        
        
-        <span class="prevbtn"></span>
-        <span class="nextbtn"></span>
+        
     </div>
 </main>
 
-<!-- <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1> -->
-<br>
-<div class="container text-center">
-    <h2>Recycle Source</h2><br>
-  </div>
-<div class="container-fluid">
-    
 
-   <div class='poster-main'>
-        <img src="/static/img/pic1.jpg" width="100%">
-        <img src="/static/img/pic2.jpg" width="100%">
-        <img src="/static/img/pic3.jpg" width="100%">
-        <img src="/static/img/pic4.jpg" width="100%">
-        <img src="/static/img/pic5.jpg" width="100%">
-
-    </div>
-
-    <br>
-    <div>
-    <p > Rethink, repurpose, recycle and remember. Rethink your daily purchases and ask yourself if there are alternatives. Repurpose unused items into art pieces to decorate your home. Recycle materials that can be broken down and turned into new products. Remember someone in the world may not have the resources your garbage bag is filled with. Set the bar high, be the change you wish to see and educate others.</p>
-  </div>
-  
-</div><br>
-
-    <div class="container text-center">
-    <h3>What We Do</h3><br>
-    <div class="row">
-      <div class="col-sm-4">
-        <img src="/static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
-        <p>For Residents</p>
-      </div>
-      <div class="col-sm-4">
-        <img src="/static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
-        <p>For Recycle Companies</p>
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
-         <p>Local Residents</p><br>
-            Do you want recycle garbege in smart way?
-        </div>
-        <div class="well">
-         <p>Recycle Companies</p>
-            Getting recycle sources directly from residents?
-        </div>
-      </div>
-    </div>
-  </div><br>
-
- <div class="container">
-  <div class="embed-responsive embed-responsive-16by9">
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div><br>
 
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
     <script src="/static/js/poster.js"></script>
