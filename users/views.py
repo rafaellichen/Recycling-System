@@ -10,29 +10,65 @@ from django.http import JsonResponse
 import json
 
 def signin(request):
-    '''Signin method with param request'''
+    """
+    This Method renders the login.html for route ('/login') 
+    
+    Will authenticate the user and also perform clean form operation to check for any errors 
+    in the login process
+    
+    If the user is authenticated will redirect to the home route
+    Else will display the form error message
+
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template templates/login.html being sent over 
+    """
+    # create a return context arg for the form
     args = {}
     if request.method == 'POST':
         LOGINFORM = forms.LoginForm(request.POST or None)
         if LOGINFORM.is_valid():
             user = authenticate(username=LOGINFORM.cleaned_data['username'], password=LOGINFORM.cleaned_data['password'])
-            print (user)
+            # print (user)
             if request.user.is_authenticated(): return redirect('/')
             login(request, user)
     else:
         LOGINFORM = forms.LoginForm()
     args['form'] = LOGINFORM
-    print (args)
+    # print (args)
     return render(request, 'users/login.djhtml', args)
 
 @csrf_exempt
 def signout(request):
-    '''Signout Method with param request'''
+    """
+    Signout Method with param request
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        redirect: HttpResponse object that redirects to the home route
+    """
     logout(request)
     return redirect('/')
 
 def signup(request):
-    '''Signup Method with param request'''
+    """
+    This Method renders the signup.html for route ('/signup') 
+    
+    Will signup the user and also perform clean form operation to check for any errors 
+    in the registeration process
+    
+    If the form is validated will redirect a redirect page
+    Else will display the form error message
+
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template templates/redirect.html being sent over for no errors
+    """
     args = {}
     if request.method == 'POST':
         USERFORM = forms.SignupForm(request.POST or None)
@@ -49,7 +85,15 @@ def signup(request):
 
 @login_required
 def profile(request):
-    '''Profile render method that renders the Users/Profile and redirects if the user is not authenticated'''
+    """
+    Profile render method that renders the Users/Profile and redirects if the user is not authenticated
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object that renders users/profile.html with context of:
+            'data' : List of all facilities that the user has bookmarked 
+    """
     user = request.user
     if request.method == 'GET':
         bookmarks = getBookmarks(user)
@@ -61,14 +105,27 @@ def profile(request):
 
 @login_required
 def editProfile(request):
-    '''Users to edit the profile'''
+    """
+    This Method renders the editprofile.html for route ('/editprofile') 
+    
+    Will allow users to enter the new information for their profile
+    
+    If the form is validated will redirect a profile.html page with username
+    Else will display the form error message 
+
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template templates/profile.html being sent over for no errors
+    """
     args = {}
     if request.method == 'POST':
-        print ("inside edit profile")
+        # print ("inside edit profile")
         EDITFORM = forms.EditProfile(request.POST or None, instance = request.user)
-        print (EDITFORM)
+        # print (EDITFORM)
         if EDITFORM.is_valid():
-            print ("form validated")
+            # print ("form validated")
             EDITFORM.save()
             user_first_name = EDITFORM.cleaned_data['first_name']
             return render(request, 'users/profile.djhtml', {'user': user_first_name})
@@ -78,16 +135,40 @@ def editProfile(request):
     return render(request, 'users/editProfile.djhtml', args)
 
 def index(request):
-    '''Index render method that renders app/index'''
+    """
+    This Method renders the index.html for route ('/') 
+    
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template app/index.html being sent over 
+    """
     return render(request, 'app/index.djhtml')
 
 def getBookmarks(user):
-    ''' Returns user's bookmarked recycling centers'''
+    """ 
+    Method to get the bookmarked recycling centers
+
+    **Args:**
+         user: (object) User object 
+
+    **Returns:**
+        list: (list) Results obtained from the user.bookmark
+    """
     user_bookmarks = user.bookmarks.all().values_list('facility', flat=True)
     return list(set(user_bookmarks))
 
 def getFacilities(idc_list):
-    '''Queries db for recycling center and groups the data in a context dict'''
+    """ 
+    Method to Query the database for recycling center and groups the data in a context dict
+
+    **Args:**
+         idc_list: (list) List of idc attribute of donation sites
+
+    **Returns:**
+        returnval: (list) Queried and filtered list of donation sites 
+    """
     result = list(RecyclingCenter.objects.filter(idc__in=idc_list).values())
     final = {}
     for cur_element in result:
@@ -127,7 +208,15 @@ def getFacilities(idc_list):
     return returnval
 
 def bookmarkHandler(request):
-    '''Adds/removes facility to user bookmarks'''
+    """
+    Adds/removes facility to user bookmarks
+    
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        JsonResponse: A JsonResponse object with the status of 'result'
+    """
     body = json.loads(request.body.decode("utf-8"))
     idc = body['idc']
     param = body['param']

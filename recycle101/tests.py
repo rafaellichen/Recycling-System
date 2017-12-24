@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 # Create your tests here.
-from mainRecycleApp.models import HowTo
+from recycle101.models import HowTo
 
 class HowToModelTest(TestCase):
 
