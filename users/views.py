@@ -11,16 +11,19 @@ import json
 
 def signin(request):
     '''Signin method with param request'''
+    args = {}
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        # print (username, password)
-        # print (user)
-        if user is None: return HttpResponse("Invalid Login")
-        if request.user.is_authenticated(): return redirect('/')
-        login(request, user)
-        return redirect('/')
-    return render(request, 'users/login.djhtml')
+        LOGINFORM = forms.LoginForm(request.POST or None)
+        if LOGINFORM.is_valid():
+            user = authenticate(username=LOGINFORM.cleaned_data('username'), password=LOGINFORM.cleaned_data('username'))
+            print (user)
+            if request.user.is_authenticated(): return redirect('/')
+            login(request, user)
+    else:
+        LOGINFORM = forms.LoginForm()
+    args['form'] = LOGINFORM
+    print (args)
+    return render(request, 'users/login.djhtml', args)
 
 def editProfile(request):
     return render(request, 'users/login.djhtml')

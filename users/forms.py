@@ -1,5 +1,7 @@
 '''Forms currently creates SignupForm object'''
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
 from django import forms
 
 class SignupForm(forms.ModelForm):
@@ -46,20 +48,29 @@ class SignupForm(forms.ModelForm):
         else:
             return self.cleaned_data['confirm_password']
 
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
     '''Class LoginForm that takes forms.ModelForm as input param'''
-    
+    username = forms.CharField(widget=forms.TextInput({
+        'placeholder': 'Username',
+        'id' : 'username',
+        'class' : 'form-control',
+        }))
+    password = forms.CharField(widget=forms.PasswordInput({
+        'placeholder': 'Password',
+        'id' : 'password',
+        'class' : 'form-control',
+        }))
+
     class Meta:
         fields = ['user_name', 'password']
         widgets = {
             'user_name': forms.TextInput(attrs={'placeholder': 'Username'}),
-            'password': forms.CharField(attrs={'placeholder': 'Password'}),
         }
 
     def clean(self):
         '''Check if the username or the password is valid or not and return validation error'''
-        username = self.cleaned_data('username')
-        password = self.cleaned_data('username')
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['username']
         user = authenticate(username=username, password=password)
         if user is None: 
             print ("failed to login")
@@ -67,5 +78,3 @@ class LoginForm(forms.ModelForm):
         else:
             print ("logged in")
             return self.cleaned_data
-
-            

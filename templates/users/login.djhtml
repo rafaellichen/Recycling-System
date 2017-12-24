@@ -18,8 +18,9 @@
                         <label class="sr-only" for="username">Username</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
-                            <input type="text" name="username" class="form-control" id="username"
-                                   placeholder="Username" required autofocus>
+                            {{ form.username }}
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -31,8 +32,7 @@
                         <label class="sr-only" for="password">Password</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                            <input type="password" name="password" class="form-control" id="password"
-                                   placeholder="Password" required>
+                            {{ form.password }}
                         </div>
                     </div>
                 </div>
@@ -57,6 +57,12 @@
                 </div>
             </div>
         </form>
-    </div>
 
+          {% if form.errors %}
+            <div class="alert alert-danger" style="margin-top:30px;" role="alert">
+                {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+    </div>                
     {% endblock body %}
