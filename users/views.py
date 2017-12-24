@@ -15,7 +15,7 @@ def signin(request):
     if request.method == 'POST':
         LOGINFORM = forms.LoginForm(request.POST or None)
         if LOGINFORM.is_valid():
-            user = authenticate(username=LOGINFORM.cleaned_data('username'), password=LOGINFORM.cleaned_data('username'))
+            user = authenticate(username=LOGINFORM.cleaned_data['username'], password=LOGINFORM.cleaned_data['password'])
             print (user)
             if request.user.is_authenticated(): return redirect('/')
             login(request, user)
@@ -24,9 +24,6 @@ def signin(request):
     args['form'] = LOGINFORM
     print (args)
     return render(request, 'users/login.djhtml', args)
-
-def editProfile(request):
-    return render(request, 'users/login.djhtml')
 
 @csrf_exempt
 def signout(request):
@@ -67,21 +64,22 @@ def editProfile(request):
     '''Users to edit the profile'''
     args = {}
     if request.method == 'POST':
-        EDITFORM = forms.EditProfile(request.POST or None)
+        print ("inside edit profile")
+        EDITFORM = forms.EditProfile(request.POST or None, instance = request.user)
+        print (EDITFORM)
         if EDITFORM.is_valid():
+            print ("form validated")
             EDITFORM.save()
             user_first_name = EDITFORM.cleaned_data['first_name']
             return render(request, 'users/profile.djhtml', {'user': user_first_name})
     else:
         EDITFORM = forms.EditProfile()
     args['form'] = EDITFORM
-    return render(request, 'users/editProfile', args)
-
+    return render(request, 'users/editProfile.djhtml', args)
 
 def index(request):
     '''Index render method that renders app/index'''
     return render(request, 'app/index.djhtml')
-
 
 def getBookmarks(user):
     ''' Returns user's bookmarked recycling centers'''

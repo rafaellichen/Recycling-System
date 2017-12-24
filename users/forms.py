@@ -64,7 +64,7 @@ class LoginForm(forms.Form):
     def clean(self):
         '''Check if the username or the password is valid or not and return validation error'''
         username = self.cleaned_data['username']
-        password = self.cleaned_data['username']
+        password = self.cleaned_data['password']
         user = authenticate(username=username, password=password)
         if user is None: 
             print ("failed to login")
@@ -76,7 +76,7 @@ class LoginForm(forms.Form):
 class EditProfile(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'username', 'password']
+        fields = ['first_name', 'last_name', 'email', 'username']
         widgets = {
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name', 'id': 'fName', 'class' : 'form-control'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name', 'id': 'LName', 'class' : 'form-control'}),

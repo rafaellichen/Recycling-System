@@ -1,0 +1,42 @@
+{% extends "mainRecycleApp/header.html" %}
+{% block body %}
+<div class="container" style="margin-top:70px;">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3 col-md-6 text-center">
+          <h4>Edit your profile details</h4>
+          <hr>
+      </div>
+  </div>
+    <div class="row">
+      <div class="col-lg-6 offset-lg-3 col-md-6">
+          <form class="form-horizontal" role="form" action="" method="post">{% csrf_token %}
+              <fieldset>
+                  <legend>{{ title }}</legend>
+                  {% for field in form %}
+                          <div class="form-group">
+                              {{ field }}
+                          </div>
+                  {% endfor %}
+
+              </fieldset>
+              <div class="form-actions text-center">
+                  <button type="submit" class="btn btn-primary" ><i class="fa fa-user-plus"></i> Submit</button>
+              </div>
+      </form>
+
+          {% if form.errors.username %}
+            <div class="alert alert-danger" style="margin-top:30px;" role="alert">
+                {{ form.errors.username }}
+            </div>
+          {% endif %}
+
+          {% if form.errors.email %}
+            <div class="alert alert-danger" style="margin-top:30px;" role="alert">
+                {{ form.errors.email }}
+            </div>
+          {% endif %}
+
+   </div>
+  </div>
+</div>
+{% endblock body %}
