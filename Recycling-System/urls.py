@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^', include('users.urls', namespace='users')),
     url(r'^', include('guestbook.urls',namespace='guestbook')),
     url(r'^', include('recycle101.urls',namespace='recycle101')),
+    url(r'^', include('django.contrib.auth.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

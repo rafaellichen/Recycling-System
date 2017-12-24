@@ -85,6 +85,19 @@ DATABASES = {
 }
 
 
+'''Config information included in version control since this is a private repo
+   This will be removed from version control once this projct is made open source
+   Includes the SendGrid username and password
+'''
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'easyrecycle'
+EMAIL_HOST_PASSWORD = 'sunshine101'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 

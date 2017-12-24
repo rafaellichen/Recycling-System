@@ -1,7 +1,8 @@
-from django.conf.urls import url
-from . import views as userViews
+from django.conf.urls import url, include
+from . import views as userViews 
 
-
+# from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^$', userViews.index, name='index'),
     url(r'^login$', userViews.signin, name='login'),
