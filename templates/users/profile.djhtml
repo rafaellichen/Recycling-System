@@ -182,8 +182,22 @@
 </div><br>
 <hr>
 <br>
+
+<div class="container">
+
 <h4>Leave feedback</h4>
+<div class="row">
+
+<div class="col-7">
 <a href="/feedback"><img src="/static/img/feedback.png" width="80"></a></h1>
+</div>
+
+<div class="col-5">
+  <a href="/contact"><img src="/static/img/CustomerService247.png" width="80"></a></h1>
+</div>
+
+</div>
+</div
 
 <br><br>
 <br>
