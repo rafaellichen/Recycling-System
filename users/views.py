@@ -62,6 +62,22 @@ def profile(request):
     else:
         pass
 
+@login_required
+def editProfile(request):
+    '''Users to edit the profile'''
+    args = {}
+    if request.method == 'POST':
+        EDITFORM = forms.EditProfile(request.POST or None)
+        if EDITFORM.is_valid():
+            EDITFORM.save()
+            user_first_name = EDITFORM.cleaned_data['first_name']
+            return render(request, 'users/profile.djhtml', {'user': user_first_name})
+    else:
+        EDITFORM = forms.EditProfile()
+    args['form'] = EDITFORM
+    return render(request, 'users/editProfile', args)
+
+
 def index(request):
     '''Index render method that renders app/index'''
     return render(request, 'app/index.djhtml')

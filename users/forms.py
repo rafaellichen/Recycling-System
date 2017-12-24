@@ -41,12 +41,6 @@ class SignupForm(forms.ModelForm):
             print ("email exists")
             raise forms.ValidationError('Your email already exists')
 
-    def clean_confirm_password(self):
-        '''Check if the password and the password confirmation matches or not'''
-        if self.cleaned_data('password') != self.cleaned_data('confirm_password'):
-            raise forms.ValidationError('Your passwords does not match.')
-        else:
-            return self.cleaned_data['confirm_password']
 
 class LoginForm(forms.Form):
     '''Class LoginForm that takes forms.ModelForm as input param'''
@@ -78,3 +72,32 @@ class LoginForm(forms.Form):
         else:
             print ("logged in")
             return self.cleaned_data
+
+class EditProfile(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'username', 'password']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name', 'id': 'fName', 'class' : 'form-control'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name', 'id': 'LName', 'class' : 'form-control'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Email', 'id': 'email', 'class' : 'form-control'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Username', 'id': 'username', 'class' : 'form-control'}),
+        }
+
+    def clean_username(self):
+        '''Check if username already exists in the database or not'''
+        user = User.objects.filter(username__iexact=self.cleaned_data['username'])
+        if not user:
+            return self.cleaned_data['username']
+        else:
+            print ("username exists")
+            raise forms.ValidationError('Your username already exists')
+
+    def clean_email(self):
+        '''Check if email already exists in the database or not'''
+        user = User.objects.filter(email__iexact=self.cleaned_data['email'])
+        if not user:
+            return self.cleaned_data['email']
+        else:
+            print ("email exists")
+            raise forms.ValidationError('Your email already exists')

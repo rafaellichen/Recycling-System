@@ -5,7 +5,7 @@ import datetime
 
 # Create your views here.
 def feedback(request):
-    messages = models.Message.objects.all()
+    messages = models.Message.objects.filter(username=request.user.username).values()
     return render(request, 'guestbook/feedback.html', {'messages' : messages})
 
 def create(request):
