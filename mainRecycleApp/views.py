@@ -24,6 +24,10 @@ def contact(request):
     '''Contact render method for mainRecycleApp/contact.html'''
     return render(request, 'mainRecycleApp/contact.html')
 
+def faqs(request):
+    '''FAQs render method for mainRecycleApp/faqs.html'''
+    return render(request, 'mainRecycleApp/faqs.html')
+
 def getBoroughFromZip(zipcode):
     '''Get user's rough location by borough'''
     BK = [10461, 10462, 10464, 10465, 10472, 10473, 11209, 11214, 11228, 11204, 11218, 11219, 11230, 11234, 11236, 11239, 11223, 11224, 11229, 11235, 11201, 11205, 11215, 11217, 11231, 11203, 11210, 11225, 11226, 11207, 11208, 11211, 11222, 11220, 11232, 11206, 11221, 11237]
