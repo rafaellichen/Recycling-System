@@ -10,25 +10,27 @@
 	</div>
 	<div class = "row justify-content-center">
 		<div class = "card-deck">
-				<div class="card mb-3" style="max-width: 30rem;">
+				<div class="card mb-3" style="min-width: 20rem;">
 				  <div class="card-body">
-				    <p class = "text-center">Address</p>
-					<p id = "address"> {{donationSite.address}}, {{donationSite.borough}}, {{donationSite.zip}}</p>
-				    Time <br>
-				    Monday : {{donationSite.Monday}} <br>
-					Tuesday : {{donationSite.Tuesday}} <br>
-					Wednesday : {{donationSite.Wednesday}} <br>
-					Thrusday : {{donationSite.Thursday}} <br>
-					Friday : {{donationSite.Friday}} <br>
-					Saturday : {{donationSite.Saturday}} <br>
-					Sunday : {{donationSite.Sunday}} <br>
-					Phone: {{donationSite.cell}} <br>
+				  	<dl>
+					    <dt><i class="fa fa-map-marker" aria-hidden="true"></i> Address </dt>
+						<dd><span id = "address"> {{donationSite.address}} <br> {{donationSite.borough}}  {{donationSite.zip}}</span> </dd> <br>
+						<dt><i class="fa fa-phone" aria-hidden="true"></i> Phone: {{donationSite.cell}} </dt> <br>
+					    <dt><i class="fa fa-clock-o" aria-hidden="true"></i> Time </dt>
+					    Monday : {{donationSite.Monday}} <br>
+						Tuesday : {{donationSite.Tuesday}} <br>
+						Wednesday : {{donationSite.Wednesday}} <br>
+						Thrusday : {{donationSite.Thursday}} <br>
+						Friday : {{donationSite.Friday}} <br>
+						Saturday : {{donationSite.Saturday}} <br>
+						Sunday : {{donationSite.Sunday}} 
+					</dl>
 				   </div>
 				</div>
 
-				<div class="card bg-light mb-3" style="max-width: 30rem;">
+				<div class="card bg-light mb-3" style="min-width: 20rem;">
 				  <div class="card-body">
-					Accepted Types:
+					Accepted Types
 					<br>
 					{% with donationSite.type as type %} {% for each in type %} {% if each == "Electronics" %}
 		            <img id="card-img" src="/static/img/electronics.png" alt="Electronics" height="42" width="42"> {% endif %} {% if each == "Home Appliances" %}
@@ -59,21 +61,21 @@
 
 {% if furtherInfo %}
 	<div class = "row mx-auto">
-		<div class="alert alert-secondary" role="alert">
+		
 		
 			{% for desc in furtherInfo %}
 				{% if desc.description %}
-				<h3>Description :</h3>
+				<h3>Description</h3>
 					<p>{{desc.description}}</p>
 				{% endif %}
 				{% if desc.pickup_info %}
-				<h3>Pickup/Drop Off Information :</h3>
+				<h3>Pickup/Drop Off Information</h3>
 					<p>{{desc.pickup_info}}</p>
 				{% endif %}
 
 			{% endfor %}
 
-		</div>
+		
 	</div>
 {% endif %}
 </div>

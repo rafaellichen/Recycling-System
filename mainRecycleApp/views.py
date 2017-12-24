@@ -165,22 +165,50 @@ def get_recommended_list_test(returnval, category, zipcode):
 
 def get_further_details(name):
     further_desc = Description.objects.filter(name=name).values()
-    print (further_desc)
+    # print (further_desc)
     return further_desc
 
 def donationSiteDetails(request, id):
     '''Method to get the donation site details'''
     result = RecyclingCenter.objects.filter(idc=id).values()
     # print (further_desc)
-    final = combine_idc(result) 
+    final = combine_idc(result)
+    print (final) 
     for i in final:
         final[i]["type"]=final[i]['type'].split(",")
+    print (final)
+    final = parse_time_table(final)
     returnval = []
     for i in final:
         returnval.append(final[i])
     returnDesc = get_further_details(returnval[0]['name'])
     return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval[0],
+                       
                                                                   "furtherInfo" : returnDesc})
+def parse_time_table(final):
+    for i in final:
+        if(final[i]["Monday"]!="closed"):
+            temp = final[i]["Monday"].split(",")
+            final[i]['Monday']=temp[0][0:2]+":"+temp[0][2:]+" - "+temp[1][0:2]+":"+temp[1][2:]
+        if(final[i]["Tuesday"]!="closed"):
+            temp = final[i]["Tuesday"].split(",")
+            final[i]['Tuesday']=temp[0][0:2]+":"+temp[0][2:]+" - "+temp[1][0:2]+":"+temp[1][2:]
+        if(final[i]["Wednesday"]!="closed"):
+            temp = final[i]["Wednesday"].split(",")
+            final[i]['Wednesday']=temp[0][0:2]+":"+temp[0][2:]+" - "+temp[1][0:2]+":"+temp[1][2:]
+        if(final[i]["Thursday"]!="closed"):
+            temp = final[i]["Thursday"].split(",")
+            final[i]['Thursday']=temp[0][0:2]+":"+temp[0][2:]+" - "+temp[1][0:2]+":"+temp[1][2:]
+        if(final[i]["Friday"]!="closed"):
+            temp = final[i]["Friday"].split(",")
+            final[i]['Friday']=temp[0][0:2]+":"+temp[0][2:]+" - "+temp[1][0:2]+":"+temp[1][2:]
+        if(final[i]["Saturday"]!="closed"):
+            temp = final[i]["Saturday"].split(",")
+            final[i]['Saturday']=temp[0][0:2]+":"+temp[0][2:]+" - "+temp[1][0:2]+":"+temp[1][2:]
+        if(final[i]["Sunday"]!="closed"):
+            temp = final[i]["Sunday"].split(",")
+            final[i]['Sunday']=temp[0][0:2]+":"+temp[0][2:]+" - "+temp[1][0:2]+":"+temp[1][2:]
+    return final
 
 def combine_idc(result):
     '''Method that combines the same idc values'''
@@ -192,6 +220,7 @@ def combine_idc(result):
         else:  # for unique "idc"
             final[keys] = {"idc":cur_element["idc"], "name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"]}
     return final
+
 
 def search_withQuery(request):
     '''Method to search with query from the database'''
@@ -220,28 +249,8 @@ def search_withQuery(request):
         final = combine_idc(result)
         for i in final:
             final[i]["type"]=final[i]['type'].split(",")
-            if(final[i]["Monday"]!="closed"):
-                temp = final[i]["Monday"].split(",")
-                final[i]['Monday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Tuesday"]!="closed"):
-                temp = final[i]["Tuesday"].split(",")
-                final[i]['Tuesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Wednesday"]!="closed"):
-                temp = final[i]["Wednesday"].split(",")
-                final[i]['Wednesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Thursday"]!="closed"):
-                temp = final[i]["Thursday"].split(",")
-                final[i]['Thursday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Friday"]!="closed"):
-                temp = final[i]["Friday"].split(",")
-                final[i]['Friday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Saturday"]!="closed"):
-                temp = final[i]["Saturday"].split(",")
-                final[i]['Saturday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Sunday"]!="closed"):
-                temp = final[i]["Sunday"].split(",")
-                final[i]['Sunday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
             final[i]["len"]=len(final[i]["type"])
+        final = parse_time_table(final)
         final = OrderedDict(sorted(final.items(), key=lambda kv: kv[1]['len'], reverse=True))
         returnval = []
         for i in final:
