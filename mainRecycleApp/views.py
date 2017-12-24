@@ -14,7 +14,7 @@ import geopy
 # Create your views here.
 def index(request):
     """
-    This Methodhod renders the home.html for route ('/') 
+    This Method renders the home.html for route ('/') 
     
     **Args:**
         request: HttpRequest object created by Django
@@ -63,6 +63,7 @@ def faqs(request):
 def getBoroughFromZip(zipcode):
     """
     Converts the zipcode into the Borough name and returns it
+
     **Args:**
         zipcode: (int) Zipcode value any zipcode within NYC
 
@@ -91,6 +92,7 @@ def getBoroughFromZip(zipcode):
 def filterDay(result, day):
     """ 
     Filters the donation sites that has closed on the day the user chose
+
     **Args:**
         result: (List) list of donation site objects
         day: (List) list of days from Monday to Sunday
@@ -106,7 +108,17 @@ def filterDay(result, day):
     return [dict(t) for t in set([tuple(d.items()) for d in filter_day])]
 
 def filterTime(result, day, time):
-    '''Filter out facilities that don't match user's avaiable time'''
+    """ 
+    Filter out facilities that don't match user's avaiable time
+
+    **Args:**
+        result: (List) list of donation site objects
+        day: (List) list of days from Monday to Sunday
+        time: (string) time selected by the user
+
+    **Returns:**
+        result: (List) List of new donation sites with filtered sites with time
+    """
     checktime = []
     for d in day:
         temp = []
@@ -126,24 +138,50 @@ def filterTime(result, day, time):
     index = list(set(index))
     return [result[i] for i in index]
 
-# retrive from the model and send the lat and long as an array
 def get_special_waste_site(borough):
-    '''Method to get the special waste site'''
-    # Since there are only 4 special waste sites as of now, Location is stored as the borough name
-    result = list(SpecialWasteSite.objects.filter(location=borough).values())
-    if result  is not None:
-        result = json.dumps(result, cls=DjangoJSONEncoder)
+    """ 
+    Method to get the special waste site
+    Since there are only 4 special waste sites as of now, Location is stored as the borough name
+
+    **Args:**
+         borough: (string) Borough name within NYC.
+
+    **Returns:**
+        result: (string) Obtained from a json.dumps which converts the object into string 
+    """
+    resultList = list(SpecialWasteSite.objects.filter(location=borough).values())
+    if resultList  is not None:
+        result = json.dumps(resultList, cls=DjangoJSONEncoder)
         return result
 
 def get_safe_disposal_events(boro):
-    '''Method to get the safe disposal events'''
+    """ 
+    Method to get the safe disposal events
+    Returns the query result based on the borough input (boro)
+
+    **Args:**
+        boro: (string) Borough name within NYC.
+
+    **Returns:**
+        result: (string) Obtained from a json.dumps which converts the object into string 
+    """
     result = list(Event.objects.all().values())
     if result is not None:
         return result
+    else:
+        return
 
 def get_public_recycle_bins(boro):
-    """
+    """ 
     Method to get the public recycle bins from the borough
+    Returns the query result based on the borough input (boro)
+    Capped the returned result to 10 elements for the MVP
+
+    **Args:**
+        boro: (string) Borough name within NYC.
+
+    **Returns:**
+        allresult: (string) Obtained from a json.dumps which converts the object into string 
     """
     result = []
     allResult = list(PublicRecyclingBin.objects.filter(borough=boro).values()[:10])
@@ -151,8 +189,15 @@ def get_public_recycle_bins(boro):
     return allResult
 
 def return_lat_long_from_Zip(zip):
-    """
+    """ 
     This method will return the latitude and longitude form Zipcode
+    Note: Future improvement to pin-point the returned result, not currently in use for the MVP
+    **Args:**
+        zip: (int) Any Zipcode within New York State
+
+    **Returns:**
+        lat: (float) Obtained latitude from the query result
+        lon: (float) Obtained longitude from the query result
     """
     result = list(Zip.objects.filter(zipcode=zip).values())
     lat = result[0]['latitude'].replace('"', '').strip()
@@ -163,9 +208,17 @@ def return_lat_long_from_Zip(zip):
 
 
 def check_Distance_Of_Zips(zip1, zip2):
-    """
-    We need to check if the current zip is close to the recommended list of centers has
+    """ 
+    Get the distance between two zipcodes
     Using the Haversine formula
+
+    Note: Future improvement to pin-point the returned result, not currently in use for the MVP
+    **Args:**
+        zip1: (int) Any Zipcode within New York State
+        zip2: (int) Any Zipcode within New York State
+
+    **Returns:**
+        float value : distance obtained from Haversine formula 
     """
     lat1, long1 = return_lat_long_from_Zip(zip1)
     lat2, long2 = return_lat_long_from_Zip(zip2)
@@ -176,12 +229,19 @@ def check_Distance_Of_Zips(zip1, zip2):
     return acos(cosx) * 3958.761
 
 
-def get_recommended_list_test(returnval, category, zipcode):
-    '''
+def get_recommended_list(returnval, category):
+    """
     Method to get the recommended list
     We are taking the returnval from our search with query and the categories that
     the user entered.
-    '''
+    
+    **Args:**
+        returnval: (list) list of donation sites objects
+        category: (list) list of categories string
+    
+    **Returns:**
+        returnval: (list) list of donation sites objects the recommended sites containing recommendedStatus
+    """
     # Maintain a new list of found categories in the returnval
     foundTypes = []
     recommended = []
@@ -202,24 +262,43 @@ def get_recommended_list_test(returnval, category, zipcode):
                             recommended.append(item)
                             # Remove the items from the returnval
                             returnval.remove(item)
-    # loop through the list in reverse since we know that the returnval is arranged by
-    # len, ideally a different recommended list should be passed, however I added this
-    # for testing our proof of concept
-
+    """
+    Loop through the list in reverse since we know that the returnval is arranged by
+    len, ideally a different recommended list should be passed, however we added this
+    for testing our proof of concept
+    """
     for item in reversed(recommended):
         item["recommendedStatus"] = "true"
         returnval.insert(0, item)
     return returnval
 
 def get_further_details(name):
+    """
+    Method to get the details of the donation sites
+    **Args:**
+        name: (string) Name of the donation site
+        
+    **Returns:**
+        further_desc: (object) Query result for further desc based on the user input 'name'
+    """
     further_desc = Description.objects.filter(name=name).values()
     # print (further_desc)
     return further_desc
 
 def donationSiteDetails(request, id):
-    '''Method to get the donation site details'''
+    """
+    This method renders the donationSites.html for route ('/donation/<id>') 
+    
+    Querying RecyclingCenter model based on the 'idc' attribute which will return all the 
+    donation centers that have this idc
+    
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template mainRecycleApp/donationSites.html being sent over 
+    """
     result = RecyclingCenter.objects.filter(idc=id).values()
-    # print (further_desc)
     final = combine_idc(result)
     print (final) 
     for i in final:
@@ -230,10 +309,18 @@ def donationSiteDetails(request, id):
     for i in final:
         returnval.append(final[i])
     returnDesc = get_further_details(returnval[0]['name'])
-    return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval[0],
-                       
+    return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval[0],                       
                                                                   "furtherInfo" : returnDesc})
+
 def parse_time_table(final):
+    """
+    Method to parse the time from eg 1000,2000 to 10:00 - 20:00 string format
+    **Args:**
+        final: (list) list of donation site objects
+        
+    **Returns:**
+        final: (list) Modified list of donation site objects
+    """
     for i in final:
         if(final[i]["Monday"]!="closed"):
             temp = final[i]["Monday"].split(",")
@@ -259,7 +346,17 @@ def parse_time_table(final):
     return final
 
 def combine_idc(result):
-    '''Method that combines the same idc values'''
+    """
+    Method to combine the result of several donation site into one
+    Note: This was an quick solution proposed and completed by the team for this MVP.
+    Changes in models in later version will help remove this method altogether
+
+    **Args:**
+        result: (list) list of donation site objects
+        
+    **Returns:**
+        final: (list) Combined donation site object with all recycle types in one list of 'type'
+    """
     final = {}
     for cur_element in result:
         keys = (cur_element["idc"])
@@ -272,6 +369,21 @@ def combine_idc(result):
 
 def search_withQuery(request):
     '''Method to search with query from the database'''
+    """
+    This Method renders the home.html for route ('/search') 
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template mainRecycleApp/home.html being sent over 
+        With context "data" : List of donation center object
+                     "bookmarks" : List of bookmarks associated with the user
+                     "userCategories" : List of categories that the user queried
+                     "days" : List of days that user selected
+                     "specialWasteSite" : String JSON of special waste sites
+                     "safeDisposalEvents" : String JSON of safe disposal events
+                     "publicRecycleBins" : String JSON of public recycle bins 
+    """
     if request.method == 'POST':
         category = request.POST.getlist("gtype")
         day=request.POST.getlist("day")
@@ -306,7 +418,7 @@ def search_withQuery(request):
             final[i]['lat']=1
             returnval.append(final[i])
         # print (check_Distance_Of_Zips('11104', '10016'))
-        get_recommended_list_test (returnval, category, zipcode)
+        get_recommended_list (returnval, category)
         bookmarks=[]
         if request.user.is_authenticated:
             bookmarks = list(set(request.user.bookmarks.values_list('facility', flat=True)))
