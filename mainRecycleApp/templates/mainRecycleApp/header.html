@@ -51,12 +51,6 @@
       <li class="nav-item ">
         <a class="nav-link" href="/faqs">FAQs</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/contact">Contact</a>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="/feedback">Feedback</a>
-      </li> -->
     </ul>
 		<ul class="nav navbar-nav navbar-right">
 			{% if request.user.is_anonymous != True %}
@@ -89,19 +83,14 @@
                 <div class="row">
                     <div class="col-6">
                         <ul class="list-unstyled">
-                            <li><a href="/">Product</a></li>
-                            <li><a href="/login">Benefits</a></li>
-                            <li><a href="/feedback">Feedback</a></li>
-                            <li><a href="/about">Team</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/recycle101">Recycle101</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/faqs">FAQs</a></li>
                         </ul>
                     </div>
                     <div class="col-6">
-                        <ul class="list-unstyled">
-                            <li><a href="/about">Documentation</a></li>
-                            <li><a href="/contact">Support</a></li>
-                            <li><a href="/about">Legal Terms</a></li>
-                            <li><a href="/about">About</a></li>
-                        </ul>
+                        
                     </div>
                 </div>
                 <ul class="nav">
@@ -113,25 +102,17 @@
                 <br>
             </div>
             <div class="col-md-2">
-                <h5 class="text-md-right">Contact Us</h5>
-                <hr>
+                
             </div>
             <div class="col-md-5">
-                <form>
-                    <fieldset class="form-group">
-                      <input type="text" class="form-control" id="exampleInputName" placeholder="Enter Name">
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
-                    </fieldset>
-                    <fieldset class="form-group">
-                        <textarea class="form-control" id="exampleMessage" placeholder="Message"></textarea>
-                    </fieldset>
-                    <fieldset class="form-group text-xs-right">
-                        <button type="button" class="btn btn-secondary-outline btn-lg">Send</button>
-                    </fieldset>
-                </form>
+              <h5 class="">Contact Us</h5>
+              <i class="fa fa-map-marker"></i><br>
+              160 Convent Ave <br> 
+              New York NY <br> 
+              10031 <br><br><br>
+              <a href="mailto:projecteasyrecycle@gmail.com"><i class="fa fa-envelope"></i> projecteasyrecycle@gmail.com</a>
             </div>
+
         </div>
     </div>
 
