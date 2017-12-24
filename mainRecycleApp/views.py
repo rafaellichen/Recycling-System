@@ -179,7 +179,7 @@ def donationSiteDetails(request, id):
     for i in final:
         returnval.append(final[i])
     returnDesc = get_further_details(returnval[0]['name'])
-    return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval,
+    return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval[0],
                                                                   "furtherInfo" : returnDesc})
 
 def combine_idc(result):
