@@ -12,22 +12,33 @@
           <form class="form-horizontal" role="form" action="/signup" method="post">{% csrf_token %}
               <fieldset>
                   <legend>{{ title }}</legend>
-                  {% for field in signupForm %}
-                      {% if field.errors %}
-                          <div class="control-group error">
-                              {{ field}}
-                          </div>
-                      {% else %}
+                  {% for field in form %}
+                     
                           <div class="form-group">
                               {{ field }}
                           </div>
-                      {% endif %}
+                     
                   {% endfor %}
+
+
               </fieldset>
               <div class="form-actions text-center">
                   <button type="submit" class="btn btn-primary" ><i class="fa fa-user-plus"></i> Submit</button>
               </div>
       </form>
+
+          {% if form.errors.username %}
+            <div class="alert alert-danger" style="margin-top:30px;" role="alert">
+                {{ form.errors.username }}
+            </div>
+          {% endif %}
+
+          {% if form.errors.email %}
+            <div class="alert alert-danger" style="margin-top:30px;" role="alert">
+                {{ form.errors.email }}
+            </div>
+          {% endif %}
+
    </div>
   </div>
 </div>

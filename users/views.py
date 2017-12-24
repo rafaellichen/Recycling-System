@@ -15,7 +15,6 @@ def signin(request):
         username = request.POST['username']
         password = request.POST['password']
         # print (username, password)
-        user = authenticate(username=username, password=password)
         # print (user)
         if user is None: return HttpResponse("Invalid Login")
         if request.user.is_authenticated(): return redirect('/')
@@ -23,6 +22,8 @@ def signin(request):
         return redirect('/')
     return render(request, 'users/login.djhtml')
 
+def editProfile(request):
+    return render(request, 'users/login.djhtml')
 
 @csrf_exempt
 def signout(request):
@@ -32,6 +33,7 @@ def signout(request):
 
 def signup(request):
     '''Signup Method with param request'''
+    args = {}
     if request.method == 'POST':
         USERFORM = forms.SignupForm(request.POST or None)
         if USERFORM.is_valid():
@@ -42,7 +44,8 @@ def signup(request):
             return render(request, 'users/redirect.djhtml', {'user': user_first_name})
     else:
         USERFORM = forms.SignupForm()
-    return render(request, 'users/signup.djhtml', {'signupForm' : USERFORM})
+    args['form'] = USERFORM
+    return render(request, 'users/signup.djhtml', args)
 
 @login_required
 def profile(request):
@@ -51,7 +54,7 @@ def profile(request):
     if request.method == 'GET':
         bookmarks = getBookmarks(user)
         data = getFacilities(bookmarks)
-        print(data)
+        # print(data)
         return render(request, 'users/profile.djhtml', {"data":data})
     else:
         pass

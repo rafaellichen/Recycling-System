@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^logout$', userViews.signout, name='logout'),
     url(r'^signup$', userViews.signup, name='signup'),
     url(r'^profile$', userViews.profile, name='profile'),
+    url(r'^profile/edit$', userViews.editProfile, name='editProfile'),
     url(r'^bookmarks$', userViews.bookmarkHandler, name='bookmarks'),
 ]
