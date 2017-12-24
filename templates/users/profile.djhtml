@@ -1,75 +1,208 @@
 {% extends "mainRecycleApp/header.html" %}
 {% block body %}
 
-<style>
-.main{
-  background-image: url("/static/img/bg1.jpg");
-  }
-
-button.css3button {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  color: #030303;
-  padding: 0px 20px;
-  background: -moz-linear-gradient(
-    top,
-    #00ffd5 0%,
-    #fafafa);
-  background: -webkit-gradient(
-    linear, left top, left bottom,
-    from(#00ffd5),
-    to(#fafafa));
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  border: 1px solid #000000;
-  -moz-box-shadow:
-    0px 1px 3px rgba(000,000,000,0.8),
-    inset 0px 0px 1px rgba(255,255,255,1);
-  -webkit-box-shadow:
-    0px 1px 3px rgba(000,000,000,0.8),
-    inset 0px 0px 1px rgba(255,255,255,1);
-  box-shadow:
-    0px 1px 3px rgba(000,000,000,0.8),
-    inset 0px 0px 1px rgba(255,255,255,1);
-  text-shadow:
-    0px -1px 0px rgba(000,000,000,0.2),
-    0px 1px 0px rgba(255,255,255,0.9);
-}
-
-
-
-</style>
-
-<body class="main">
 <div  class="container" style="margin-top:80px;">
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="text-center">
-          <h1>Welcome To Easy Recycle!</h1>
-          
+      <div class="col-lg-12 col-md-12">
+        <div class="">
+          <h1>Welcome, {{request.user.first_name}}!
+
         </div>
-          <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
-          <div class="row">
-          <div class="col-6">
-          <label> Name: {{request.user.first_name}} {{request.user.last_name}} </label><br>
-          <label> Username: {{request.user.username}} </label><br>
-          <label> Email: {{request.user.email}} </label><br>
-      <br>  
-       <a href="/feedback"><button type="button" class="css3button">Leave Feedback</button></a>
+         
+   <hr><br>
+        <div class="container">
+          <h4>Your Bookmarks</h4>
+           <div class="card-deck justify-content-center">
 
-         </div>
+               {% if data %}
+                 <br>
+          {% for item in data %}
+          <div id="bookmark-{{item.idc}}">
+          <div class="card-block" style="width: 20rem; border: 1px grey solid" id = "{{item.idc}}">
+              <i class="bookmark fa fa-3x fa-bookmark" id="remove" title="remove from favorites" aria-hidden="true"></i>
 
-         <div class="col-6">
-            <img src="/static/img/user.png">
-         </div>
+                   <div class="card-body">
+                     {% with item.type as type %}
+                     {% for each in type %}
+                       {% if each == "Electronics" %}
+                         <img id="card-img" src="/static/img/electronics.png" alt="Electronics" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Home Appliances" %}
+                         <img id="card-img" src="/static/img/homeappliances.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Automotive" %}
+                         <img id="card-img" src="/static/img/car.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Office Furniture" %}
+                         <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Clothing" %}
+                         <img id="card-img" src="/static/img/clothing.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Building Products" %}
+                         <img id="card-img" src="/static/img/buildingproducts.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Art Supplies" %}
+                         <img id="card-img" src="/static/img/art.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Food" %}
+                         <img id="card-img" src="/static/img/food.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Office Supplies" %}
+                         <img id="card-img" src="/static/img/officesupp.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Textiles" %}
+                         <img id="card-img" src="/static/img/textiles.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Household Furniture" %}
+                         <img id="card-img" src="/static/img/householdfurniture.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Shoes" %}
+                         <img id="card-img" src="/static/img/shoes.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Housewares" %}
+                         <img id="card-img" src="/static/img/houseware.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Sporting Equipment" %}
+                         <img id="card-img" src="/static/img/sport.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Collectibles" %}
+                         <img id="card-img" src="/static/img/jewelry.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Lubricants" %}
+                         <img id="card-img" src="/static/img/lubricants.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Containers" %}
+                         <img id="card-img" src="/static/img/cardboard.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Medical Equipment" %}
+                         <img id="card-img" src="/static/img/medical.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Toys" %}
+                         <img id="card-img" src="/static/img/toy.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% if each == "Musical Instruments" %}
+                         <img id="card-img" src="/static/img/musicalinstruments.png" alt="" height="42" width="42">
+                       {% endif %}
+                       {% endfor %}
+                     {% endwith %}
+                     <h6 class="card-title">{{item.name}}</h6>
+                     <div class="progress">
+                       {% if item.Monday != "closed" %}
+                        <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+                          MON
+                        </div>
+                      {% else %}
+                      <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+                          MON
+                        </div>
+                      {% endif %}
+                      {% if item.Tuesday != "closed" %}
+                      <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+                        TUE
+                      </div>
+                    {% else %}
+                    <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+                        TUE
+                      </div>
+                    {% endif %}
+                    {% if item.Wednesday != "closed" %}
+                    <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+                      WED
+                    </div>
+                  {% else %}
+                  <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+                      WED
+                    </div>
+                  {% endif %}
+                  {% if item.Thursday != "closed" %}
+                  <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:16%">
+                    THUR
+                  </div>
+                {% else %}
+                <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:16%">
+                    THUR
+                  </div>
+                {% endif %}
+                {% if item.Friday != "closed" %}
+                <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+                  FRI
+                </div>
+              {% else %}
+              <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+                  FRI
+                </div>
+              {% endif %}
+              {% if item.Saturday != "closed" %}
+              <div class="progress-bar progress-bar1 bg-success" role="progressbar" style="width:14%">
+                SAT
+              </div>
+            {% else %}
+            <div class="progress-bar progress-bar1 bg-danger" role="progressbar" style="width:14%">
+                SAT
+              </div>
+            {% endif %}
+            {% if item.Sunday != "closed" %}
+            <div class="progress-bar bg-success" role="progressbar" style="width:14%">
+              SUN
+            </div>
+          {% else %}
+          <div class="progress-bar bg-danger" role="progressbar" style="width:14%">
+              SUN
+            </div>
+          {% endif %}
+                    </div>
+                    <br>
+                     <img id="card-img" src="/static/img/location.png" alt="" height="30" width="30"> {{item.address}}</img>
+                     <br>
+                     <img id="card-img" src="/static/img/cell.png" alt="" height="30" width="30"> {{item.cell}}</img>
+                     <br>
+                     {% if item.picksup == "1" %}
+                      <img id="card-img" src="/static/img/pick.png" alt="" height="30" width="30"> Pick up</img>
+                      <br>
+                     {% endif %}
+                     <a tabindex="0" class="btn btn-success" role="button" data-toggle="popover" data-trigger="focus" data-html="true" title="Schedule" data-content="Monday: {{item.Monday}}<br>Tuesday: {{item.Tuesday}}<br>Wednesday: {{item.Wednesday}}<br>Thursday: {{item.Thursday}}<br>Friday: {{item.Friday}}<br>Saturday: {{item.Saturday}}<br>Sunday: {{item.Sunday}}">Schedule</a>
+                     {% if item.url %}
+                       <a target="#blank" class="btn btn-info" href = "{{item.url}}">Website</a>
+                     {% else %}
+                       <br>
+                     {% endif %}
+                   </div>
+                 </div>
+                </div>
+               {% endfor %}
+               {%endif%}
+
         </div>
       </div>
     </div>
   </div>
-</div>
-</body>
+</div><br>
+<hr>
 <br>
+
+<div class="container">
+
+<h4>Leave feedback</h4>
+<div class="row">
+
+<div class="col-7">
+<a href="/feedback"><img src="/static/img/feedback.png" width="80"></a></h1>
+</div>
+
+<div class="col-5">
+  <a href="/contact"><img src="/static/img/CustomerService247.png" width="80"></a></h1>
+</div>
+
+</div>
+</div
+
+<br><br>
+<br>
+{% load static %}
+{% csrf_token %}
+<script type="text/javascript" src="{%static "js/app/profile.js"%}">
+</script>
 {% endblock body %}

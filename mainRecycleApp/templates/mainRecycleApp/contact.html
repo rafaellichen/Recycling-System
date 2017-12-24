@@ -1,64 +1,6 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
-<style>
-body {
-  background: #f5f5f5;
-}
-
-.chat-box {
-  width: 900px;
-  height: 400px;
-  overflow: auto;
-  margin: 30px auto 20px;
-  padding: 25px;
-  background: #fff;
-}
-.chat-box p {
-  line-height: 1;
-  margin: 8px auto;
-}
-.chat-box p span {
-  font-weight: 600;
-}
-.chat-box p span#you {
-  color: #5cb85c;
-}
-.chat-box p span#ai {
-  color: #337ab7;
-}
-.you-hr,
-.ai-hr {
-  margin: 5px 0;
-  width: 5%;
-  opacity: 0.1;
-}
-.you-hr {
-  border-color: #5cb85c;
-}
-.ai-hr {
-  border-color: #337ab7;
-}
-
-.chat-form {
-  width: 600px;
-  margin: 0 auto 20px;
-}
-.chat-message {
-  width: 420px !important;
-}
-.chat-send,
-.chat-reset,
-.chat-clear {
-  width: 56px;
-}
-
-body > hr
-{
-    width: 60%;
-    margin: 20px auto;
-}
-</style>
 
 <div class="container">
   <div class="row-fluid">
@@ -75,7 +17,7 @@ body > hr
           New York<br>
           NY, 10036<br>
           United States<br>
-          <abbr title="Phone">P:</abbr> 212 666 7777
+          <abbr title="Phone">P:</abbr> (212)-666-7777
         </address>
       </div>
     </div>
@@ -85,7 +27,7 @@ body > hr
 <div class="container">
 <div class="row">
 
-<div class="col-8">
+<div class="col-9">
 <div class="container">
   <div class="chat-box">
 </div>
@@ -108,7 +50,7 @@ body > hr
 </div>
 </div>
 
-<div class="col-4">
+<div class="col-3">
    <img src="/static/img/customer-service-icon.png" , height="180" , width="180" >
 </div>
 

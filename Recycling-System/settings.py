@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'mainRecycleApp',
     'users',
     'guestbook',
+    'recycle101',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,3 +126,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+FIXTURE_DIRS = (
+   os.path.join(BASE_DIR, "fixtures"),
+)

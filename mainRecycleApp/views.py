@@ -2,13 +2,14 @@
 '''Views for mainRecycleApp'''
 from __future__ import unicode_literals
 from collections import OrderedDict
-from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip
-
+from mainRecycleApp.models import RecyclingCenter, SpecialWasteSite, Event, Zip, PublicRecyclingBin, Description
+from django.contrib.auth.models import User
 from django.shortcuts import render
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
 from math import sin, cos, sqrt, atan2, radians, acos
+import geopy
 
 # Create your views here.
 def index(request):
@@ -22,6 +23,10 @@ def about(request):
 def contact(request):
     '''Contact render method for mainRecycleApp/contact.html'''
     return render(request, 'mainRecycleApp/contact.html')
+
+def faqs(request):
+    '''FAQs render method for mainRecycleApp/faqs.html'''
+    return render(request, 'mainRecycleApp/faqs.html')
 
 def getBoroughFromZip(zipcode):
     '''Get user's rough location by borough'''
@@ -42,7 +47,6 @@ def getBoroughFromZip(zipcode):
         # Not a new york city zip code
         borough = ""
     return borough
-
 
 def filterDay(result, day):
     '''filter out closed facilities'''
@@ -87,7 +91,16 @@ def get_safe_disposal_events(boro):
     '''Method to get the safe disposal events'''
     result = list(Event.objects.all().values())
     if result is not None:
-        return result 
+        return result
+
+def get_public_recycle_bins(boro):
+    """
+    Method to get the public recycle bins from the borough
+    """
+    result = []
+    allResult = list(PublicRecyclingBin.objects.filter(borough=boro).values()[:10])
+    allResult = json.dumps(allResult, cls=DjangoJSONEncoder)
+    return allResult
 
 def return_lat_long_from_Zip(zip):
     """
@@ -103,7 +116,7 @@ def return_lat_long_from_Zip(zip):
 
 def check_Distance_Of_Zips(zip1, zip2):
     """
-    We need to check if the current zip is close to the recommended list of centers has 
+    We need to check if the current zip is close to the recommended list of centers has
     Using the Haversine formula
     """
     lat1, long1 = return_lat_long_from_Zip(zip1)
@@ -119,12 +132,12 @@ def get_recommended_list_test(returnval, category, zipcode):
     '''
     Method to get the recommended list
     We are taking the returnval from our search with query and the categories that
-    the user entered. 
+    the user entered.
     '''
     # Maintain a new list of found categories in the returnval
     foundTypes = []
     recommended = []
-    minDifference = 0;
+    minDifference = 0
     # loop through each item in the returnval
     for item in returnval:
         # Loop through each sub category
@@ -136,10 +149,10 @@ def get_recommended_list_test(returnval, category, zipcode):
                         # if it is not already in foundtypes append it
                         foundTypes.append(categoryType)
                         # if the item is not already in recommened add it
-                        if item not in recommended: 
+                        if item not in recommended:
                             # Also need to check for zipcode variance before adding to recommended
                             recommended.append(item)
-                            # Remove the items from the returnval   
+                            # Remove the items from the returnval
                             returnval.remove(item)
     # loop through the list in reverse since we know that the returnval is arranged by
     # len, ideally a different recommended list should be passed, however I added this
@@ -150,6 +163,35 @@ def get_recommended_list_test(returnval, category, zipcode):
         returnval.insert(0, item)
     return returnval
 
+def get_further_details(name):
+    further_desc = Description.objects.filter(name=name).values()
+    print (further_desc)
+    return further_desc
+
+def donationSiteDetails(request, id):
+    '''Method to get the donation site details'''
+    result = RecyclingCenter.objects.filter(idc=id).values()
+    # print (further_desc)
+    final = combine_idc(result) 
+    for i in final:
+        final[i]["type"]=final[i]['type'].split(",")
+    returnval = []
+    for i in final:
+        returnval.append(final[i])
+    returnDesc = get_further_details(returnval[0]['name'])
+    return render(request, 'mainRecycleApp/donationSites.html', { "donationSite" : returnval[0],
+                                                                  "furtherInfo" : returnDesc})
+
+def combine_idc(result):
+    '''Method that combines the same idc values'''
+    final = {}
+    for cur_element in result:
+        keys = (cur_element["idc"])
+        if keys in final:  # combine when have same "idc"
+            final[keys] = {"idc":cur_element["idc"], "name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"] + "," +final[keys]["type"]}
+        else:  # for unique "idc"
+            final[keys] = {"idc":cur_element["idc"], "name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"]}
+    return final
 
 def search_withQuery(request):
     '''Method to search with query from the database'''
@@ -169,48 +211,53 @@ def search_withQuery(request):
         result = list(RecyclingCenter.objects.filter(type__in=category).filter(borough=borough).values())
         special_waste_site = get_special_waste_site(borough)
         safe_disposal_events = get_safe_disposal_events(borough)
+        public_recycle_bins = get_public_recycle_bins(borough)
+
         if(day!=[]):
             result = filterDay(result,day)
         if(time!=""):
             result = filterTime(result, day, time)
-        final = {}
-        for cur_element in result:
-            keys = (cur_element["idc"])
-            if keys in final:  # combine when have same "idc"
-                final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"] + "," +final[keys]["type"]}
-            else:  # for unique "idc"
-                final[keys] = {"name": cur_element["name"], "address": cur_element["address"], "Monday": cur_element["Monday"], "Tuesday": cur_element["Tuesday"], "Wednesday": cur_element["Wednesday"], "Thursday": cur_element["Thursday"], "Friday": cur_element["Friday"], "Saturday": cur_element["Saturday"], "Sunday": cur_element["Sunday"], "borough": cur_element["borough"], "zip": cur_element["zip"],  "cell": cur_element["cell"], "picksup": cur_element["picksup"], "cell":cur_element["cell"], "url": cur_element["url"], "type": cur_element["type"]}
+        final = combine_idc(result)
         for i in final:
             final[i]["type"]=final[i]['type'].split(",")
             if(final[i]["Monday"]!="closed"):
                 temp = final[i]["Monday"].split(",")
                 final[i]['Monday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Tuesday"]!="closed"):    
+            if(final[i]["Tuesday"]!="closed"):
                 temp = final[i]["Tuesday"].split(",")
                 final[i]['Tuesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Wednesday"]!="closed"):    
+            if(final[i]["Wednesday"]!="closed"):
                 temp = final[i]["Wednesday"].split(",")
                 final[i]['Wednesday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Thursday"]!="closed"):   
+            if(final[i]["Thursday"]!="closed"):
                 temp = final[i]["Thursday"].split(",")
                 final[i]['Thursday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Friday"]!="closed"):    
+            if(final[i]["Friday"]!="closed"):
                 temp = final[i]["Friday"].split(",")
                 final[i]['Friday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Saturday"]!="closed"):    
+            if(final[i]["Saturday"]!="closed"):
                 temp = final[i]["Saturday"].split(",")
                 final[i]['Saturday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
-            if(final[i]["Sunday"]!="closed"):    
+            if(final[i]["Sunday"]!="closed"):
                 temp = final[i]["Sunday"].split(",")
                 final[i]['Sunday']=temp[0][0:2]+":"+temp[0][2:]+"  -"+temp[1][0:2]+":"+temp[1][2:]
             final[i]["len"]=len(final[i]["type"])
         final = OrderedDict(sorted(final.items(), key=lambda kv: kv[1]['len'], reverse=True))
         returnval = []
         for i in final:
+            final[i]['long']=1
+            final[i]['lat']=1
             returnval.append(final[i])
         # print (check_Distance_Of_Zips('11104', '10016'))
         get_recommended_list_test (returnval, category, zipcode)
+        bookmarks=[]
+        if request.user.is_authenticated:
+            bookmarks = list(set(request.user.bookmarks.values_list('facility', flat=True)))
+
         return render(request,'mainRecycleApp/home.html', {"data": returnval,
+                                                           "bookmarks":bookmarks,
                                                            "userCategories": category,
+                                                           "days": day,
                                                            "specialWasteSite" : special_waste_site,
-                                                           "safeDisposalEvents" : safe_disposal_events })
+                                                           "safeDisposalEvents" : safe_disposal_events,
+                                                           "publicRecycleBins" : public_recycle_bins})

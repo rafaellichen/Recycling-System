@@ -1,107 +1,86 @@
 {% extends "mainRecycleApp/header.html" %}
 
 {% block content %}
-<style>
-.poster-main{position:relative;width:800px;height:234px;margin:0px auto;visibility:hidden;}
-.poster-main.done{visibility:visible;}
-.poster-main a,.poster-main img{display: block;border:0px}
-.poster-main .poster-list{width:800px;height: 234px;list-style:none;}
-.poster-main .poster-btn{
-    position:absolute;
-    height: 234px;
-    width:100px;
-    top:0;
-    z-index:10;
-    opacity:.5;
-    color:black;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center center;
-    transition: opacity .3s;
-}
-.poster-main .poster-btn:hover{
-    opacity:.8;
-    transition: opacity .3s;
-}
-.poster-main .poster-item{position:absolute;left:0;top:0;}
-.poster-main .poster-left-btn{
-    left:0;
-    background-image: url('/static/img/arrow-left.png');
-}
-.poster-main .poster-right-btn{
-    right:0;
-    background-image: url('/static/img/arrow-right.png');
-}
-
-</style>
-
-<div class="container-fluid">
-	<div class="row">
-  <main> 
-    <div class=" text-center">
-        <p><span>About Us</span></p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row justify-content-center">
+          <h1 id="header1">About Us</h1>
     </div>
-
-    <div class="container-fluid">
-
-        <img src="/static/img/about2.jpg" class="rounded float-right" height="500" width="500">
-  
-    <div class="main-about-footer">
+  </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
         <p class="english">The company is committed to help the traditional recycle companies to achieve the transformation and
             upgrading in the Internet age. At present, local residents could schedule garbage(recycle source) then choose one of these recycle companies via our website.</p>
+  </div>
+
+</div>
+</div>
+
+<main>
+    <div class="main-head text-center">
+        <h2><span>MRRS TEAM</span></h2>
+    </div>
+    <div class = "container">
+    <div class="card-deck">
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars1.githubusercontent.com/u/15823067?s=400&v=4" width = "50%" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Rafael Li Chen <br><a href="https://github.com/rafaellichen"><i class="fa fa-github"></i></a></h5>
+        <p>Scrum Master</p>
+        <p>The facilitator for an agile development team.</p></p>
+        </div>
+      </div>
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars3.githubusercontent.com/u/26423462?s=400&v=4" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Rupesh Basnet <br><a href="https://github.com/rupeshbasnet"><i class="fa fa-github"></i></a></h5>
+        <p>Product Owner</p>
+        <p>Having a vision of what to build in website.</p></p>
+        </div>
+      </div>
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars2.githubusercontent.com/u/9379035?s=400&v=4" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Moustafa Mahmoud <br><a href="https://github.com/drsh2k"><i class="fa fa-github"></i></a></h5>
+        <p>Developer</p>
+        <p>Develop website depend requirement.</p></p>
+        </div>
+      </div>
+      <div class="card" style="width: 10rem;">
+        <img class="card-img-top" src="https://avatars3.githubusercontent.com/u/15865510?s=400&v=4" alt="Card image cap">
+        <div class="card-body">
+        <p class="card-text"><h5>Shirong Zheng <br><a href="https://github.com/shirongzheng"><i class="fa fa-github"></i></a></h5>
+        <p>Developer</p>
+        <p>Develop website depend requirement.</p></p>
+        </div>
+      </div>
+
+      </div>
+    </div>
     </div>
 
-  </div>
+    <div id = "container" style="margin-top: 20px;">
+      <div class="text-center">
+          <h2><span>Contact us</span></h2>
+      </div>
+      <div class="span8 text-center">
+              <a href="mailto:projecteasyrecycle@gmail.com"><i class="fa fa-envelope"></i> projecteasyrecycle@gmail.com</a>
+      </div>
+    </div>
+
+    
+    <div id = "container" style="margin-top: 20px;">
+      <div class="text-center">
+          <h2><span>Visit us</span></h2>
+      </div>
+      <div class="span8">
+            <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJidKA7VVYwokRFqUPE4N8OFo&key=AIzaSyBm4zLC1U1LxOz5KiWtR1w4NK8AxLi9FwM&q" allowfullscreen></iframe>
+      </div>
+    </div>
+
+
 </main>
-</div>
-</div>
-<br>
-
-<HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="100%" color=#987cb9 SIZE=1>
-
-<div class="container-fluid">
-    <div class="row">
-
-   <div class='poster-main'>
-        <img src="/static/img/pic1.jpg" width="100%">
-        <img src="/static/img/pic2.jpg" width="100%">
-        <img src="/static/img/pic3.jpg" width="100%">
-        <img src="/static/img/pic4.jpg" width="100%">
-        <img src="/static/img/pic5.jpg" width="100%">
-
-    </div>
-  </div>
-</div><br>
-
-    <div class="container text-center">
-    <h3>What We Do</h3><br>
-    <div class="row">
-      <div class="col-sm-4">
-        <img src="/static/img/PlasticRecycling1.jpg" class="img-responsive" style="width:100%" alt="Image">
-        <p>For Residents</p>
-      </div>
-      <div class="col-sm-4">
-        <img src="/static/img/RecycleCompany1.jpg" class="img-responsive" style="width:100%" alt="Image">
-        <p>For Recycle Companies</p>
-      </div>
-      <div class="col-sm-4">
-        <div class="well">
-         <p>Local Residents</p><br>
-            Do you want recycle garbege in smart way?
-        </div>
-        <div class="well">
-         <p>Recycle Companies</p>
-            Getting recycle sources directly from residents?
-        </div>
-      </div>
-    </div>
-  </div><br>
-
- <div class="container">
-  <div class="embed-responsive embed-responsive-16by9">
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/OasbYWF4_S8" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div><br>
 
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
     <script src="/static/js/poster.js"></script>
@@ -117,4 +96,3 @@
 
 
 {% endblock %}
-
