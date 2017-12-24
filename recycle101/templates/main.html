@@ -1,36 +1,71 @@
-{% extends "mainRecycleApp/header.html" %}
+{% extends "mainRecycleApp/header.html" %}{%load static%}
 
-{% block body %}
-{%load static%}
-<div class= "cotainer" style="margin-top:70px;">
-<div class = "row justify-content-center">
-		<h2>How recycling in New York works?</h2>
-		
+{% block content %}
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row justify-content-center">
+          <h1 id="header1">How recycling in New York works?</h1>
+    </div>
+  </div>
 </div>
-<div class = "row justify-content-center"><p>Recycling in New York depends on three things: </p></div>
-<div class = "row justify-content-center">
-	Item type
+<div class= "container" style="margin-top:30px;">
+	<div class = "row justify-content-center">
+		<p>Recycling in New York depends on two aspects </p>
+	</div>
+	<div class = "row justify-content-center">
+		<div class = "card-deck">
+				<div class="card mb-3" style="max-width: 30rem;">
+				  <div class="card-body">
+				    <p class = "text-center">Item type</p>
+				    <ul>
+				    	<li>Recyable items such as paper, plastic, glass that is usually handled by the Department of Sanitation</li><br>
+				    	<li>Difficult to recycle items which is handled by the Department of Sanitation, however is a hassle for them. Items like electronics, home appliances, automotive, furniture etc.</li><br>
+				    	<li>Strict rules and regulations in-place by the DSNY for difficult to recycle items</li><br>
+				    	<li>Several programs are offered by DSNY such as legally mandated take-back programs to help NYC residents to despose of these items properly</li><br>
+				    	<li>Several donation centers available that accept these items</li>
+				    </ul>
+				   </div>
+				</div>
+				<div class="card bg-light mb-3" style="max-width: 30rem;">
+				  <div class="card-body">
+				    <p class = "text-center">Item condition</p>
+				    <ul>
+				    	<li>Items in working condition will be accepted by Donation centers</li><br>
+				    	<li>Items that are not in working condition should be recycled through DSNY programs</li><br>
+				    	<li>Programs such as DSNY Safe Disposal Events accepts these difficult to recycle items</li><br>
+				    	<li>DSNY's Special Waste Drop Off Sites accepts these items</li>
+				    </ul>
+				  </div>
+				</div>
+		</div>
+	</div>
+	<div class = "row justify-content-center">
+		Need more information about these programs and events ? 
+	</div>
+	<div class = "row justify-content-center" style="margin-bottom:10px;">
+		<a href = "#">Check FAQs</a>
+	</div>
 </div>
-<div class = "row justify-content-center">
-	Item condition
+
+<div class="container">
+	<div class = "row">
+		<div class="col-lg-7 mx-auto">
+			<div class = "ui-widget">
+			<form role="form" method="POST" action= "/search101"> {% csrf_token %}
+      			<div class="input-group">
+					   <input id = "recycleType" name = "recycleType" class="form-control form-control-lg" type="text" placeholder="Enter the item type">
+					   <br>
+					   <button type="submit" class="btn btn-info">Search</button>	   
+				
+				</div>
+			</form>
+		</div>
+		</div>
+	</div>
 </div>
-<div class = "row justify-content-center">
-	Item quantity
-</div>
-<br>
-</div>
-</div>
-<div class="container" style="margin-top:30px;">
-	<form role="form" method="POST" action= "/search101"> 
-	   {% csrf_token %}
-	   <div class = "ui-widget">
-		   <input id = "recycleType" name = "recycleType" class="form-control form-control-lg" type="text" placeholder="Enter the  item type">
-		   <br>
-		   <button type="submit" class="btn btn-primary">Search</button>
-	   </div>
-	</form>
-</div>
-<div class = "container">
+<div class = "container" style="margin-bottom:30px;">
 	{% if data %}
 	<br>
 		{% for item in data %}
@@ -38,11 +73,15 @@
 			<p>{{ item.description }}</p>
 		{% endfor %}
 	{% else %}
-		No Result
+		
 	{% endif %}
 </div>
 
 
-<script type="text/javascript" src="{% static "js/app/recycle101.js" %}">
+<script type="text/javascript" src="{% static "js/app/recycle101.js" %}"> </script>
+
 
 {% endblock %}
+
+
+
