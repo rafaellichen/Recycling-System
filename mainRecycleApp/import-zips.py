@@ -1,8 +1,9 @@
+"""Helper Import script to import the CSV data into the Django Zips Model"""
 import csv
 
 from mainRecycleApp.models import Zip
 
-data = csv.reader(open("static/data/zips.csv"), delimiter=",")
+data = csv.reader(open("../static/data/zips.csv"), delimiter=",")
 
 for row in data:
 	zips = Zip()

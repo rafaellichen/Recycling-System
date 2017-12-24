@@ -1,9 +1,9 @@
-'''Helper Import script to import the CSV data into the Django Models'''
+"""Helper Import script to import the CSV data into the Django Models"""
 import csv
 
 from mainRecycleApp.models import RecyclingCenter
 
-data = csv.reader(open("DonateNYCCSV.csv"), delimiter=",")
+data = csv.reader(open("../static/data/DonateNYCCSV.csv"), delimiter=",")
 
 for row in data:
     if row[0] != 'name':

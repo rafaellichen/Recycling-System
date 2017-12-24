@@ -13,23 +13,63 @@ import geopy
 
 # Create your views here.
 def index(request):
-    '''Index render method for mainrecycleApp/home'''
+    """
+    This Methodhod renders the home.html for route ('/') 
+    
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template mainRecycleApp/home.html being sent over 
+    """
     return render(request, 'mainRecycleApp/home.html')
 
 def about(request):
-    '''About render method for mainRecycleApp/about.html'''
+    """
+    This method renders the about.html for route ('/about') 
+    
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template mainRecycleApp/about.html being sent over 
+    """
     return render(request, 'mainRecycleApp/about.html')
 
 def contact(request):
-    '''Contact render method for mainRecycleApp/contact.html'''
+    """
+    This method renders the contact.html for route ('/contact') 
+    
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template mainRecycleApp/contact.html being sent over 
+    """
     return render(request, 'mainRecycleApp/contact.html')
 
 def faqs(request):
-    '''FAQs render method for mainRecycleApp/faqs.html'''
+    """
+    This method renders the faqs.html for route ('/faqs') 
+    
+    **Args:**
+        request: HttpRequest object created by Django
+
+    **Returns:**
+        render: HttpResponse object with the template mainRecycleApp/faqs.html being sent over 
+    """
     return render(request, 'mainRecycleApp/faqs.html')
 
 def getBoroughFromZip(zipcode):
-    '''Get user's rough location by borough'''
+    """
+    Converts the zipcode into the Borough name and returns it
+    **Args:**
+        zipcode: (int) Zipcode value any zipcode within NYC
+
+    **Returns:**
+        borough: (string) Borough name of all boroughs in NYC.
+                 Value is empty if the zipcode is invalid or not of New York City
+    """
     BK = [10461, 10462, 10464, 10465, 10472, 10473, 11209, 11214, 11228, 11204, 11218, 11219, 11230, 11234, 11236, 11239, 11223, 11224, 11229, 11235, 11201, 11205, 11215, 11217, 11231, 11203, 11210, 11225, 11226, 11207, 11208, 11211, 11222, 11220, 11232, 11206, 11221, 11237]
     MH = [10026, 10027, 10030, 10037, 10039,10001, 10011, 10018, 10019, 10020, 10036, 10029, 10035, 10010, 10016, 10017, 10022, 10012, 10013, 10014, 10004, 10005, 10006, 10007, 10038, 10280, 10002, 10003, 10009, 10021, 10028, 10044, 10065, 10075, 10128, 10023, 10024, 10025, 10031, 10032, 10033, 10034, 10040]
     QN = [11361, 11362, 11363, 11364, 11354, 11355, 11356, 11357, 11358, 11359, 11360, 11365, 11366, 11367, 11412, 11423, 11432, 11433, 11434, 11435, 11436, 11101, 11102, 11103, 11104, 11105, 11106, 11374, 11375, 11379, 11385, 11691, 11692, 11693, 11694, 11695, 11697, 11004, 11005, 11411, 11413, 11422, 11426, 11427, 11428, 11429, 11414, 11415, 11416, 11417, 11418, 11419, 11420, 11421, 11368, 11369, 11370, 11372, 11373, 11377, 11378]
@@ -49,7 +89,15 @@ def getBoroughFromZip(zipcode):
     return borough
 
 def filterDay(result, day):
-    '''filter out closed facilities'''
+    """ 
+    Filters the donation sites that has closed on the day the user chose
+    **Args:**
+        result: (List) list of donation site objects
+        day: (List) list of days from Monday to Sunday
+
+    **Returns:**
+        filter_day: (List) List of new donation sites with filtered sites that are closed on day list
+    """
     filter_day = []
     for e in result:
         for i in day:

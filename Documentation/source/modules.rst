@@ -2,9 +2,11 @@ Recycling-System
 ================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
 
    Recycling-System
    mainRecycleApp
    manage
    users
+   recycle101
+   guestbook

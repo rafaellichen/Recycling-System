@@ -7,7 +7,9 @@ from django.db import models
 
 class RecyclingCenter(models.Model):
     """
-    Model for RecyclingCenters in searchResult App
+    Model for Donation Centers / Recycling Centers in mainRecycleApp 
+    Contains the donation centers with estential attributes name, address, type, borough,
+    zipcode, phone number, a boolean for pickup status and the web url if available.
     """
     idc = models.TextField()
     name = models.TextField()
@@ -20,24 +22,20 @@ class RecyclingCenter(models.Model):
     Friday = models.TextField()
     Saturday = models.TextField()
     Sunday = models.TextField()
-    #recycleType = models.TextField()
     borough = models.TextField()
     zip = models.TextField()
     cell = models.TextField()
     picksup = models.TextField()
     url = models.TextField()
-    #website = models.TextField()
-    #logo_url = models.TextField()
 
     def __str__(self):
-        """
-        Method to return the string name
-        """
+        """ Method to return the string name """
         return self.name
 
 class PublicRecyclingBin(models.Model):
     """
-    Model for the public recycling bins
+    Model for the public recycling bins which contains the information for public bins 
+    with attributes , borough, site type, address, latitude and longitude
     """
     borough = models.TextField()
     siteType = models.TextField()
@@ -47,14 +45,12 @@ class PublicRecyclingBin(models.Model):
     longitude = models.TextField()
 
     def __str__(self):
-        """
-        Method to return the string sitename
-        """
+        """Method to return the string sitename"""
         return self.siteName
 
 class SpecialWasteSite(models.Model):
     """
-    Model for the special waste site
+    Model for the special waste sites 
     """
     name = models.TextField()
     latitude = models.TextField()

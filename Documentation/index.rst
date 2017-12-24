@@ -6,10 +6,19 @@
 Welcome to Recycling-System's documentation!
 ============================================
 
+Table of Contents
+-----------------
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   source/installation
+   source/Recycling-System
+   source/mainRecycleApp
+   source/recycle101
+   source/users
+   source/guestbook
 
 Indices and tables
 ==================

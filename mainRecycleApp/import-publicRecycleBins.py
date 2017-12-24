@@ -1,8 +1,10 @@
+"""Helper Import script to import the CSV data into the Django Public Recycle Bins Model"""
+
 import csv
 
 from mainRecycleApp.models import PublicRecyclingBin
 
-data = csv.reader(open("publicbins.csv"), delimiter=",")
+data = csv.reader(open("../static/data/publicbins.csv"), delimiter=",")
 
 for row in data:
 	bins = PublicRecyclingBin()
