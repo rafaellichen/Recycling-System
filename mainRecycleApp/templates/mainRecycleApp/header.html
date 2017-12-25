@@ -54,11 +54,11 @@
     </ul>
 		<ul class="nav navbar-nav navbar-right">
 			{% if request.user.is_anonymous != True %}
-			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user"></span>{{request.user.first_name}}'s Profile</a></li>
+			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user loggedin"></span>{{request.user.first_name}}'s Profile</a></li>
 			<li class="nav-item"><a class="nav-link" id="logout" href="#"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
 			{% else %}
 			<li class="nav-item"><a class="nav-link" href="/signup"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
-			<li class='nav-item'><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+			<li class='nav-item'><a class="nav-link" href="/login" name="login-nav"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
 			{% endif %}
 		</ul>
   </div>
@@ -90,7 +90,7 @@
                         </ul>
                     </div>
                     <div class="col-6">
-                        
+
                     </div>
                 </div>
                 <ul class="nav">
@@ -102,13 +102,13 @@
                 <br>
             </div>
             <div class="col-md-2">
-                
+
             </div>
             <div class="col-md-5">
               <h5 class="">Contact Us</h5>
               <i class="fa fa-map-marker"></i><br>
-              160 Convent Ave <br> 
-              New York NY <br> 
+              160 Convent Ave <br>
+              New York NY <br>
               10031 <br><br><br>
               <a href="mailto:projecteasyrecycle@gmail.com"><i class="fa fa-envelope"></i> projecteasyrecycle@gmail.com</a>
             </div>
