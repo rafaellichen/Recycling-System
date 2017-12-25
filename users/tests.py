@@ -149,6 +149,44 @@ class RegisterationIntegrationTest(StaticLiveServerTestCase):
         self.assertTrue(logged_in)
 
 
+class BookmarksFeatureAcceptanceTest(StaticLiveServerTestCase):
+
+    fixtures = ['centers.json']
+
+    @classmethod
+    def setUpClass(cls):
+        super(BookmarksFeatureAcceptanceTest, cls).setUpClass()
+        cls.selenium = webdriver.Firefox()
+        cls.selenium.implicitly_wait(10)
+        cls.user = User.objects.create_user(username='test', first_name='SteeeeveMadden',
+                        password='testtest')
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super(BookmarksFeatureAcceptanceTest, cls).tearDownClass()
+
+    def test_acceptance_bookmarks(self):
+        self.selenium.get(self.live_server_url)
+        self.selenium.find_element_by_name('login-nav').click()
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.click(); username_input.clear()
+        username_input.send_keys('test')
+        password_input = self.selenium.find_element_by_id("password")
+        password_input.click(); password_input.clear()
+        password_input.send_keys('testtest')
+        self.selenium.find_element_by_name('loginbtn').click()
+        try:
+            logged_in = self.selenium.find_element_by_class_name("loggedin")
+        except NoSuchElementException:
+            logged_in = False
+        self.assertTrue(logged_in)
+
+        # TODO: Navigate to login page -> Search for centers ->> Add to bookmarks
+        # Verify in /Profile
+
+
+
 
 class BookmarksViewTest(TestCase):
     fixtures = ['centers.json']
@@ -173,6 +211,8 @@ class BookmarksViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(str(response.content, encoding='utf8'),
                                 {'result':'success'})
+
+
 
 
 
