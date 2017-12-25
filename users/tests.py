@@ -166,7 +166,13 @@ class BookmarksViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(str(response.content, encoding='utf8'),
                                 {'result':'success'})
+        new_params = json.dumps({"param": "remove", "idc":5})
+        response = self.client.post('/bookmarks', data= new_params, content_type='application/json',
+                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(str(response.content, encoding='utf8'),
+                                {'result':'success'})
 
 
 
