@@ -10,7 +10,12 @@ https://warm-beach-37724.herokuapp.com
 ## Running the tests:
 **cd into the Recycling-System**: 
 > $ coverage run --source="." manage.py test
+---
+## Using django-nose as a test runner:
+> $ ./manage.py test _\<appname\>_ --cover-html
 
+**open conver/index.html**:
+---
 ## View the test report:
 **cd into the Recycling-System**:
 > $ coverage run --source="." manage.py test
