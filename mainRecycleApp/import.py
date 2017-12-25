@@ -3,9 +3,9 @@ import csv
 
 from mainRecycleApp.models import RecyclingCenter
 
-data = csv.reader(open("../static/data/DonateNYCCSV.csv"), delimiter=",")
+DATA = csv.reader(open("../static/data/DonateNYCCSV.csv"), delimiter=",")
 
-for row in data:
+for row in DATA:
     if row[0] != 'name':
         recycle = RecyclingCenter()
         recycle.name = row[0]

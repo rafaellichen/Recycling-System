@@ -1,6 +1,5 @@
 from django.test import TestCase
 import recycle101
-# Create your tests here.
 from recycle101.models import HowTo
 from mock import patch, MagicMock
 from django.test import TestCase
@@ -13,6 +12,7 @@ class TestViewsRecycle101AppUnit(TestCase):
         self.factory = RequestFactory()
         self.requestRecycle = self.factory.get('/recycle101')
         self.requestSearch = self.factory.post('/search101', {'recycleType' : 'test'})
+        self.requestAjax = self.factory.get('/api/types/', {'term' : 'test'}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
     def test_index_gets_main_template(self, render_mock):
         recycle101.views.index(self.requestRecycle)
@@ -23,6 +23,10 @@ class TestViewsRecycle101AppUnit(TestCase):
         recycle101.views.searchHowTo(self.requestSearch)
         self.assertTrue(render_mock.called)
         render_mock.assert_called_with(self.requestSearch, 'main.html', {'data' : []})
+
+    def test_search_get_how_tos_template(self, render_mock):
+        response = recycle101.views.getItemTypes(self.requestAjax)
+        self.assertEqual(response.status_code, 200)
 
 
 class HowToModelTest(TestCase):

@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^contact/', views.contact, name='contact'),
     url(r'^faqs/', views.faqs, name='faqs'),
     url(r'^search/', views.search_withQuery, name='search_withQuery'),
-    url(r'^donation/(?P<id>\d+)/$', views.donationSiteDetails, name='donationSiteDetails')    
+    url(r'^donation/(?P<id>\d+)/$', views.donationSiteDetails, name='donationSiteDetails')
 ]

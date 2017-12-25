@@ -7,7 +7,7 @@ from django.db import models
 
 class RecyclingCenter(models.Model):
     """
-    Model for Donation Centers / Recycling Centers in mainRecycleApp 
+    Model for Donation Centers / Recycling Centers in mainRecycleApp
     Contains the donation centers with estential attributes name, address, type, borough,
     zipcode, phone number, a boolean for pickup status and the web url if available.
     """
@@ -34,7 +34,7 @@ class RecyclingCenter(models.Model):
 
 class PublicRecyclingBin(models.Model):
     """
-    Model for the public recycling bins which contains the information for public bins 
+    Model for the public recycling bins which contains the information for public bins
     with attributes , borough, site type, address, latitude and longitude
     """
     borough = models.TextField()
@@ -50,7 +50,7 @@ class PublicRecyclingBin(models.Model):
 
 class SpecialWasteSite(models.Model):
     """
-    Model for the special waste sites 
+    Model for the special waste sites
     """
     name = models.TextField()
     latitude = models.TextField()
@@ -112,6 +112,9 @@ class Description(models.Model):
         """
         return self.name
 
-class Bookmark (models.Model):
+class Bookmark(models.Model):
+    """
+    Model for User Bookmarks of Donation Sites
+    """
     facility = models.TextField()
     user = models.ForeignKey(User, related_name='bookmarks')

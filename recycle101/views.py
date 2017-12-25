@@ -8,7 +8,7 @@ import json
 
 def index(request):
     """
-    This Method renders the main.html for route ('/') 
+    This Method renders the main.html for route ('/recycle101') 
     
     **Args:**
         request: HttpRequest object created by Django
