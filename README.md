@@ -12,9 +12,10 @@ https://warm-beach-37724.herokuapp.com
 > $ coverage run --source="." manage.py test
 ---
 ## Using django-nose as a test runner:
-> $ ./manage.py test _\<appname\>_ --cover-html
-
-**open conver/index.html**:
+```
+ $ ./manage.py test <appname> --cover-html
+ $ open cover/index.html
+```
 ---
 ## View the test report:
 **cd into the Recycling-System**:
