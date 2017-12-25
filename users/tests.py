@@ -10,21 +10,21 @@ class LoginTest(TestCase):
     def setUp(self):
         '''Method setup that sets the user credentials'''
         user = User.objects.create_user(username='test', password='password')
-        user.save()            
+        user.save()
 
     def test_login(self):
         '''Method test_Login that logs in'''
-        login = self.client.login(username='test', password='password')
+        self.client.login(username='test', password='password')
         response = self.client.get('/')
 
         self.assertEqual(str(response.context['user']), 'test')
         self.assertEqual(response.status_code, 200)
 
     def test_logout(self):
-        '''Method test_logout that verifies the logout''' 
-        login = self.client.login(username='test', password='password')
+        '''Method test_logout that verifies the logout'''
+        self.client.login(username='test', password='password')
         response = self.client.get('/')
-        
+
         # Verify first that the user has logged in with the accurate response code
         self.assertEqual(str(response.context['user']), 'test')
         self.assertEqual(response.status_code, 200)
@@ -37,11 +37,10 @@ class LoginTest(TestCase):
 
     def invalid_user_login_test(self):
         '''Method for testing the rendered message for invalid users'''
-        login = self.client.login(username='garbage', password='password')
+        self.client.login(username='garbage', password='password')
         response = self.client.get('/')
 
-        self.assertEqual(str(response), "Invalid Login")
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(str(response.context['user']), 'AnonymousUser')
 
 
 class UserProfileViewTest(TestCase):
@@ -49,19 +48,19 @@ class UserProfileViewTest(TestCase):
     def setUp(self):
         '''Method setup that sets the user credentials'''
         user = User.objects.create_user(username='test', password='password')
-        user.save()  
+        user.save()
 
     def test_profile_page_view(self):
         '''Method to test the profile page views is being rendered after login'''
-        login = self.client.login(username='test', password='password')
+        self.client.login(username='test', password='password')
         response = self.client.get('/profile')
         self.assertEqual(response.status_code, 200)
 
     def test_home_template_use(self):
         '''Method to test if the correct profile template was used'''
-        login = self.client.login(username='test', password='password')
+        self.client.login(username='test', password='password')
         response = self.client.get('/profile')
-        self.assertTemplateUsed(response, 'users/profile.djhtml') 
+        self.assertTemplateUsed(response, 'users/profile.djhtml')
 
     def test_redirect_if_user_not_logged_in(self):
         '''Method to test the redirect to homepage if user not logged in'''
@@ -86,7 +85,7 @@ class UsersViewTest(TestCase):
 
     def test_login_from_url(self):
         '''Test returns true when login is redered properly with URL'''
-        response = self.client.get('login/')
+        response = self.client.get('/login')
         self.assertEqual(response.status_code, 200)
 
     def test_logout_from_url(self):
@@ -96,10 +95,10 @@ class UsersViewTest(TestCase):
 
     def test_signup_from_name(self):
         '''Test returns true when signup index is redered properly with name'''
-        response = self.client.get(reverse('signup'))
+        response = self.client.get(reverse('users:signup'))
         self.assertEqual(response.status_code, 200)
 
     def test_profile_from_name(self):
         '''Test returns true when profile index is redered properly with name'''
-        response = self.client.get(reverse('profile'))
+        response = self.client.get('users:profile')
         self.assertEqual(response.status_code, 200)

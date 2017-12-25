@@ -60,13 +60,13 @@ class MainRecycleAppViewTest(TestCase):
         """
         response = self.client.get('/about/')
         self.assertTemplateUsed(response, 'mainRecycleApp/about.html')
-    
+
     def test_contact_template_use(self):
         """
         Test returns true when contact is redered properly with right template
         """
         response = self.client.get('/contact/')
-        self.assertTemplateUsed(response, 'mainRecycleApp/contact.html')   
+        self.assertTemplateUsed(response, 'mainRecycleApp/contact.html')
 
 class RecyclingCenterModelTest(TestCase):
 
@@ -224,7 +224,7 @@ class RecyclingCenterModelLabelTest(TestCase):
 
     def test_object_name_is_name(self):
         """
-        Test returns true when __str__ method returns the name of the Recycling center 
+        Test returns true when __str__ method returns the name of the Recycling center
         """
         RECYCLINGCENTER = RecyclingCenter.objects.get(id=1)
         output_name = RECYCLINGCENTER.name
@@ -241,7 +241,7 @@ class DescriptionModelsTest(TestCase):
 
     def test_public_recycle_bin_name(self):
         self.assertEqual(self.description.idc, "1")
-        self.assertEqual(self.description.name, "TestSiteType")
+        self.assertEqual(self.description.name, "TestSiteName")
         self.assertEqual(self.description.description, "TestDescription")
         self.assertEqual(self.description.pickup_info, "Test pickup information")
 
@@ -338,13 +338,13 @@ class PublicRecyclingBinsModelsLabelTest(TestCase):
 
     def test_object_name_is_siteName(self):
         """
-        Test returns true when __str__ method returns the siteName of the public recycling bins 
+        Test returns true when __str__ method returns the siteName of the public recycling bins
         """
         PUBLICRECYCLEBIN = PublicRecyclingBin.objects.get(id=1)
         output_name = PUBLICRECYCLEBIN.siteName
         self.assertEqual(output_name, str(PUBLICRECYCLEBIN))
 
-    
+
 class SpecialWasteSiteModelTest(TestCase):
 
     @classmethod
@@ -357,7 +357,7 @@ class SpecialWasteSiteModelTest(TestCase):
                                        location='E 227 St/Bronx River Pkway',
                                        hours='Saturdays and the last Friday of every month from 10 AM to 5 PM.',
                                        url='http://www.nyc.gov/html/dsny/html/collection/special_schedule.shtml')
-        
+
     def test_special_waste_site_name(self):
         """
         Testing the special waste site values
@@ -367,7 +367,7 @@ class SpecialWasteSiteModelTest(TestCase):
         self.assertEqual(self.specialWasteSite.longitude, "-73.864223918")
         self.assertEqual(self.specialWasteSite.location, "E 227 St/Bronx River Pkway")
         self.assertEqual(self.specialWasteSite.hours, "Saturdays and the last Friday of every month from 10 AM to 5 PM.")
-        self.assertEqual(self.specialWasteSite.url, "http://www.nyc.gov/html/dsny/html/collection/special_schedule.shtml")        
+        self.assertEqual(self.specialWasteSite.url, "http://www.nyc.gov/html/dsny/html/collection/special_schedule.shtml")
 
     def tearDown(self):
         del self
@@ -385,7 +385,7 @@ class SpecialWasteSiteModelLabelTest(TestCase):
                                        location='E 227 St/Bronx River Pkway',
                                        hours='Saturdays and the last Friday of every month from 10 AM to 5 PM.',
                                        url='http://www.nyc.gov/html/dsny/html/collection/special_schedule.shtml')
-        
+
     def test_name_label(self):
         """
         Test name label
@@ -400,7 +400,7 @@ class SpecialWasteSiteModelLabelTest(TestCase):
         """
         SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
         field_label = SPECIALWASTESITE._meta.get_field('latitude').verbose_name
-        self.assertEqual(field_label, 'latitude') 
+        self.assertEqual(field_label, 'latitude')
 
     def test_location_label(self):
         """
@@ -408,7 +408,7 @@ class SpecialWasteSiteModelLabelTest(TestCase):
         """
         SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
         field_label = SPECIALWASTESITE._meta.get_field('location').verbose_name
-        self.assertEqual(field_label, 'location') 
+        self.assertEqual(field_label, 'location')
 
     def test_hours_label(self):
         """
@@ -416,7 +416,7 @@ class SpecialWasteSiteModelLabelTest(TestCase):
         """
         SPECIALWASTESITE = SpecialWasteSite.objects.get(id=1)
         field_label = SPECIALWASTESITE._meta.get_field('hours').verbose_name
-        self.assertEqual(field_label, 'hours') 
+        self.assertEqual(field_label, 'hours')
 
     def test_url_label(self):
         """

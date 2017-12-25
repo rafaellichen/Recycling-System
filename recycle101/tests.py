@@ -16,8 +16,8 @@ class HowToModelTest(TestCase):
         """
         Testing the how to model values
         """
-        self.assertEqual(self.howTo.borough, "Test Type")
-        self.assertEqual(self.howTo.siteType, "Test description")
+        self.assertEqual(self.howTo.recycleType, "Test Type")
+        self.assertEqual(self.howTo.description, "Test description")
 
     def tearDown(self):
         del self

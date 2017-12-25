@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'users',
     'guestbook',
     'recycle101',
+    'django_nose',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +55,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Recycling-System.urls'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=users,mainRecycleApp',
+]
+
 
 TEMPLATES = [
     {
@@ -116,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+LOGIN_URL = '/login'
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 

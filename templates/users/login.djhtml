@@ -19,8 +19,8 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
                             {{ form.username }}
-                            
-                            
+
+
                         </div>
                     </div>
                 </div>
@@ -59,10 +59,10 @@
         </form>
 
           {% if form.errors %}
-            <div class="alert alert-danger" style="margin-top:30px;" role="alert">
+            <div class="alert alert-danger invalid-login" style="margin-top:30px;" role="alert">
                 {{ form.non_field_errors }}
             </div>
           {% endif %}
 
-    </div>                
+    </div>
     {% endblock body %}
