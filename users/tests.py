@@ -182,8 +182,28 @@ class BookmarksFeatureAcceptanceTest(StaticLiveServerTestCase):
             logged_in = False
         self.assertTrue(logged_in)
 
-        # TODO: Navigate to login page -> Search for centers ->> Add to bookmarks
-        # Verify in /Profile
+        self.selenium.find_element_by_xpath("//a[@id='homelogo']").click()
+        zipcode = self.selenium.find_element_by_name("zipcode")
+        zipcode.click(); zipcode.clear()
+        zipcode.send_keys('1001')
+        submit_btn = self.selenium.find_element_by_id("submit-zip")
+        self.selenium.find_element_by_id("Automotive").click()
+        self.selenium.find_element_by_id("Electronics").click()
+        self.selenium.find_element_by_id("Appliances").click()
+        submit_btn.click()
+
+        WebDriverWait(self.selenium, 10).until(
+			EC.presence_of_element_located((By.CLASS_NAME, "card-block"))
+		)
+
+        try:
+            results_exist = self.selenium.find_element_by_id("result-ok")
+        except NoSuchElementException:
+            results_exist = False
+
+        self.assertTrue(results_exist)
+        
+
 
 
 
