@@ -1,6 +1,6 @@
 '''Test for Users App'''
 from django.contrib.auth.models import User
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.core.urlresolvers import reverse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,6 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+from .views import bookmarkHandler
+import json
 
 
 class LoginAcceptanceTest(StaticLiveServerTestCase):
@@ -145,6 +147,26 @@ class RegisterationIntegrationTest(StaticLiveServerTestCase):
         except NoSuchElementException:
             logged_in = False
         self.assertTrue(logged_in)
+
+
+
+class BookmarksViewTest(TestCase):
+    fixtures = ['centers.json']
+
+    def setUp(self):
+        # self.rf = RequestFactory()
+        self.user = User.objects.create_user(
+            username='test', email='test@aol.com', password='testpwd')
+
+    def test_bookmarks_view(self):
+        self.client.login(username='test', password='testpwd')
+        params= json.dumps({"param": "add", "idc":5})
+        response = self.client.post('/bookmarks', data= params, content_type='application/json',
+                                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(str(response.content, encoding='utf8'),
+                                {'result':'success'})
+
 
 
 
