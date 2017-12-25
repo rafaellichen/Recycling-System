@@ -185,13 +185,14 @@ class BookmarksFeatureAcceptanceTest(StaticLiveServerTestCase):
         self.selenium.find_element_by_xpath("//a[@id='homelogo']").click()
         zipcode = self.selenium.find_element_by_name("zipcode")
         zipcode.click(); zipcode.clear()
-        zipcode.send_keys('1001')
-        submit_btn = self.selenium.find_element_by_id("submit-zip")
+        zipcode.send_keys('10001')
+
         self.selenium.find_element_by_id("Automotive").click()
         self.selenium.find_element_by_id("Electronics").click()
-        self.selenium.find_element_by_id("Appliances").click()
+        self.selenium.find_element_by_id("Home_Appliances").click()
+        submit_btn = self.selenium.find_element_by_name("zipcode_btn")
+        # submit_btn.click(); submit_btn.clear()
         submit_btn.click()
-
         WebDriverWait(self.selenium, 10).until(
 			EC.presence_of_element_located((By.CLASS_NAME, "card-block"))
 		)
@@ -200,11 +201,25 @@ class BookmarksFeatureAcceptanceTest(StaticLiveServerTestCase):
             results_exist = self.selenium.find_element_by_id("result-ok")
         except NoSuchElementException:
             results_exist = False
-
         self.assertTrue(results_exist)
-        
 
+        centers = self.selenium.find_elements_by_xpath("//div[@class='card-block']/i[@id='add']")
+        self.assertTrue(centers)
+        for i in range(4):
+            centers[i].click()
 
+        self.selenium.find_element_by_name('profileref').click()
+        bookmarks = self.selenium.find_elements_by_xpath("//div[@class='card-block']/i[@id='remove']")
+        for el in bookmarks:
+            el.click()
+
+        bkmrks_deleted = False
+        try:
+             self.selenium.find_element_by_xpath("//div[@class='card-block']")
+        except NoSuchElementException:
+            bkmrks_deleted= True
+
+        self.assertTrue(bkmrks_deleted)
 
 
 

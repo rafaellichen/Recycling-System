@@ -40,7 +40,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" id="homelogo" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item ">
         <a class="nav-link" href="/recycle101">Recycle 101</a>
@@ -54,7 +54,7 @@
     </ul>
 		<ul class="nav navbar-nav navbar-right">
 			{% if request.user.is_anonymous != True %}
-			<li class="nav-item"><a class="nav-link" href="/profile"><span class="glyphicon glyphicon-user loggedin"></span>{{request.user.first_name}}'s Profile</a></li>
+			<li class="nav-item"><a class="nav-link" href="/profile" name="profileref"><span class="glyphicon glyphicon-user loggedin"></span>{{request.user.first_name}}'s Profile</a></li>
 			<li class="nav-item"><a class="nav-link" id="logout" href="#"><span class="glyphicon glyphicon-user"></span>Logout</a></li>
 			{% else %}
 			<li class="nav-item"><a class="nav-link" href="/signup" name="signup-nav"><span class="glyphicon glyphicon-user"></span>Signup</a></li>
