@@ -1,7 +1,29 @@
 from django.test import TestCase
-
+import recycle101
 # Create your tests here.
 from recycle101.models import HowTo
+from mock import patch, MagicMock
+from django.test import TestCase
+from django.test.client import RequestFactory
+
+@patch('recycle101.views.render')
+class TestViewsRecycle101AppUnit(TestCase):
+    
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.requestRecycle = self.factory.get('/recycle101')
+        self.requestSearch = self.factory.post('/search101', {'recycleType' : 'test'})
+
+    def test_index_gets_main_template(self, render_mock):
+        recycle101.views.index(self.requestRecycle)
+        self.assertTrue(render_mock.called)
+        render_mock.assert_called_with(self.requestRecycle, 'main.html')
+
+    def test_search_gets_main_template(self, render_mock):
+        recycle101.views.searchHowTo(self.requestSearch)
+        self.assertTrue(render_mock.called)
+        render_mock.assert_called_with(self.requestSearch, 'main.html', {'data' : []})
+
 
 class HowToModelTest(TestCase):
 
@@ -21,3 +43,4 @@ class HowToModelTest(TestCase):
 
     def tearDown(self):
         del self
+
