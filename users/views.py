@@ -11,11 +11,11 @@ import json
 
 def signin(request):
     """
-    This Method renders the login.html for route ('/login') 
-    
-    Will authenticate the user and also perform clean form operation to check for any errors 
+    This Method renders the login.html for route ('/login')
+
+    Will authenticate the user and also perform clean form operation to check for any errors
     in the login process
-    
+
     If the user is authenticated will redirect to the home route
     Else will display the form error message
 
@@ -23,7 +23,7 @@ def signin(request):
         request: HttpRequest object created by Django
 
     **Returns:**
-        render: HttpResponse object with the template templates/login.html being sent over 
+        render: HttpResponse object with the template templates/login.html being sent over
     """
     # create a return context arg for the form
     args = {}
@@ -55,11 +55,11 @@ def signout(request):
 
 def signup(request):
     """
-    This Method renders the signup.html for route ('/signup') 
-    
-    Will signup the user and also perform clean form operation to check for any errors 
+    This Method renders the signup.html for route ('/signup')
+
+    Will signup the user and also perform clean form operation to check for any errors
     in the registeration process
-    
+
     If the form is validated will redirect a redirect page
     Else will display the form error message
 
@@ -92,7 +92,7 @@ def profile(request):
 
     **Returns:**
         render: HttpResponse object that renders users/profile.html with context of:
-            'data' : List of all facilities that the user has bookmarked 
+            'data' : List of all facilities that the user has bookmarked
     """
     user = request.user
     if request.method == 'GET':
@@ -106,12 +106,12 @@ def profile(request):
 @login_required
 def editProfile(request):
     """
-    This Method renders the editprofile.html for route ('/editprofile') 
-    
+    This Method renders the editprofile.html for route ('/editprofile')
+
     Will allow users to enter the new information for their profile
-    
+
     If the form is validated will redirect a profile.html page with username
-    Else will display the form error message 
+    Else will display the form error message
 
     **Args:**
         request: HttpRequest object created by Django
@@ -136,22 +136,22 @@ def editProfile(request):
 
 def index(request):
     """
-    This Method renders the index.html for route ('/') 
-    
+    This Method renders the index.html for route ('/')
+
     **Args:**
         request: HttpRequest object created by Django
 
     **Returns:**
-        render: HttpResponse object with the template app/index.html being sent over 
+        render: HttpResponse object with the template app/index.html being sent over
     """
     return render(request, 'app/index.djhtml')
 
 def getBookmarks(user):
-    """ 
+    """
     Method to get the bookmarked recycling centers
 
     **Args:**
-         user: (object) User object 
+         user: (object) User object
 
     **Returns:**
         list: (list) Results obtained from the user.bookmark
@@ -160,14 +160,14 @@ def getBookmarks(user):
     return list(set(user_bookmarks))
 
 def getFacilities(idc_list):
-    """ 
+    """
     Method to Query the database for recycling center and groups the data in a context dict
 
     **Args:**
          idc_list: (list) List of idc attribute of donation sites
 
     **Returns:**
-        returnval: (list) Queried and filtered list of donation sites 
+        returnval: (list) Queried and filtered list of donation sites
     """
     result = list(RecyclingCenter.objects.filter(idc__in=idc_list).values())
     final = {}
@@ -207,10 +207,11 @@ def getFacilities(idc_list):
         returnval.append(final[i])
     return returnval
 
+@csrf_exempt
 def bookmarkHandler(request):
     """
     Adds/removes facility to user bookmarks
-    
+
     **Args:**
         request: HttpRequest object created by Django
 
