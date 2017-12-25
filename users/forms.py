@@ -29,7 +29,6 @@ class SignupForm(forms.ModelForm):
         if not user:
             return self.cleaned_data['username']
         else:
-            print ("username exists")
             raise forms.ValidationError('Your username already exists')
 
     def clean_email(self):
@@ -38,7 +37,6 @@ class SignupForm(forms.ModelForm):
         if not user:
             return self.cleaned_data['email']
         else:
-            print ("email exists")
             raise forms.ValidationError('Your email already exists')
 
 
@@ -66,11 +64,9 @@ class LoginForm(forms.Form):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
         user = authenticate(username=username, password=password)
-        if user is None: 
-            print ("failed to login")
+        if user is None:
             raise forms.ValidationError('Your username or password is invalid')
         else:
-            print ("logged in")
             return self.cleaned_data
 
 class EditProfile(forms.ModelForm):
@@ -90,7 +86,6 @@ class EditProfile(forms.ModelForm):
         if not user:
             return self.cleaned_data['username']
         else:
-            print ("username exists")
             raise forms.ValidationError('Your username already exists')
 
     def clean_email(self):
@@ -99,5 +94,4 @@ class EditProfile(forms.ModelForm):
         if not user:
             return self.cleaned_data['email']
         else:
-            print ("email exists")
             raise forms.ValidationError('Your email already exists')

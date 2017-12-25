@@ -43,6 +43,50 @@ class LoginAcceptanceTest(StaticLiveServerTestCase):
         self.assertTrue(logged_in)
 
 
+class SignupAcceptanceTest(StaticLiveServerTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(SignupAcceptanceTest, cls).setUpClass()
+        cls.selenium = webdriver.Firefox()
+        cls.selenium.implicitly_wait(10)
+        cls.new_user = {
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'email': 'jane.doe@aol.com',
+            'username': 'jane_doe101',
+            'password':'p@$$w0rd',
+            'confirm_password':'p@$$w0rd',
+        }
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super(SignupAcceptanceTest, cls).tearDownClass()
+
+    def test_signup(self):
+        self.selenium.get(self.live_server_url)
+        self.selenium.find_element_by_name('signup-nav').click()
+
+        for k,v in self.new_user.items():
+            input_field = self.selenium.find_element_by_name(k)
+            input_field.click()
+            input_field.clear()
+            input_field.send_keys(v)
+
+        self.selenium.find_element_by_class_name('signupbtn').click()
+        WebDriverWait(self.selenium, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "success")))
+
+        try:
+            reg_success = self.selenium.find_element_by_class_name("success")
+        except NoSuchElementException:
+            reg_success = False
+        self.assertTrue(reg_success)
+        self.assertEqual(reg_success.text, 'HELLO JANE!')
+
+
+
+
 class LoginTest(TestCase):
     '''LoginTest for User App'''
     def setUp(self):

@@ -13,17 +13,17 @@
               <fieldset>
                   <legend>{{ title }}</legend>
                   {% for field in form %}
-                     
+
                           <div class="form-group">
                               {{ field }}
                           </div>
-                     
+
                   {% endfor %}
 
 
               </fieldset>
               <div class="form-actions text-center">
-                  <button type="submit" class="btn btn-primary" ><i class="fa fa-user-plus"></i> Submit</button>
+                  <button type="submit" class="btn btn-primary" ><i class="fa fa-user-plus signupbtn"></i> Submit</button>
               </div>
       </form>
 
