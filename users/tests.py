@@ -31,7 +31,6 @@ class LoginAcceptanceTest(StaticLiveServerTestCase):
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys('test10')
         password_input = self.selenium.find_element_by_id("password")
-        print(password_input)
         password_input.click()
         password_input.clear()
         password_input.send_keys('asdasd12')
@@ -53,8 +52,8 @@ class SignupAcceptanceTest(StaticLiveServerTestCase):
         cls.new_user = {
             'first_name': 'Jane',
             'last_name': 'Doe',
-            'email': 'jane.doe@aol.com',
-            'username': 'jane_doe101',
+            'email': 'janedoe@aol.com',
+            'username': 'janedoe101',
             'password':'p@$$w0rd',
             'confirm_password':'p@$$w0rd',
         }
@@ -84,6 +83,68 @@ class SignupAcceptanceTest(StaticLiveServerTestCase):
         self.assertTrue(reg_success)
         self.assertEqual(reg_success.text, 'HELLO JANE!')
 
+
+
+class RegisterationIntegrationTest(StaticLiveServerTestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(RegisterationIntegrationTest, cls).setUpClass()
+        cls.selenium = webdriver.Firefox()
+        cls.selenium.implicitly_wait(10)
+        cls.new_user = {
+            'first_name': 'Jane',
+            'last_name': 'Doe',
+            'email': 'janedoe@aol.com',
+            'username': 'janedoe101',
+            'password':'p@$$w0rd',
+            'confirm_password':'p@$$w0rd',
+        }
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super(RegisterationIntegrationTest, cls).tearDownClass()
+
+    def test_integration(self):
+        self.Register_new_user()
+        self.Login_new_user()
+
+    def Register_new_user(self):
+        self.selenium.get(self.live_server_url)
+        self.selenium.find_element_by_name('signup-nav').click()
+
+        for k,v in self.new_user.items():
+            input_field = self.selenium.find_element_by_name(k)
+            input_field.click()
+            input_field.clear()
+            input_field.send_keys(v)
+
+        self.selenium.find_element_by_class_name('signupbtn').click()
+        WebDriverWait(self.selenium, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "success")))
+
+        try:
+            reg_success = self.selenium.find_element_by_class_name("success")
+        except NoSuchElementException:
+            reg_success = False
+        self.assertTrue(reg_success)
+        self.assertEqual(reg_success.text, 'HELLO JANE!')
+
+    def Login_new_user(self):
+        self.selenium.get(self.live_server_url)
+        self.selenium.find_element_by_name('login-nav').click()
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.click(); username_input.clear()
+        username_input.send_keys(self.new_user['username'])
+        password_input = self.selenium.find_element_by_id("password")
+        password_input.click(); password_input.clear()
+        password_input.send_keys(self.new_user['password'])
+        self.selenium.find_element_by_name('loginbtn').click()
+        try:
+            logged_in = self.selenium.find_element_by_class_name("loggedin")
+        except NoSuchElementException:
+            logged_in = False
+        self.assertTrue(logged_in)
 
 
 
