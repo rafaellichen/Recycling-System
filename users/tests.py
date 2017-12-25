@@ -63,20 +63,19 @@ class UserProfileViewTest(TestCase):
         self.assertTemplateUsed(response, 'users/profile.djhtml')
 
     def test_redirect_if_user_not_logged_in(self):
-        '''Method to test the redirect to homepage if user not logged in'''
+        '''Test redirect to login page when unauthenticated user requests /profile'''
         response = self.client.get('/profile', follow=True)
-        self.assertRedirects(response, '/')
+        self.assertRedirects(response, '/login?next=/profile')
 
-class SignupFormTest(TestCase):
-    '''Signup Form Test Class for users app'''
-
-    def test_singupForm_password_field_label(self):
-        form = SignupForm()
-        self.assertTrue(form.fields['password'].label == 'Password')
 
 # Create your tests here.
 class UsersViewTest(TestCase):
     '''Class to test the Users views'''
+
+    def setUp(self):
+        '''Method setup that sets the user credentials'''
+        user = User.objects.create_user(username='test', password='password')
+        user.save()
 
     def test_index_from_url(self):
         '''Test returns true when index is redered properly with URL'''
@@ -100,5 +99,6 @@ class UsersViewTest(TestCase):
 
     def test_profile_from_name(self):
         '''Test returns true when profile index is redered properly with name'''
-        response = self.client.get('users:profile')
+        self.client.login(username='test', password='password')
+        response = self.client.get(reverse('users:profile'))
         self.assertEqual(response.status_code, 200)
