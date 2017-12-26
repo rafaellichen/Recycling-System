@@ -1,5 +1,7 @@
 # Recycling-System
-https://warm-beach-37724.herokuapp.com
+Live site: https://warm-beach-37724.herokuapp.com
+
+Slides: https://drive.google.com/drive/folders/1Jtyh39obV1v_us9bhiLv7CBNBeXTJOAu?usp=sharing
 
 ## Running the application:
 **cd into the Recycling-System**:
