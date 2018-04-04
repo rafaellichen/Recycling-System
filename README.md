@@ -1,4 +1,4 @@
-# Recycling-System
+# Recycling-System CSC 47300 Web Site Design, Fall 2017
 Live site: https://warm-beach-37724.herokuapp.com
 
 Slides: https://drive.google.com/drive/folders/1Jtyh39obV1v_us9bhiLv7CBNBeXTJOAu?usp=sharing
